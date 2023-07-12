@@ -17,10 +17,10 @@ image::docs/previews/demo.gif[]
 
 == Project Layout
 
-=== The `ccf` Directory
+=== link:game/ccf[The `ccf` Directory]
 
 The code necessary to run the character customizer lives under the
-link:game/ccf[ccf] directory and is broken into 3 files:
+`ccf` directory and is broken into 3 files:
 
 link:game/ccf/ccf_config.rpy[ccf_config.rpy]::
 
@@ -42,6 +42,14 @@ link:game/ccf/ccf_src.rpy[ccf_src.rpy]::
 `ccf_src.rpy` is where the core of the Character Customizer is defined.
 +
 This is where you go if you want to hack the source and customize its behavior.
+
+=== link:game/images.rpy[`images.rpy`]
+
+The `images.rpy` file contains the declaration of "normal" Ren'Py images for use
+in the script.
+
+This file contains a demonstration of using the customized character sprites as
+part of ``LayeredImage``s.
 
 === link:game/script.rpy[`script.rpy`]
 

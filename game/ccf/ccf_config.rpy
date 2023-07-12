@@ -87,30 +87,6 @@ init python:
         """
         return "images/ccp/eyes/{}_eyes.png".format(eye_color)
 
-    def cc_brows(eyebrows, **kwargs):
-        """
-        CustomizedCharacter Example: Eyebrows Callback
-
-        The `cc_brows` callback takes an `eyebrows` argument and uses it to
-        generate the path to the target eyebrows image.
-
-        The `eyebrows` value will be one of the options defined in the layer
-        declaration below.
-        """
-        return "images/ccp/brows/{}_brows.png".format(eyebrows)
-
-    def cc_mouth(mouth, **kwargs):
-        """
-        CustomizedCharacter Example: Mouth Callback
-
-        The `cc_mouth` callback takes an `mouth` argument and uses it to
-        generate the path to the target mouth image.
-
-        The `mouth` value will be one of the options defined in the layer
-        declaration below.
-        """
-        return "images/ccp/mouth/{}_mouth.png".format(mouth)
-
 # Customized Character Factory Declaration.
 #
 # This demonstrates the creation of a customized character sprite.  The creation
@@ -178,13 +154,14 @@ define ccf = CustomizedCharacterFactory(
         "green",
         "grey"
     ])),
-
-    # Eye Eyebrows
-    CCLayer("eyebrows", cc_brows, eyebrows=CCOpt("Eyebrows", [ "angry", "relaxed", "sad" ])),
-
-    # Mouth Layer
-    CCLayer("mouth", cc_mouth, mouth=CCOpt("Mouth", [ "angry", "grin", "sad", "smile", ])),
 )
 
-define cc_player_sprite = ccf.customized_character("player")
-define cc_antagonist_sprite = ccf.customized_character("antagonist")
+# Create defines for the sprite controller classes which are used by screens to
+# manipulate our custom sprites.
+#
+# The string value passed into the `customized_character` method is the name of
+# the image that will be created.  Meaning if you pass in the string
+# "player_base" you can now reference that image like normal by doing things
+# such as `show player_base`.
+define cc_player_sprite = ccf.customized_character("player_base")
+define cc_antagonist_sprite = ccf.customized_character("antagonist_base")

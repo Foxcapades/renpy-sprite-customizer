@@ -10,11 +10,6 @@ default antagonist_sprite_state = CCState()
 define pc = Character("Player", image="player")
 define an = Character("Antagonist", image="antagonist")
 
-# You can even use our custom sprites in image proxies:
-image side player = LayeredImageProxy("player", Transform(yoffset=350, xoffset=-50, zoom=0.7))
-image side antagonist = LayeredImageProxy("antagonist", Transform(yoffset=350, xoffset=-50, zoom=0.7))
-
-
 label after_load:
     # !!IMPORTANT!!
     # Recall the saved state for all our custom sprites.
@@ -30,7 +25,7 @@ label start:
     $ cc_antagonist_sprite.set_state(antagonist_sprite_state)
 
     show player at left
-    show antagonist at right:
+    show antagonist relaxed smile at right:
         xzoom -1.0
 
     pc "Customize my sprite!"
@@ -39,11 +34,16 @@ label start:
     call screen character_creator("player", cc_player_sprite)
     $ quick_menu = True
 
+    show player relaxed smile
+    show antagonist -relaxed -smile
+
     an "Now customize {i}my{/i} sprite!"
 
     $ quick_menu = False
     call screen character_creator("antagonist", cc_antagonist_sprite)
     $ quick_menu = True
+
+    show antagonist angry_brows grin
 
     pc "Now both characters are customized separately!"
 
