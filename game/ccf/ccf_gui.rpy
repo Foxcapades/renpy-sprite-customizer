@@ -1,12 +1,3 @@
-image gui_close_idle:
-    "ccf/img/close_idle.png"
-    xsize 50
-    ysize 50
-image gui_close_hover:
-    "ccf/img/close_hover.png"
-    xsize 50
-    ysize 50
-
 image cc_gui_option_arrow_right_idle:
     "ccf/img/arrow.png"
     xsize 50
