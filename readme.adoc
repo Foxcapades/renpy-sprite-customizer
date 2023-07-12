@@ -1,9 +1,25 @@
 = Ren'Py Character Customizer
 
 A character customization toolset that allows the creation of any number of
-customizable sprites using Ren'Py's LayeredImages.
+customizable sprites using Ren'Py's ``LayeredImage``s.
+
+
 
 
 == Credits
 
-* Sprite Layers - link:https://butterymilk.itch.io/awfully-sweet[Butter Milk on Itch.io]
+=== Resources Used
+
+* Example Sprite Layers - link:https://butterymilk.itch.io/awfully-sweet[Butter Milk on Itch.io]
+
+=== Contributors
+
+Foxcapades::
+image:docs/assets/github.svg[width=32]: https://github.com/Foxcapades
++
+image:docs/assets/itch-io.svg[width=32]: https://foxcapades.itch.io/
+
+GemmySystem::
+image:docs/assets/github.svg[width=32]: https://github.com/GemmySystem
++
+image:docs/assets/itch-io.svg[width=32]: https://gemmysystem.itch.io/
