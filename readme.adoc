@@ -15,11 +15,9 @@ customizable sprites using Ren'Py's ``LayeredImage``s.
 === Contributors
 
 Foxcapades::
-image:docs/assets/github.svg[width=32]: https://github.com/Foxcapades
-+
-image:docs/assets/itch-io.svg[width=32]: https://foxcapades.itch.io/
+image:docs/assets/github.svg[width=32, link="https://github.com/Foxcapades"]
+image:docs/assets/itch-io.svg[width=32, link="https://foxcapades.itch.io/"]
 
 GemmySystem::
-image:docs/assets/github.svg[width=32]: https://github.com/GemmySystem
-+
-image:docs/assets/itch-io.svg[width=32]: https://gemmysystem.itch.io/
+image:docs/assets/github.svg[width=32, link="https://github.com/GemmySystem"]
+image:docs/assets/itch-io.svg[width=32, link="https://gemmysystem.itch.io/"]
