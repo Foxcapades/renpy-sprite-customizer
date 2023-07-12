@@ -1,8 +1,7 @@
 = Ren'Py Character Customizer
 
 A pluggable character sprite customization framework that allows the creation of
-any number of customized and runtime customizable sprites using Ren'Py's
-``LayeredImage``s.
+any number of playtime-customizable sprites using Ren'Py's ``LayeredImage``s.
 
 This project is currently in its early stages so, while it works fine, the
 included ``screen``s are not the prettiest.  Luckily this framework provides the
@@ -12,6 +11,39 @@ tools necessary to customize those ``screen``s.
 
 image::docs/previews/demo.gif[]
 
+
+== Project Layout
+
+=== The `ccf` Directory
+
+The code necessary to run the character customizer lives under the
+link:game/ccf[ccf] directory and is broken into 3 files:
+
+link:game/ccf/ccf_config.rpy[ccf_config.rpy]::
+
+`ccf_config.rpy` is where the configuration of the ``CharacterCustomizer``s
+lives.  This file is where the sprite files are referenced and the options
+provided to build the `CharacterCustomizer` instances.
++
+This is where you go to configure your character customization.
+
+link:game/ccf/ccf_gui.rpy[ccf_gui.rpy]::
+
+`ccf_gui.rpy` is where the character customization screen and components are
+defined.
++
+This is where you go to customize the Character Customization screen.
+
+link:game/ccf/ccf_src.rpy[ccf_src.rpy]::
+
+`ccf_src.rpy` is where the core of the Character Customizer is defined.
++
+This is where you go if you want to hack the source and customize its behavior.
+
+=== `script.rpy`
+
+The `script.rpy` file contains a basic example usage of the Character Customizer
+and provides a template from which you can model your own usage of the toolset.
 
 == Credits
 
