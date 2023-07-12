@@ -33,7 +33,7 @@ screen character_creator(character, customizer):
 screen character_creator_left(character):
     frame:
         background Solid("#9cb9cb")
-        xsize 0.5
+        xsize 0.7
         ysize 1.0
 
         add character:
@@ -46,24 +46,37 @@ screen character_creator_right(customizer):
         xsize 1.0
 
         vbox:
-            grid 4 customizer.option_count:
-                spacing 25
+            spacing 50
+            yalign 0.5
 
-                for name, opt in customizer.menu_components.items():
-                    text "[name]:"
+            for name, opt in customizer.menu_components.items():
+                hbox:
+                    xalign 0.5
+                    xminimum 500
+                    yminimum 1.0
+
+                    null:
+                        width 50
+                    text name:
+                        min_width 200
+                        line_leading 5
                     imagebutton:
                         auto "cc_gui_option_arrow_left_%s"
                         xsize 50
                         ysize 50
                         action Function(customizer.dec_option, opt)
-                    text customizer.option_value_text(opt)
+                    text customizer.option_value_text(opt):
+                        line_leading 5
                     imagebutton:
                         auto "cc_gui_option_arrow_right_%s"
                         xsize 50
                         ysize 50
                         action Function(customizer.inc_option, opt)
-            imagebutton:
-                auto "gui_close_%s"
-                xsize 50
-                ysize 50
+
+            null:
+                height 50
+
+            textbutton "Done!":
+                xalign 0.5
+                yalign 0
                 action Return(0)
