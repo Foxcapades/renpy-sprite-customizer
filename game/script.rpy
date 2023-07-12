@@ -35,11 +35,15 @@ label start:
 
     pc "Customize my sprite!"
 
+    $ quick_menu = False
     call screen character_creator("player", cc_player_sprite)
+    $ quick_menu = True
 
     an "Now customize {i}my{/i} sprite!"
 
+    $ quick_menu = False
     call screen character_creator("antagonist", cc_antagonist_sprite)
+    $ quick_menu = True
 
     pc "Now both characters are customized separately!"
 
