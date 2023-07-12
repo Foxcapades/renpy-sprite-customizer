@@ -104,6 +104,11 @@ init python:
 # layer.
 define ccf = CustomizedCharacterFactory(
     # Skin Layer
+    #
+    # For the skin layer we have one, colorless base image to use for the skin
+    # and we use the following hex codes to define the skin colors that may be
+    # selected in the character customizer.  These are applied via a TintMatrix
+    # in the `cc_skin` callback function defined above.
     CCLayer("skin", cc_skin, skin_color=CCOpt("Skin", [
         "#513021",
         "#874c2c",
@@ -115,9 +120,21 @@ define ccf = CustomizedCharacterFactory(
     ])),
 
     # Clothes Layer
+    #
+    # For the clothes layer, we have 2 clothing options that are separate sprite
+    # layer files.  The options defined here are the names of the clothes files
+    # which are loaded by the `cc_clothes` callback function defined above.
     CCLayer("clothes", cc_clothes, clothes=CCOpt("Clothes", [ "cottoncandy", "plaid" ])),
 
     # Hair Layer
+    #
+    # For the hair layer, we define 2 customization options.  A hair style which
+    # controls which sprite component image is used, and a hair color which
+    # applies color to the selected sprite component image via a TintMatrix.
+    #
+    # Both options are used by the `cc_hair` callback function defined above to
+    # create a displayable that combines the selected image component with the
+    # TintMatrix.
     CCLayer(
         "hair",
         cc_hair,
@@ -138,6 +155,10 @@ define ccf = CustomizedCharacterFactory(
     ),
 
     # Accessory Layer
+    #
+    # For the accessory layer the options defined are the names of the accessory
+    # image files that may be used.  The `cc_accessory` callback function
+    # defined above takes the selected option and converts it to an image path.
     CCLayer("accessories", cc_accessory, accessory=CCOpt("Accessory", [
         "none",
         "cottoncandy_bow",
@@ -148,6 +169,10 @@ define ccf = CustomizedCharacterFactory(
 
 
     # Eye Layer
+    #
+    # For the eyes layer the options defined are the names of the eyes image
+    # files that may be used.  The `cc_eyes` callback function defined above
+    # takes the selected option and converts it to an image path.
     CCLayer("eyes", cc_eyes, eye_color=CCOpt("Eyes", [
         "blue",
         "brown",
