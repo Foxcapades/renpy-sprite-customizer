@@ -77,6 +77,17 @@ init -1 python:
 
         def option_text(self, key):
             """
+            Returns the displayable text for the value of the selection for the
+            given option key.
+
+            Arguments:
+
+            key (str): Key of the selection option whose value should be
+            rendered as a string and returned.
+
+            Returns:
+
+            str: String representation of the selection option for `key`.
             """
             return str(self[key]).rjust(2, '0')
 
