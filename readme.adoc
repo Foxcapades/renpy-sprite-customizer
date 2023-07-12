@@ -1,0 +1,9 @@
+= Ren'Py Character Customizer
+
+A character customization toolset that allows the creation of any number of
+customizable sprites using Ren'Py's LayeredImages.
+
+
+== Credits
+
+* Sprite Layers - link:https://butterymilk.itch.io/awfully-sweet[Butter Milk on Itch.io]
