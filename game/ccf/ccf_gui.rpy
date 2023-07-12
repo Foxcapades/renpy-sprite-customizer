@@ -43,7 +43,7 @@ screen character_creator_right(customizer):
             for name, opt in customizer.menu_components.items():
                 hbox:
                     xalign 0.5
-                    xminimum 500
+                    xminimum 550
                     yminimum 1.0
 
                     null:
@@ -69,5 +69,4 @@ screen character_creator_right(customizer):
 
             textbutton "Done!":
                 xalign 0.5
-                yalign 0
                 action Return(0)
