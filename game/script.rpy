@@ -11,8 +11,8 @@ define pc = Character("Player", image="player")
 define an = Character("Antagonist", image="antagonist")
 
 # You can even use our custom sprites in image proxies:
-image side player = LayeredImageProxy("player", Transform(yoffset=50, xoffset=-80, zoom=0.4))
-image side antagonist = LayeredImageProxy("antagonist", Transform(yoffset=50, xoffset=-80, zoom=0.4))
+image side player = LayeredImageProxy("player", Transform(yoffset=350, xoffset=-50, zoom=0.7))
+image side antagonist = LayeredImageProxy("antagonist", Transform(yoffset=350, xoffset=-50, zoom=0.7))
 
 
 label after_load:
