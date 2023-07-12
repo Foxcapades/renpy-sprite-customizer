@@ -4,7 +4,7 @@
 #
 # One CCState object is needed for every customized character sprite in use.
 default player_sprite_state = CCState()
-default antagnoist_sprite_state = CCState()
+default antagonist_sprite_state = CCState()
 
 # Define our characters like normal.
 define pc = Character("Player", image="player")
@@ -19,7 +19,7 @@ label after_load:
     # !!IMPORTANT!!
     # Recall the saved state for all our custom sprites.
     $ cc_player_sprite.set_state(player_sprite_state)
-    $ cc_antagonist_sprite.set_state(antagnoist_sprite_state)
+    $ cc_antagonist_sprite.set_state(antagonist_sprite_state)
     return
 
 label start:
@@ -27,7 +27,7 @@ label start:
     # !!IMPORTANT!!
     # Set the state for all our custom sprites.
     $ cc_player_sprite.set_state(player_sprite_state)
-    $ cc_antagonist_sprite.set_state(antagnoist_sprite_state)
+    $ cc_antagonist_sprite.set_state(antagonist_sprite_state)
 
     show player at left
     show antagonist at right:
