@@ -40,7 +40,7 @@ link:game/ccf/ccf_src.rpy[ccf_src.rpy]::
 +
 This is where you go if you want to hack the source and customize its behavior.
 
-=== `script.rpy`
+=== link:game/script.rpy[`script.rpy`]
 
 The `script.rpy` file contains a basic example usage of the Character Customizer
 and provides a template from which you can model your own usage of the toolset.
