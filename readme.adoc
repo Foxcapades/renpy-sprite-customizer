@@ -1,5 +1,8 @@
 = Ren'Py Sprite Customizer
 
+link:https://foxcapades.github.io/renpy-sprite-customizer/[Docs] |
+link:https://foxcapades.itch.io/renpy-sprite-customizer[Itch.IO]
+
 A pluggable sprite customization framework that allows the creation of any
 number of playtime-customizable sprites using Ren'Py's ``LayeredImage``s.
 
