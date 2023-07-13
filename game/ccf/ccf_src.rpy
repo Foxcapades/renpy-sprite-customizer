@@ -443,7 +443,7 @@ init -1 python:
 
         def get_option(self, option):
             self._require_option(option)
-            self._option_to_layer[option].get_option(option)
+            return self._option_to_layer[option].get_option(option)
 
         def option_value(self, option, selection):
             self._require_option(option)

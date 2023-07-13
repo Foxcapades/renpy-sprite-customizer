@@ -1,6 +1,6 @@
 = Ren'Py Sprite Customizer
 :source-highlighter: highlight.js
-:toc:
+:toc: left
 :icons: font
 
 This document is a WIP and presently is just a collection of notes about various
@@ -39,18 +39,44 @@ done, the sprites will reset to their default state.
 === CustomizedSprite vs CustomizedSpriteFactory
 
 The <<custom-sprite>> class may be constructed directly or via the
-`CustomizedSpriteFactory` type.  Deciding whether to construct the type directly
-or via the factory comes down to whether you want to create multiple sprites
-from the same set of layers and options.
+<<custom-sprite-fac>> type.  Deciding whether to construct the type directly or
+via the factory comes down to whether you want to create multiple sprites from
+the same set of layers and options.
 
 If you only wish to create a single sprite out of a given set of layers and
 options, then it is fine to construct a new <<custom-sprite>> instance
 directly.
 
 If you wish to create more than one sprite out of a set of layers and options,
-then it is best to create a `CustomizedSpriteFactory` from those layers and
-options and use that factory instance to produce new <<custom-sprite>>
-instances.
+then it is best to create a <<custom-sprite-fac>> from those layers and options
+and use that factory instance to produce new <<custom-sprite>> instances.
+
+.Constructing a Single Sprite
+[source, python]
+----
+my_sprite = CustomizedSprite(
+    "protagonist",
+    SCLayer("skin", ...),
+    SCLayer("clothes", ...),
+    SCLayer("hair", ...),
+    SCLayer("eyes", ...)
+)
+----
+
+.Constructing Multiple Sprites from the Same Options
+[source, python]
+----
+sprite_fac = CustomizedSpriteFactory(
+    SCLayer("skin", ...),
+    SCLayer("clothes", ...),
+    SCLayer("hair", ...),
+    SCLayer("eyes", ...)
+)
+
+my_sprite_1 = sprite_fac.new_sprite("protagonist")
+my_sprite_2 = sprite_fac.new_sprite("antagonist")
+----
+
 
 === Layer Callbacks
 
@@ -131,15 +157,45 @@ CustomizedSprite(
 
 A list of all the option keys known to the `CustomizedSprite` instance.
 
+.Example
+[source, python]
+----
+my_sprite = CustomizedSprite(
+    "sprite_name",
+    SCLayer("skin", skin_cb, skin_color=SCOpt(...)),
+    SCLayer("hair", hair_cb, hair_style=SCOpt(...)),
+    SCLayer("eyes", eyes_cb, eye_color=SCOpt(...))
+)
+
+my_sprite.option_keys == [ 'skin_color', 'hair_style', 'eye_color' ]
+
+----
+
+
 ===== `option_count`
 
 The number of options known to the `CustomizedSprite` instance.
+
+.Example
+[source, python]
+----
+my_sprite = CustomizedSprite(
+    "sprite_name",
+    SCLayer("skin", skin_cb, skin_color=SCOpt(...)),
+    SCLayer("hair", hair_cb, hair_style=SCOpt(...), hair_color=SCOpt(...)),
+    SCLayer("eyes", eyes_cb, eye_color=SCOpt(...))
+)
+
+my_sprite.option_count == 4
+----
+
 
 ===== `menu_components`
 
 A dict of display name mapped to key for all options known to the
 `CustomizedSprite` instance.
 
+.Example Return Value
 [source, python]
 ----
 {
@@ -257,9 +313,128 @@ Returns the display name value for the target option.
 |===
 
 
+===== `option_selection`
+
+Returns the current selection for the target option.
+
+.Example
+[source, python]
+----
+my_sprite.option_selection("hair_style") == 1
+----
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Keyword of the option for which the display name should be returned.
+|===
+
+====== Returns
+
+[cols="1m,9"]
+|===
+| int
+| The selection value for the target option.
+|===
+
+
+===== `get_option`
+
+Returns the <<sc-opt>> instance for the given option keyword.
+
+.Example
+[source, python]
+----
+my_sprite = CustomizedSprite(
+    "sprite",
+    SCLayer("hair", hair_cb, hair_style=SCOpt("Hair Style", [ "buns", "bob", "mohawk" ]))
+)
+
+print(my_sprite.get_option("hair_style").display_name) # Hair Style
+----
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Keyword of the option for which the <<sc-opt>> instance should be returned.
+|===
+
+====== Returns
+
+[cols="1m,9"]
+|===
+| <<sc-opt>>
+| The target `SCOpt` instance.
+|===
+
+
+===== `option_value`
+
+Returns the option value for the given option and selection.
+
+.Example
+[source, python]
+----
+my_sprite = CustomizedSprite(
+    "sprite",
+    SCLayer("hair", hair_cb, hair_style=SCOpt("Hair Style", [ "buns", "bob", "mohawk" ]))
+)
+
+my_sprite.option_value("hair_style", 2) == "bob"
+
+----
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Keyword of the option from which the target value should be returned.
+
+| `selection`
+| int
+| `1` based index of the option value to return.
+|===
+
+====== Returns
+
+[cols="1m,9"]
+|===
+| any
+| Target option value.
+|===
+
+
 [#custom-sprite-fac]
 === `CustomizedSpriteFactory`
 
+A factory which may be used to generate multiple <<custom-sprite>> instances
+with the same base set of layers and options.
+
+==== Methods
+
+===== `+__init__+`
+
+Initializes a new `CustomizedSpriteFactory` instance with the given arguments.
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `*layers`
+| <<sc-layer>>[]
+| One or more layers from which <<custom-sprite>> instances should be created.
+The layers are stacked on top of one another in the passed order. This means the
+first given layer will be at the "back" of the sprite, where the last given
+layer will be at the "front".
+|===
 
 
 [#sc-layer]
@@ -522,11 +697,17 @@ The newly constructed
 https://www.renpy.org/doc/html/layeredimage.html#attribute[Attribute] instance.
 
 
+
 [#sc-opt]
 === `SCOpt`
 
 Represents an option set for an <<sc-layer>>, providing options for customizing
 that layer.
+
+[source, python]
+----
+SCOpt("Display Name", [ "some", "option", "values" ])
+----
 
 ==== Properties
 
