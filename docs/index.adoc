@@ -2,6 +2,7 @@
 :source-highlighter: highlight.js
 :toc: left
 :icons: font
+:stylesheet: assets/readthedocs.css
 
 This document is a WIP and presently is just a collection of notes about various
 Sprite Customizer topics.  This document will eventually become the overall
