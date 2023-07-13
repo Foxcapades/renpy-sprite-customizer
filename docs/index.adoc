@@ -113,7 +113,48 @@ given `SCState` instance.
 ====== Arguments
 
 `state`::
-    A `SCState` object to use for storing customization option selections.
+A `SCState` object to use for storing customization option selections.
++
+[source, python]
+----
+$ my_sprite_state = SCState()
+$ my_sprite.set_state(my_sprite_state)
+----
+
+
+===== `inc_option`
+
+Increments the selection value for the given option.
+
+====== Arguments
+
+`option`::
+String key of the option for which the selection should be incremented.  This
+key will be one of the `SCOpt` kwargs given to the `SCLayer` constructors.
++
+[source, python]
+----
+$ my_sprite.inc_option("hair_style")
+----
+
+
+===== `dec_option`
+
+Decrements the selection value for the given option.
+
+====== Arguments
+
+`option`::
+String key of the option for which the selection should be decremented.  This
+key will be one of the `SCOpt` kwargs given to the `SCLayer` constructors.
++
+[source, python]
+----
+$ my_sprite.dec_option("hair_style")
+----
+
+
+
 
 
 == Reference:
