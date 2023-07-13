@@ -1,7 +1,7 @@
-= Ren'Py Character Customizer
+= Ren'Py Sprite Customizer
 
-A pluggable character sprite customization framework that allows the creation of
-any number of playtime-customizable sprites using Ren'Py's ``LayeredImage``s.
+A pluggable sprite customization framework that allows the creation of any
+number of playtime-customizable sprites using Ren'Py's ``LayeredImage``s.
 
 The goal of this project is to allow game creators to plug in their own assets
 and screens to set up character or sprite customization in their own games.
@@ -19,27 +19,27 @@ image::docs/previews/demo.gif[]
 
 === link:game/ccf[The `ccf` Directory]
 
-The code necessary to run the character customizer lives under the
-`ccf` directory and is broken into 3 files:
+The code necessary to run the sprite customizer lives under the `ccf` directory
+and is broken into 3 files:
 
 link:game/ccf/ccf_config.rpy[ccf_config.rpy]::
 
-`ccf_config.rpy` is where the configuration of the ``CharacterCustomizer``s
-lives.  This file is where the sprite files are referenced and the options
-provided to build the `CharacterCustomizer` instances.
+`ccf_config.rpy` is where the configuration for the ``CustomizedSprite``s
+live.  This file is where the sprite files are referenced and the options
+provided to build the `CustomizedSprite` instances.
 +
-This is where you go to configure your character customization.
+This is where you go to configure your sprite customization.
 
 link:game/ccf/ccf_gui.rpy[ccf_gui.rpy]::
 
-`ccf_gui.rpy` is where the character customization screen and components are
+`ccf_gui.rpy` is where the sprite customization screen and components are
 defined.
 +
-This is where you go to customize the Character Customization screen.
+This is where you go to customize the sprite customization screen.
 
 link:game/ccf/ccf_src.rpy[ccf_src.rpy]::
 
-`ccf_src.rpy` is where the core of the Character Customizer is defined.
+`ccf_src.rpy` is where the core of the Sprite Customizer is defined.
 +
 This is where you go if you want to hack the source and customize its behavior.
 
@@ -53,7 +53,7 @@ part of ``LayeredImage``s.
 
 === link:game/script.rpy[`script.rpy`]
 
-The `script.rpy` file contains a basic example usage of the Character Customizer
+The `script.rpy` file contains a basic example usage of the Sprite Customizer
 and provides a template from which you can model your own usage of the toolset.
 
 == Credits

@@ -31,7 +31,7 @@ label start:
     pc "Customize my sprite!"
 
     $ quick_menu = False
-    call screen character_creator("player", cc_player_sprite)
+    call screen sprite_creator("player", cc_player_sprite)
     $ quick_menu = True
 
     show player relaxed smile
@@ -40,7 +40,7 @@ label start:
     an "Now customize {i}my{/i} sprite!"
 
     $ quick_menu = False
-    call screen character_creator("antagonist", cc_antagonist_sprite)
+    call screen sprite_creator("antagonist", cc_antagonist_sprite)
     $ quick_menu = True
 
     show antagonist angry_brows grin

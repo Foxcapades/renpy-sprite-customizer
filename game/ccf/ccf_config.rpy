@@ -87,7 +87,7 @@ init python:
         """
         return "images/ccp/eyes/{}_eyes.png".format(eye_color)
 
-# Customized Character Factory Declaration.
+# Customized Sprite Factory Declaration.
 #
 # This demonstrates the creation of a customized character sprite.  The creation
 # of this sprite takes 2+ parameters.
@@ -107,7 +107,7 @@ define ccf = CustomizedSpriteFactory(
     #
     # For the skin layer we have one, colorless base image to use for the skin
     # and we use the following hex codes to define the skin colors that may be
-    # selected in the character customizer.  These are applied via a TintMatrix
+    # selected in the sprite customizer.  These are applied via a TintMatrix
     # in the `cc_skin` callback function defined above.
     SCLayer("skin", cc_skin, skin_color=SCOpt("Skin", [
         "#513021",

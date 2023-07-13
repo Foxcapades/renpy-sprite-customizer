@@ -14,23 +14,23 @@ image cc_gui_option_arrow_left_idle:
 image cc_gui_option_arrow_left_hover = Transform("cc_gui_option_arrow_left_idle", matrixcolor=BrightnessMatrix(-0.5))
 
 
-screen character_creator(character, customizer):
+screen sprite_creator(sprite, customizer):
     modal True
 
     hbox:
-        use character_creator_left(character)
-        use character_creator_right(customizer)
+        use sprite_creator_left(sprite)
+        use sprite_creator_right(customizer)
 
-screen character_creator_left(character):
+screen sprite_creator_left(sprite):
     frame:
         background Solid("#9cb9cb")
         xsize 0.7
         ysize 1.0
 
-        add character:
+        add sprite:
             xalign 0.5
 
-screen character_creator_right(customizer):
+screen sprite_creator_right(customizer):
     frame:
         background Solid("#1f1f1f")
         ysize 1.0
