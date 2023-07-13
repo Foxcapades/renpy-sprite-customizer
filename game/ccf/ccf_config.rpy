@@ -20,13 +20,13 @@ init python:
 
     def cc_skin(skin_color, **kwargs):
         """
-        CustomizedCharacter Example: Skin Callback
+        CustomizedSprite Example: Skin Callback
 
         The `cc_skin` callback takes the `skin_color` argument and uses it to
         generate a displayable for the chosen skin color option.
 
         The `skin_color` argument value will be one of the hex code values
-        defined in the `skin_color=CCOpt(...` declaration below and is used with
+        defined in the `skin_color=SCOpt(...` declaration below and is used with
         a TintMatrix to Transform the colorless base image into a base image
         with the selected color overlayed.
         """
@@ -34,20 +34,20 @@ init python:
 
     def cc_clothes(clothes, **kwargs):
         """
-        CustomizedCharacter Example: Clothes Callback
+        CustomizedSprite Example: Clothes Callback
 
         The `cc_clothes` callback takes the `clothes` argument and uses it to
         generate a displayable for the chosen clothes option.
 
         The `clothes` argument value will be one of the values defined in the
-        `clothes=CCOpt(...` declaration below and is used to generate the path
+        `clothes=SCOpt(...` declaration below and is used to generate the path
         to the correct clothing option to render.
         """
         return "images/ccp/clothes/{}.png".format(clothes)
 
     def cc_hair(hair_style, hair_color, **kwargs):
         """
-        CustomizedCharacter Example: Hair Callback
+        CustomizedSprite Example: Hair Callback
 
         The `cc_hair` callback takes the `hair_style` and `hair_color` arguments
         and uses them to generate a displayable for the chosen hair options.
@@ -65,7 +65,7 @@ init python:
 
     def cc_accessory(accessory, **kwargs):
         """
-        CustomizedCharacter Example: Accessory Callback
+        CustomizedSprite Example: Accessory Callback
 
         The `cc_accessory` callback takes the `accessory` argument and uses it
         to generate the path to the target accessory image.
@@ -77,7 +77,7 @@ init python:
 
     def cc_eyes(eye_color, **kwargs):
         """
-        CustomizedCharacter Example: Eyes Callback
+        CustomizedSprite Example: Eyes Callback
 
         The `cc_eyes` callback takes an `eye_color` argument and uses it to
         generate the path to the target eye image.
@@ -97,19 +97,19 @@ init python:
 # statements, Transforms, etc...).
 #
 # The following parameter is the base image layer for the sprite.  A base layer
-# is required to construct a CustomizedCharacter instance.
+# is required to construct a CustomizedSprite instance.
 #
 # All following parameters are additional layers that are placed on top of one
 # another in declaration order stepping "closer" to the player with each new
 # layer.
-define ccf = CustomizedCharacterFactory(
+define ccf = CustomizedSpriteFactory(
     # Skin Layer
     #
     # For the skin layer we have one, colorless base image to use for the skin
     # and we use the following hex codes to define the skin colors that may be
     # selected in the character customizer.  These are applied via a TintMatrix
     # in the `cc_skin` callback function defined above.
-    CCLayer("skin", cc_skin, skin_color=CCOpt("Skin", [
+    SCLayer("skin", cc_skin, skin_color=SCOpt("Skin", [
         "#513021",
         "#874c2c",
         "#803716",
@@ -124,7 +124,7 @@ define ccf = CustomizedCharacterFactory(
     # For the clothes layer, we have 2 clothing options that are separate sprite
     # layer files.  The options defined here are the names of the clothes files
     # which are loaded by the `cc_clothes` callback function defined above.
-    CCLayer("clothes", cc_clothes, clothes=CCOpt("Clothes", [ "cottoncandy", "plaid" ])),
+    SCLayer("clothes", cc_clothes, clothes=SCOpt("Clothes", [ "cottoncandy", "plaid" ])),
 
     # Hair Layer
     #
@@ -135,11 +135,11 @@ define ccf = CustomizedCharacterFactory(
     # Both options are used by the `cc_hair` callback function defined above to
     # create a displayable that combines the selected image component with the
     # TintMatrix.
-    CCLayer(
+    SCLayer(
         "hair",
         cc_hair,
-        hair_style=CCOpt("Hair Style", [ "afro", "bob", "buns" ]),
-        hair_color=CCOpt("Hair Color", [
+        hair_style=SCOpt("Hair Style", [ "afro", "bob", "buns" ]),
+        hair_color=SCOpt("Hair Color", [
             "#3D2314",
             "#100C07",
             "#DA680F",
@@ -159,7 +159,7 @@ define ccf = CustomizedCharacterFactory(
     # For the accessory layer the options defined are the names of the accessory
     # image files that may be used.  The `cc_accessory` callback function
     # defined above takes the selected option and converts it to an image path.
-    CCLayer("accessories", cc_accessory, accessory=CCOpt("Accessory", [
+    SCLayer("accessories", cc_accessory, accessory=SCOpt("Accessory", [
         "none",
         "cottoncandy_bow",
         "cottoncandy_clips",
@@ -173,7 +173,7 @@ define ccf = CustomizedCharacterFactory(
     # For the eyes layer the options defined are the names of the eyes image
     # files that may be used.  The `cc_eyes` callback function defined above
     # takes the selected option and converts it to an image path.
-    CCLayer("eyes", cc_eyes, eye_color=CCOpt("Eyes", [
+    SCLayer("eyes", cc_eyes, eye_color=SCOpt("Eyes", [
         "blue",
         "brown",
         "green",
@@ -184,9 +184,9 @@ define ccf = CustomizedCharacterFactory(
 # Create defines for the sprite controller classes which are used by screens to
 # manipulate our custom sprites.
 #
-# The string value passed into the `customized_character` method is the name of
+# The string value passed into the `new_sprite` method is the name of
 # the image that will be created.  Meaning if you pass in the string
 # "player_base" you can now reference that image like normal by doing things
 # such as `show player_base`.
-define cc_player_sprite = ccf.customized_character("player_base")
-define cc_antagonist_sprite = ccf.customized_character("antagonist_base")
+define cc_player_sprite = ccf.new_sprite("player_base")
+define cc_antagonist_sprite = ccf.new_sprite("antagonist_base")

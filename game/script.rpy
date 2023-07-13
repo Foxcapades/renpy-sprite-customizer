@@ -1,10 +1,10 @@
-﻿# Create new CCState objects to hold the state of our customizable sprite's
+﻿# Create new SCState objects to hold the state of our customizable sprite's
 # settings.  This is necessary to persist the customization selections in
 # the game's save data.
 #
-# One CCState object is needed for every customized character sprite in use.
-default player_sprite_state = CCState()
-default antagonist_sprite_state = CCState()
+# One SCState object is needed for every customized character sprite in use.
+default player_sprite_state = SCState()
+default antagonist_sprite_state = SCState()
 
 # Define our characters like normal.
 define pc = Character("Player", image="player")
