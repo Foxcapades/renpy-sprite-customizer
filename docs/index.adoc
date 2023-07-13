@@ -116,16 +116,21 @@ Initializes a new `CustomizedSprite` instance with the given arguments.
 
 ====== Arguments
 
-`image_name`::
-    String name of the image that will be created for the sprite.  This name is
-    the value that will be used when referencing the sprite image elsewhere in
-    scripts via `show`, `add`, etc...
+[cols="1h,1m,8"]
+|===
+| `image_name`
+| str
+| Name of the image that will be created for the sprite.  This name is the value
+that will be used when referencing the sprite image elsewhere in scripts via
+`show`, `add`, etc...
 
-`*layers`::
-    One or more ``SCLayer``s from which the sprite should be created.  The
-    layers are stacked on top of one another in the passed order.  This means
-    the first given layer will be at the "back" of the sprite, where the last
-    given layer will be at the "front".
+| `*layers`
+| SCLayer[]
+| One or more ``SCLayer``s from which the sprite should be created.  The layers
+are stacked on top of one another in the passed order.  This means the first
+given layer will be at the "back" of the sprite, where the last given layer will
+be at the "front".
+|===
 
 ===== `set_state`
 
@@ -134,8 +139,12 @@ given `SCState` instance.
 
 ====== Arguments
 
-`state`::
-A `SCState` object to use for storing customization option selections.
+[cols="1h,1m,8"]
+|===
+| `state`
+| SCState
+| A `SCState` object to use for storing customization option selections.
+|===
 
 
 ===== `inc_option`
@@ -144,9 +153,13 @@ Increments the selection value for the given option.
 
 ====== Arguments
 
-`option`::
-String key of the option for which the selection should be incremented.  This
-key will be one of the `SCOpt` kwargs given to the `SCLayer` constructors.
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Key of the option for which the selection should be incremented.  This key
+will be one of the `SCOpt` kwargs given to the `SCLayer` constructors.
+|===
 
 
 ===== `dec_option`
@@ -155,9 +168,13 @@ Decrements the selection value for the given option.
 
 ====== Arguments
 
-`option`::
-String key of the option for which the selection should be decremented.  This
-key will be one of the `SCOpt` kwargs given to the `SCLayer` constructors.
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Key of the option for which the selection should be decremented.  This key
+will be one of the `SCOpt` kwargs given to the `SCLayer` constructors.
+|===
 
 
 ===== `option_display_text`
@@ -166,8 +183,12 @@ Returns the display name for the target option.
 
 ====== Arguments
 
-`option`::
-String key of the option for which the display name should be returned.
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Key of the option for which the display name should be returned.
+|===
 
 
 ===== `option_value_text`
@@ -176,8 +197,14 @@ Returns the selection value for the target option as a string.
 
 ====== Arguments
 
-`option`::
-Key of the option for which the selection value should be returned as a string.
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Key of the option for which the selection value should be returned as a
+string.
+|===
+
 
 === `CustomizedSpriteFactory`
 
@@ -192,11 +219,15 @@ Initializes a new `CustomizedSpriteFactory` instance with the given arguments.
 
 ====== Arguments
 
-`*layers`::
-One or more ``SCLayer``s from which new <<customized-sprite>> instances should
+[cols="1h,1m,8"]
+|===
+| `*layers`
+| SCLayer[]
+| One or more ``SCLayer``s from which new <<customized-sprite>> instances should
 be created.  The layers are stacked on top of one another in the passed order.
 This means the first given layer will be at the "back" of the sprite, where the
 last given layer will be at the "front".
+|===
 
 ===== `new_sprite`
 
@@ -206,14 +237,18 @@ construction.
 
 ====== Arguments
 
-`image_name`::
-String name of the image that will be created for the returned sprite.  This
-name is the value by which the sprite may be referenced in scripts via `show`,
-`add`, etc...
+[cols="1h,1m,8"]
+|===
+| `image_name`
+| str
+| Name of the image that will be created for the returned sprite.  This name is
+the value by which the sprite may be referenced in scripts via `show`, `add`,
+etc...
+|===
 
 
 
-== Reference:
+== Reference
 
 * link:https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable[DynamicDisplayable]
 * link:https://www.renpy.org/doc/html/layeredimage.html[LayeredImage]
