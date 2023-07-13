@@ -7,6 +7,22 @@ documentation of the Sprite Customizer toolset.
 
 == Topics
 
+=== CustomizedSprite vs CustomizedSpriteFactory
+
+The `CustomizedSprite` class may be constructed directly or via the
+`CustomizedSpriteFactory` type.  Deciding whether to construct the type directly
+or via the factory comes down to whether you want to create multiple sprites
+from the same set of layers and options.
+
+If you only wish to create a single sprite out of a given set of layers and
+options, then it is fine to construct a new `CustomizedSprite` instance
+directly.
+
+If you wish to create more than one sprite out of a set of layers and options,
+then it is best to create a `CustomizedSpriteFactory` from those layers and
+options and use that factory instance to produce new `CustomizedSprite`
+instances.
+
 === Layer Callbacks
 
 A layer callback is a function that takes customization option values and
