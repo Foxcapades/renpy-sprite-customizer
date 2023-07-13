@@ -1,7 +1,7 @@
 = Ren'Py Sprite Customizer
 :source-highlighter: highlight.js
 :toc:
-:toclevels: 4
+:toclevels: 3
 
 This document is a WIP and presently is just a collection of notes about various
 Sprite Customizer topics.  This document will eventually become the overall
@@ -121,7 +121,7 @@ Initializes a new `CustomizedSprite` instance with the given arguments.
     the value that will be used when referencing the sprite image elsewhere in
     scripts via `show`, `add`, etc...
 
-`layers`::
+`*layers`::
     One or more ``SCLayer``s from which the sprite should be created.  The
     layers are stacked on top of one another in the passed order.  This means
     the first given layer will be at the "back" of the sprite, where the last
@@ -136,12 +136,6 @@ given `SCState` instance.
 
 `state`::
 A `SCState` object to use for storing customization option selections.
-+
-[source, python]
-----
-$ my_sprite_state = SCState()
-$ my_sprite.set_state(my_sprite_state)
-----
 
 
 ===== `inc_option`
@@ -153,11 +147,6 @@ Increments the selection value for the given option.
 `option`::
 String key of the option for which the selection should be incremented.  This
 key will be one of the `SCOpt` kwargs given to the `SCLayer` constructors.
-+
-[source, python]
-----
-$ my_sprite.inc_option("hair_style")
-----
 
 
 ===== `dec_option`
@@ -169,11 +158,6 @@ Decrements the selection value for the given option.
 `option`::
 String key of the option for which the selection should be decremented.  This
 key will be one of the `SCOpt` kwargs given to the `SCLayer` constructors.
-+
-[source, python]
-----
-$ my_sprite.dec_option("hair_style")
-----
 
 
 ===== `option_display_text`
@@ -184,11 +168,6 @@ Returns the display name for the target option.
 
 `option`::
 String key of the option for which the display name should be returned.
-+
-[source, python]
-----
-$ display_name = my_sprite.option_display_text("hair_style")
-----
 
 
 ===== `option_value_text`
@@ -199,11 +178,39 @@ Returns the selection value for the target option as a string.
 
 `option`::
 Key of the option for which the selection value should be returned as a string.
-+
-[source, python]
-----
-$ selection = my_sprite.option_value_text("hair_style")
-----
+
+=== `CustomizedSpriteFactory`
+
+A factory that may be used to generate multiple <<customized-sprite>> instances
+from the same base set of layers and options.
+
+==== Methods
+
+===== `+__init__+`
+
+Initializes a new `CustomizedSpriteFactory` instance with the given arguments.
+
+====== Arguments
+
+`*layers`::
+One or more ``SCLayer``s from which new <<customized-sprite>> instances should
+be created.  The layers are stacked on top of one another in the passed order.
+This means the first given layer will be at the "back" of the sprite, where the
+last given layer will be at the "front".
+
+===== `new_sprite`
+
+Constructs a new <<customized-sprite>> instance with the given name and the
+set of layers and options given to the `CustomizedSpriteFactory` on
+construction.
+
+====== Arguments
+
+`image_name`::
+String name of the image that will be created for the returned sprite.  This
+name is the value by which the sprite may be referenced in scripts via `show`,
+`add`, etc...
+
 
 
 == Reference:
