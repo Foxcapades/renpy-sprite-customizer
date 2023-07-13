@@ -136,6 +136,25 @@ init -1 python:
         """
 
         def __init__(self, name, layer_callback, **options):
+            """
+            Initializes the new `SCLayer` instance with the given arguments.
+
+            Arguments:
+
+            name (str): Name of the layer.
+
+            layer_callback (function): Callback used to create the displayable
+            that backs this layer.
+
+            **options (dict): Dictionary of keyword arguments that define the
+            options available to this layer.  Keyword args must all be `SCOpt`
+            values.
+            """
+
+            if not isinstance(name, str):
+                raise Exception("SCLayer name must be a string.")
+            if not callable(layer_callback):
+                raise Exception("SCLayer layer_callback must be callable.")
             for key, opt in options.items():
                 if not isinstance(opt, SCOpt):
                     raise Exception("SCLayer options must be SCOpt instances.")
@@ -224,11 +243,19 @@ init -1 python:
             self._require_option(option)
             self._state.dec_selection(option, len(self._options[option].values))
 
+        def get_option(self, option):
+            self._require_option(option)
+            return self._options[option]
+
+        def get_option_value(self, option, selection):
+            self._require_option(option)
+            return self._options[option].values[selection - 1]
+
         def option_display_name(self, option):
             self._require_option(option)
             return self._options[option].display_name
 
-        def option_value(self, option):
+        def option_selection(self, option):
             self._require_option(option)
             return self._state.get_selection(option)
 
@@ -410,9 +437,17 @@ init -1 python:
             self._require_option(option)
             return self._option_to_layer[option].option_display_name(option)
 
-        def option_value(self, option):
+        def option_selection(self, option):
             self._require_option(option)
-            return self._option_to_layer[option].option_value(option)
+            return self._option_to_layer[option].option_selection(option)
+
+        def get_option(self, option):
+            self._require_option(option)
+            self._option_to_layer[option].get_option(option)
+
+        def option_value(self, option, selection):
+            self._require_option(option)
+            return self._option_to_layer[option].get_option_value(option, selection)
 
         @property
         def option_keys(self):

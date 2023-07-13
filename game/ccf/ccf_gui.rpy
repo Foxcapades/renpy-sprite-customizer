@@ -56,7 +56,7 @@ screen sprite_creator_right(customizer):
                         xsize 50
                         ysize 50
                         action Function(customizer.dec_selection, opt)
-                    text "{:02d}".format(customizer.option_value(opt)):
+                    text "{:02d}".format(customizer.option_selection(opt)):
                         line_leading 5
                     imagebutton:
                         auto "cc_gui_option_arrow_right_%s"
