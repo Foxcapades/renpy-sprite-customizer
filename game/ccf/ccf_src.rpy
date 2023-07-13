@@ -8,6 +8,11 @@ init -1 python:
         option selections.  This is used to persist the selected options as part
         of the game saves and reload those selections when loading the game from
         a save.
+
+        ```python
+        my_sprite_state = SCState()
+        my_sprite.set_state(my_sprite_state)
+        ```
         """
         def __init__(self):
             """
@@ -15,29 +20,26 @@ init -1 python:
             """
             self._state = {}
 
-        def __getitem__(self, key):
+        def get_selection(self, key):
             """
-            Looks up a selection value, defaulting to option `1` if no such
-            selection has ever been made before.
+            Looks up the target selection value.  If the target selection value
+            is unknown to the `SCState` object, the value `1` will be recorded
+            in the state and returned from this method.
 
             Arguments:
+
             key (str): Selection key.
 
             Returns:
-            int: Current state for the given option selection.
+
+            int: Current selection state for the given option selection.
             """
             if not key in self._state:
                 self._state[key] = 1
 
             return self._state[key]
 
-        def __setitem__(self, key, value):
-            """
-            Override dict access setter to disable it.
-            """
-            raise Exception("Unsupported operation.")
-
-        def inc_option(self, key, max):
+        def inc_selection(self, key, max):
             """
             Increment the selection value for the given option to a maximum of
             `max`, rolling back over to `1` if it would exceed that maximum.
@@ -56,7 +58,7 @@ init -1 python:
             else:
                 self._state[key] += 1
 
-        def dec_option(self, key, max):
+        def dec_selection(self, key, max):
             """
             Decrement the selection value for the given option to a minimum of
             `1`, rolling over to `max` if it would go below `1`.
@@ -74,22 +76,6 @@ init -1 python:
                 self._state[key] = max
             else:
                 self._state[key] -= 1
-
-        def option_text(self, key):
-            """
-            Returns the displayable text for the value of the selection for the
-            given option key.
-
-            Arguments:
-
-            key (str): Key of the selection option whose value should be
-            rendered as a string and returned.
-
-            Returns:
-
-            str: String representation of the selection option for `key`.
-            """
-            return str(self[key]).rjust(2, '0')
 
 
     class SCOpt:
@@ -120,24 +106,33 @@ init -1 python:
 
             option_values (list): List of option values.
             """
+            if not isinstance(display_name, str):
+                raise Exception("SCOpt display_name argument must be a string.")
+
+            if not (isinstance(option_values, list) or isinstance(option_values, set)):
+                raise Exception("SCOpt option_values argument must be a list.")
+
+            if len(option_values) < 1:
+                raise Exception("Cannot construct an SCOpt instance with no option values.")
+
             self.display_name = display_name
             self.values = option_values
 
 
     class SCLayer:
         """
-        Sprite Customization Layer
+        # Sprite Customization Layer
 
-        Represents a single layer in a customizable sprite.  This layer has
-        zero or more customization options provided at construction time via
-        named `SCOpt` keyword args.
+        Represents a single layer in a customizable sprite.
 
-        ...
+        This layer has zero or more customization options provided at
+        construction time via named `SCOpt` keyword args.  The user's selections
+        of those options are then passed to the given `layer_callback` to
+        construct the underlying Displayable for the layer.
 
-        Attributes
-        ----------
-
-        options (dict): Map of option keywords to `SCOpt` instances.
+        ```python
+        SCLayer("name", callback, option=SCOpt("Option", [ "some", "choices" ]))
+        ```
         """
 
         def __init__(self, name, layer_callback, **options):
@@ -148,15 +143,10 @@ init -1 python:
             self._name  = name
             self._func  = layer_callback
             self._state = None
-            self.options = options
+            self._options = options
 
         def _require_option(self, option):
-            """
-            Require Option
-
-            Requires that the given `option` value is known to this layer.
-            """
-            if option not in self.options:
+            if option not in self._options:
                 raise Exception("Unrecognized SCLayer option \"{}\"".format(option))
 
         def _render(self, st, at, **kwargs):
@@ -176,15 +166,13 @@ init -1 python:
             construction, and an int representing the time to pause before
             rerendering.
             """
-            for key in self.options.keys():
-                kwargs[key] = self.options[key].values[self._state[key] - 1]
+            for key in self._options.keys():
+                kwargs[key] = self._options[key].values[self._state.get_selection(key) - 1]
 
             return (self._func(**kwargs), 0)
 
-        def _copy(self):
+        def clone(self):
             """
-            Copy Layer
-
             Creates a clone of this layer instance.
 
             Returns:
@@ -192,7 +180,7 @@ init -1 python:
             SCLayer: A new `SCLayer` instance containing the same values
             configured on this instance.
             """
-            return SCLayer(self._name, self._func, **self.options)
+            return SCLayer(self._name, self._func, **self._options)
 
         def set_state(self, state):
             """
@@ -208,7 +196,7 @@ init -1 python:
                 raise Exception("Cannot call set_state with a non SCState value.")
             self._state = state
 
-        def inc_option(self, option):
+        def inc_selection(self, option):
             """
             Increment Option Selection
 
@@ -220,9 +208,9 @@ init -1 python:
             incremented.
             """
             self._require_option(option)
-            self._state.inc_option(option, len(self.options[option].values))
+            self._state.inc_selection(option, len(self._options[option].values))
 
-        def dec_option(self, option):
+        def dec_selection(self, option):
             """
             Decrement Option Selection
 
@@ -234,28 +222,15 @@ init -1 python:
             decremented.
             """
             self._require_option(option)
-            self._state.dec_option(option, len(self.options[option].values))
+            self._state.dec_selection(option, len(self._options[option].values))
 
-        def option_display_text(self, option):
-            """
-            Option Display Text
-
-            Returns:
-
-            str: The configured display name for the layer customization option.
-            """
+        def option_display_name(self, option):
             self._require_option(option)
-            return self.options[option].display_name
+            return self._options[option].display_name
 
-        def option_value_text(self, option):
-            """
-            Option Value Text
-
-            Returns:
-            str: the rendered string representing the current option selection.
-            """
+        def option_value(self, option):
             self._require_option(option)
-            return self._state.option_text(option)
+            return self._state.get_selection(option)
 
         def build_image(self):
             """
@@ -372,7 +347,7 @@ init -1 python:
                 if not isinstance(layer, SCLayer):
                     raise Exception("CustomizedSprite arguments 1+ must all be SCLayer instances.")
 
-                for option_name, option in layer.options.items():
+                for option_name, option in layer._options.items():
                     if option_name in self._option_to_layer:
                         raise Exception("Duplicate option \"{}\"".format(option_name))
                     self._option_to_layer[option_name] = layer
@@ -387,12 +362,6 @@ init -1 python:
             renpy.image(image_name, LayeredImage(attrs))
 
         def _require_option(self, option):
-            """
-            Require Option
-
-            Requires that the given `option` value is known to one of the layers
-            in this `CustomizedSprite`.
-            """
             if not option in self._option_to_layer:
                 raise Exception("Unrecognized CustomizedSprite option \"{}\"".format(option))
 
@@ -413,7 +382,7 @@ init -1 python:
             for layer in self._layers:
                 layer.set_state(state)
 
-        def inc_option(self, option):
+        def inc_selection(self, option):
             """
             Increments the selection value for the given option.
 
@@ -423,9 +392,9 @@ init -1 python:
             incremented.
             """
             self._require_option(option)
-            self._option_to_layer[option].inc_option(option)
+            self._option_to_layer[option].inc_selection(option)
 
-        def dec_option(self, option):
+        def dec_selection(self, option):
             """
             Decrements the selection value for the given option.
 
@@ -435,39 +404,22 @@ init -1 python:
             decremented.
             """
             self._require_option(option)
-            self._option_to_layer[option].dec_option(option)
+            self._option_to_layer[option].dec_selection(option)
 
-        def option_display_text(self, option):
-            """
-            Returns the display name for the target option.
-
-            Arguments:
-
-            option (str): Key of the option for which the display name should be
-            returned.
-
-            Returns:
-
-            str: Display name for the target option.
-            """
+        def option_display_name(self, option):
             self._require_option(option)
-            return self._option_to_layer[option].option_display_text(option)
+            return self._option_to_layer[option].option_display_name(option)
 
-        def option_value_text(self, option):
-            """
-            Returns the selection value for the target option as a string.
-
-            Arguments:
-
-            option (str): Key of the option for which the selection value should
-            be returned as a string.
-
-            Returns:
-
-            str: Selection value for the target option as a string.
-            """
+        def option_value(self, option):
             self._require_option(option)
-            return self._option_to_layer[option].option_value_text(option)
+            return self._option_to_layer[option].option_value(option)
+
+        @property
+        def option_keys(self):
+            """
+            A list of all the option keys.
+            """
+            return self._option_to_layer.keys()
 
         @property
         def option_count(self):
@@ -484,8 +436,8 @@ init -1 python:
             """
             out = {}
             for layer in self._layers:
-                for opt in layer.options.keys():
-                    out[layer.option_display_text(opt)] = opt
+                for opt in layer._options.keys():
+                    out[layer.option_display_name(opt)] = opt
             return out
 
 
@@ -528,4 +480,4 @@ init -1 python:
             returned sprite.  This name is the value that will be used when
             referencing the sprite elsewhere in scripts via `show`, `add`, etc..
             """
-            return CustomizedSprite(image_name, *[ layer._copy() for layer in self._layers ])
+            return CustomizedSprite(image_name, *[ layer.clone() for layer in self._layers ])
