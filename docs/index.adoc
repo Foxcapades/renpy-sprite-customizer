@@ -1,5 +1,7 @@
 = Ren'Py Sprite Customizer
 :source-highlighter: highlight.js
+:toc:
+:toclevels: 4
 
 This document is a WIP and presently is just a collection of notes about various
 Sprite Customizer topics.  This document will eventually become the overall
@@ -86,6 +88,26 @@ Represents a sprite image composed of customizable layers.
 This type provides methods for manipulating the layers and changing their
 customizations between each layer's configured customization options.
 
+==== Properties
+
+===== `option_count`
+
+The total number of registered options across all layers.
+
+===== `menu_components`
+
+A dict of option display names to the matching option keyword.
+
+[source, python]
+----
+{
+    "Hair Style": "hair_style",
+    "Hair Color": "hair_color",
+    ...
+}
+----
+
+
 ==== Methods
 
 ===== `+__init__+`
@@ -154,7 +176,34 @@ $ my_sprite.dec_option("hair_style")
 ----
 
 
+===== `option_display_text`
 
+Returns the display name for the target option.
+
+====== Arguments
+
+`option`::
+String key of the option for which the display name should be returned.
++
+[source, python]
+----
+$ display_name = my_sprite.option_display_text("hair_style")
+----
+
+
+===== `option_value_text`
+
+Returns the selection value for the target option as a string.
+
+====== Arguments
+
+`option`::
+Key of the option for which the selection value should be returned as a string.
++
+[source, python]
+----
+$ selection = my_sprite.option_value_text("hair_style")
+----
 
 
 == Reference:
