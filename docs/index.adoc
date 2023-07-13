@@ -1,0 +1,67 @@
+= Ren'Py Sprite Customizer
+:source-highlighter: highlight.js
+
+This document is a WIP and presently is just a collection of notes about various
+Sprite Customizer topics.  This document will eventually become the overall
+documentation of the Sprite Customizer toolset.
+
+== Topics
+
+=== Layer Callbacks
+
+A layer callback is a function that takes customization option values and
+and returns a link:https://www.renpy.org/doc/html/displayables.html[Displayable]
+to be used for the layer.  These callbacks are how the Sprite Customizer makes
+use of your assets.
+
+Customization option values are passed on parameters with names matching the
+keyword args by which the backing `SCOpt` instances were passed to the relevant
+`SCLayer`.
+
+.Simple Example
+[source, python]
+----
+def my_eyes_callback(eye_color, **kwargs):
+    return f"images/sprites/eyes/{eye_color}.png"
+
+define my_sprite = CustomizedSprite(
+    "sprite",
+    SCLayer("eyes", my_eyes_callback, eye_color=[ "green", "brown", "blue", "hazel" ])
+)
+----
+
+Using the simple example above we have declared a callback that takes a single
+argument, `eye_color` and returns the path to an image named with that value.
+
+This argument directly relates to the kwarg `eye_color` passed to the `SCLayer`
+constructor.
+
+When the callback is executed, it will be passed one of the values from the
+associated `SCOpt` value list.
+
+.Complex Example
+[source, python]
+----
+def my_hair_callback(hair_style, hair_color, **kwargs):
+    return Transform("images/ccp/hair/{}.png".format(hair_style), matrixcolor=TintMatrix(hair_color))
+
+SCLayer(
+    "hair",
+    my_hair_callback,
+    hair_style=SCOpt("Hair Style", [ "straight", "curly", "bob", "mohawk" ]),
+    hair_color=SCOpt("Hair Color", [ "#3d23e9", "#d0e1f5", "#aebce8", "#76b2e7" ])
+)
+----
+
+In this, slightly more complex example, we have declared a callback that takes
+two set arguments, `hair_style` and `hair_color`, then returns a
+link:https://www.renpy.org/doc/html/transforms.html#transforms[Transform] that
+applies a
+link:https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix[TintMatrix] to
+a target image.
+
+
+== Reference:
+
+* link:https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable[DynamicDisplayable]
+* link:https://www.renpy.org/doc/html/layeredimage.html[LayeredImage]
