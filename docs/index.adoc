@@ -34,7 +34,7 @@ use of your assets.
 
 Customization option values are passed on parameters with names matching the
 keyword args by which the backing `SCOpt` instances were passed to the relevant
-`SCLayer`.
+<<sc-layer>>.
 
 .Simple Example
 [source, python]
@@ -51,8 +51,8 @@ define my_sprite = CustomizedSprite(
 Using the simple example above we have declared a callback that takes a single
 argument, `eye_color` and returns the path to an image named with that value.
 
-This argument directly relates to the kwarg `eye_color` passed to the `SCLayer`
-constructor.
+This argument directly relates to the kwarg `eye_color` passed to the
+<<sc-layer>> constructor.
 
 When the callback is executed, it will be passed one of the values from the
 associated `SCOpt` value list.
@@ -125,8 +125,8 @@ that will be used when referencing the sprite image elsewhere in scripts via
 `show`, `add`, etc...
 
 | `*layers`
-| SCLayer[]
-| One or more ``SCLayer``s from which the sprite should be created.  The layers
+| <<sc-layer>>[]
+| One or more <<sc-layer>>s from which the sprite should be created.  The layers
 are stacked on top of one another in the passed order.  This means the first
 given layer will be at the "back" of the sprite, where the last given layer will
 be at the "front".
@@ -222,11 +222,11 @@ Initializes a new `CustomizedSpriteFactory` instance with the given arguments.
 [cols="1h,1m,8"]
 |===
 | `*layers`
-| SCLayer[]
-| One or more ``SCLayer``s from which new <<customized-sprite>> instances should
-be created.  The layers are stacked on top of one another in the passed order.
-This means the first given layer will be at the "back" of the sprite, where the
-last given layer will be at the "front".
+| <<sc-layer>>[]
+| One or more <<sc-layer>>s from which new <<customized-sprite>> instances
+should be created.  The layers are stacked on top of one another in the passed
+order.  This means the first given layer will be at the "back" of the sprite,
+where the last given layer will be at the "front".
 |===
 
 ===== `new_sprite`
@@ -246,6 +246,49 @@ the value by which the sprite may be referenced in scripts via `show`, `add`,
 etc...
 |===
 
+
+[#sc-layer]
+=== `SCLayer`
+
+Represents a single layer in a customizable sprite.  This layer has zero or more
+customization options provided at construction time via named `SCOpt` keyword
+args.
+
+[source, python]
+----
+SCLayer(
+    "hair",
+    hair_callback,
+    hair_style=[ "braids", "short", "bob", "long", "mohawk", "none" ],
+    hair_color=[ "#3D2314", "#100C07", "#DA680F", "#FFCC47", "#9A9E9F" ],
+)
+----
+
+
+==== Methods
+
+===== `+__init__+`
+
+Initializes the new `SCLayer` instance with the given arguments.
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `name`
+| str
+| Name of the layer.
+
+| `layer_callback`
+| function
+| See <<Layer Callbacks>>.
+
+| `**options`
+| dict
+| Keyword argument `SCOpt` instances.  The keywords used to pass the `SCOpt`
+instances to the new layer are used as the keys to reference those options
+and the names of the parameters that will be passed to the given callback.
+|===
 
 
 == Reference
