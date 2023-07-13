@@ -1206,9 +1206,18 @@ selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
 </div>
 <div class="sect5">
 <h6 id="_returns_6">Returns</h6>
-<div class="paragraph">
-<p>A copy of the current <code>SCLayer</code> instance sans user state.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-layer"><code>SCLayer</code></a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A copy of the current <code>SCLayer</code> instance sans user state.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect4">
@@ -1305,9 +1314,18 @@ selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
 </div>
 <div class="sect5">
 <h6 id="_returns_7">Returns</h6>
-<div class="paragraph">
-<p>The target <a href="#sc-opt"><code>SCOpt</code></a> instance.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-opt"><code>SCOpt</code></a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The target <code>SCOpt</code> instance.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect4">
@@ -1359,9 +1377,18 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </div>
 <div class="sect5">
 <h6 id="_returns_8">Returns</h6>
-<div class="paragraph">
-<p>Returns the option value for the target option and selection.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>any</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the option value for the target option and selection.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect4">
@@ -1388,15 +1415,24 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </div>
 <div class="sect5">
 <h6 id="_returns_9">Returns</h6>
-<div class="paragraph">
-<p>The display name for the target option.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The display name for the target option.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_option_selection_2"><code>option_selection</code></h5>
 <div class="paragraph">
-<p>Returns the use selected value for the target option.</p>
+<p>Returns the use selection index for the target option.</p>
 </div>
 <div class="sect5">
 <h6 id="_arguments_20">Arguments</h6>
@@ -1417,40 +1453,64 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </div>
 <div class="sect5">
 <h6 id="_returns_10">Returns</h6>
-<div class="paragraph">
-<p>The user selected value for the target option.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user selection index for the target option.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect4">
 <h5 id="sc-lay-build-image"><code>build_image</code></h5>
 <div class="paragraph">
 <p>Builds the
-<a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable">DynamicDisplayable</a>
+<a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable"><code>DynamicDisplayable</code></a>
 that represents this <code>SCLayer</code> instance.</p>
 </div>
 <div class="sect5">
 <h6 id="_returns_11">Returns</h6>
-<div class="paragraph">
-<p>The newly constructed
-<a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable">DynamicDisplayable</a>
-instance.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable"><code>DynamicDisplayable</code></a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The newly constructed <code>DynamicDisplayable</code> instance.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_build_attribute"><code>build_attribute</code></h5>
 <div class="paragraph">
-<p>Builds a <a href="https://www.renpy.org/doc/html/layeredimage.html">LayeredImage</a>
-<a href="https://www.renpy.org/doc/html/layeredimage.html#attribute">Attribute</a> instance
+<p>Builds a <a href="https://www.renpy.org/doc/html/layeredimage.html"><code>LayeredImage</code></a>
+<a href="https://www.renpy.org/doc/html/layeredimage.html#attribute"><code>Attribute</code></a> instance
 to represent this <code>SCLayer</code> instance.</p>
 </div>
 <div class="sect5">
 <h6 id="_returns_12">Returns</h6>
-<div class="paragraph">
-<p>The newly constructed
-<a href="https://www.renpy.org/doc/html/layeredimage.html#attribute">Attribute</a> instance.</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://www.renpy.org/doc/html/layeredimage.html#attribute"><code>Attribute</code></a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The newly constructed <code>Attribute</code> instance.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1642,7 +1702,7 @@ over to <code>max</code> if it would go below <code>1</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-13 12:31:20 -0400
+Last updated 2023-07-13 12:50:41 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

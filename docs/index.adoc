@@ -540,7 +540,12 @@ Creates a copy of the current `SCLayer` instance.
 
 ====== Returns
 
-A copy of the current `SCLayer` instance sans user state.
+[cols="1m,9"]
+|===
+| <<sc-layer>>
+| A copy of the current `SCLayer` instance sans user state.
+|===
+
 
 ===== `set_state`
 
@@ -597,7 +602,12 @@ Returns the target <<sc-opt>> value from the current layer.
 
 ====== Returns
 
-The target <<sc-opt>> instance.
+[cols="1m,9"]
+|===
+| <<sc-opt>>
+| The target `SCOpt` instance.
+|===
+
 
 ===== `get_option_value`
 
@@ -635,7 +645,12 @@ layer.get_option_value("fizz", 2) == "ding"
 
 ====== Returns
 
-Returns the option value for the target option and selection.
+[cols="1m,9"]
+|===
+| any
+| Returns the option value for the target option and selection.
+|===
+
 
 ===== `option_display_name`
 
@@ -652,11 +667,15 @@ Returns the display name for the target option.
 
 ====== Returns
 
-The display name for the target option.
+[cols="1m,9"]
+|===
+| str
+| The display name for the target option.
+|===
 
 ===== `option_selection`
 
-Returns the use selected value for the target option.
+Returns the use selection index for the target option.
 
 ====== Arguments
 
@@ -669,33 +688,41 @@ Returns the use selected value for the target option.
 
 ====== Returns
 
-The user selected value for the target option.
+[cols="1m,9"]
+|===
+| int
+| The user selection index for the target option.
+|===
 
 [#sc-lay-build-image]
 ===== `build_image`
 
 Builds the
-link:https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable[DynamicDisplayable]
+link:https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable[`DynamicDisplayable`]
 that represents this `SCLayer` instance.
 
 ====== Returns
 
-The newly constructed
-link:https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable[DynamicDisplayable]
-instance.
+[cols="1m,9"]
+|===
+| link:https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable[`DynamicDisplayable`]
+| The newly constructed `DynamicDisplayable` instance.
+|===
 
 
 ===== `build_attribute`
 
-Builds a link:https://www.renpy.org/doc/html/layeredimage.html[LayeredImage]
-https://www.renpy.org/doc/html/layeredimage.html#attribute[Attribute] instance
+Builds a link:https://www.renpy.org/doc/html/layeredimage.html[`LayeredImage`]
+https://www.renpy.org/doc/html/layeredimage.html#attribute[`Attribute`] instance
 to represent this `SCLayer` instance.
 
 ====== Returns
 
-The newly constructed
-https://www.renpy.org/doc/html/layeredimage.html#attribute[Attribute] instance.
-
+[cols="1m,9"]
+|===
+| https://www.renpy.org/doc/html/layeredimage.html#attribute[`Attribute`]
+| The newly constructed `Attribute` instance.
+|===
 
 
 [#sc-opt]

@@ -7,8 +7,8 @@ The goal of this project is to allow game creators to plug in their own assets
 and screens to set up character or sprite customization in their own games.
 
 This project is currently in its early stages so, while it works fine, the
-included ``screen``s are not the prettiest.  Luckily this framework provides the
-tools necessary to customize those ``screen``s.
+included ``screen``s are not the prettiest.  Luckily this framework provides
+tools to assist in customizing those ``screen``s.
 
 == Preview
 
