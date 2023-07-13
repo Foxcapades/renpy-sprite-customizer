@@ -9,18 +9,18 @@ documentation of the Sprite Customizer toolset.
 
 === CustomizedSprite vs CustomizedSpriteFactory
 
-The `CustomizedSprite` class may be constructed directly or via the
+The <<customized-sprite>> class may be constructed directly or via the
 `CustomizedSpriteFactory` type.  Deciding whether to construct the type directly
 or via the factory comes down to whether you want to create multiple sprites
 from the same set of layers and options.
 
 If you only wish to create a single sprite out of a given set of layers and
-options, then it is fine to construct a new `CustomizedSprite` instance
+options, then it is fine to construct a new <<customized-sprite>> instance
 directly.
 
 If you wish to create more than one sprite out of a set of layers and options,
 then it is best to create a `CustomizedSpriteFactory` from those layers and
-options and use that factory instance to produce new `CustomizedSprite`
+options and use that factory instance to produce new <<customized-sprite>>
 instances.
 
 === Layer Callbacks
@@ -75,6 +75,45 @@ link:https://www.renpy.org/doc/html/transforms.html#transforms[Transform] that
 applies a
 link:https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix[TintMatrix] to
 a target image.
+
+== Type Reference
+
+[#customized-sprite]
+=== `CustomizedSprite`
+
+Represents a sprite image composed of customizable layers.
+
+This type provides methods for manipulating the layers and changing their
+customizations between each layer's configured customization options.
+
+==== Methods
+
+===== `+__init__+`
+
+Initializes a new `CustomizedSprite` instance with the given arguments.
+
+====== Arguments
+
+`image_name`::
+    String name of the image that will be created for the sprite.  This name is
+    the value that will be used when referencing the sprite image elsewhere in
+    scripts via `show`, `add`, etc...
+
+`layers`::
+    One or more ``SCLayer``s from which the sprite should be created.  The
+    layers are stacked on top of one another in the passed order.  This means
+    the first given layer will be at the "back" of the sprite, where the last
+    given layer will be at the "front".
+
+===== `set_state`
+
+Replaces the internal state object of the `CustomizedSprite` instance with the
+given `SCState` instance.
+
+====== Arguments
+
+`state`::
+    A `SCState` object to use for storing customization option selections.
 
 
 == Reference:
