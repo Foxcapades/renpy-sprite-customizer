@@ -1,0 +1,24 @@
+[#custom-sprite-fac]
+= `CustomizedSpriteFactory`
+
+A factory which may be used to generate multiple <<custom-sprite>> instances
+with the same base set of layers and options.
+
+== Methods
+
+=== `+__init__+`
+
+Initializes a new `CustomizedSpriteFactory` instance with the given arguments.
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `*layers`
+| <<sc-layer>>[]
+| One or more layers from which <<custom-sprite>> instances should be created.
+The layers are stacked on top of one another in the passed order. This means the
+first given layer will be at the "back" of the sprite, where the last given
+layer will be at the "front".
+|===
+

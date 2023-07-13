@@ -1,0 +1,83 @@
+[#sc-state]
+= `SCState`
+
+This class defines an object that is used to hold sprite customization option
+selections.  This is used to persist the selected options as part of the game
+saves and reload those selections when loading the game from a save.
+
+The state is a map of `1` based indexes of option values.
+
+[source, python]
+----
+my_sprite_state = SCState()
+my_sprite.set_state(my_sprite_state)
+----
+
+== Methods
+
+
+=== `+__init__+`
+
+Initializes the new, blank `SCState` instance.
+
+
+=== `get_selection`
+
+Looks up the target selection value.  If the target selection value is unknown
+to the `SCState` object, the value `1` will be recorded in the state and
+returned from this method.
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `key`
+| str
+| Selection key.
+|===
+
+==== Returns
+
+[cols="1m,9"]
+|===
+| int
+| Current selection state for the given option key.
+|===
+
+
+=== `inc_selection`
+
+Increments the selection value for the iven option to a maximum of `max`,
+rolling back over to `1` if it would exceed that maximum.
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `key`
+| str
+| Key of the selection option whose value should be incremented.
+
+| `max`
+| int
+| Max value the selection option can possibly be.
+|===
+
+
+=== `dec_selection`
+
+Decrements the selection value for the given option to a minimum of `1`, rolling
+over to `max` if it would go below `1`.
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `key`
+| str
+| Key of the selection option whose value should be decremented.
+
+| `max`
+| int
+| Max value the selection option can possibly be.
+|===

@@ -483,6 +483,10 @@ documentation of the Sprite Customizer toolset.</p>
 selection state for the sprites is stored in a runtime variable of type
 <a href="#sc-state"><code>SCState</code></a>.</p>
 </div>
+<div class="paragraph">
+<p>This state should be created via a runtime variable in a python line, or,
+preferrably, a <code>default</code> statement.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">default my_sprite_state_1 = SCState()
@@ -496,6 +500,14 @@ label after_load:
     $ my_sprite_1.set_state(my_sprite_state_1)
     $ my_sprite_2.set_state(my_sprite_state_2)</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>This state is then loaded into a target <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance to configure
+all the option selections show the correct combination of options.  Each
+separate <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance should have it&#8217;s own state instance.  This
+means that for every unique sprite, you will need a unique <code>default</code> declaring a
+new <a href="#sc-state"><code>SCState</code></a> object.  Additionally, for every separate <a href="#custom-sprite"><code>CustomizedSprite</code></a>
+instance, that state value must be loaded at <code>start</code> and <code>after_load</code> times.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -563,9 +575,10 @@ my_sprite_2 = sprite_fac.new_sprite("antagonist")</code></pre>
 <h3 id="_layer_callbacks">Layer Callbacks</h3>
 <div class="paragraph">
 <p>A layer callback is a function that takes customization option values and
-and returns a <a href="https://www.renpy.org/doc/html/displayables.html">Displayable</a>
-to be used for the layer.  These callbacks are how the Sprite Customizer makes
-use of your assets.</p>
+and returns a
+<a href="https://www.renpy.org/doc/html/displayables.html"><code>Displayable</code></a> to be used
+for the layer.  These callbacks are how the Sprite Customizer makes use of your
+assets.</p>
 </div>
 <div class="paragraph">
 <p>Customization option values are passed on parameters with names matching the
@@ -613,9 +626,9 @@ SCLayer(
 <div class="paragraph">
 <p>In this, slightly more complex example, we have declared a callback that takes
 two set arguments, <code>hair_style</code> and <code>hair_color</code>, then returns a
-<a href="https://www.renpy.org/doc/html/transforms.html#transforms">Transform</a> that
+<a href="https://www.renpy.org/doc/html/transforms.html#transforms"><code>Transform</code></a> that
 applies a
-<a href="https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix">TintMatrix</a> to
+<a href="https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix"><code>TintMatrix</code></a> to
 a target image.</p>
 </div>
 </div>
@@ -1702,7 +1715,7 @@ over to <code>max</code> if it would go below <code>1</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-13 12:50:41 -0400
+Last updated 2023-07-13 14:28:58 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

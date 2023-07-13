@@ -1,0 +1,39 @@
+[#sc-opt]
+= `SCOpt`
+
+Represents an option set for an <<sc-layer>>, providing options for customizing
+that layer.
+
+[source, python]
+----
+SCOpt("Display Name", [ "some", "option", "values" ])
+----
+
+== Properties
+
+=== `display_name`
+
+Display name for the set of options.
+
+=== `option_values`
+
+List of option values.
+
+== Methods
+
+=== `+__init__+`
+
+Initializes the new `SCOpt` object.
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `display_name`
+| str
+| Display name for the option group.
+
+| `option_values`
+| list
+| List of values for the option group.
+|===
