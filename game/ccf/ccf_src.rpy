@@ -123,16 +123,6 @@ init -1 python:
             self.display_name = display_name
             self.values = option_values
 
-        def len(self):
-            """
-            Returns the number of option values contained in this option set.
-
-            Returns:
-
-            int: Number of option values contained in this option set.
-            """
-            return len(self.values)
-
 
     class SCLayer:
         """

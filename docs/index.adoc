@@ -291,6 +291,40 @@ and the names of the parameters that will be passed to the given callback.
 |===
 
 
+[#sc-opt]
+=== `SCOpt`
+
+Represents an option set for a <<customized-sprite>> layer, providing options
+for customizing that layer and the display name for those options.
+
+==== Properties
+
+===== `display_name`
+
+Display name for the set of options.
+
+===== `values`
+
+List of option values.
+
+==== Methods
+
+===== `+__init__+`
+
+Initializes the new `SCOpt` object.
+
+[cols="1h,1m,8"]
+|===
+| `display_name`
+| str
+| Display name for the set of options.
+
+| `values`
+| list
+| Option values.
+|===
+
+
 == Reference
 
 * link:https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable[DynamicDisplayable]
