@@ -1,7 +1,7 @@
 = Ren'Py Sprite Customizer
 :source-highlighter: highlight.js
 :toc:
-:toclevels: 3
+:icons: font
 
 This document is a WIP and presently is just a collection of notes about various
 Sprite Customizer topics.  This document will eventually become the overall
@@ -11,22 +11,45 @@ documentation of the Sprite Customizer toolset.
 
 === State
 
-TODO
+To keep sprite customization options stored in game save files, the internal
+selection state for the sprites is stored in a runtime variable of type
+<<sc-state>>.
+
+[source, python]
+----
+default my_sprite_state_1 = SCState()
+default my_sprite_state_2 = SCState()
+
+label start:
+    $ my_sprite_1.set_state(my_sprite_state_1)
+    $ my_sprite_2.set_state(my_sprite_state_2)
+
+label after_load:
+    $ my_sprite_1.set_state(my_sprite_state_1)
+    $ my_sprite_2.set_state(my_sprite_state_2)
+----
+
+[IMPORTANT]
+--
+This state value *MUST* be passed to the relevant sprite instance via the
+`set_state` method in both the `start` and `after_load` labels.  If this is not
+done, the sprites will reset to their default state.
+--
 
 === CustomizedSprite vs CustomizedSpriteFactory
 
-The <<customized-sprite>> class may be constructed directly or via the
+The <<custom-sprite>> class may be constructed directly or via the
 `CustomizedSpriteFactory` type.  Deciding whether to construct the type directly
 or via the factory comes down to whether you want to create multiple sprites
 from the same set of layers and options.
 
 If you only wish to create a single sprite out of a given set of layers and
-options, then it is fine to construct a new <<customized-sprite>> instance
+options, then it is fine to construct a new <<custom-sprite>> instance
 directly.
 
 If you wish to create more than one sprite out of a set of layers and options,
 then it is best to create a `CustomizedSpriteFactory` from those layers and
-options and use that factory instance to produce new <<customized-sprite>>
+options and use that factory instance to produce new <<custom-sprite>>
 instances.
 
 === Layer Callbacks
@@ -128,10 +151,116 @@ A dict of display name mapped to key for all options known to the
 
 ==== Methods
 
-TODO
+
+===== `+__init__+`
+
+Initializes the new `CustomizedSprite` instance with the given arguments.
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `image_name`
+| str
+| Name of the image that will be created for this sprite.  This name is the
+value that will be used when referencing the sprite elsewhere in scripts via
+`show`, `add`, etc...
+
+| `*layers`
+| <<sc-layer>>[]
+| One or more layers from which the sprite should be created.  The layers are
+stacked on top of one another in the passed order.  This means the first given
+layer will be at the "back" of the sprite, where the last given layer will be at
+the "front".
+|===
+
+
+===== `_require_option`
+
+Requires that the given option key is known to the current `CustomizedSprite`
+instance or one of its layers.
+
+If the option key is not known, an exception will be thrown.
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Keyword for the option to require.
+|===
+
+
+===== `set_state`
+
+Sets the internal state object of this `CustomizedSprite` instance to the given
+<<sc-state>> instance.
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `state`
+| <<sc-state>>
+| State object to use for storing customization option selections.
+|===
+
+
+===== `inc_selection`
+
+Increments the selection value for the target option.
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Keyword of the option for which the selection should be incremented.
+|===
+
+
+===== `dec_selection`
+
+Deccrements the selection value for the target option.
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Keyword of the option for which the selection should be decremented.
+|===
+
+
+===== `option_display_name`
+
+Returns the display name value for the target option.
+
+====== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `option`
+| str
+| Keyword of the option for which the display name should be returned.
+|===
+
+====== Returns
+
+[cols="1m,9"]
+|===
+| str
+| Display name value for the target option.
+|===
+
 
 [#custom-sprite-fac]
 === `CustomizedSpriteFactory`
+
+
 
 [#sc-layer]
 === `SCLayer`
@@ -204,11 +333,11 @@ selected in the <<sc-state>>.
 |===
 | `st`
 | float
-|
+| The amount of time the displayable has been shown for.
 
 | `at`
 | float
-|
+| The amount of time any displayable with the same tag has been shown for.
 
 | `**kwargs`
 | dict
