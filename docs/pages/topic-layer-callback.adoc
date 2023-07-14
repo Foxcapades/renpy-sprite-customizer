@@ -182,6 +182,3 @@ define cs = CustomizedSprite(
     transform = lambda x : Transform(x, zoom=0.75),
 )
 ----
-
-
-
