@@ -72,7 +72,7 @@ init -1 python:
             kwargs["at"] = at
 
             for key in self._options.keys():
-                kwargs[key] = self._options[option]._values[self._state.get_selection(key) - 1]
+                kwargs[key] = self._options[key]._values[self._state.get_selection(key) - 1]
 
             out = self._func(**kwargs)
 

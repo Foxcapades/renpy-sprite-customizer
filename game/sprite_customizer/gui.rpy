@@ -1,12 +1,12 @@
 image cc_gui_option_arrow_right_idle:
-    "ccf/img/arrow.png"
+    "sprite_customizer/img/arrow.png"
     xsize 50
     ysize 50
 
 image cc_gui_option_arrow_right_hover = Transform("cc_gui_option_arrow_right_idle", matrixcolor=BrightnessMatrix(-0.5))
 
 image cc_gui_option_arrow_left_idle:
-    "ccf/img/arrow.png"
+    "sprite_customizer/img/arrow.png"
     xsize 50
     ysize 50
     xzoom -1.0

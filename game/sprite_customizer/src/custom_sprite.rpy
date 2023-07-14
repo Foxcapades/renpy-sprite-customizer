@@ -184,7 +184,7 @@ init -1 python:
             self._require_option(option)
             return self._option_to_layer[option].get_option_value(option, selection)
 
-        def get_selected_option_value(self, option)
+        def get_selected_option_value(self, option):
             """
             Returns the currently selected option value for the target option.
 
