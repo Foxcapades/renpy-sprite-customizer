@@ -8,9 +8,7 @@
 
 Documentation for the Sprite Customizer (SC) framework.
 
-This document is a WIP and presently is just a collection of notes about various
-Sprite Customizer topics.  This document will eventually become the overall
-documentation of the Sprite Customizer toolset.
+This document is a work in progress.
 
 == Topics
 
