@@ -5,7 +5,7 @@ This class defines an object that is used to hold sprite customization option
 selections.  This is used to persist the selected options as part of the game
 saves and reload those selections when loading the game from a save.
 
-The state is a map of `1` based indexes of option values.
+The state is a dict of `1` based indexes of option values.
 
 [source, python]
 ----

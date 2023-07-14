@@ -15,7 +15,7 @@ SCOpt("Display Name", [ "some", "option", "values" ])
 
 Display name for the set of options.
 
-=== `option_values`
+=== `values`
 
 List of option values.
 

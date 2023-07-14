@@ -18,6 +18,11 @@ CustomizedSprite(
 
 == Properties
 
+=== `layers`
+
+A read-only list of all the SCLayer instances known to the current
+<<custom-sprite>> instance.
+
 === `option_keys`
 
 A list of all the option keys known to the <<custom-sprite>> instance.
@@ -156,7 +161,7 @@ Deccrements the selection value for the target option.
 |===
 
 
-=== `option_display_name`
+=== `get_option_display_name`
 
 Returns the display name value for the target option.
 
@@ -178,14 +183,14 @@ Returns the display name value for the target option.
 |===
 
 
-=== `option_selection`
+=== `get_option_selection`
 
 Returns the current selection for the target option.
 
 .Example
 [source, python]
 ----
-my_sprite.option_selection("hair_style") == 1
+my_sprite.get_option_selection("hair_style") == 1
 ----
 
 ==== Arguments
@@ -239,7 +244,7 @@ print(my_sprite.get_option("hair_style").display_name) # Hair Style
 |===
 
 
-=== `option_value`
+=== `get_option_value`
 
 Returns the option value for the given option and selection.
 
@@ -251,7 +256,7 @@ my_sprite = CustomizedSprite(
     SCLayer("hair", hair_cb, hair_style=SCOpt("Hair Style", [ "buns", "bob", "mohawk" ]))
 )
 
-my_sprite.option_value("hair_style", 2) == "bob"
+my_sprite.get_option_value("hair_style", 2) == "bob"
 
 ----
 
