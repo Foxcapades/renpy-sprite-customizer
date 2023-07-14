@@ -88,7 +88,7 @@ means both of the following example functions are correct:
 
 [source, python]
 ----
-# Alternate eye colors every second for some reason
+# Alternate eye image every second for some reason
 init python:
     def my_lcb_1(eye_color, **kwargs):
         if int(kwargs["st"]) % 2 == 1:
