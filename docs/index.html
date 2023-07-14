@@ -20,18 +20,18 @@
 <ul class="sectlevel1">
 <li><a href="#_topics">Topics</a>
 <ul class="sectlevel2">
-<li><a href="#_state">State</a></li>
-<li><a href="#_customizedsprite_vs_customizedspritefactory">CustomizedSprite vs CustomizedSpriteFactory</a></li>
+<li><a href="#_sprite_state">Sprite State</a></li>
+<li><a href="#_sprite_vs_factory">Sprite vs. Factory</a></li>
 <li><a href="#_layer_callbacks">Layer Callbacks</a></li>
 </ul>
 </li>
 <li><a href="#_type_reference">Type Reference</a>
 <ul class="sectlevel2">
-<li><a href="#custom-sprite"><code>CustomizedSprite</code></a></li>
-<li><a href="#custom-sprite-fac"><code>CustomizedSpriteFactory</code></a></li>
-<li><a href="#sc-layer"><code>SCLayer</code></a></li>
-<li><a href="#sc-opt"><code>SCOpt</code></a></li>
-<li><a href="#sc-state"><code>SCState</code></a></li>
+<li><a href="#custom-sprite">CustomizedSprite</a></li>
+<li><a href="#custom-sprite-fac">CustomizedSpriteFactory</a></li>
+<li><a href="#sc-layer">SCLayer</a></li>
+<li><a href="#sc-opt">SCOpt</a></li>
+<li><a href="#sc-state">SCState</a></li>
 </ul>
 </li>
 </ul>
@@ -51,11 +51,11 @@ documentation of the Sprite Customizer toolset.</p>
 <h2 id="_topics">Topics</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_state">State</h3>
+<h3 id="_sprite_state">Sprite State</h3>
 <div class="paragraph">
 <p>To keep sprite customization options stored in game save files, the internal
 selection state for the sprites is stored in a runtime variable of type
-<a href="#sc-state"><code>SCState</code></a>.</p>
+<a href="#sc-state">SCState</a>.</p>
 </div>
 <div class="paragraph">
 <p>This state should be created via a runtime variable in a python line, or,
@@ -76,11 +76,11 @@ label after_load:
 </div>
 </div>
 <div class="paragraph">
-<p>This state is then loaded into a target <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance to configure
+<p>This state is then loaded into a target <a href="#custom-sprite">CustomizedSprite</a> instance to configure
 all the option selections show the correct combination of options.  Each
-separate <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance should have it&#8217;s own state instance.  This
+separate <a href="#custom-sprite">CustomizedSprite</a> instance should have it&#8217;s own state instance.  This
 means that for every unique sprite, you will need a unique <code>default</code> declaring a
-new <a href="#sc-state"><code>SCState</code></a> object.  Additionally, for every separate <a href="#custom-sprite"><code>CustomizedSprite</code></a>
+new <a href="#sc-state">SCState</a> object.  Additionally, for every separate <a href="#custom-sprite">CustomizedSprite</a>
 instance, that state value must be loaded at <code>start</code> and <code>after_load</code> times.</p>
 </div>
 <div class="admonitionblock important">
@@ -101,22 +101,22 @@ done, the sprites will reset to their default state.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_customizedsprite_vs_customizedspritefactory">CustomizedSprite vs CustomizedSpriteFactory</h3>
+<h3 id="_sprite_vs_factory">Sprite vs. Factory</h3>
 <div class="paragraph">
-<p>The <a href="#custom-sprite"><code>CustomizedSprite</code></a> class may be constructed directly or via the
-<a href="#custom-sprite-fac"><code>CustomizedSpriteFactory</code></a> type.  Deciding whether to construct the type directly or
+<p>The <a href="#custom-sprite">CustomizedSprite</a> class may be constructed directly or via the
+<a href="#custom-sprite-fac">CustomizedSpriteFactory</a> type.  Deciding whether to construct the type directly or
 via the factory comes down to whether you want to create multiple sprites from
 the same set of layers and options.</p>
 </div>
 <div class="paragraph">
 <p>If you only wish to create a single sprite out of a given set of layers and
-options, then it is fine to construct a new <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance
+options, then it is fine to construct a new <a href="#custom-sprite">CustomizedSprite</a> instance
 directly.</p>
 </div>
 <div class="paragraph">
 <p>If you wish to create more than one sprite out of a set of layers and options,
-then it is best to create a <a href="#custom-sprite-fac"><code>CustomizedSpriteFactory</code></a> from those layers and options
-and use that factory instance to produce new <a href="#custom-sprite"><code>CustomizedSprite</code></a> instances.</p>
+then it is best to create a <a href="#custom-sprite-fac">CustomizedSpriteFactory</a> from those layers and options
+and use that factory instance to produce new <a href="#custom-sprite">CustomizedSprite</a> instances.</p>
 </div>
 <div class="listingblock">
 <div class="title">Constructing a Single Sprite</div>
@@ -148,62 +148,85 @@ my_sprite_2 = sprite_fac.new_sprite("antagonist")</code></pre>
 <div class="sect2">
 <h3 id="_layer_callbacks">Layer Callbacks</h3>
 <div class="paragraph">
-<p>A layer callback is a function that takes customization option values and
-and returns a
-<a href="https://www.renpy.org/doc/html/displayables.html"><code>Displayable</code></a> to be used
-for the layer.  These callbacks are how the Sprite Customizer makes use of your
-assets.</p>
+<p>Layer callbacks are functions that are used by <a href="#sc-layer">SCLayer</a> instances to
+generate <a href="https://www.renpy.org/doc/html/displayables.html#displayables">Displayable</a>s that can be used as components of
+the overall <a href="#custom-sprite">CustomizedSprite</a> image.  These functions are how the Sprite
+Customizer makes use of your project&#8217;s assets.</p>
+</div>
+<div class="sect3">
+<h4 id="_defining_layer_callbacks">Defining Layer Callbacks</h4>
+<div class="paragraph">
+<p>Before we can talk more about layer callbacks, we need to talk a little bit
+about layers, more specifically, <a href="#sc-layer">SCLayer</a>s and how they are constructed.</p>
 </div>
 <div class="paragraph">
-<p>Customization option values are passed on parameters with names matching the
-keyword args by which the backing <code>SCOpt</code> instances were passed to the relevant
-<a href="#sc-layer"><code>SCLayer</code></a>.</p>
+<p>When constructing a new <a href="#sc-layer">SCLayer</a> instance, you pass it a layer name, a
+<em>layer callback</em>, and zero or more customization option groups (<a href="#sc-opt">SCOpt</a>s) via
+keyword arguments.  Those keyword arguments are <em>very</em> important to the
+definition of the given layer callback; they name the same arguments that will
+be passed <em>to</em> the layer callback when it is eventually (and repeatedly)
+executed.</p>
+</div>
+<div class="paragraph">
+<p>For example, given the following <a href="#sc-layer">SCLayer</a> definition:</p>
 </div>
 <div class="listingblock">
-<div class="title">Simple Example</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def my_eyes_callback(eye_color, **kwargs):
-    return f"images/sprites/eyes/{eye_color}.png"
-
-define my_sprite = CustomizedSprite(
-    "sprite",
-    SCLayer("eyes", my_eyes_callback, eye_color=[ "green", "brown", "blue", "hazel" ])
-)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Using the simple example above we have declared a callback that takes a single
-argument, <code>eye_color</code> and returns the path to an image named with that value.</p>
-</div>
-<div class="paragraph">
-<p>This argument directly relates to the kwarg <code>eye_color</code> passed to the
-<a href="#sc-layer"><code>SCLayer</code></a> constructor.</p>
-</div>
-<div class="paragraph">
-<p>When the callback is executed, it will be passed one of the values from the
-associated <code>SCOpt</code> value list.</p>
-</div>
-<div class="listingblock">
-<div class="title">Complex Example</div>
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def my_hair_callback(hair_style, hair_color, **kwargs):
-    return Transform("images/ccp/hair/{}.png".format(hair_style), matrixcolor=TintMatrix(hair_color))
-
-SCLayer(
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">SCLayer(
     "hair",
-    my_hair_callback,
-    hair_style=SCOpt("Hair Style", [ "straight", "curly", "bob", "mohawk" ]),
-    hair_color=SCOpt("Hair Color", [ "#3d23e9", "#d0e1f5", "#aebce8", "#76b2e7" ])
+    hair_lcb,
+    hair_style=SCOpt("Hair Style", [ "afro", "bob", "buns" ]),
+    hair_color=SCOpt("Hair Color", [
+        "#3D2314",
+        "#100C07",
+        "#DA680F",
+        "#FFCC47",
+        "#9A9E9F",
+        "#FAFAFA",
+        "#801818",
+        "#580271",
+        "#1592CA",
+        "#11694E",
+        "#FF87C5"
+    ]),
 )</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In this, slightly more complex example, we have declared a callback that takes
-two set arguments, <code>hair_style</code> and <code>hair_color</code>, then returns a
-<a href="https://www.renpy.org/doc/html/transforms.html#transforms"><code>Transform</code></a> that
-applies a
-<a href="https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix"><code>TintMatrix</code></a> to
-a target image.</p>
+<p>we would expect the defined layer callback function (<code>hair_lcb</code>) to accept 2
+arguments, <code>hair_style</code> and <code>hair_color</code>.  We would then expect that function to
+perform some work with those arguments to produce a
+<a href="https://www.renpy.org/doc/html/displayables.html#displayables">Displayable</a>.  The values passed on those arguments will
+be one of the options in the relevant <a href="#sc-opt">SCOpt</a>'s option list.  In our example
+demonstration&#8217;s case, we use the <code>hair_style</code> value (one of "afro", "bob", or
+"bun") to create a path to the specific image we wish to display; then we use
+the <code>hair_color</code> value (one of the listed hex color codes) to apply a tint
+matrix to that image.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def hair_lcb(hair_style, hair_color, **kwargs):
+    return Transform(f"images/ccp/hair/{hair_style}.png", matrixcolor=TintMatrix(hair_color))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A layer callback may also be as simple as returning a static string for a case
+where there are no customization options.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def mic_stand_lcb(**kwargs):
+    return "images/something/mic_stand.png"
+
+...
+
+SCLayer("mic_stand", mic_stand_lcb)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_advanced_usage">Advanced Usage</h4>
+
 </div>
 </div>
 </div>
@@ -212,7 +235,7 @@ a target image.</p>
 <h2 id="_type_reference">Type Reference</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="custom-sprite"><code>CustomizedSprite</code></h3>
+<h3 id="custom-sprite">CustomizedSprite</h3>
 <div class="paragraph">
 <p>Represents a sprite image composed of customizable layers.</p>
 </div>
@@ -235,7 +258,7 @@ customizations between each layer&#8217;s configured customization options.</p>
 <div class="sect4">
 <h5 id="_option_keys"><code>option_keys</code></h5>
 <div class="paragraph">
-<p>A list of all the option keys known to the <code>CustomizedSprite</code> instance.</p>
+<p>A list of all the option keys known to the <a href="#custom-sprite">CustomizedSprite</a> instance.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example</div>
@@ -254,7 +277,7 @@ my_sprite.option_keys == [ 'skin_color', 'hair_style', 'eye_color' ]</code></pre
 <div class="sect4">
 <h5 id="_option_count"><code>option_count</code></h5>
 <div class="paragraph">
-<p>The number of options known to the <code>CustomizedSprite</code> instance.</p>
+<p>The number of options known to the <a href="#custom-sprite">CustomizedSprite</a> instance.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example</div>
@@ -274,7 +297,7 @@ my_sprite.option_count == 4</code></pre>
 <h5 id="_menu_components"><code>menu_components</code></h5>
 <div class="paragraph">
 <p>A dict of display name mapped to key for all options known to the
-<code>CustomizedSprite</code> instance.</p>
+<a href="#custom-sprite">CustomizedSprite</a> instance.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example Return Value</div>
@@ -293,7 +316,7 @@ my_sprite.option_count == 4</code></pre>
 <div class="sect4">
 <h5 id="_init"><code>__init__</code></h5>
 <div class="paragraph">
-<p>Initializes the new <code>CustomizedSprite</code> instance with the given arguments.</p>
+<p>Initializes the new <a href="#custom-sprite">CustomizedSprite</a> instance with the given arguments.</p>
 </div>
 <div class="sect5">
 <h6 id="_arguments">Arguments</h6>
@@ -313,7 +336,7 @@ value that will be used when referencing the sprite elsewhere in scripts via
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>*layers</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-layer"><code>SCLayer</code></a>[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-layer">SCLayer</a>[]</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One or more layers from which the sprite should be created.  The layers are
 stacked on top of one another in the passed order.  This means the first given
 layer will be at the "back" of the sprite, where the last given layer will be at
@@ -326,7 +349,7 @@ the "front".</p></td>
 <div class="sect4">
 <h5 id="_require_option"><code>_require_option</code></h5>
 <div class="paragraph">
-<p>Requires that the given option key is known to the current <code>CustomizedSprite</code>
+<p>Requires that the given option key is known to the current <a href="#custom-sprite">CustomizedSprite</a>
 instance or one of its layers.</p>
 </div>
 <div class="paragraph">
@@ -353,8 +376,8 @@ instance or one of its layers.</p>
 <div class="sect4">
 <h5 id="_set_state"><code>set_state</code></h5>
 <div class="paragraph">
-<p>Sets the internal state object of this <code>CustomizedSprite</code> instance to the given
-<a href="#sc-state"><code>SCState</code></a> instance.</p>
+<p>Sets the internal state object of this <a href="#custom-sprite">CustomizedSprite</a> instance to the given
+<a href="#sc-state">SCState</a> instance.</p>
 </div>
 <div class="sect5">
 <h6 id="_arguments_3">Arguments</h6>
@@ -367,7 +390,7 @@ instance or one of its layers.</p>
 <tbody>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>state</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-state"><code>SCState</code></a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-state">SCState</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">State object to use for storing customization option selections.</p></td>
 </tr>
 </tbody>
@@ -505,7 +528,7 @@ instance or one of its layers.</p>
 <div class="sect4">
 <h5 id="_get_option"><code>get_option</code></h5>
 <div class="paragraph">
-<p>Returns the <a href="#sc-opt"><code>SCOpt</code></a> instance for the given option keyword.</p>
+<p>Returns the <a href="#sc-opt">SCOpt</a> instance for the given option keyword.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example</div>
@@ -530,7 +553,7 @@ print(my_sprite.get_option("hair_style").display_name) # Hair Style</code></pre>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>option</code></p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword of the option for which the <a href="#sc-opt"><code>SCOpt</code></a> instance should be returned.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword of the option for which the <a href="#sc-opt">SCOpt</a> instance should be returned.</p></td>
 </tr>
 </tbody>
 </table>
@@ -544,8 +567,8 @@ print(my_sprite.get_option("hair_style").display_name) # Hair Style</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-opt"><code>SCOpt</code></a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The target <code>SCOpt</code> instance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-opt">SCOpt</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The target <a href="#sc-opt">SCOpt</a> instance.</p></td>
 </tr>
 </tbody>
 </table>
@@ -608,9 +631,9 @@ my_sprite.option_value("hair_style", 2) == "bob"</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="custom-sprite-fac"><code>CustomizedSpriteFactory</code></h3>
+<h3 id="custom-sprite-fac">CustomizedSpriteFactory</h3>
 <div class="paragraph">
-<p>A factory which may be used to generate multiple <a href="#custom-sprite"><code>CustomizedSprite</code></a> instances
+<p>A factory which may be used to generate multiple <a href="#custom-sprite">CustomizedSprite</a> instances
 with the same base set of layers and options.</p>
 </div>
 <div class="sect3">
@@ -618,7 +641,7 @@ with the same base set of layers and options.</p>
 <div class="sect4">
 <h5 id="_init_2"><code>__init__</code></h5>
 <div class="paragraph">
-<p>Initializes a new <code>CustomizedSpriteFactory</code> instance with the given arguments.</p>
+<p>Initializes a new CustomizedSpriteFactory instance with the given arguments.</p>
 </div>
 <div class="sect5">
 <h6 id="_arguments_10">Arguments</h6>
@@ -631,8 +654,8 @@ with the same base set of layers and options.</p>
 <tbody>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>*layers</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-layer"><code>SCLayer</code></a>[]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One or more layers from which <a href="#custom-sprite"><code>CustomizedSprite</code></a> instances should be created.
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-layer">SCLayer</a>[]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One or more layers from which <a href="#custom-sprite">CustomizedSprite</a> instances should be created.
 The layers are stacked on top of one another in the passed order. This means the
 first given layer will be at the "back" of the sprite, where the last given
 layer will be at the "front".</p></td>
@@ -644,15 +667,15 @@ layer will be at the "front".</p></td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sc-layer"><code>SCLayer</code></h3>
+<h3 id="sc-layer">SCLayer</h3>
 <div class="paragraph">
 <p>Represents a single layer in a customizable sprite.</p>
 </div>
 <div class="paragraph">
 <p>This layer has zero or more customization options provided at construction time
-via named <a href="#sc-opt"><code>SCOpt</code></a> keyword args.  The user&#8217;s selections of those options are
+via named <a href="#sc-opt">SCOpt</a> keyword args.  The user&#8217;s selections of those options are
 then passed to the given <code>layer_callback</code> to construct the underlying
-<a href="https://www.renpy.org/doc/html/displayables.html"><code>Displayable</code></a> for the
+<a href="https://www.renpy.org/doc/html/displayables.html">Displayable</a> for the
 layer.</p>
 </div>
 <div class="listingblock">
@@ -665,7 +688,7 @@ layer.</p>
 <div class="sect4">
 <h5 id="_init_3"><code>__init__</code></h5>
 <div class="paragraph">
-<p>Initializes the new <code>SCLayer</code> instance with the given arguments.</p>
+<p>Initializes the new <a href="#sc-layer">SCLayer</a> instance with the given arguments.</p>
 </div>
 <div class="sect5">
 <h6 id="_arguments_11">Arguments</h6>
@@ -692,7 +715,7 @@ this layer.</p></td>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>**options</code></p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>dict</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Dictionary of keyword arguments that define the options available to this
-layer.  These keyword args must all be <a href="#sc-opt"><code>SCOpt</code></a> values.</p></td>
+layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></td>
 </tr>
 </tbody>
 </table>
@@ -726,12 +749,12 @@ option is known, an exception will be thrown.</p>
 <h5 id="_render"><code>_render</code></h5>
 <div class="paragraph">
 <p>A callback that is passed to the
-<a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable"><code>DynamicDisplayable</code></a>
+<a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable">DynamicDisplayable</a>
 instances built via the <a href="#sc-lay-build-image"><code>build_image</code></a> method.</p>
 </div>
 <div class="paragraph">
 <p>This method calls out to the configured <code>layer_callback</code> with the options
-selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
+selected in the <a href="#sc-state">SCState</a>.</p>
 </div>
 <div class="sect5">
 <h6 id="_arguments_13">Arguments</h6>
@@ -774,7 +797,7 @@ selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
 <tbody>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>d</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://www.renpy.org/doc/html/displayables.html"><code>Displayable</code></a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://www.renpy.org/doc/html/displayables.html">Displayable</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Displayable</code> generated by the <code>layer_callback</code> function.</p></td>
 </tr>
 <tr>
@@ -789,7 +812,7 @@ selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
 <div class="sect4">
 <h5 id="_clone"><code>clone</code></h5>
 <div class="paragraph">
-<p>Creates a copy of the current <code>SCLayer</code> instance.</p>
+<p>Creates a copy of the current <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
 <h6 id="_returns_6">Returns</h6>
@@ -800,8 +823,8 @@ selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-layer"><code>SCLayer</code></a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A copy of the current <code>SCLayer</code> instance sans user state.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-layer">SCLayer</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A copy of the current <a href="#sc-layer">SCLayer</a> instance sans user state.</p></td>
 </tr>
 </tbody>
 </table>
@@ -810,7 +833,7 @@ selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
 <div class="sect4">
 <h5 id="_set_state_2"><code>set_state</code></h5>
 <div class="paragraph">
-<p>Replaces the user state store used by this <code>SCLayer</code> instance with the given
+<p>Replaces the user state store used by this <a href="#sc-layer">SCLayer</a> instance with the given
 <code>SCState</code> object.</p>
 </div>
 <div class="sect5">
@@ -824,7 +847,7 @@ selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
 <tbody>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>state</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-state"><code>SCState</code></a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-state">SCState</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">New state object to back this layer&#8217;s customization option selections.</p></td>
 </tr>
 </tbody>
@@ -880,7 +903,7 @@ selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
 <div class="sect4">
 <h5 id="_get_option_2"><code>get_option</code></h5>
 <div class="paragraph">
-<p>Returns the target <a href="#sc-opt"><code>SCOpt</code></a> value from the current layer.</p>
+<p>Returns the target <a href="#sc-opt">SCOpt</a> value from the current layer.</p>
 </div>
 <div class="sect5">
 <h6 id="_arguments_17">Arguments</h6>
@@ -908,7 +931,7 @@ selected in the <a href="#sc-state"><code>SCState</code></a>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-opt"><code>SCOpt</code></a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#sc-opt">SCOpt</a></code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The target <code>SCOpt</code> instance.</p></td>
 </tr>
 </tbody>
@@ -1058,8 +1081,8 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 <h5 id="sc-lay-build-image"><code>build_image</code></h5>
 <div class="paragraph">
 <p>Builds the
-<a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable"><code>DynamicDisplayable</code></a>
-that represents this <code>SCLayer</code> instance.</p>
+<a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable">DynamicDisplayable</a>
+that represents this <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
 <h6 id="_returns_11">Returns</h6>
@@ -1070,8 +1093,8 @@ that represents this <code>SCLayer</code> instance.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable"><code>DynamicDisplayable</code></a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The newly constructed <code>DynamicDisplayable</code> instance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable">DynamicDisplayable</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The newly constructed DynamicDisplayable instance.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1080,9 +1103,9 @@ that represents this <code>SCLayer</code> instance.</p>
 <div class="sect4">
 <h5 id="_build_attribute"><code>build_attribute</code></h5>
 <div class="paragraph">
-<p>Builds a <a href="https://www.renpy.org/doc/html/layeredimage.html"><code>LayeredImage</code></a>
-<a href="https://www.renpy.org/doc/html/layeredimage.html#attribute"><code>Attribute</code></a> instance
-to represent this <code>SCLayer</code> instance.</p>
+<p>Builds a <a href="https://www.renpy.org/doc/html/layeredimage.html">LayeredImage</a>
+<a href="https://www.renpy.org/doc/html/layeredimage.html#attribute">Attribute</a> instance
+to represent this <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
 <h6 id="_returns_12">Returns</h6>
@@ -1093,8 +1116,8 @@ to represent this <code>SCLayer</code> instance.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://www.renpy.org/doc/html/layeredimage.html#attribute"><code>Attribute</code></a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The newly constructed <code>Attribute</code> instance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://www.renpy.org/doc/html/layeredimage.html#attribute">Attribute</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The newly constructed Attribute instance.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1103,9 +1126,9 @@ to represent this <code>SCLayer</code> instance.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sc-opt"><code>SCOpt</code></h3>
+<h3 id="sc-opt">SCOpt</h3>
 <div class="paragraph">
-<p>Represents an option set for an <a href="#sc-layer"><code>SCLayer</code></a>, providing options for customizing
+<p>Represents an option set for an <a href="#sc-layer">SCLayer</a>, providing options for customizing
 that layer.</p>
 </div>
 <div class="listingblock">
@@ -1133,7 +1156,7 @@ that layer.</p>
 <div class="sect4">
 <h5 id="_init_4"><code>__init__</code></h5>
 <div class="paragraph">
-<p>Initializes the new <code>SCOpt</code> object.</p>
+<p>Initializes the new <a href="#sc-opt">SCOpt</a> object.</p>
 </div>
 <div class="sect5">
 <h6 id="_arguments_21">Arguments</h6>
@@ -1161,7 +1184,7 @@ that layer.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sc-state"><code>SCState</code></h3>
+<h3 id="sc-state">SCState</h3>
 <div class="paragraph">
 <p>This class defines an object that is used to hold sprite customization option
 selections.  This is used to persist the selected options as part of the game
@@ -1181,14 +1204,14 @@ my_sprite.set_state(my_sprite_state)</code></pre>
 <div class="sect4">
 <h5 id="_init_5"><code>__init__</code></h5>
 <div class="paragraph">
-<p>Initializes the new, blank <code>SCState</code> instance.</p>
+<p>Initializes the new, blank <a href="#sc-state">SCState</a> instance.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_get_selection"><code>get_selection</code></h5>
 <div class="paragraph">
 <p>Looks up the target selection value.  If the target selection value is unknown
-to the <code>SCState</code> object, the value <code>1</code> will be recorded in the state and
+to the <a href="#sc-state">SCState</a> object, the value <code>1</code> will be recorded in the state and
 returned from this method.</p>
 </div>
 <div class="sect5">
@@ -1289,7 +1312,7 @@ over to <code>max</code> if it would go below <code>1</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-13 14:31:51 -0400
+Last updated 2023-07-14 08:05:57 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

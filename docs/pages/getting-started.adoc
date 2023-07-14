@@ -1,0 +1,14 @@
+= Getting Started
+:icons: font
+
+This guide will attempt to help guide you through the process of using the
+Sprite Customizer.
+
+
+. Download the latest release.
+. Delete the `game/images/ccp` directory and its contents.
+. Drop your sprite component assets somewhere under your game directory.
+. Edit the `game/ccf/ccf_config.rpy` file to:
+.. Declare your customized sprites
+.. Write your own callbacks based on your assets
+

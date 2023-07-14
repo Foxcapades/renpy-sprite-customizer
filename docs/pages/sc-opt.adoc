@@ -1,5 +1,5 @@
 [#sc-opt]
-= `SCOpt`
+= SCOpt
 
 Represents an option set for an <<sc-layer>>, providing options for customizing
 that layer.
@@ -23,7 +23,7 @@ List of option values.
 
 === `+__init__+`
 
-Initializes the new `SCOpt` object.
+Initializes the new <<sc-opt>> object.
 
 ==== Arguments
 

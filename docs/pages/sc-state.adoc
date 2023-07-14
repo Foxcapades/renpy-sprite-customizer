@@ -1,5 +1,5 @@
 [#sc-state]
-= `SCState`
+= SCState
 
 This class defines an object that is used to hold sprite customization option
 selections.  This is used to persist the selected options as part of the game
@@ -18,13 +18,13 @@ my_sprite.set_state(my_sprite_state)
 
 === `+__init__+`
 
-Initializes the new, blank `SCState` instance.
+Initializes the new, blank <<sc-state>> instance.
 
 
 === `get_selection`
 
 Looks up the target selection value.  If the target selection value is unknown
-to the `SCState` object, the value `1` will be recorded in the state and
+to the <<sc-state>> object, the value `1` will be recorded in the state and
 returned from this method.
 
 ==== Arguments

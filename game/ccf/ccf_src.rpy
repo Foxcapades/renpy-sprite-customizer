@@ -185,10 +185,15 @@ init -1 python:
             construction, and an int representing the time to pause before
             rerendering.
             """
+            kwargs["st"] = st
+            kwargs["at"] = at
+
             for key in self._options.keys():
                 kwargs[key] = self._options[key].values[self._state.get_selection(key) - 1]
 
-            return (self._func(**kwargs), 0)
+            out = self._func(**kwargs)
+
+            return out if isinstance(out, tuple) else (out, 0)
 
         def clone(self):
             """

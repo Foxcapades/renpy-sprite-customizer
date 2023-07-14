@@ -1,5 +1,5 @@
 [#custom-sprite]
-= `CustomizedSprite`
+= CustomizedSprite
 
 Represents a sprite image composed of customizable layers.
 
@@ -20,7 +20,7 @@ CustomizedSprite(
 
 === `option_keys`
 
-A list of all the option keys known to the `CustomizedSprite` instance.
+A list of all the option keys known to the <<custom-sprite>> instance.
 
 .Example
 [source, python]
@@ -39,7 +39,7 @@ my_sprite.option_keys == [ 'skin_color', 'hair_style', 'eye_color' ]
 
 === `option_count`
 
-The number of options known to the `CustomizedSprite` instance.
+The number of options known to the <<custom-sprite>> instance.
 
 .Example
 [source, python]
@@ -58,7 +58,7 @@ my_sprite.option_count == 4
 === `menu_components`
 
 A dict of display name mapped to key for all options known to the
-`CustomizedSprite` instance.
+<<custom-sprite>> instance.
 
 .Example Return Value
 [source, python]
@@ -75,7 +75,7 @@ A dict of display name mapped to key for all options known to the
 
 === `+__init__+`
 
-Initializes the new `CustomizedSprite` instance with the given arguments.
+Initializes the new <<custom-sprite>> instance with the given arguments.
 
 ==== Arguments
 
@@ -98,7 +98,7 @@ the "front".
 
 === `_require_option`
 
-Requires that the given option key is known to the current `CustomizedSprite`
+Requires that the given option key is known to the current <<custom-sprite>>
 instance or one of its layers.
 
 If the option key is not known, an exception will be thrown.
@@ -115,7 +115,7 @@ If the option key is not known, an exception will be thrown.
 
 === `set_state`
 
-Sets the internal state object of this `CustomizedSprite` instance to the given
+Sets the internal state object of this <<custom-sprite>> instance to the given
 <<sc-state>> instance.
 
 ==== Arguments
@@ -235,7 +235,7 @@ print(my_sprite.get_option("hair_style").display_name) # Hair Style
 [cols="1m,9"]
 |===
 | <<sc-opt>>
-| The target `SCOpt` instance.
+| The target <<sc-opt>> instance.
 |===
 
 

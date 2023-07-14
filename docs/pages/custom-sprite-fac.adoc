@@ -1,5 +1,5 @@
 [#custom-sprite-fac]
-= `CustomizedSpriteFactory`
+= CustomizedSpriteFactory
 
 A factory which may be used to generate multiple <<custom-sprite>> instances
 with the same base set of layers and options.
@@ -8,7 +8,7 @@ with the same base set of layers and options.
 
 === `+__init__+`
 
-Initializes a new `CustomizedSpriteFactory` instance with the given arguments.
+Initializes a new CustomizedSpriteFactory instance with the given arguments.
 
 ==== Arguments
 

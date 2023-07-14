@@ -4,13 +4,17 @@
 :icons: font
 :stylesheet: assets/readthedocs.css
 
+:renpy-docs: https://www.renpy.org/doc/html
+
+Documentation for the Sprite Customizer (SC) framework.
+
 This document is a WIP and presently is just a collection of notes about various
 Sprite Customizer topics.  This document will eventually become the overall
 documentation of the Sprite Customizer toolset.
 
 == Topics
 
-=== State
+=== Sprite State
 
 To keep sprite customization options stored in game save files, the internal
 selection state for the sprites is stored in a runtime variable of type
@@ -48,7 +52,7 @@ done, the sprites will reset to their default state.
 --
 
 
-=== CustomizedSprite vs CustomizedSpriteFactory
+=== Sprite vs. Factory
 
 The <<custom-sprite>> class may be constructed directly or via the
 <<custom-sprite-fac>> type.  Deciding whether to construct the type directly or
@@ -90,59 +94,8 @@ my_sprite_2 = sprite_fac.new_sprite("antagonist")
 ----
 
 
-=== Layer Callbacks
+include::pages/topic-layer-callback.adoc[leveloffset=2]
 
-A layer callback is a function that takes customization option values and
-and returns a
-link:https://www.renpy.org/doc/html/displayables.html[`Displayable`] to be used
-for the layer.  These callbacks are how the Sprite Customizer makes use of your
-assets.
-
-Customization option values are passed on parameters with names matching the
-keyword args by which the backing `SCOpt` instances were passed to the relevant
-<<sc-layer>>.
-
-.Simple Example
-[source, python]
-----
-def my_eyes_callback(eye_color, **kwargs):
-    return f"images/sprites/eyes/{eye_color}.png"
-
-define my_sprite = CustomizedSprite(
-    "sprite",
-    SCLayer("eyes", my_eyes_callback, eye_color=[ "green", "brown", "blue", "hazel" ])
-)
-----
-
-Using the simple example above we have declared a callback that takes a single
-argument, `eye_color` and returns the path to an image named with that value.
-
-This argument directly relates to the kwarg `eye_color` passed to the
-<<sc-layer>> constructor.
-
-When the callback is executed, it will be passed one of the values from the
-associated `SCOpt` value list.
-
-.Complex Example
-[source, python]
-----
-def my_hair_callback(hair_style, hair_color, **kwargs):
-    return Transform("images/ccp/hair/{}.png".format(hair_style), matrixcolor=TintMatrix(hair_color))
-
-SCLayer(
-    "hair",
-    my_hair_callback,
-    hair_style=SCOpt("Hair Style", [ "straight", "curly", "bob", "mohawk" ]),
-    hair_color=SCOpt("Hair Color", [ "#3d23e9", "#d0e1f5", "#aebce8", "#76b2e7" ])
-)
-----
-
-In this, slightly more complex example, we have declared a callback that takes
-two set arguments, `hair_style` and `hair_color`, then returns a
-link:https://www.renpy.org/doc/html/transforms.html#transforms[`Transform`] that
-applies a
-link:https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix[`TintMatrix`] to
-a target image.
 
 == Type Reference
 

@@ -1,0 +1,121 @@
+= Layer Callbacks
+:url-renpy-docs: https://www.renpy.org/doc/html
+:url-disp: {url-renpy-docs}/displayables.html#displayables
+:url-ddisp: {url-renpy-docs}/displayables.html#dynamic-displayables
+
+Layer callbacks are functions that are used by <<sc-layer>> instances to
+generate link:{url-disp}[Displayable]s that can be used as components of
+the overall <<custom-sprite>> image.  These functions are how the Sprite
+Customizer makes use of your project's assets.
+
+== Defining Layer Callbacks
+
+Before we can talk more about layer callbacks, we need to talk a little bit
+about layers, more specifically, <<sc-layer>>s and how they are constructed.
+
+When constructing a new <<sc-layer>> instance, you pass it a layer name, a
+_layer callback_, and zero or more customization option groups (<<sc-opt>>s) via
+keyword arguments.  Those keyword arguments are _very_ important to the
+definition of the given layer callback; they name the same arguments that will
+be passed _to_ the layer callback when it is eventually (and repeatedly)
+executed.
+
+For example, given the following <<sc-layer>> definition:
+
+[source, python]
+----
+SCLayer(
+    "hair",
+    hair_lcb,
+    hair_style=SCOpt("Hair Style", [ "afro", "bob", "buns" ]),
+    hair_color=SCOpt("Hair Color", [
+        "#3D2314",
+        "#100C07",
+        "#DA680F",
+        "#FFCC47",
+        "#9A9E9F",
+        "#FAFAFA",
+        "#801818",
+        "#580271",
+        "#1592CA",
+        "#11694E",
+        "#FF87C5"
+    ]),
+)
+----
+
+we would expect the defined layer callback function (`hair_lcb`) to accept 2
+arguments, `hair_style` and `hair_color`.  We would then expect that function to
+perform some work with those arguments to produce a
+link:{url-disp}[Displayable].  The values passed on those arguments will
+be one of the options in the relevant <<sc-opt>>'s option list.  In our example
+demonstration's case, we use the `hair_style` value (one of "afro", "bob", or
+"bun") to create a path to the specific image we wish to display; then we use
+the `hair_color` value (one of the listed hex color codes) to apply a tint
+matrix to that image.
+
+[source, python]
+----
+def hair_lcb(hair_style, hair_color, **kwargs):
+    return Transform(f"images/ccp/hair/{hair_style}.png", matrixcolor=TintMatrix(hair_color))
+----
+
+A layer callback may also be as simple as returning a static string for a case
+where there are no customization options.
+
+[source, python]
+----
+def mic_stand_lcb(**kwargs):
+    return "images/something/mic_stand.png"
+
+...
+
+SCLayer("mic_stand", mic_stand_lcb)
+----
+
+== Animating Layers
+
+As the whole Sprite Customization framework is built on
+link:{url-ddisp}[DynamicDisplayable]s, it may be desirable to put those
+Displayables to work with animations.  Luckily, the same values passed to a
+DynamicDisplayable's callback are accessible from an SC layer callback as well.
+
+In addition to the customization options, the typical ``st``-``at`` pair are
+passed to layer callbacks and can be accessed by declaring those parameters as
+positional arguments or by accessing them from the `**kwargs` argument.  This
+means both of the following example functions are correct:
+
+[source, python]
+----
+# Alternate eye colors every second for some reason
+init python:
+    def my_lcb_1(eye_color, **kwargs):
+        if int(kwargs["st"]) % 2 == 1:
+            return f"images/sprite/eyes/{eye-color}_1.png"
+        else:
+            return f"images/sprite/eyes/{eye-color}_0.png"
+
+    def my_lcb_2(st, eye_color, **kwargs):
+        if int(st) % 2 == 1:
+            return f"images/sprite/eyes/{eye-color}_1.png"
+        else:
+            return f"images/sprite/eyes/{eye-color}_0.png"
+----
+
+Those of you that are already familiar with
+link:{url-ddisp}[DynamicDisplayable]s and their callbacks may be wondering how
+and where a redraw time may be defined.  Luckily, if needed, that may also be
+returned from SC layer callbacks:
+
+[source, python]
+----
+init python:
+    def my_lcb_1(eye_color, **kwargs):
+        if int(kwargs["st"]) % 2 == 1:
+            return (f"images/sprite/eyes/{eye-color}_1.png", 1.0)
+        else:
+            return (f"images/sprite/eyes/{eye-color}_0.png", 1.0)
+----
+
+If a redraw time is not returned by the layer callback, a default value of `0.0`
+is used.

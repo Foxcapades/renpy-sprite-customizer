@@ -1,10 +1,12 @@
 = Ren'Py Sprite Customizer
+:renpy-docs: https://www.renpy.org/doc/html
 
 link:https://foxcapades.github.io/renpy-sprite-customizer/[Docs] |
 link:https://foxcapades.itch.io/renpy-sprite-customizer[Itch.IO]
 
 A pluggable sprite customization framework that allows the creation of any
-number of playtime-customizable sprites using Ren'Py's ``LayeredImage``s.
+number of playtime-customizable sprites using Ren'Py's
+link:{renpy-docs}/layeredimage.html[LayeredImage]s.
 
 The goal of this project is to allow game creators to plug in their own assets
 and screens to set up character or sprite customization in their own games.
@@ -27,9 +29,10 @@ and is broken into 3 files:
 
 link:game/ccf/ccf_config.rpy[ccf_config.rpy]::
 
-`ccf_config.rpy` is where the configuration for the ``CustomizedSprite``s
-live.  This file is where the sprite files are referenced and the options
-provided to build the `CustomizedSprite` instances.
+`ccf_config.rpy` is where the configuration for the
+link:https://foxcapades.github.io/renpy-sprite-customizer/#custom-sprite[CustomizedSprite]s
+lives.  This file is where the sprite files are referencedand the options
+provided to build the CustomizedSprite instances.
 +
 This is where you go to configure your sprite customization.
 
@@ -38,7 +41,7 @@ link:game/ccf/ccf_gui.rpy[ccf_gui.rpy]::
 `ccf_gui.rpy` is where the sprite customization screen and components are
 defined.
 +
-This is where you go to customize the sprite customization screen.
+This is where you go to change the sprite customization screen.
 
 link:game/ccf/ccf_src.rpy[ccf_src.rpy]::
 
@@ -52,7 +55,7 @@ The `images.rpy` file contains the declaration of "normal" Ren'Py images for use
 in the script.
 
 This file contains a demonstration of using the customized character sprites as
-part of ``LayeredImage``s.
+part of link:{renpy-docs}/layeredimage.html[LayeredImage]s.
 
 === link:game/script.rpy[`script.rpy`]
 
