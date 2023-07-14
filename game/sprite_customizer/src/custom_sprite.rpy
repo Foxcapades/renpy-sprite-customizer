@@ -70,8 +70,10 @@ init -1 python:
             another in the passed order.  This means the first given layer will
             be at the "back" of the sprite, where the last given layer will be
             the "front".
-            """
 
+            transform (callable): An optional transform function that will be
+            applied to the created image.
+            """
             self._layers = layers
             self._state  = SCState()
 
@@ -91,13 +93,27 @@ init -1 python:
                     self._option_to_layer[option_name] = layer
                 layer.set_state(self._state)
 
+            if "transform" in kwargs:
+                if not callable(kwargs["transform"]):
+                    raise Exception("CustomizedSprite transform must be callable.")
+                else:
+                    transform = kwargs["transform"]
+            else:
+                transform = None
+
             # Build the layered image
             attrs = [ layers[0].build_image() ]
 
             for i in range(1, len(layers)):
                 attrs.append(layers[i].build_attribute())
 
-            renpy.image(image_name, LayeredImage(attrs))
+            if transform == None:
+                renpy.image(image_name, LayeredImage(attrs))
+            else:
+                from uuid import uuid4
+                tmp_name = str(uuid4())
+                renpy.image(tmp_name, LayeredImage(attrs))
+                renpy.image(image_name, transform(tmp_name))
 
         def _require_option(self, option):
             if not option in self._option_to_layer:

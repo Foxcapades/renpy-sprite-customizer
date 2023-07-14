@@ -20,6 +20,13 @@ Initializes a new CustomizedSpriteFactory instance with the given arguments.
 The layers are stacked on top of one another in the passed order. This means the
 first given layer will be at the "back" of the sprite, where the last given
 layer will be at the "front".
+
+| `transform`
+| callable
+| An optional transform function that will be applied to the image created by
+this factory.  This function should take a single
+link:https://www.renpy.org/doc/html/displayables.html[Displayable] argument and
+return a single Displayable value.
 |===
 
 === `new_sprite`

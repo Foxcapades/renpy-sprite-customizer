@@ -276,6 +276,70 @@ returned from SC layer callbacks:</p>
 <p>If a redraw time is not returned by the layer callback, a default value of <code>0.0</code>
 is used.</p>
 </div>
+<div class="sect4">
+<h5 id="_advanced_animations">Advanced Animations</h5>
+<div class="paragraph">
+<p>The following example demonstrates an advanced animation where a character
+sprite blinks their eyes at a semi-random interval.  This is also a
+demonstration of where the Customized Sprite frameworks starts to break down;
+at this point it may be worthwhile to consider assembling the
+<a href="https://www.renpy.org/doc/html/displayables.html#dynamic-displayables">DynamicDisplayable</a>s and <a href="https://www.renpy.org/doc/html/layeredimage.html">LayeredImage</a>s
+manually unless you are comfortable writing animations in Python.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">init python:
+
+    def cs_base(**kwargs):
+        return "sprite_base"
+
+    class cs_eyes:
+        def __init__(self):
+            self.cur_frame = "sprite_openeyes"
+            self.next_frame = "sprite_halfclosedeyes"
+            self.next_animate = 0.0
+            self.last_frame = 0.0
+            self.opening = False
+
+        def __call__(self, st, at, **kwargs):
+            # If the next_animate time has not yet elapsed, return the current
+            # frame.
+            if st - self.last_frame &lt; self.next_animate:
+                return self.cur_frame
+
+            # The next_animate time has elapsed, set the current frame to the
+            # previous next_frame value to queue it up for rendering.
+            self.cur_frame = self.next_frame
+
+            # Determine what the new next sprite should be.
+            if self.next_frame == "sprite_halfclosedeyes":
+                if self.opening:
+                    self.next_frame = "sprite_openeyes"
+                else:
+                    self.next_frame = "sprite_closedeyes"
+                self.next_animate = 0.1
+            elif self.next_frame == "sprite_closedeyes":
+                self.next_frame = "sprite_halfclosedeyes"
+                self.opening = True
+                self.next_animate = 0.1
+            else: # self.next_frame == "sprite_openeyes"
+                self.next_frame = "sprite_halfclosedeyes"
+                self.opening = False
+                self.next_animate = max(0.5, renpy.random.random()) * 5
+
+            self.last_frame = st
+
+            return (self.cur_frame, self.next_animate)
+
+define cs = CustomizedSprite(
+    "sprite",
+    SCLayer("base", cs_base),
+    SCLayer("eyes", cs_eyes()),
+    transform = lambda x : Transform(x, zoom=0.75),
+)</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -397,6 +461,14 @@ value that will be used when referencing the sprite elsewhere in scripts via
 stacked on top of one another in the passed order.  This means the first given
 layer will be at the "back" of the sprite, where the last given layer will be at
 the "front".</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>transform</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>callable</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional transform function that will be applied to the image created by
+this CustomizedSprite.  This function should take a single
+<a href="https://www.renpy.org/doc/html/displayables.html">Displayable</a> argument and
+return a single Displayable value.</p></td>
 </tr>
 </tbody>
 </table>
@@ -753,6 +825,14 @@ with the same base set of layers and options.</p>
 The layers are stacked on top of one another in the passed order. This means the
 first given layer will be at the "back" of the sprite, where the last given
 layer will be at the "front".</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>transform</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>callable</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An optional transform function that will be applied to the image created by
+this factory.  This function should take a single
+<a href="https://www.renpy.org/doc/html/displayables.html">Displayable</a> argument and
+return a single Displayable value.</p></td>
 </tr>
 </tbody>
 </table>

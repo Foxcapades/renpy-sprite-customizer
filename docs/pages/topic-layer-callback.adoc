@@ -2,6 +2,7 @@
 :url-renpy-docs: https://www.renpy.org/doc/html
 :url-disp: {url-renpy-docs}/displayables.html#displayables
 :url-ddisp: {url-renpy-docs}/displayables.html#dynamic-displayables
+:url-lay: {url-renpy-docs}/layeredimage.html
 
 Layer callbacks are functions that are used by <<sc-layer>> instances to
 generate link:{url-disp}[Displayable]s that can be used as components of
@@ -119,3 +120,68 @@ init python:
 
 If a redraw time is not returned by the layer callback, a default value of `0.0`
 is used.
+
+=== Advanced Animations
+
+The following example demonstrates an advanced animation where a character
+sprite blinks their eyes at a semi-random interval.  This is also a
+demonstration of where the Customized Sprite frameworks starts to break down;
+at this point it may be worthwhile to consider assembling the
+link:{url-ddisp}[DynamicDisplayable]s and link:{url-lay}[LayeredImage]s
+manually unless you are comfortable writing animations in Python.
+
+[source, python]
+----
+init python:
+
+    def cs_base(**kwargs):
+        return "sprite_base"
+
+    class cs_eyes:
+        def __init__(self):
+            self.cur_frame = "sprite_openeyes"
+            self.next_frame = "sprite_halfclosedeyes"
+            self.next_animate = 0.0
+            self.last_frame = 0.0
+            self.opening = False
+
+        def __call__(self, st, at, **kwargs):
+            # If the next_animate time has not yet elapsed, return the current
+            # frame.
+            if st - self.last_frame < self.next_animate:
+                return self.cur_frame
+
+            # The next_animate time has elapsed, set the current frame to the
+            # previous next_frame value to queue it up for rendering.
+            self.cur_frame = self.next_frame
+
+            # Determine what the new next sprite should be.
+            if self.next_frame == "sprite_halfclosedeyes":
+                if self.opening:
+                    self.next_frame = "sprite_openeyes"
+                else:
+                    self.next_frame = "sprite_closedeyes"
+                self.next_animate = 0.1
+            elif self.next_frame == "sprite_closedeyes":
+                self.next_frame = "sprite_halfclosedeyes"
+                self.opening = True
+                self.next_animate = 0.1
+            else: # self.next_frame == "sprite_openeyes"
+                self.next_frame = "sprite_halfclosedeyes"
+                self.opening = False
+                self.next_animate = max(0.5, renpy.random.random()) * 5
+
+            self.last_frame = st
+
+            return (self.cur_frame, self.next_animate)
+
+define cs = CustomizedSprite(
+    "sprite",
+    SCLayer("base", cs_base),
+    SCLayer("eyes", cs_eyes()),
+    transform = lambda x : Transform(x, zoom=0.75),
+)
+----
+
+
+
