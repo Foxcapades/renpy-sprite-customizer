@@ -22,3 +22,25 @@ first given layer will be at the "back" of the sprite, where the last given
 layer will be at the "front".
 |===
 
+=== `new_sprite`
+
+Constructs a new `CustomizedSprite` instance with the given name.
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| image_name
+| str
+| Name of the image that will be created for the returned sprite.  This name is
+the value that will be used when referencing the sprite elsewhere in scripts via
+`show`, `add`, etc..
+|===
+
+==== Returns
+
+[cols="1m,9"]
+|===
+| <<custom-sprite>>
+| A newly created CustomSprite instance.
+|===

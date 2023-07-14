@@ -758,6 +758,46 @@ layer will be at the "front".</p></td>
 </table>
 </div>
 </div>
+<div class="sect4">
+<h5 id="_new_sprite"><code>new_sprite</code></h5>
+<div class="paragraph">
+<p>Constructs a new <code>CustomizedSprite</code> instance with the given name.</p>
+</div>
+<div class="sect5">
+<h6 id="_arguments_11">Arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">image_name</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the image that will be created for the returned sprite.  This name is
+the value that will be used when referencing the sprite elsewhere in scripts via
+<code>show</code>, <code>add</code>, etc..</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_returns_6">Returns</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="#custom-sprite">CustomizedSprite</a></code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A newly created CustomSprite instance.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -785,7 +825,7 @@ layer.</p>
 <p>Initializes the new <a href="#sc-layer">SCLayer</a> instance with the given arguments.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_11">Arguments</h6>
+<h6 id="_arguments_12">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -821,7 +861,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></
 <p>Creates a copy of the current <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_returns_6">Returns</h6>
+<h6 id="_returns_7">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -843,7 +883,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></
 <code>SCState</code> object.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_12">Arguments</h6>
+<h6 id="_arguments_13">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -866,7 +906,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></
 <p>Increments the user selection for the given option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_13">Arguments</h6>
+<h6 id="_arguments_14">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -889,7 +929,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></
 <p>Decrements the user selection for the given option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_14">Arguments</h6>
+<h6 id="_arguments_15">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -912,7 +952,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></
 <p>Returns the target <a href="#sc-opt">SCOpt</a> value from the current layer.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_15">Arguments</h6>
+<h6 id="_arguments_16">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -929,7 +969,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_7">Returns</h6>
+<h6 id="_returns_8">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -950,7 +990,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></
 <p>Returns the number of options in the target option group.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_16">Arguments</h6>
+<h6 id="_arguments_17">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -967,7 +1007,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_8">Returns</h6>
+<h6 id="_returns_9">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1008,7 +1048,7 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_17">Arguments</h6>
+<h6 id="_arguments_18">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1030,7 +1070,7 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_9">Returns</h6>
+<h6 id="_returns_10">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1063,7 +1103,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_18">Arguments</h6>
+<h6 id="_arguments_19">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1080,7 +1120,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_10">Returns</h6>
+<h6 id="_returns_11">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1101,7 +1141,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 <p>Returns the display name for the target option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_19">Arguments</h6>
+<h6 id="_arguments_20">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1118,7 +1158,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_11">Returns</h6>
+<h6 id="_returns_12">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1139,7 +1179,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 <p>Returns the user selection index for the target option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_20">Arguments</h6>
+<h6 id="_arguments_21">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1156,7 +1196,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_12">Returns</h6>
+<h6 id="_returns_13">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1179,7 +1219,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 that represents this <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_returns_13">Returns</h6>
+<h6 id="_returns_14">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1202,7 +1242,7 @@ that represents this <a href="#sc-layer">SCLayer</a> instance.</p>
 to represent this <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_returns_14">Returns</h6>
+<h6 id="_returns_15">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1253,7 +1293,7 @@ that layer.</p>
 <p>Initializes the new <a href="#sc-opt">SCOpt</a> object.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_21">Arguments</h6>
+<h6 id="_arguments_22">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1309,7 +1349,7 @@ to the <a href="#sc-state">SCState</a> object, the value <code>1</code> will be 
 returned from this method.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_22">Arguments</h6>
+<h6 id="_arguments_23">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1326,7 +1366,7 @@ returned from this method.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_15">Returns</h6>
+<h6 id="_returns_16">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1348,7 +1388,7 @@ returned from this method.</p>
 rolling back over to <code>1</code> if it would exceed that maximum.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_23">Arguments</h6>
+<h6 id="_arguments_24">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1377,7 +1417,7 @@ rolling back over to <code>1</code> if it would exceed that maximum.</p>
 over to <code>max</code> if it would go below <code>1</code>.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_24">Arguments</h6>
+<h6 id="_arguments_25">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
