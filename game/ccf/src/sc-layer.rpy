@@ -164,6 +164,32 @@ init -1 python:
             self._require_option(option)
             return self._options[option]._values[selection - 1]
 
+        def get_selected_option_value(self, option):
+            """
+            Returns the currently selected option value for the target option.
+
+            ```python
+            my_layer = SCLayer("layer", callback, option=SCOpt("Option", [ "option 1", "option 2" ]))
+            my_layer.set_state(SCState())
+
+            my_layer.get_selected_option_value("option") == "option 1"
+
+            my_layer.inc_selection("option")
+
+            my_layer.get_selected_option_value("option") == "option 2"
+            ```
+
+            Arguments:
+
+            option (str): Keyword for the option whose user selected value
+            should be returned.
+
+            Returns:
+
+            any: The currently selected option value for the target option.
+            """
+            return self.get_option_value(option, self.get_option_selection(option))
+
         def get_option_display_name(self, option):
             """
             Returns the display name for the target option.

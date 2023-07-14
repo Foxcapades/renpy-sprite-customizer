@@ -41,6 +41,9 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
+<p>Documentation for the Sprite Customizer (SC) framework.</p>
+</div>
+<div class="paragraph">
 <p>This document is a WIP and presently is just a collection of notes about various
 Sprite Customizer topics.  This document will eventually become the overall
 documentation of the Sprite Customizer toolset.</p>
@@ -225,8 +228,56 @@ SCLayer("mic_stand", mic_stand_lcb)</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_advanced_usage">Advanced Usage</h4>
+<h4 id="_animating_layers">Animating Layers</h4>
+<div class="paragraph">
+<p>As the whole Sprite Customization framework is built on
+<a href="https://www.renpy.org/doc/html/displayables.html#dynamic-displayables">DynamicDisplayable</a>s, it may be desirable to put those
+Displayables to work with animations.  Luckily, the same values passed to a
+DynamicDisplayable&#8217;s callback are accessible from an SC layer callback as well.</p>
+</div>
+<div class="paragraph">
+<p>In addition to the customization options, the typical <code>st</code>-<code>at</code> pair are
+passed to layer callbacks and can be accessed by declaring those parameters as
+positional arguments or by accessing them from the <code>**kwargs</code> argument.  This
+means both of the following example functions are correct:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python"># Alternate eye colors every second for some reason
+init python:
+    def my_lcb_1(eye_color, **kwargs):
+        if int(kwargs["st"]) % 2 == 1:
+            return f"images/sprite/eyes/{eye-color}_1.png"
+        else:
+            return f"images/sprite/eyes/{eye-color}_0.png"
 
+    def my_lcb_2(st, eye_color, **kwargs):
+        if int(st) % 2 == 1:
+            return f"images/sprite/eyes/{eye-color}_1.png"
+        else:
+            return f"images/sprite/eyes/{eye-color}_0.png"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Those of you that are already familiar with
+<a href="https://www.renpy.org/doc/html/displayables.html#dynamic-displayables">DynamicDisplayable</a>s and their callbacks may be wondering how
+and where a redraw time may be defined.  Luckily, if needed, that may also be
+returned from SC layer callbacks:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">init python:
+    def my_lcb_1(eye_color, **kwargs):
+        if int(kwargs["st"]) % 2 == 1:
+            return (f"images/sprite/eyes/{eye-color}_1.png", 1.0)
+        else:
+            return (f"images/sprite/eyes/{eye-color}_0.png", 1.0)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If a redraw time is not returned by the layer callback, a default value of <code>0.0</code>
+is used.</p>
+</div>
 </div>
 </div>
 </div>
@@ -255,6 +306,13 @@ customizations between each layer&#8217;s configured customization options.</p>
 </div>
 <div class="sect3">
 <h4 id="_properties">Properties</h4>
+<div class="sect4">
+<h5 id="_layers"><code>layers</code></h5>
+<div class="paragraph">
+<p>A read-only list of all the SCLayer instances known to the current
+<a href="#custom-sprite">CustomizedSprite</a> instance.</p>
+</div>
+</div>
 <div class="sect4">
 <h5 id="_option_keys"><code>option_keys</code></h5>
 <div class="paragraph">
@@ -347,40 +405,25 @@ the "front".</p></td>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_require_option"><code>_require_option</code></h5>
-<div class="paragraph">
-<p>Requires that the given option key is known to the current <a href="#custom-sprite">CustomizedSprite</a>
-instance or one of its layers.</p>
-</div>
-<div class="paragraph">
-<p>If the option key is not known, an exception will be thrown.</p>
-</div>
-<div class="sect5">
-<h6 id="_arguments_2">Arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 10%;">
-<col style="width: 80%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><code>option</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword for the option to require.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect4">
 <h5 id="_set_state"><code>set_state</code></h5>
 <div class="paragraph">
 <p>Sets the internal state object of this <a href="#custom-sprite">CustomizedSprite</a> instance to the given
 <a href="#sc-state">SCState</a> instance.</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">define my_sprite = CustomizedSprte("sprite", ...)
+default my_sprite_state = SCState()
+
+label start:
+    $ my_sprite.set_state(my_sprite_state)
+
+label after_load:
+    $ my_sprite.set_state(my_sprite_state)</code></pre>
+</div>
+</div>
 <div class="sect5">
-<h6 id="_arguments_3">Arguments</h6>
+<h6 id="_arguments_2">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -403,7 +446,7 @@ instance or one of its layers.</p>
 <p>Increments the selection value for the target option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_4">Arguments</h6>
+<h6 id="_arguments_3">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -426,7 +469,7 @@ instance or one of its layers.</p>
 <p>Deccrements the selection value for the target option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_5">Arguments</h6>
+<h6 id="_arguments_4">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -444,12 +487,12 @@ instance or one of its layers.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_option_display_name"><code>option_display_name</code></h5>
+<h5 id="_get_option_display_name"><code>get_option_display_name</code></h5>
 <div class="paragraph">
 <p>Returns the display name value for the target option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_6">Arguments</h6>
+<h6 id="_arguments_5">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -482,18 +525,18 @@ instance or one of its layers.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_option_selection"><code>option_selection</code></h5>
+<h5 id="_get_option_selection"><code>get_option_selection</code></h5>
 <div class="paragraph">
-<p>Returns the current selection for the target option.</p>
+<p>Returns the current selection index for the target option.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">my_sprite.option_selection("hair_style") == 1</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">my_sprite.get_option_selection("hair_style") == 1</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_7">Arguments</h6>
+<h6 id="_arguments_6">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -504,7 +547,7 @@ instance or one of its layers.</p>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>option</code></p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword of the option for which the display name should be returned.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword of the option for which the selection index should be returned.</p></td>
 </tr>
 </tbody>
 </table>
@@ -519,7 +562,7 @@ instance or one of its layers.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The selection value for the target option.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The selection index for the target option.</p></td>
 </tr>
 </tbody>
 </table>
@@ -542,7 +585,7 @@ print(my_sprite.get_option("hair_style").display_name) # Hair Style</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_8">Arguments</h6>
+<h6 id="_arguments_7">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -575,7 +618,7 @@ print(my_sprite.get_option("hair_style").display_name) # Hair Style</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_option_value"><code>option_value</code></h5>
+<h5 id="_get_option_value"><code>get_option_value</code></h5>
 <div class="paragraph">
 <p>Returns the option value for the given option and selection.</p>
 </div>
@@ -587,11 +630,11 @@ print(my_sprite.get_option("hair_style").display_name) # Hair Style</code></pre>
     SCLayer("hair", hair_cb, hair_style=SCOpt("Hair Style", [ "buns", "bob", "mohawk" ]))
 )
 
-my_sprite.option_value("hair_style", 2) == "bob"</code></pre>
+my_sprite.get_option_value("hair_style", 2) == "bob"</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_9">Arguments</h6>
+<h6 id="_arguments_8">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -623,6 +666,59 @@ my_sprite.option_value("hair_style", 2) == "bob"</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>any</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Target option value.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_get_selected_option_value"><code>get_selected_option_value</code></h5>
+<div class="paragraph">
+<p>Returns the currently selected option value for the target option.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">my_sprite = CustomizedSprite(
+    "sprite",
+    SCLayer("hair", hair_lcb, hair_style=SCOpt("Hair Style", [ "afro", "bob", "bun" ]))
+)
+my_sprite.set_state(SCState())
+
+my_sprite.get_selected_option_value("hair_style") == "afro"
+
+my_sprite.inc_selection("hair_style")
+
+my_sprite.get_selected_option_value("hair_style") == "bob"</code></pre>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_arguments_9">Arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">option</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword for the option whose user selected value should be returned.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_returns_5">Returns</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>any</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The currently selected option value for the target option.</p></td>
 </tr>
 </tbody>
 </table>
@@ -722,94 +818,6 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></
 </div>
 </div>
 <div class="sect4">
-<h5 id="_require_option_2"><code>_require_option</code></h5>
-<div class="paragraph">
-<p>Requires that an option with the given key is known to this layer.  If no such
-option is known, an exception will be thrown.</p>
-</div>
-<div class="sect5">
-<h6 id="_arguments_12">Arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 10%;">
-<col style="width: 80%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><code>option</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Key to the option to require.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_render"><code>_render</code></h5>
-<div class="paragraph">
-<p>A callback that is passed to the
-<a href="https://www.renpy.org/doc/html/displayables.html#DynamicDisplayable">DynamicDisplayable</a>
-instances built via the <a href="#sc-lay-build-image"><code>build_image</code></a> method.</p>
-</div>
-<div class="paragraph">
-<p>This method calls out to the configured <code>layer_callback</code> with the options
-selected in the <a href="#sc-state">SCState</a>.</p>
-</div>
-<div class="sect5">
-<h6 id="_arguments_13">Arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 10%;">
-<col style="width: 80%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><code>st</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>float</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The amount of time the displayable has been shown for.</p></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><code>at</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>float</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The amount of time any displayable with the same tag has been shown for.</p></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><code>**kwargs</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dict</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword args that are passed through to the <code>layer_callback</code> function.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_returns_5">Returns</h6>
-<div class="paragraph">
-<p>This method returns a <code>(d, redraw)</code> tuple where:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 10%;">
-<col style="width: 80%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><code>d</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="https://www.renpy.org/doc/html/displayables.html">Displayable</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Displayable</code> generated by the <code>layer_callback</code> function.</p></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><code>redraw</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int|float</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum amount of time to wait before calling this method again.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect4">
 <h5 id="_clone"><code>clone</code></h5>
 <div class="paragraph">
 <p>Creates a copy of the current <a href="#sc-layer">SCLayer</a> instance.</p>
@@ -837,7 +845,7 @@ selected in the <a href="#sc-state">SCState</a>.</p>
 <code>SCState</code> object.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_14">Arguments</h6>
+<h6 id="_arguments_12">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -860,7 +868,7 @@ selected in the <a href="#sc-state">SCState</a>.</p>
 <p>Increments the user selection for the given option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_15">Arguments</h6>
+<h6 id="_arguments_13">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -883,7 +891,7 @@ selected in the <a href="#sc-state">SCState</a>.</p>
 <p>Decrements the user selection for the given option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_16">Arguments</h6>
+<h6 id="_arguments_14">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -906,7 +914,7 @@ selected in the <a href="#sc-state">SCState</a>.</p>
 <p>Returns the target <a href="#sc-opt">SCOpt</a> value from the current layer.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_17">Arguments</h6>
+<h6 id="_arguments_15">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -939,7 +947,45 @@ selected in the <a href="#sc-state">SCState</a>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_get_option_value"><code>get_option_value</code></h5>
+<h5 id="_get_option_count"><code>get_option_count</code></h5>
+<div class="paragraph">
+<p>Returns the number of options in the target option group.</p>
+</div>
+<div class="sect5">
+<h6 id="_arguments_16">Arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>option</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword for the option group whose size should be retrieved.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_returns_8">Returns</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of options in the target option group.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_get_option_value_2"><code>get_option_value</code></h5>
 <div class="paragraph">
 <p>Returns the option value for the target option and selection.</p>
 </div>
@@ -964,7 +1010,7 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_18">Arguments</h6>
+<h6 id="_arguments_17">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -986,7 +1032,7 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_8">Returns</h6>
+<h6 id="_returns_9">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1002,7 +1048,57 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_option_display_name_2"><code>option_display_name</code></h5>
+<h5 id="_get_selected_option_value_2"><code>get_selected_option_value</code></h5>
+<div class="paragraph">
+<p>Returns the currently selected option value for the target option.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">my_layer = SCLayer("layer", callback, option=SCOpt("Option", [ "option 1", "option 2" ]))
+my_layer.set_state(SCState())
+
+my_layer.get_selected_option_value("option") == "option 1"
+
+my_layer.inc_selection("option")
+
+my_layer.get_selected_option_value("option") == "option 2"</code></pre>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_arguments_18">Arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">option</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword for the option whose user selected value should be returned.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_returns_10">Returns</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>any</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The currently selected option value for the target option.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_get_option_display_name_2"><code>get_option_display_name</code></h5>
 <div class="paragraph">
 <p>Returns the display name for the target option.</p>
 </div>
@@ -1024,7 +1120,7 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_9">Returns</h6>
+<h6 id="_returns_11">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1040,9 +1136,9 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_option_selection_2"><code>option_selection</code></h5>
+<h5 id="_get_option_selection_2"><code>get_option_selection</code></h5>
 <div class="paragraph">
-<p>Returns the use selection index for the target option.</p>
+<p>Returns the user selection index for the target option.</p>
 </div>
 <div class="sect5">
 <h6 id="_arguments_20">Arguments</h6>
@@ -1056,13 +1152,13 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>option</code></p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword for the option whose value should be returned.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keyword for the option whose selection index should be returned.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_10">Returns</h6>
+<h6 id="_returns_12">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1085,7 +1181,7 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 that represents this <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_returns_11">Returns</h6>
+<h6 id="_returns_13">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1108,7 +1204,7 @@ that represents this <a href="#sc-layer">SCLayer</a> instance.</p>
 to represent this <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_returns_12">Returns</h6>
+<h6 id="_returns_14">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1145,7 +1241,7 @@ that layer.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_option_values"><code>option_values</code></h5>
+<h5 id="_values"><code>values</code></h5>
 <div class="paragraph">
 <p>List of option values.</p>
 </div>
@@ -1191,7 +1287,7 @@ selections.  This is used to persist the selected options as part of the game
 saves and reload those selections when loading the game from a save.</p>
 </div>
 <div class="paragraph">
-<p>The state is a map of <code>1</code> based indexes of option values.</p>
+<p>The state is a dict of <code>1</code> based indexes of option values.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1232,7 +1328,7 @@ returned from this method.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_13">Returns</h6>
+<h6 id="_returns_15">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1312,7 +1408,7 @@ over to <code>max</code> if it would go below <code>1</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-14 08:05:57 -0400
+Last updated 2023-07-14 08:55:34 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

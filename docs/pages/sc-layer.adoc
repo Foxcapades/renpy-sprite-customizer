@@ -180,6 +180,39 @@ layer.get_option_value("fizz", 2) == "ding"
 |===
 
 
+=== `get_selected_option_value`
+
+Returns the currently selected option value for the target option.
+
+[source, python]
+----
+my_layer = SCLayer("layer", callback, option=SCOpt("Option", [ "option 1", "option 2" ]))
+my_layer.set_state(SCState())
+
+my_layer.get_selected_option_value("option") == "option 1"
+
+my_layer.inc_selection("option")
+
+my_layer.get_selected_option_value("option") == "option 2"
+----
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| option 
+| str
+| Keyword for the option whose user selected value should be returned.
+|===
+
+==== Returns
+
+[cols="1m,9"]
+|===
+| any
+| The currently selected option value for the target option.
+|===
+
 === `get_option_display_name`
 
 Returns the display name for the target option.

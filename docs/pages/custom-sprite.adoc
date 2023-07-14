@@ -101,27 +101,22 @@ the "front".
 |===
 
 
-=== `_require_option`
-
-Requires that the given option key is known to the current <<custom-sprite>>
-instance or one of its layers.
-
-If the option key is not known, an exception will be thrown.
-
-==== Arguments
-
-[cols="1h,1m,8"]
-|===
-| `option`
-| str
-| Keyword for the option to require.
-|===
-
-
 === `set_state`
 
 Sets the internal state object of this <<custom-sprite>> instance to the given
 <<sc-state>> instance.
+
+[source, python]
+----
+define my_sprite = CustomizedSprte("sprite", ...)
+default my_sprite_state = SCState()
+
+label start:
+    $ my_sprite.set_state(my_sprite_state)
+
+label after_load:
+    $ my_sprite.set_state(my_sprite_state)
+----
 
 ==== Arguments
 
@@ -185,7 +180,7 @@ Returns the display name value for the target option.
 
 === `get_option_selection`
 
-Returns the current selection for the target option.
+Returns the current selection index for the target option.
 
 .Example
 [source, python]
@@ -199,7 +194,7 @@ my_sprite.get_option_selection("hair_style") == 1
 |===
 | `option`
 | str
-| Keyword of the option for which the display name should be returned.
+| Keyword of the option for which the selection index should be returned.
 |===
 
 ==== Returns
@@ -207,7 +202,7 @@ my_sprite.get_option_selection("hair_style") == 1
 [cols="1m,9"]
 |===
 | int
-| The selection value for the target option.
+| The selection index for the target option.
 |===
 
 
@@ -279,4 +274,40 @@ my_sprite.get_option_value("hair_style", 2) == "bob"
 |===
 | any
 | Target option value.
+|===
+
+=== `get_selected_option_value`
+
+Returns the currently selected option value for the target option.
+
+[source, python]
+----
+my_sprite = CustomizedSprite(
+    "sprite",
+    SCLayer("hair", hair_lcb, hair_style=SCOpt("Hair Style", [ "afro", "bob", "bun" ]))
+)
+my_sprite.set_state(SCState())
+
+my_sprite.get_selected_option_value("hair_style") == "afro"
+
+my_sprite.inc_selection("hair_style")
+
+my_sprite.get_selected_option_value("hair_style") == "bob"
+----
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| option 
+| str
+| Keyword for the option whose user selected value should be returned.
+|===
+
+==== Returns
+
+[cols="1m,9"]
+|===
+| any
+| The currently selected option value for the target option.
 |===

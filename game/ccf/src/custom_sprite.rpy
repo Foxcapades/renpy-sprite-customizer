@@ -105,8 +105,20 @@ init -1 python:
 
         def set_state(self, state):
             """
-            Sets the internal state object of this `CustomizedSprite` instance
-            to the given `SCState` instance.
+            Sets the internal state object of this CustomizedSprite instance to
+            the given SCState instance.
+
+            [source, python]
+            ----
+            define my_sprite = CustomizedSprte("sprite", ...)
+            default my_sprite_state = SCState()
+
+            label start:
+                $ my_sprite.set_state(my_sprite_state)
+
+            label after_load:
+                $ my_sprite.set_state(my_sprite_state)
+            ----
 
             Arguments:
 
@@ -168,9 +180,39 @@ init -1 python:
             self._require_option(option)
             return self._option_to_layer[option].get_option(option)
 
-        def get_option_value(self, option, selection):
+        def get_option_value(self, option):
             self._require_option(option)
             return self._option_to_layer[option].get_option_value(option, selection)
+
+        def get_selected_option_value(self, option)
+            """
+            Returns the currently selected option value for the target option.
+
+            ```python
+            my_sprite = CustomizedSprite(
+                "sprite",
+                SCLayer("hair", hair_lcb, hair_style=SCOpt("Hair Style", [ "afro", "bob", "bun" ]))
+            )
+            my_sprite.set_state(SCState())
+
+            my_sprite.get_selected_option_value("hair_style") == "afro"
+
+            my_sprite.inc_selection("hair_style")
+
+            my_sprite.get_selected_option_value("hair_style") == "bob"
+            ```
+
+            Arguments:
+
+            option (str): Keyword for the option whose user selected value
+            should be returned.
+
+            Returns:
+
+            any: The currently selected option value for the target option.
+            """
+            self._require_option(option)
+            return self._option_to_layer[option].get_selected_option_value(option)
 
         @property
         def layers(self):
