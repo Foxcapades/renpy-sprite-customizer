@@ -22,32 +22,37 @@ image::docs/previews/demo.gif[]
 
 == Project Layout
 
-=== link:game/ccf[The `ccf` Directory]
+=== link:game/sprite_customizer[The `sprite_customizer` Directory]
 
-The code necessary to run the sprite customizer lives under the `ccf` directory
-and is broken into 3 files:
+The `game/sprite_customizer` directory is where the source and configuration for
+the Sprite Customizer lives.
 
-link:game/ccf/ccf_config.rpy[ccf_config.rpy]::
+This directory contains 2 files and a subdirectory:
 
-`ccf_config.rpy` is where the configuration for the
-link:https://foxcapades.github.io/renpy-sprite-customizer/#custom-sprite[CustomizedSprite]s
-lives.  This file is where the sprite files are referencedand the options
-provided to build the CustomizedSprite instances.
-+
-This is where you go to configure your sprite customization.
+* `src/`
+* `config.rpy`
+* `gui.rpy`
 
-link:game/ccf/ccf_gui.rpy[ccf_gui.rpy]::
+==== The `src` Directory
 
-`ccf_gui.rpy` is where the sprite customization screen and components are
-defined.
-+
-This is where you go to change the sprite customization screen.
+The source directory contains the source files for the classes that back the
+Sprite Customizer.
 
-link:game/ccf/ccf_src.rpy[ccf_src.rpy]::
+This is where you would go if you want to hack the behavior of the Sprite
+Customizer.
 
-`ccf_src.rpy` is where the core of the Sprite Customizer is defined.
-+
-This is where you go if you want to hack the source and customize its behavior.
+==== `config.rpy`
+
+The `config.rpy` file is where the demo sprites are defined.  This file is
+intended to be used to hold your Customized Sprite configuration(s) and layer
+callbacks.
+
+==== `gui.rpy`
+
+The `gui.rpy` file is where the default Sprite Customizer screen is defined.
+
+This is where you go if you want to redefine or alter the Sprite Customization
+screen.
 
 === link:game/images.rpy[`images.rpy`]
 
