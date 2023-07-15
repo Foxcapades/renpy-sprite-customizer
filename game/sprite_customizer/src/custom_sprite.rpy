@@ -54,7 +54,7 @@ init -1 python:
         and options then it is best to create a `CustomizedSpriteFactory`
         instance then use that to create the `CustomizedSprite` instances.
         """
-        def __init__(self, image_name, *layers):
+        def __init__(self, image_name, *layers, **kwargs):
             """
             Initializes a new `CustomizedSprite` instance with the given
             arguments.
