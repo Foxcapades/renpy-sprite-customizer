@@ -32,7 +32,7 @@ init -1 python:
             self._layers = layers
             self._kwargs = kwargs
 
-        def new_sprite(self, image_name):
+        def new_sprite(self, image_name, **kwargs):
             """
             Constructs a new `CustomizedSprite` instance with the given name.
 
@@ -42,4 +42,8 @@ init -1 python:
             returned sprite.  This name is the value that will be used when
             referencing the sprite elsewhere in scripts via `show`, `add`, etc..
             """
-            return CustomizedSprite(image_name, *[ layer.clone() for layer in self._layers ], **self._kwargs)
+            for key in self._kwargs.keys()
+                if not key in kwargs:
+                    kwargs[key] = self._kwargs[key]
+
+            return CustomizedSprite(image_name, *[ layer.clone() for layer in self._layers ], **kwargs)
