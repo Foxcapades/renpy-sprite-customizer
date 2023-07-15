@@ -21,6 +21,65 @@ my_sprite.set_state(my_sprite_state)
 Initializes the new, blank <<sc-state>> instance.
 
 
+=== `set_state`
+
+Stores arbitrary user state that will be passed to all layer callbacks.
+
+[NOTE]
+----
+This method cannot be used to override option selections.  If a user state item
+key conflicts with a sprite customization option, the sprite customization
+option will take priority.
+----
+
+[source, python]
+----
+default sprite_state = SCState()
+
+label start:
+    $ sprite_state.set_state("mood", "happy")
+    $ sprite.set_state(my_state)
+    ...
+    ...
+    ...
+    $ sprite_state.set_state("mood", "angry")
+----
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `key`
+| str
+| Key for the user state item
+
+| `value`
+| any
+| Value to store.
+|===
+
+
+=== `get_state`
+
+Retrieves user state from the SCState store.
+
+==== Arguments
+
+[cols="1h,1m,8"]
+|===
+| `key`
+| str
+| Key for the user state item
+|===
+
+==== Returns
+
+[cols="1m,9"]
+|===
+| any
+| User state value.
+|===
+
 === `get_selection`
 
 Looks up the target selection value.  If the target selection value is unknown

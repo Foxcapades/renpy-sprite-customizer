@@ -20,7 +20,38 @@ init -1 python:
             """
             Initializes the new, blank SCState instance.
             """
-            self._state = {}
+            self._selections = {}
+            self._user_state = {}
+
+        def _user_state_items(self):
+            return self._user_state
+
+        def set_state(self, key, value):
+            """
+            Store arbitrary user state that will be passed to all layer
+            callbacks.
+
+            Arguments:
+
+            key (str): Key for the user state item.
+
+            value (any): Value to store.
+            """
+            self._user_state[key] = value
+
+        def get_state(self, key):
+            """
+            Retrieve arbitrary user state from the SCState store.
+
+            Arguments:
+
+            key (str): Key for the user state item.
+
+            Returns:
+
+            any: User state value.
+            """
+            return self._user_state[key]
 
         def get_selection(self, key):
             """
@@ -36,10 +67,10 @@ init -1 python:
 
             int: Current selection state for the given option selection.
             """
-            if not key in self._state:
-                self._state[key] = 1
+            if not key in self._selections:
+                self._selections[key] = 1
 
-            return self._state[key]
+            return self._selections[key]
 
         def inc_selection(self, key, max):
             """
@@ -53,12 +84,12 @@ init -1 python:
 
             max (int): Max value the selection option can possibly be.
             """
-            if not key in self._state:
-                self._state[key] = 2
-            elif self._state[key] >= max:
-                self._state[key] = 1
+            if not key in self._selections:
+                self._selections[key] = 2
+            elif self._selections[key] >= max:
+                self._selections[key] = 1
             else:
-                self._state[key] += 1
+                self._selections[key] += 1
 
         def dec_selection(self, key, max):
             """
@@ -72,9 +103,9 @@ init -1 python:
 
             max (int): Max value the selection option can possibly be.
             """
-            if not key in self._state:
-                self._state[key] = max
-            elif self._state[key] == 1:
-                self._state[key] = max
+            if not key in self._selections:
+                self._selections[key] = max
+            elif self._selections[key] == 1:
+                self._selections[key] = max
             else:
-                self._state[key] -= 1
+                self._selections[key] -= 1

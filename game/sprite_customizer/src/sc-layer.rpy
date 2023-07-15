@@ -71,6 +71,11 @@ init -1 python:
             kwargs["st"] = st
             kwargs["at"] = at
 
+            # Go through user state first to prevent it from overwriting real
+            # option selections.  TODO: Should we allow overriding selections?
+            for key, value in self._state._user_state_items().items():
+                kwargs[key] = value
+
             for key in self._options.keys():
                 kwargs[key] = self._options[key]._values[self._state.get_selection(key) - 1]
 

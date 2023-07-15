@@ -1422,6 +1422,92 @@ my_sprite.set_state(my_sprite_state)</code></pre>
 </div>
 </div>
 <div class="sect4">
+<h5 id="_set_state_3"><code>set_state</code></h5>
+<div class="paragraph">
+<p>Stores arbitrary user state that will be passed to all layer callbacks.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>This method cannot be used to override option selections.  If a user state item
+key conflicts with a sprite customization option, the sprite customization
+option will take priority.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">default sprite_state = SCState()
+
+label start:
+    $ sprite_state.set_state("mood", "happy")
+    $ sprite.set_state(my_state)
+    ...
+    ...
+    ...
+    $ sprite_state.set_state("mood", "angry")</code></pre>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_arguments_23">Arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>key</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key for the user state item</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>value</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>any</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value to store.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_get_state"><code>get_state</code></h5>
+<div class="paragraph">
+<p>Retrieves user state from the SCState store.</p>
+</div>
+<div class="sect5">
+<h6 id="_arguments_24">Arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>key</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key for the user state item</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_returns_16">Returns</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>any</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User state value.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
 <h5 id="_get_selection"><code>get_selection</code></h5>
 <div class="paragraph">
 <p>Looks up the target selection value.  If the target selection value is unknown
@@ -1429,7 +1515,7 @@ to the <a href="#sc-state">SCState</a> object, the value <code>1</code> will be 
 returned from this method.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_23">Arguments</h6>
+<h6 id="_arguments_25">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1446,7 +1532,7 @@ returned from this method.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_16">Returns</h6>
+<h6 id="_returns_17">Returns</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1468,7 +1554,7 @@ returned from this method.</p>
 rolling back over to <code>1</code> if it would exceed that maximum.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_24">Arguments</h6>
+<h6 id="_arguments_26">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -1497,7 +1583,7 @@ rolling back over to <code>1</code> if it would exceed that maximum.</p>
 over to <code>max</code> if it would go below <code>1</code>.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_25">Arguments</h6>
+<h6 id="_arguments_27">Arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
