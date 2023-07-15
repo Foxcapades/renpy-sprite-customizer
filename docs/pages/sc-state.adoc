@@ -26,11 +26,11 @@ Initializes the new, blank <<sc-state>> instance.
 Stores arbitrary user state that will be passed to all layer callbacks.
 
 [NOTE]
-----
+--
 This method cannot be used to override option selections.  If a user state item
 key conflicts with a sprite customization option, the sprite customization
 option will take priority.
-----
+--
 
 [source, python]
 ----

@@ -49,6 +49,44 @@ This state value *MUST* be passed to the relevant sprite instance via the
 done, the sprites will reset to their default state.
 --
 
+==== Additional State
+
+In addition to the sprite customization option selection values, the
+<<sc-state>> object may be used to store arbitrary user-defined variables that
+will then be passed through to the <<Layer Callbacks>> attached to the sprite
+that uses the target <<sc-state>> object.
+
+Example::
+The following code snippets attempt to demonstrate a use case for the use of
+additional user-defined state to augment the CustomizedSprite's behavior so as
+to make use of a non-option variable to control how the sprite gets rendered.
++
+In this particular case, we have a set of sprite "base" images that represent
+different player moods.  It wouldn't make sense to have the player mood be a
+customization option, but it is something that does have options we wish to
+control during gameplay.
++
+.`config.rpy`
+[source, python]
+----
+init python:
+    def base_lcb(**kwargs):
+        return "sprite_base_{}".format(kwargs["mood"])
+
+define my_sprite = CustomizedSprite("player", SCLayer("base", base_lcb))
+----
++
+.`script.rpy`
+[source, python]
+----
+default my_sprite_state = SCState()
+
+label start:
+    $ my_sprite_state.set_state("mood", "happy")
+    $ my_sprite.set_state(my_sprite_state)
+
+    show player
+----
 
 === Sprite vs. Factory
 
