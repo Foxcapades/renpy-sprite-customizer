@@ -4,6 +4,8 @@
 #
 # One SCState object is needed for every customized character sprite in use.
 default player_sprite_state = SCState()
+
+# For the antagonist, set some different defaults than the player.
 default antagonist_sprite_state = SCState(selections={
     "skin_color": 5,
     "clothes": 2,
