@@ -4,7 +4,14 @@
 #
 # One SCState object is needed for every customized character sprite in use.
 default player_sprite_state = SCState()
-default antagonist_sprite_state = SCState()
+default antagonist_sprite_state = SCState(selections={
+    "skin_color": 5,
+    "clothes": 2,
+    "hair_style": 2,
+    "hair_color": 10,
+    "accessory": 4,
+    "eyes": 3
+})
 
 # Define our characters like normal.
 define pc = Character("Player", image="player")
