@@ -16,19 +16,35 @@ init -1 python:
         my_sprite.set_state(my_sprite_state)
         ```
         """
-        def __init__(self):
+        def __init__(self, selections={}, user_state={}):
             """
             Initializes the new, blank SCState instance.
+
+            Arguments:
+
+            selection (dict): Initial selection state for the SCState instance.
+
+            user_state (dict): Initial user variable state for the SCState
+            instance.
             """
-            self._selections = {}
-            self._user_state = {}
+            if not isinstance(selections, dict):
+                raise Exception("SCState selections argument must be a dict value.")
+            if not isinstance(user_state, dict):
+                raise Exception("SCState user_state argument must be a dict value.")
+
+            for key, value in selections.items():
+                if not isinstance(value, int) or value < 1:
+                    raise Exception("Option selections must be 1 based integers.")
+
+            self._selections = selections.copy()
+            self._user_state = user_state.copy()
 
         def _user_state_items(self):
             return self._user_state
 
-        def set_state(self, key, value):
+        def set_variable(self, key, value):
             """
-            Store arbitrary user state that will be passed to all layer
+            Store arbitrary user variable that will be passed to all layer
             callbacks.
 
             Arguments:
@@ -39,9 +55,9 @@ init -1 python:
             """
             self._user_state[key] = value
 
-        def get_state(self, key):
+        def get_variable(self, key):
             """
-            Retrieve arbitrary user state from the SCState store.
+            Retrieve arbitrary user variable from the SCState store by key.
 
             Arguments:
 
