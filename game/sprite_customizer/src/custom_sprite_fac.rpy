@@ -42,7 +42,7 @@ init -1 python:
             returned sprite.  This name is the value that will be used when
             referencing the sprite elsewhere in scripts via `show`, `add`, etc..
             """
-            for key in self._kwargs.keys()
+            for key in self._kwargs.keys():
                 if not key in kwargs:
                     kwargs[key] = self._kwargs[key]
 
