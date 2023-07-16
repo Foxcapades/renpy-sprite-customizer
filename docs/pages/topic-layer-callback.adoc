@@ -14,7 +14,7 @@ that the Sprite Customizer is able to make use of your project's assets.
 Before we can talk more about layer callbacks, we need to talk a little bit
 about layers, more specifically, <<sc-layer>>s and how they are constructed.
 
-When constructing a new <<sc-layer>> instance, you pass it a layer name, a
+When constructing a new <<sc-layer>> instance, you may pass it a layer name, a
 _layer callback_, and zero or more customization option groups (<<sc-opt>>s) via
 keyword arguments.  Those keyword arguments are _very_ important to the
 definition of the given layer callback; they name the same arguments that will
