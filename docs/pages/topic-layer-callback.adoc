@@ -6,8 +6,8 @@
 
 Layer callbacks are functions that are used by <<sc-layer>> instances to
 generate link:{url-disp}[Displayable]s that can be used as components of
-the overall <<custom-sprite>> image.  These functions are how the Sprite
-Customizer makes use of your project's assets.
+the overall <<custom-sprite>> image.  These functions are one of the two ways
+that the Sprite Customizer is able to make use of your project's assets.
 
 == Defining Layer Callbacks
 
