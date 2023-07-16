@@ -109,7 +109,7 @@ define ccf = CustomizedSpriteFactory(
     # and we use the following hex codes to define the skin colors that may be
     # selected in the sprite customizer.  These are applied via a TintMatrix
     # in the `cc_skin` callback function defined above.
-    SCLayer("skin", cc_skin, skin_color=SCOpt("Skin", [
+    SCLayer("skin", cc_skin, skin_color=SCOpt("Skin", group="Body", values=[
         "#513021",
         "#874c2c",
         "#803716",
@@ -124,7 +124,7 @@ define ccf = CustomizedSpriteFactory(
     # For the clothes layer, we have 2 clothing options that are separate sprite
     # layer files.  The options defined here are the names of the clothes files
     # which are loaded by the `cc_clothes` callback function defined above.
-    SCLayer("clothes", cc_clothes, clothes=SCOpt("Clothes", [ "cottoncandy", "plaid" ])),
+    SCLayer("clothes", cc_clothes, clothes=SCOpt("Clothes", group="Body", values=[ "cottoncandy", "plaid" ])),
 
     # Hair Layer
     #
@@ -138,8 +138,8 @@ define ccf = CustomizedSpriteFactory(
     SCLayer(
         "hair",
         cc_hair,
-        hair_style=SCOpt("Hair Style", [ "afro", "bob", "buns" ]),
-        hair_color=SCOpt("Hair Color", [
+        hair_style=SCOpt("Hair Style", group="Hair", values=[ "afro", "bob", "buns" ]),
+        hair_color=SCOpt("Hair Color", group="Hair", values=[
             "#3D2314",
             "#100C07",
             "#DA680F",
@@ -159,7 +159,7 @@ define ccf = CustomizedSpriteFactory(
     # For the accessory layer the options defined are the names of the accessory
     # image files that may be used.  The `cc_accessory` callback function
     # defined above takes the selected option and converts it to an image path.
-    SCLayer("accessories", cc_accessory, accessory=SCOpt("Accessory", [
+    SCLayer("accessories", cc_accessory, accessory=SCOpt("Accessory", group="Hair", values=[
         "none",
         "cottoncandy_bow",
         "cottoncandy_clips",
@@ -173,7 +173,7 @@ define ccf = CustomizedSpriteFactory(
     # For the eyes layer the options defined are the names of the eyes image
     # files that may be used.  The `cc_eyes` callback function defined above
     # takes the selected option and converts it to an image path.
-    SCLayer("eyes", cc_eyes, eye_color=SCOpt("Eyes", [
+    SCLayer("eyes", cc_eyes, eye_color=SCOpt("Eyes", group="Face", values=[
         "blue",
         "brown",
         "green",

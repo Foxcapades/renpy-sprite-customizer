@@ -6,7 +6,11 @@ that layer.
 
 [source, python]
 ----
-SCOpt("Display Name", [ "some", "option", "values" ])
+SCOpt("Hair Style", [ "afro", "bob", "bun" ])
+
+# OR
+
+SCOpt("Hair Style", group="Hair", values=[ "afro", "bob", "bun" ])
 ----
 
 == Properties
@@ -18,6 +22,10 @@ Display name for the set of options.
 === `values`
 
 List of option values.
+
+=== `group`
+
+
 
 == Methods
 
