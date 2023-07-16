@@ -84,8 +84,8 @@ define ccf = CustomizedSpriteFactory(
     SCLayer(
         "hair",
         cc_hair,
-        hair_style=SCOpt("Hair Style", group="Hair", values=[ "afro", "bob", "buns" ]),
-        hair_color=SCOpt("Hair Color", group="Hair", values=[
+        hair_style=SCOpt("Style", group="Hair", values=[ "afro", "bob", "buns" ]),
+        hair_color=SCOpt("Color", group="Hair", values=[
             "#3D2314",
             "#100C07",
             "#DA680F",
