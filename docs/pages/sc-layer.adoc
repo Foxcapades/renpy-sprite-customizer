@@ -5,7 +5,8 @@ Represents a single layer in a customizable sprite.
 
 This layer has zero or more customization options provided at construction time
 via named <<sc-opt>> keyword args.  The user's selections of those options are
-then passed to the given `layer_callback` to construct the underlying
+then passed to the given `layer_callback` or fed into the given template string
+to construct the underlying
 link:https://www.renpy.org/doc/html/displayables.html[Displayable] for the
 layer.
 
