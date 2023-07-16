@@ -1416,7 +1416,11 @@ that layer.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">SCOpt("Display Name", [ "some", "option", "values" ])</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">SCOpt("Hair Style", [ "afro", "bob", "bun" ])
+
+# OR
+
+SCOpt("Hair Style", group="Hair", values=[ "afro", "bob", "bun" ])</code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -1431,6 +1435,18 @@ that layer.</p>
 <h5 id="_values"><code>values</code></h5>
 <div class="paragraph">
 <p>List of option values.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_group"><code>group</code></h5>
+<div class="paragraph">
+<p>Name of this option&#8217;s group.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_has_group"><code>has_group</code></h5>
+<div class="paragraph">
+<p>Boolean indication as to whether this option has a group.</p>
 </div>
 </div>
 </div>
@@ -1459,6 +1475,11 @@ that layer.</p>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>option_values</code></p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">List of values for the option group.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>group</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str|None</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional group name for the option.</p></td>
 </tr>
 </tbody>
 </table>

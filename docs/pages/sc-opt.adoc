@@ -25,6 +25,11 @@ List of option values.
 
 === `group`
 
+Name of this option's group.
+
+=== `has_group`
+
+Boolean indication as to whether this option has a group.
 
 
 == Methods
@@ -44,4 +49,8 @@ Initializes the new <<sc-opt>> object.
 | `option_values`
 | list
 | List of values for the option group.
+
+| `group`
+| str\|None
+| Optional group name for the option.
 |===
