@@ -1,0 +1,42 @@
+[#sprite-vs-factory]
+= Sprite vs. Factory
+
+The <<custom-sprite>> class may be constructed directly or via the
+<<custom-sprite-fac>> type.  Deciding whether to construct the type directly or
+via the factory comes down to whether you want to create multiple sprites from
+the same set of layers and options.
+
+If you only wish to create a single sprite out of a given set of layers and
+options, then it is fine to construct a new <<custom-sprite>> instance
+directly.
+
+If you wish to create more than one sprite out of a set of layers and options,
+then it is best to create a <<custom-sprite-fac>> from those layers and options
+and use that factory instance to produce new <<custom-sprite>> instances.
+
+.Constructing a Single Sprite
+[source, python]
+----
+my_sprite = CustomizedSprite(
+    "protagonist",
+    SCLayer("skin", ...),
+    SCLayer("clothes", ...),
+    SCLayer("hair", ...),
+    SCLayer("eyes", ...)
+)
+----
+
+.Constructing Multiple Sprites from the Same Options
+[source, python]
+----
+sprite_fac = CustomizedSpriteFactory(
+    SCLayer("skin", ...),
+    SCLayer("clothes", ...),
+    SCLayer("hair", ...),
+    SCLayer("eyes", ...)
+)
+
+my_sprite_1 = sprite_fac.new_sprite("protagonist")
+my_sprite_2 = sprite_fac.new_sprite("antagonist")
+----
+
