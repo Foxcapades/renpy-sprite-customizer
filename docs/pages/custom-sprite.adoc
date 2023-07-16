@@ -20,7 +20,7 @@ CustomizedSprite(
 
 === `layers`
 
-A read-only list of all the SCLayer instances known to the current
+A read-only list of all the <<sc-layer>> instances known to the current
 <<custom-sprite>> instance.
 
 === `option_keys`
