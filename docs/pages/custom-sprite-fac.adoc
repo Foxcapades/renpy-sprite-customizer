@@ -37,11 +37,16 @@ Constructs a new `CustomizedSprite` instance with the given name.
 
 [cols="1h,1m,8"]
 |===
-| image_name
+| `image_name`
 | str
 | Name of the image that will be created for the returned sprite.  This name is
 the value that will be used when referencing the sprite elsewhere in scripts via
 `show`, `add`, etc..
+
+| `**kwargs`
+| any
+| Additional keyword args that will be passed through to the <<cuustom-sprite>>
+constructor.
 |===
 
 ==== Returns
