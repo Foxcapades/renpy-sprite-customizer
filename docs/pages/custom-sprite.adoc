@@ -34,7 +34,7 @@ my_sprite = CustomizedSprite(
     "sprite_name",
     SCLayer("skin", skin_cb, skin_color=SCOpt(...)),
     SCLayer("hair", hair_cb, hair_style=SCOpt(...)),
-    SCLayer("eyes", eyes_cb, eye_color=SCOpt(...))
+    SCLayer("eyes", "images/ccp/eyes/{eye_color}_eyes.png", eye_color=SCOpt(...))
 )
 
 my_sprite.option_keys == [ 'skin_color', 'hair_style', 'eye_color' ]
@@ -53,7 +53,7 @@ my_sprite = CustomizedSprite(
     "sprite_name",
     SCLayer("skin", skin_cb, skin_color=SCOpt(...)),
     SCLayer("hair", hair_cb, hair_style=SCOpt(...), hair_color=SCOpt(...)),
-    SCLayer("eyes", eyes_cb, eye_color=SCOpt(...))
+    SCLayer("eyes", "images/ccp/eyes/{eye_color}_eyes.png", eye_color=SCOpt(...))
 )
 
 my_sprite.option_count == 4
