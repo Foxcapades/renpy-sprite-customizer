@@ -15,7 +15,7 @@ init -1 python:
         ```
         """
 
-        def __init__(self, name, layer_callback, **options):
+        def __init__(self, name, layer_callback, transform=None, **options):
             """
             Initializes the new `SCLayer` instance with the given arguments.
 
@@ -23,8 +23,12 @@ init -1 python:
 
             name (str): Name of the layer.
 
-            layer_callback (function): Callback used to create the displayable
+            layer_callback (callable): Callback used to create the displayable
             that backs this layer.
+
+            transform (callable): Optional transform function.  A function that
+            takes a Displayable as a single argument and returns a Displayable.
+            Allows performing arbitrary transforms on individual layers.
 
             **options (dict): Dictionary of keyword arguments that define the
             options available to this layer.  Keyword args must all be `SCOpt`
@@ -43,6 +47,7 @@ init -1 python:
             self._func  = layer_callback
             self._state = None
             self._options = options
+            self._transform = transform
 
         def _require_option(self, option):
             """
@@ -92,7 +97,7 @@ init -1 python:
             SCLayer: A new `SCLayer` instance containing the same values
             configured on this instance.
             """
-            return SCLayer(self._name, self._func, **self._options)
+            return SCLayer(self._name, self._func, self._transform, **self._options)
 
         def set_state(self, state):
             """
@@ -239,7 +244,10 @@ init -1 python:
             DynamicDisplayable: The DynamicDisplayable that represents this
             `SCLayer` instance.
             """
-            return DynamicDisplayable(self._render, **kwargs)
+            if self._transform == None:
+                return DynamicDisplayable(self._render, **kwargs)
+
+            return self._transform(DynamicDisplayable(self._render, **kwargs))
 
         def build_attribute(self):
             """

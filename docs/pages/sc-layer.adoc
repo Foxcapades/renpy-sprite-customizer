@@ -22,17 +22,30 @@ Initializes the new <<sc-layer>> instance with the given arguments.
 
 ==== Arguments
 
-[cols="1h,1m,8"]
+[cols="1h,1m,8a"]
 |===
 | `name`
 | str
 | Name of the layer.
 
 | `layer_callback`
-| function
+| callable
 | Callback used to create the
-link:https://www.renpy.org/doc/html/displayables.html[`Displayable`] that backs
+link:https://www.renpy.org/doc/html/displayables.html[Displayabl`] that backs
 this layer.
+
+| `transform`
+| callable
+| Optional transform function.  A function that takes a
+link:https://www.renpy.org/doc/html/displayables.html[Displayable] as its
+single argument and returns a
+link:https://www.renpy.org/doc/html/displayables.html[Displayable].  Allows
+performing arbitrary transforms on individual layers:
+
+[source, python]
+----
+lambda i : Transform(i, matrixcolor=HueMatrix(60.0))
+----
 
 | `**options`
 | dict

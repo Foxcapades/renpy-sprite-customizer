@@ -963,20 +963,42 @@ layer.</p>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the layer.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Name of the layer.</p>
+</div></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>layer_callback</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>function</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Callback used to create the
-<a href="https://www.renpy.org/doc/html/displayables.html"><code>Displayable</code></a> that backs
-this layer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>callable</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Callback used to create the
+<a href="https://www.renpy.org/doc/html/displayables.html">Displayabl`</a> that backs
+this layer.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>transform</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>callable</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Optional transform function.  A function that takes a
+<a href="https://www.renpy.org/doc/html/displayables.html">Displayable</a> as its
+single argument and returns a
+<a href="https://www.renpy.org/doc/html/displayables.html">Displayable</a>.  Allows
+performing arbitrary transforms on individual layers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">lambda i : Transform(i, matrixcolor=HueMatrix(60.0))</code></pre>
+</div>
+</div></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><code>**options</code></p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>dict</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Dictionary of keyword arguments that define the options available to this
-layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Dictionary of keyword arguments that define the options available to this
+layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p>
+</div></div></td>
 </tr>
 </tbody>
 </table>
