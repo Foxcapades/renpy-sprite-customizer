@@ -947,7 +947,11 @@ layer.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">SCLayer("name", callback, option=SCOpt("Option", [ "some", "choices" ]))</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">SCLayer("name", callback, option=SCOpt("Option", [ "some", "choices" ]))
+
+# OR
+
+SCLayer("name", "my_image_{option}", option=SCOpt("Option", [ "some", "choices" ]))</code></pre>
 </div>
 </div>
 <div class="sect3">
@@ -974,12 +978,18 @@ layer.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><code>layer_callback</code></p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>callable</code></p></td>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>layer_provider</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>callable|str</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Callback used to create the
-<a href="https://www.renpy.org/doc/html/displayables.html">Displayabl`</a> that backs
-this layer.</p>
+<p>Either a <a href="#_layer_callbacks">Layer Callback</a> used to create the
+<a href="https://www.renpy.org/doc/html/displayables.html">Displayable</a> that backs
+this layer or a string path to an image that will be interpolated with the
+selected option values.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">"images/folder/file_{option}.png"</code></pre>
+</div>
 </div></div></td>
 </tr>
 <tr>

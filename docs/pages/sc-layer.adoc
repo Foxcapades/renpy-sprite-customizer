@@ -12,6 +12,10 @@ layer.
 [source, python]
 ----
 SCLayer("name", callback, option=SCOpt("Option", [ "some", "choices" ]))
+
+# OR
+
+SCLayer("name", "my_image_{option}", option=SCOpt("Option", [ "some", "choices" ]))
 ----
 
 == Methods
@@ -28,11 +32,17 @@ Initializes the new <<sc-layer>> instance with the given arguments.
 | str
 | Name of the layer.
 
-| `layer_callback`
-| callable
-| Callback used to create the
-link:https://www.renpy.org/doc/html/displayables.html[Displayabl`] that backs
-this layer.
+| `layer_provider`
+| callable\|str
+| Either a <<Layer Callbacks,Layer Callback>> used to create the
+link:https://www.renpy.org/doc/html/displayables.html[Displayable] that backs
+this layer or a string path to an image that will be interpolated with the
+selected option values.
+
+[source, python]
+----
+"images/folder/file_{option}.png"
+----
 
 | `transform`
 | callable

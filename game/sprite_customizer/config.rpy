@@ -32,19 +32,6 @@ init python:
         """
         return Transform("images/ccp/base/base.png", matrixcolor=TintMatrix(skin_color))
 
-    def cc_clothes(clothes, **kwargs):
-        """
-        CustomizedSprite Example: Clothes Callback
-
-        The `cc_clothes` callback takes the `clothes` argument and uses it to
-        generate a displayable for the chosen clothes option.
-
-        The `clothes` argument value will be one of the values defined in the
-        `clothes=SCOpt(...` declaration below and is used to generate the path
-        to the correct clothing option to render.
-        """
-        return "images/ccp/clothes/{}.png".format(clothes)
-
     def cc_hair(hair_style, hair_color, **kwargs):
         """
         CustomizedSprite Example: Hair Callback
@@ -63,30 +50,6 @@ init python:
         """
         return Transform("images/ccp/hair/{}.png".format(hair_style), matrixcolor=TintMatrix(hair_color))
 
-    def cc_accessory(accessory, **kwargs):
-        """
-        CustomizedSprite Example: Accessory Callback
-
-        The `cc_accessory` callback takes the `accessory` argument and uses it
-        to generate the path to the target accessory image.
-
-        The `accessory` value will be one of the accessory options defined in
-        the layer declaration below.
-        """
-        return "images/ccp/accessories/{}.png".format(accessory)
-
-    def cc_eyes(eye_color, **kwargs):
-        """
-        CustomizedSprite Example: Eyes Callback
-
-        The `cc_eyes` callback takes an `eye_color` argument and uses it to
-        generate the path to the target eye image.
-
-        The `eye_color` value will be one of the eye color options defined in
-        the layer declaration below.
-        """
-        return "images/ccp/eyes/{}_eyes.png".format(eye_color)
-
 # Customized Sprite Factory Declaration.
 #
 # This demonstrates the creation of a customized character sprite.  The creation
@@ -104,11 +67,6 @@ init python:
 # layer.
 define ccf = CustomizedSpriteFactory(
     # Skin Layer
-    #
-    # For the skin layer we have one, colorless base image to use for the skin
-    # and we use the following hex codes to define the skin colors that may be
-    # selected in the sprite customizer.  These are applied via a TintMatrix
-    # in the `cc_skin` callback function defined above.
     SCLayer("skin", cc_skin, skin_color=SCOpt("Skin", group="Body", values=[
         "#513021",
         "#874c2c",
@@ -120,21 +78,9 @@ define ccf = CustomizedSpriteFactory(
     ])),
 
     # Clothes Layer
-    #
-    # For the clothes layer, we have 2 clothing options that are separate sprite
-    # layer files.  The options defined here are the names of the clothes files
-    # which are loaded by the `cc_clothes` callback function defined above.
-    SCLayer("clothes", cc_clothes, clothes=SCOpt("Clothes", group="Body", values=[ "cottoncandy", "plaid" ])),
+    SCLayer("clothes", "images/ccp/clothes/{clothes}.png", clothes=SCOpt("Clothes", group="Body", values=[ "cottoncandy", "plaid" ])),
 
     # Hair Layer
-    #
-    # For the hair layer, we define 2 customization options.  A hair style which
-    # controls which sprite component image is used, and a hair color which
-    # applies color to the selected sprite component image via a TintMatrix.
-    #
-    # Both options are used by the `cc_hair` callback function defined above to
-    # create a displayable that combines the selected image component with the
-    # TintMatrix.
     SCLayer(
         "hair",
         cc_hair,
@@ -155,11 +101,7 @@ define ccf = CustomizedSpriteFactory(
     ),
 
     # Accessory Layer
-    #
-    # For the accessory layer the options defined are the names of the accessory
-    # image files that may be used.  The `cc_accessory` callback function
-    # defined above takes the selected option and converts it to an image path.
-    SCLayer("accessories", cc_accessory, accessory=SCOpt("Accessory", group="Hair", values=[
+    SCLayer("accessories", "images/ccp/accessories/{accessory}.png", accessory=SCOpt("Accessory", group="Hair", values=[
         "none",
         "cottoncandy_bow",
         "cottoncandy_clips",
@@ -169,11 +111,7 @@ define ccf = CustomizedSpriteFactory(
 
 
     # Eye Layer
-    #
-    # For the eyes layer the options defined are the names of the eyes image
-    # files that may be used.  The `cc_eyes` callback function defined above
-    # takes the selected option and converts it to an image path.
-    SCLayer("eyes", cc_eyes, eye_color=SCOpt("Eyes", group="Face", values=[
+    SCLayer("eyes", "images/ccp/eyes/{eye_color}_eyes.png", eye_color=SCOpt("Eyes", group="Face", values=[
         "blue",
         "brown",
         "green",
