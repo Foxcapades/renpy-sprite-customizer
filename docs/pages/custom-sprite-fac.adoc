@@ -45,7 +45,7 @@ the value that will be used when referencing the sprite elsewhere in scripts via
 
 | `**kwargs`
 | any
-| Additional keyword args that will be passed through to the <<cuustom-sprite>>
+| Additional keyword args that will be passed through to the <<custom-sprite>>
 constructor.
 |===
 
