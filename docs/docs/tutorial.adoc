@@ -1,8 +1,9 @@
 = Sprite Customizer Tutorial
-:toc:
+:toc: left
 :toclevels: 3
 :source-highlighter: highlight.js
 :icons: font
+:stylesheet: ../assets/readthedocs.css
 
 :docs-url-base: https://foxcapades.github.io/renpy-sprite-customizer
 :custom-sprite: link:{docs-url-base}#custom-sprite[CustomizedSprite]
@@ -132,7 +133,8 @@ target file.
 The names of a callback's arguments must be the same as the names of the options
 on the relevant layer.  Since, in this case, our layer has two options named
 `skin_base` and `skin_color`, those two options will be passed to the callback
-under arguments with those names.
+under arguments with those names.  The ordering of the arguments does not
+matter.
 --
 
 We pass this function to the created {sc-layer} instance to tell the layer how
