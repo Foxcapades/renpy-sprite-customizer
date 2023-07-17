@@ -48,7 +48,7 @@ is recommended)
 . Add a new `define` statement for our {custom-sprite}, it's best to go ahead
   and make the declaration multi-line as we are going to be adding a lot to it.
 +
-[source, python, linenums]
+[source%nowrap, python]
 ----
 define player_customizer = CustomizedSprite(
 )
@@ -56,7 +56,7 @@ define player_customizer = CustomizedSprite(
 .. Give it a name that we can use in our `show` statements.  We are going to
 name it `player_base` for reasons we will explore <<char-expressions,later>>.
 +
-[source, python, linenums]
+[source%nowrap, python]
 ----
 define player_customizer = CustomizedSprite(
   "player_base",
@@ -75,7 +75,7 @@ options for the skin layer, so this will be one of the more complex examples.
 
 The full snippet is as follows, but we will break down what it means below.
 
-[source, python, linenums]
+[source%nowrap, python]
 ----
 init python:
     def skin_lcb(skin_base, skin_color, **kwargs): <1>
@@ -113,7 +113,7 @@ define player_customizer = CustomizedSprite(
 [#skin-lcb]
 ===== The `skin_lcb` Callback
 
-[source, python]
+[source%nowrap, python]
 ----
 def skin_lcb(skin_base, skin_color, **kwargs):
     return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
@@ -161,7 +161,7 @@ can watch our progress in-game via script reloads.
 . Open `game/script.rpy` and delete all its contents.
 . Create a new <<sc-state>> object to hold our custom sprite option selections.
 +
-[source, python]
+[source%nowrap, python]
 ----
 default customizer_state = SCState()
 ----
@@ -171,7 +171,7 @@ default customizer_state = SCState()
   into the sprite customizer on game load time (without this the option
   selections will not show when loading a game).
 +
-[source, python]
+[source%nowrap, python]
 ----
 label after_load:
     $ player_customizer.set_state(customizer_state)
@@ -182,14 +182,14 @@ label after_load:
   into the sprite customizer.  This is done so that the player's choices will be
   stored as part of the game save files.
 +
-[source, python]
+[source%nowrap, python]
 ----
 label start:
     $ player_customizer.set_state(customizer_state)
 ----
 . Show our customized sprite.
 +
-[source, python]
+[source%nowrap, python]
 ----
 label start:
     $ player_customizer.set_state(customizer_state)
@@ -199,7 +199,7 @@ label start:
     `config.rpy`
 . Add a `pause` so the game doesn't end immediately.
 +
-[source, python]
+[source%nowrap, python]
 ----
 label start:
     $ player_customizer.set_state(customizer_state)
@@ -224,7 +224,7 @@ the definition of it will be more simple than the skin layer.
 . In the {custom-sprite} declaration, add a new argument that is another
 {sc-layer} constructor:
 +
-[source, python]
+[source%nowrap, python]
 ----
 define player_customizer = CustomizedSprite(
     "player_base",
@@ -255,7 +255,7 @@ Under our existing `skin_lcb` callback in the `init python` block we will add
 a new function named `hair_lcb` which does the same thing the `skin_lcb`
 function does but with a different image path.
 
-[source, python]
+[source%nowrap, python]
 ----
 init python:
     def skin_lcb(skin_base, skin_color, **kwargs):
@@ -270,7 +270,7 @@ Lets look at this callback quickly.  As it takes the arguments `hair_style` and
 
 Now that that's out of the way, lets add our hair layer.
 
-[source, python]
+[source%nowrap, python]
 ----
 define player_customizer = CustomizedSprite(
     "player_base",
@@ -307,7 +307,7 @@ image::../assets/images/tutorial/tutorial-03.png[]
 The eyes layer is another simple layer without a transform, so we can construct
 our {sc-layer} instance an image path rather than a callback.
 
-[source, python]
+[source%nowrap, python]
 ----
 define player_customizer = CustomizedSprite(
     "player_base",
@@ -335,7 +335,7 @@ is what we will do to "remove" the accessory layers.
 The glasses layer is a simple image path layer, while the bow layer has color
 options like the skin and hair.
 
-[source, python]
+[source%nowrap, python]
 ----
 init python:
     ...
@@ -377,7 +377,7 @@ To do this, go back to the `script.rpy` file and add call the customization
 screen.
 
 .`script.rpy`
-[source, python]
+[source%nowrap, python]
 ----
 default customizer_state = SCState()
 
@@ -413,13 +413,13 @@ a standard Ren'Py feature.
 . Open up the `game/images.rpy` file and delete all of its contents.
 . Create a new `layeredimage` named "player".
 +
-[source, python]
+[source%nowrap, python]
 ----
 layeredimage player:
 ----
 . Add an `always` attribute to show our customized sprite, `player_base`.
 +
-[source, python]
+[source%nowrap, python]
 ----
 layeredimage player:
     always:
@@ -428,7 +428,7 @@ layeredimage player:
 . Add a new group named "eyebrows" for our eyebrow expression sprites, "angry"
   "neutral", "questioning", "raised", and "sad" and add those sprite paths.
 +
-[source, python]
+[source%nowrap, python]
 ----
 layeredimage player:
     always:
@@ -449,7 +449,7 @@ layeredimage player:
 . Add another group named "mouth" for our mouth expression sprites, "frown",
   "happy", "smile", and "surprised".
 +
-[source, python]
+[source%nowrap, python]
 ----
 layeredimage player:
     ...
@@ -470,7 +470,7 @@ character sprite.  To do this we need to go back to `script.rpy` and edit the
 references to `player_base` to say "player" instead.  This will use our new
 layered image rather than the raw custom sprite it's based on.
 
-[source, python]
+[source%nowrap, python]
 ----
 default customizer_state = SCState()
 
@@ -492,7 +492,7 @@ image::../assets/images/tutorial/tutorial-07.png[]
 Now we can change our player character sprites expression by using our
 `layeredimage`'s attributes like so:
 
-[source, python]
+[source%nowrap, python]
 ----
     show player raised_brows surprised
     # or
@@ -505,7 +505,7 @@ Now we can change our player character sprites expression by using our
 .`game/sprite_customizer/config.rpy`
 [%collapsible]
 ====
-[source, python]
+[source%nowrap, python]
 ----
 init python:
     def skin_lcb(skin_base, skin_color, **kwargs):
@@ -585,7 +585,7 @@ define player_customizer = CustomizedSprite(
 .`game/images.rpy`
 [%collapsible]
 ====
-[source, python]
+[source%nowrap, python]
 ----
 layeredimage player:
     always:
@@ -618,7 +618,7 @@ layeredimage player:
 .`game/script.rpy`
 [%collapsible]
 ====
-[source, python]
+[source%nowrap, python]
 ----
 default customizer_state = SCState()
 

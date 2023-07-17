@@ -557,7 +557,7 @@ using in this tutorial.</p>
 and make the declaration multi-line as we are going to be adding a lot to it.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
 )</code></pre>
 </div>
 </div>
@@ -568,7 +568,7 @@ and make the declaration multi-line as we are going to be adding a lot to it.</p
 name it <code>player_base</code> for reasons we will explore <a href="#char-expressions">later</a>.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
   "player_base",
 )</code></pre>
 </div>
@@ -597,7 +597,7 @@ options for the skin layer, so this will be one of the more complex examples.</p
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">init python:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
     def skin_lcb(skin_base, skin_color, **kwargs): <i class="conum" data-value="1"></i><b>(1)</b>
         return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
 
@@ -656,7 +656,7 @@ TintMatrix to apply the skin color to our grayscale base images.</td>
 <h5 id="skin-lcb">The <code>skin_lcb</code> Callback</h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def skin_lcb(skin_base, skin_color, **kwargs):
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">def skin_lcb(skin_base, skin_color, **kwargs):
     return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))</code></pre>
 </div>
 </div>
@@ -731,7 +731,7 @@ can watch our progress in-game via script reloads.</p>
 <p>Create a new <a href="#sc-state">[sc-state]</a> object to hold our custom sprite option selections.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()</code></pre>
 </div>
 </div>
 </li>
@@ -743,7 +743,7 @@ into the sprite customizer on game load time (without this the option
 selections will not show when loading a game).</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">label after_load:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label after_load:
     $ player_customizer.set_state(customizer_state)</code></pre>
 </div>
 </div>
@@ -755,7 +755,7 @@ into the sprite customizer.  This is done so that the player&#8217;s choices wil
 stored as part of the game save files.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">label start:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label start:
     $ player_customizer.set_state(customizer_state)</code></pre>
 </div>
 </div>
@@ -764,7 +764,7 @@ stored as part of the game save files.</p>
 <p>Show our customized sprite.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">label start:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label start:
     $ player_customizer.set_state(customizer_state)
     show player_base <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
 </div>
@@ -783,7 +783,7 @@ stored as part of the game save files.</p>
 <p>Add a <code>pause</code> so the game doesn&#8217;t end immediately.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">label start:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label start:
     $ player_customizer.set_state(customizer_state)
     show player_base
     pause 1000000</code></pre>
@@ -820,7 +820,7 @@ the definition of it will be more simple than the skin layer.</p>
 <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> constructor:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
     "player_base",
     SCLayer(
         ...
@@ -869,7 +869,7 @@ function does but with a different image path.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">init python:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
     def skin_lcb(skin_base, skin_color, **kwargs):
         return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
 
@@ -886,7 +886,7 @@ function does but with a different image path.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
     "player_base",
     ...
     SCLayer(
@@ -938,7 +938,7 @@ our <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCL
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
     "player_base",
     ...
     SCLayer(
@@ -972,7 +972,7 @@ options like the skin and hair.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">init python:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
     ...
     def hair_accessory_lcb(hair_accessory, hair_accessory_color, **kwargs):
         return Transform(f"images/sugar/accessories/{hair_accessory}.png", matrixcolor=TintMatrix(hair_accessory_color))
@@ -1020,7 +1020,7 @@ screen.</p>
 <div class="listingblock">
 <div class="title"><code>script.rpy</code></div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
 
 label start:
     $ player_customizer.set_state(customizer_state)
@@ -1078,7 +1078,7 @@ a standard Ren&#8217;Py feature.</p>
 <p>Create a new <code>layeredimage</code> named "player".</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">layeredimage player:</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:</code></pre>
 </div>
 </div>
 </li>
@@ -1086,7 +1086,7 @@ a standard Ren&#8217;Py feature.</p>
 <p>Add an <code>always</code> attribute to show our customized sprite, <code>player_base</code>.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">layeredimage player:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
     always:
         "player_base"</code></pre>
 </div>
@@ -1097,7 +1097,7 @@ a standard Ren&#8217;Py feature.</p>
 "neutral", "questioning", "raised", and "sad" and add those sprite paths.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">layeredimage player:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
     always:
         "player_base"
 
@@ -1120,7 +1120,7 @@ a standard Ren&#8217;Py feature.</p>
 "happy", "smile", and "surprised".</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">layeredimage player:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
     ...
     group mouth:
         attribute frown:
@@ -1144,7 +1144,7 @@ layered image rather than the raw custom sprite it&#8217;s based on.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
 
 label start:
     $ player_customizer.set_state(customizer_state)
@@ -1169,7 +1169,7 @@ label start:
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">    show player raised_brows surprised
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">    show player raised_brows surprised
     # or
     show player angry_brows frown
     # etc...</code></pre>
@@ -1186,7 +1186,7 @@ label start:
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">init python:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
     def skin_lcb(skin_base, skin_color, **kwargs):
         return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
 
@@ -1267,7 +1267,7 @@ define player_customizer = CustomizedSprite(
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">layeredimage player:
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
     always:
         "player_base"
 
@@ -1301,7 +1301,7 @@ define player_customizer = CustomizedSprite(
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
 
 label start:
     $ player_customizer.set_state(customizer_state)
@@ -1329,7 +1329,7 @@ label start:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-16 23:53:57 -0400
+Last updated 2023-07-16 23:58:11 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
