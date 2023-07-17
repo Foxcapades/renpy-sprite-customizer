@@ -1,14 +1,36 @@
 = Getting Started
 :icons: font
+:url-github-repo: https://github.com/Foxcapades/renpy-sprite-customizer
 
 This guide will attempt to help guide you through the process of using the
 Sprite Customizer.
 
 
-. Download the latest release.
+. Download the link:{url-github-repo}/releases/latest[latest release] of the
+  Sprite Customizer (specifically the 'base-project' zip file).
+. Create a project directory under your Ren'Py workspace directory.
+. Unzip the base-project zip file into the new project directory.
 . Delete the `game/images/ccp` directory and its contents.
 . Drop your sprite component assets somewhere under your game directory.
 . Edit the `game/ccf/ccf_config.rpy` file to:
 .. Declare your customized sprites
 .. Write your own callbacks based on your assets
 
+== Tutorial
+
+=== Prerequisites
+
+* Ren'Py
+* A code editor (link:https://code.visualstudio.com/[VSCode] with the
+link:https://marketplace.visualstudio.com/items?itemName=LuqueDaniel.languague-renpy[Ren'Py Plugin]
+is recommended)
+
+=== Walkthrough
+
+. Create a new project directory under your Ren'Py workspace directory titled
+  "CharacterCreatorTutorial" (or whatever you would like to call it).
+. Download the link:{url-github-repo}/releases/latest[latest release] of the
+  Sprite Customizer (specifically the 'base-project' zip file).
+. Unzip the downloaded base-project zip into your new project directory.
+. Delete the "game/images/ccp" directory and its contents.
+. Create a new directory under "game/images" called "sugar".
