@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <title>Sprite Customizer Tutorial</title>
 <style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -796,6 +796,11 @@ svg {
   -webkit-border-radius: 6px;
   border-radius: 6px;
   line-height: inherit
+}
+
+#toc code {
+  background-color: #3c3636;
+  border: none;
 }
 
 pre {
@@ -3615,14 +3620,14 @@ label start:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-17 01:21:11 -0400
+Last updated 2023-07-17 01:38:50 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
 <script>
 if (!hljs.initHighlighting.called) {
   hljs.initHighlighting.called = true
-  ;[].slice.call(document.querySelectorAll('pre.highlight > code')).forEach(function (el) { hljs.highlightBlock(el) })
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
 }
 </script>
 </body>

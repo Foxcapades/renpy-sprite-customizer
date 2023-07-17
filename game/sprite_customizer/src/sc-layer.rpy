@@ -274,3 +274,11 @@ init -1 python:
             `SCLayer` instance.
             """
             return Attribute(None, self._name, image=self.build_image(), default=True)
+
+        def randomize(self):
+            """
+            Randomizes the selections for all the options on this SCLayer
+            instance.
+            """
+            for option_key, option in self._options.items():
+                self._state.randomize(option_key, option.size)

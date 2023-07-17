@@ -49,9 +49,15 @@ screen sprite_creator_right(customizer):
             null:
                 height 50
 
-            textbutton "Done!":
+            hbox:
                 xalign 0.5
-                action Return(0)
+                spacing 50
+
+                textbutton "Randomize":
+                    action Function(customizer.randomize)
+
+                textbutton "Done":
+                    action Return(0)
 
 
 screen sprite_creator_option_group(sprite, group, options):

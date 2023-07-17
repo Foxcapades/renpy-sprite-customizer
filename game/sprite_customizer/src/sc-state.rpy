@@ -125,3 +125,6 @@ init -1 python:
                 self._selections[key] = max
             else:
                 self._selections[key] -= 1
+
+        def randomize(self, key, max):
+            self._selections[key] = renpy.random.randint(1, max)

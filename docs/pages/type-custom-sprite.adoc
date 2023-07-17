@@ -283,6 +283,7 @@ my_sprite.get_option_value("hair_style", 2) == "bob"
 | Target option value.
 |===
 
+
 === `get_selected_option_value`
 
 Returns the currently selected option value for the target option.
@@ -306,7 +307,7 @@ my_sprite.get_selected_option_value("hair_style") == "bob"
 
 [cols="1h,1m,8"]
 |===
-| option 
+| `option`
 | str
 | Keyword for the option whose user selected value should be returned.
 |===
@@ -318,3 +319,71 @@ my_sprite.get_selected_option_value("hair_style") == "bob"
 | any
 | The currently selected option value for the target option.
 |===
+
+
+=== `get_options_by_group`
+
+Returns an index of options and display names grouped by layer group name.  This
+index may optionally be ordered by providing a list of the desired group order.
+
+[NOTE]
+--
+Options that do not have a group name declared on them, their display name will
+be used as the group name.
+--
+
+[source, python]
+----
+sprite.get_options_by_group()
+
+sprite.get_options_by_group(["Body", "Face", "Hair"])
+----
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `group_order`
+| str[]
+| Optional list of option group names by which the output `dict` will be
+ordered.  This list *MUST* contain all of the groups declared in the SCLayer
+definitions, and ONLY those groups.
+|===
+
+==== Returns
+
+[cols="1m,9a"]
+|===
+| OrderedDict
+| An index of the declared sprite customization options grouped by the
+configured option groups.
+
+[source, python]
+----
+{
+    "Body": {
+        "skin_color": "Skin Color",
+        "clothes": "Clothes",
+    },
+    "Face": {
+        "eyes": "Eye Color"
+    }
+    "Hair": {
+        "hair_style": "Hair Style",
+        "hair_color": "Hair Color",
+        "accessory": "Accessory"
+    },
+}
+----
+|===
+
+
+=== `randomize`
+
+Randomizes the selections for all the options on this CustomizedSprite instance.
+
+[source, python]
+----
+textbutton "Randomize":
+    action Function(customizer.randomize)
+----

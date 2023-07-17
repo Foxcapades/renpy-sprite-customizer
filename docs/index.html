@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.16">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <title>Ren&#8217;Py Sprite Customizer</title>
 <style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
@@ -796,6 +796,11 @@ svg {
   -webkit-border-radius: 6px;
   border-radius: 6px;
   line-height: inherit
+}
+
+#toc code {
+  background-color: #3c3636;
+  border: none;
 }
 
 pre {
@@ -2707,18 +2712,116 @@ h6>a.link:hover:after {
 <ul class="sectlevel1">
 <li><a href="#_topics">Topics</a>
 <ul class="sectlevel2">
-<li><a href="#sprite-state">Sprite State</a></li>
+<li><a href="#sprite-state">Sprite State</a>
+<ul class="sectlevel3">
+<li><a href="#_additional_state">Additional State</a></li>
+</ul>
+</li>
 <li><a href="#sprite-vs-factory">Sprite vs. Factory</a></li>
-<li><a href="#_layer_callbacks">Layer Callbacks</a></li>
+<li><a href="#_layer_callbacks">Layer Callbacks</a>
+<ul class="sectlevel3">
+<li><a href="#_defining_layer_callbacks">Defining Layer Callbacks</a></li>
+<li><a href="#_animating_layers">Animating Layers</a>
+<ul class="sectlevel4">
+<li><a href="#_advanced_animations">Advanced Animations</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_type_reference">Type Reference</a>
 <ul class="sectlevel2">
-<li><a href="#custom-sprite">CustomizedSprite</a></li>
-<li><a href="#custom-sprite-fac">CustomizedSpriteFactory</a></li>
-<li><a href="#sc-layer">SCLayer</a></li>
-<li><a href="#sc-opt">SCOpt</a></li>
-<li><a href="#sc-state">SCState</a></li>
+<li><a href="#custom-sprite">CustomizedSprite</a>
+<ul class="sectlevel3">
+<li><a href="#_properties">Properties</a>
+<ul class="sectlevel4">
+<li><a href="#_layers"><code>layers</code></a></li>
+<li><a href="#_option_keys"><code>option_keys</code></a></li>
+<li><a href="#_option_count"><code>option_count</code></a></li>
+<li><a href="#_menu_components"><code>menu_components</code></a></li>
+</ul>
+</li>
+<li><a href="#_methods">Methods</a>
+<ul class="sectlevel4">
+<li><a href="#_init"><code>__init__</code></a></li>
+<li><a href="#_set_state"><code>set_state</code></a></li>
+<li><a href="#_inc_selection"><code>inc_selection</code></a></li>
+<li><a href="#_dec_selection"><code>dec_selection</code></a></li>
+<li><a href="#_get_option_display_name"><code>get_option_display_name</code></a></li>
+<li><a href="#_get_option_selection"><code>get_option_selection</code></a></li>
+<li><a href="#_get_option"><code>get_option</code></a></li>
+<li><a href="#_get_option_value"><code>get_option_value</code></a></li>
+<li><a href="#_get_selected_option_value"><code>get_selected_option_value</code></a></li>
+<li><a href="#_get_options_by_group"><code>get_options_by_group</code></a></li>
+<li><a href="#_randomize"><code>randomize</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#custom-sprite-fac">CustomizedSpriteFactory</a>
+<ul class="sectlevel3">
+<li><a href="#_methods_2">Methods</a>
+<ul class="sectlevel4">
+<li><a href="#_init_2"><code>__init__</code></a></li>
+<li><a href="#_new_sprite"><code>new_sprite</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sc-layer">SCLayer</a>
+<ul class="sectlevel3">
+<li><a href="#_methods_3">Methods</a>
+<ul class="sectlevel4">
+<li><a href="#_init_3"><code>__init__</code></a></li>
+<li><a href="#_clone"><code>clone</code></a></li>
+<li><a href="#_set_state_2"><code>set_state</code></a></li>
+<li><a href="#_inc_selection_2"><code>inc_selection</code></a></li>
+<li><a href="#_dec_selection_2"><code>dec_selection</code></a></li>
+<li><a href="#_get_option_2"><code>get_option</code></a></li>
+<li><a href="#_get_option_count"><code>get_option_count</code></a></li>
+<li><a href="#_get_option_value_2"><code>get_option_value</code></a></li>
+<li><a href="#_get_selected_option_value_2"><code>get_selected_option_value</code></a></li>
+<li><a href="#_get_option_display_name_2"><code>get_option_display_name</code></a></li>
+<li><a href="#_get_option_selection_2"><code>get_option_selection</code></a></li>
+<li><a href="#sc-lay-build-image"><code>build_image</code></a></li>
+<li><a href="#_build_attribute"><code>build_attribute</code></a></li>
+<li><a href="#_randomize_2"><code>randomize</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sc-opt">SCOpt</a>
+<ul class="sectlevel3">
+<li><a href="#_properties_2">Properties</a>
+<ul class="sectlevel4">
+<li><a href="#_display_name"><code>display_name</code></a></li>
+<li><a href="#_values"><code>values</code></a></li>
+<li><a href="#_group"><code>group</code></a></li>
+<li><a href="#_has_group"><code>has_group</code></a></li>
+</ul>
+</li>
+<li><a href="#_methods_4">Methods</a>
+<ul class="sectlevel4">
+<li><a href="#_init_4"><code>__init__</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sc-state">SCState</a>
+<ul class="sectlevel3">
+<li><a href="#_methods_5">Methods</a>
+<ul class="sectlevel4">
+<li><a href="#_init_5"><code>__init__</code></a></li>
+<li><a href="#sc-state-set-var"><code>set_variable</code></a></li>
+<li><a href="#sc-state-get-var"><code>get_variable</code></a></li>
+<li><a href="#_get_selection"><code>get_selection</code></a></li>
+<li><a href="#_inc_selection_3"><code>inc_selection</code></a></li>
+<li><a href="#_dec_selection_3"><code>dec_selection</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -3505,7 +3608,7 @@ my_sprite.get_selected_option_value("hair_style") == "bob"</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">option</p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>option</code></p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Keyword for the option whose user selected value should be returned.</p></td>
 </tr>
@@ -3528,6 +3631,104 @@ my_sprite.get_selected_option_value("hair_style") == "bob"</code></pre>
 </table>
 </div>
 </div>
+<div class="sect4">
+<h5 id="_get_options_by_group"><a class="anchor" href="#_get_options_by_group"></a><a class="link" href="#_get_options_by_group"><code>get_options_by_group</code></a></h5>
+<div class="paragraph">
+<p>Returns an index of options and display names grouped by layer group name.  This
+index may optionally be ordered by providing a list of the desired group order.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Options that do not have a group name declared on them, their display name will
+be used as the group name.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">sprite.get_options_by_group()
+
+sprite.get_options_by_group(["Body", "Face", "Hair"])</code></pre>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_arguments_10"><a class="anchor" href="#_arguments_10"></a><a class="link" href="#_arguments_10">Arguments</a></h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>group_order</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str[]</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Optional list of option group names by which the output <code>dict</code> will be
+ordered.  This list <strong>MUST</strong> contain all of the groups declared in the SCLayer
+definitions, and ONLY those groups.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_returns_6"><a class="anchor" href="#_returns_6"></a><a class="link" href="#_returns_6">Returns</a></h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 90%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OrderedDict</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>An index of the declared sprite customization options grouped by the
+configured option groups.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">{
+    "Body": {
+        "skin_color": "Skin Color",
+        "clothes": "Clothes",
+    },
+    "Face": {
+        "eyes": "Eye Color"
+    }
+    "Hair": {
+        "hair_style": "Hair Style",
+        "hair_color": "Hair Color",
+        "accessory": "Accessory"
+    },
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_randomize"><a class="anchor" href="#_randomize"></a><a class="link" href="#_randomize"><code>randomize</code></a></h5>
+<div class="paragraph">
+<p>Randomizes the selections for all the options on this CustomizedSprite instance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">textbutton "Randomize":
+    action Function(customizer.randomize)</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -3544,7 +3745,7 @@ with the same base set of layers and options.</p>
 <p>Initializes a new CustomizedSpriteFactory instance with the given arguments.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_10"><a class="anchor" href="#_arguments_10"></a><a class="link" href="#_arguments_10">Arguments</a></h6>
+<h6 id="_arguments_11"><a class="anchor" href="#_arguments_11"></a><a class="link" href="#_arguments_11">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3578,7 +3779,7 @@ return a single Displayable value.</p></td>
 <p>Constructs a new <code>CustomizedSprite</code> instance with the given name.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_11"><a class="anchor" href="#_arguments_11"></a><a class="link" href="#_arguments_11">Arguments</a></h6>
+<h6 id="_arguments_12"><a class="anchor" href="#_arguments_12"></a><a class="link" href="#_arguments_12">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3603,7 +3804,7 @@ constructor.</p></td>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_6"><a class="anchor" href="#_returns_6"></a><a class="link" href="#_returns_6">Returns</a></h6>
+<h6 id="_returns_7"><a class="anchor" href="#_returns_7"></a><a class="link" href="#_returns_7">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3650,7 +3851,7 @@ SCLayer("name", "my_image_{option}", option=SCOpt("Option", [ "some", "choices" 
 <p>Initializes the new <a href="#sc-layer">SCLayer</a> instance with the given arguments.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_12"><a class="anchor" href="#_arguments_12"></a><a class="link" href="#_arguments_12">Arguments</a></h6>
+<h6 id="_arguments_13"><a class="anchor" href="#_arguments_13"></a><a class="link" href="#_arguments_13">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3714,7 +3915,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p>
 <p>Creates a copy of the current <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_returns_7"><a class="anchor" href="#_returns_7"></a><a class="link" href="#_returns_7">Returns</a></h6>
+<h6 id="_returns_8"><a class="anchor" href="#_returns_8"></a><a class="link" href="#_returns_8">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3736,7 +3937,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p>
 <code>SCState</code> object.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_13"><a class="anchor" href="#_arguments_13"></a><a class="link" href="#_arguments_13">Arguments</a></h6>
+<h6 id="_arguments_14"><a class="anchor" href="#_arguments_14"></a><a class="link" href="#_arguments_14">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3759,7 +3960,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p>
 <p>Increments the user selection for the given option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_14"><a class="anchor" href="#_arguments_14"></a><a class="link" href="#_arguments_14">Arguments</a></h6>
+<h6 id="_arguments_15"><a class="anchor" href="#_arguments_15"></a><a class="link" href="#_arguments_15">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3782,7 +3983,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p>
 <p>Decrements the user selection for the given option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_15"><a class="anchor" href="#_arguments_15"></a><a class="link" href="#_arguments_15">Arguments</a></h6>
+<h6 id="_arguments_16"><a class="anchor" href="#_arguments_16"></a><a class="link" href="#_arguments_16">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3805,7 +4006,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p>
 <p>Returns the target <a href="#sc-opt">SCOpt</a> value from the current layer.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_16"><a class="anchor" href="#_arguments_16"></a><a class="link" href="#_arguments_16">Arguments</a></h6>
+<h6 id="_arguments_17"><a class="anchor" href="#_arguments_17"></a><a class="link" href="#_arguments_17">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3822,7 +4023,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_8"><a class="anchor" href="#_returns_8"></a><a class="link" href="#_returns_8">Returns</a></h6>
+<h6 id="_returns_9"><a class="anchor" href="#_returns_9"></a><a class="link" href="#_returns_9">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3843,7 +4044,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p>
 <p>Returns the number of options in the target option group.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_17"><a class="anchor" href="#_arguments_17"></a><a class="link" href="#_arguments_17">Arguments</a></h6>
+<h6 id="_arguments_18"><a class="anchor" href="#_arguments_18"></a><a class="link" href="#_arguments_18">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3860,7 +4061,7 @@ layer.  These keyword args must all be <a href="#sc-opt">SCOpt</a> values.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_9"><a class="anchor" href="#_returns_9"></a><a class="link" href="#_returns_9">Returns</a></h6>
+<h6 id="_returns_10"><a class="anchor" href="#_returns_10"></a><a class="link" href="#_returns_10">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3901,7 +4102,7 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_18"><a class="anchor" href="#_arguments_18"></a><a class="link" href="#_arguments_18">Arguments</a></h6>
+<h6 id="_arguments_19"><a class="anchor" href="#_arguments_19"></a><a class="link" href="#_arguments_19">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3923,7 +4124,7 @@ layer.get_option_value("fizz", 2) == "ding"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_10"><a class="anchor" href="#_returns_10"></a><a class="link" href="#_returns_10">Returns</a></h6>
+<h6 id="_returns_11"><a class="anchor" href="#_returns_11"></a><a class="link" href="#_returns_11">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3956,7 +4157,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_19"><a class="anchor" href="#_arguments_19"></a><a class="link" href="#_arguments_19">Arguments</a></h6>
+<h6 id="_arguments_20"><a class="anchor" href="#_arguments_20"></a><a class="link" href="#_arguments_20">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3965,7 +4166,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">option</p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>option</code></p></th>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Keyword for the option whose user selected value should be returned.</p></td>
 </tr>
@@ -3973,7 +4174,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_11"><a class="anchor" href="#_returns_11"></a><a class="link" href="#_returns_11">Returns</a></h6>
+<h6 id="_returns_12"><a class="anchor" href="#_returns_12"></a><a class="link" href="#_returns_12">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3994,7 +4195,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 <p>Returns the display name for the target option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_20"><a class="anchor" href="#_arguments_20"></a><a class="link" href="#_arguments_20">Arguments</a></h6>
+<h6 id="_arguments_21"><a class="anchor" href="#_arguments_21"></a><a class="link" href="#_arguments_21">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4011,7 +4212,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_12"><a class="anchor" href="#_returns_12"></a><a class="link" href="#_returns_12">Returns</a></h6>
+<h6 id="_returns_13"><a class="anchor" href="#_returns_13"></a><a class="link" href="#_returns_13">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4032,7 +4233,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 <p>Returns the user selection index for the target option.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_21"><a class="anchor" href="#_arguments_21"></a><a class="link" href="#_arguments_21">Arguments</a></h6>
+<h6 id="_arguments_22"><a class="anchor" href="#_arguments_22"></a><a class="link" href="#_arguments_22">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4049,7 +4250,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_13"><a class="anchor" href="#_returns_13"></a><a class="link" href="#_returns_13">Returns</a></h6>
+<h6 id="_returns_14"><a class="anchor" href="#_returns_14"></a><a class="link" href="#_returns_14">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4072,7 +4273,7 @@ my_layer.get_selected_option_value("option") == "option 2"</code></pre>
 that represents this <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_returns_14"><a class="anchor" href="#_returns_14"></a><a class="link" href="#_returns_14">Returns</a></h6>
+<h6 id="_returns_15"><a class="anchor" href="#_returns_15"></a><a class="link" href="#_returns_15">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4095,7 +4296,7 @@ that represents this <a href="#sc-layer">SCLayer</a> instance.</p>
 to represent this <a href="#sc-layer">SCLayer</a> instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_returns_15"><a class="anchor" href="#_returns_15"></a><a class="link" href="#_returns_15">Returns</a></h6>
+<h6 id="_returns_16"><a class="anchor" href="#_returns_16"></a><a class="link" href="#_returns_16">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4108,6 +4309,12 @@ to represent this <a href="#sc-layer">SCLayer</a> instance.</p>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_randomize_2"><a class="anchor" href="#_randomize_2"></a><a class="link" href="#_randomize_2"><code>randomize</code></a></h5>
+<div class="paragraph">
+<p>Randomizes the selections for all the options on this SCLayer instance.</p>
 </div>
 </div>
 </div>
@@ -4162,7 +4369,7 @@ SCOpt("Hair Style", group="Hair", values=[ "afro", "bob", "bun" ])</code></pre>
 <p>Initializes the new <a href="#sc-opt">SCOpt</a> object.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_22"><a class="anchor" href="#_arguments_22"></a><a class="link" href="#_arguments_22">Arguments</a></h6>
+<h6 id="_arguments_23"><a class="anchor" href="#_arguments_23"></a><a class="link" href="#_arguments_23">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4215,7 +4422,7 @@ my_sprite.set_state(my_sprite_state)</code></pre>
 <p>Initializes the new, blank <a href="#sc-state">SCState</a> instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_23"><a class="anchor" href="#_arguments_23"></a><a class="link" href="#_arguments_23">Arguments</a></h6>
+<h6 id="_arguments_24"><a class="anchor" href="#_arguments_24"></a><a class="link" href="#_arguments_24">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4277,7 +4484,7 @@ label start:
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_24"><a class="anchor" href="#_arguments_24"></a><a class="link" href="#_arguments_24">Arguments</a></h6>
+<h6 id="_arguments_25"><a class="anchor" href="#_arguments_25"></a><a class="link" href="#_arguments_25">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4305,7 +4512,7 @@ label start:
 <p>Retrieves user variable from the SCState store by key.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_25"><a class="anchor" href="#_arguments_25"></a><a class="link" href="#_arguments_25">Arguments</a></h6>
+<h6 id="_arguments_26"><a class="anchor" href="#_arguments_26"></a><a class="link" href="#_arguments_26">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4322,7 +4529,7 @@ label start:
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_16"><a class="anchor" href="#_returns_16"></a><a class="link" href="#_returns_16">Returns</a></h6>
+<h6 id="_returns_17"><a class="anchor" href="#_returns_17"></a><a class="link" href="#_returns_17">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4345,7 +4552,7 @@ to the <a href="#sc-state">SCState</a> object, the value <code>1</code> will be 
 returned from this method.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_26"><a class="anchor" href="#_arguments_26"></a><a class="link" href="#_arguments_26">Arguments</a></h6>
+<h6 id="_arguments_27"><a class="anchor" href="#_arguments_27"></a><a class="link" href="#_arguments_27">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4362,7 +4569,7 @@ returned from this method.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_returns_17"><a class="anchor" href="#_returns_17"></a><a class="link" href="#_returns_17">Returns</a></h6>
+<h6 id="_returns_18"><a class="anchor" href="#_returns_18"></a><a class="link" href="#_returns_18">Returns</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4384,7 +4591,7 @@ returned from this method.</p>
 rolling back over to <code>1</code> if it would exceed that maximum.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_27"><a class="anchor" href="#_arguments_27"></a><a class="link" href="#_arguments_27">Arguments</a></h6>
+<h6 id="_arguments_28"><a class="anchor" href="#_arguments_28"></a><a class="link" href="#_arguments_28">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4413,7 +4620,7 @@ rolling back over to <code>1</code> if it would exceed that maximum.</p>
 over to <code>max</code> if it would go below <code>1</code>.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_28"><a class="anchor" href="#_arguments_28"></a><a class="link" href="#_arguments_28">Arguments</a></h6>
+<h6 id="_arguments_29"><a class="anchor" href="#_arguments_29"></a><a class="link" href="#_arguments_29">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4442,14 +4649,14 @@ over to <code>max</code> if it would go below <code>1</code>.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-17 01:21:56 -0400
+Last updated 2023-07-17 02:05:27 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
 <script>
 if (!hljs.initHighlighting.called) {
   hljs.initHighlighting.called = true
-  ;[].slice.call(document.querySelectorAll('pre.highlight > code')).forEach(function (el) { hljs.highlightBlock(el) })
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
 }
 </script>
 </body>

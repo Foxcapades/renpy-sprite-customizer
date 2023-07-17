@@ -224,7 +224,7 @@ my_layer.get_selected_option_value("option") == "option 2"
 
 [cols="1h,1m,8"]
 |===
-| option 
+| `option`
 | str
 | Keyword for the option whose user selected value should be returned.
 |===
@@ -308,3 +308,8 @@ to represent this <<sc-layer>> instance.
 | https://www.renpy.org/doc/html/layeredimage.html#attribute[Attribute]
 | The newly constructed Attribute instance.
 |===
+
+
+=== `randomize`
+
+Randomizes the selections for all the options on this SCLayer instance.

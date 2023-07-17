@@ -789,6 +789,11 @@ svg {
   line-height: inherit
 }
 
+#toc code {
+  background-color: #3c3636;
+  border: none;
+}
+
 pre {
   color: inherit;
   font-family: "Consolas", "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", monospace;

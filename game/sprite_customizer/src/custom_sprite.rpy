@@ -302,11 +302,20 @@ init -1 python:
                     out[group] = OrderedDict()
                     for option in options:
                         out[group][option] = self.get_option_display_name(option)
+
             elif isinstance(group_order, list):
+                if len(group_order) != len(self._options_by_group):
+                    raise Exception("group_order parameter must contain all and only the declared option group names for this CustomizedSprite's layers")
+
                 for group in group_order:
                     out[group] = OrderedDict()
+
+                    if not group in self._options_by_group:
+                        raise Exception("unrecognized option group name \"{}\"".format(group))
+
                     for option in self._options_by_group[group]:
                         out[group][option] = self.get_option_display_name(option)
+
             else:
                 raise Exception("group_order must be a list, a set, or None")
 
@@ -343,3 +352,11 @@ init -1 python:
                     out[layer.get_option_display_name(opt)] = opt
 
             return out
+
+        def randomize(self):
+            """
+            Randomizes the selections for all the options on this
+            CustomizedSprite instance.
+            """
+            for layer in self._layers:
+                layer.randomize()
