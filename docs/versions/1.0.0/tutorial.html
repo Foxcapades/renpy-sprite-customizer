@@ -2707,6 +2707,9 @@ h6>a.link:hover:after {
 <body class="article toc2 toc-left">
 <div id="header">
 <h1>Sprite Customizer Tutorial</h1>
+<div class="details">
+<span id="revnumber">version 1.0.0</span>
+</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -2873,8 +2876,8 @@ define player_customizer = CustomizedSprite(
     SCLayer( <i class="conum" data-value="2"></i><b>(2)</b>
         "skin", <i class="conum" data-value="3"></i><b>(3)</b>
         skin_lcb, <i class="conum" data-value="4"></i><b>(4)</b>
-        skin_base=SCOpt("Skin Base", group="Body", values=[ "dark", "medium", "light" ]), <i class="conum" data-value="5"></i><b>(5)</b>
-        skin_color=SCOpt("Skin Color", group="Body", values=[ <i class="conum" data-value="6"></i><b>(6)</b>
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <i class="conum" data-value="5"></i><b>(5)</b>
+        skin_color=("Skin Color", "Body", [ <i class="conum" data-value="6"></i><b>(6)</b>
             "#513021",
             "#874c2c",
             "#803716",
@@ -3113,7 +3116,7 @@ the definition of it will be more simple than the skin layer.</p>
     SCLayer(
         "clothes",
         "images/sugar/clothes/{clothes}.png", <i class="conum" data-value="1"></i><b>(1)</b>
-        clothes=SCOpt("Clothes", group="Body", values=[ "tshirt", "tie", "bow" ])
+        clothes=("Clothes", "Body", [ "tshirt", "tie", "bow" ])
     ),
 )</code></pre>
 </div>
@@ -3177,8 +3180,8 @@ function does but with a different image path.</p>
     SCLayer(
         "hair",
         hair_lcb,
-        hair_style=SCOpt("Style", group="Hair", values=[ 1, 2, 3 ]), <i class="conum" data-value="1"></i><b>(1)</b>
-        hair_color=SCOpt("Color", group="Hair", values=[ <i class="conum" data-value="2"></i><b>(2)</b>
+        hair_style=("Style", "Hair", [ 1, 2, 3 ]), <i class="conum" data-value="1"></i><b>(1)</b>
+        hair_color=("Color", "Hair", [ <i class="conum" data-value="2"></i><b>(2)</b>
             "#3D2314",
             "#100C07",
             "#DA680F",
@@ -3229,7 +3232,7 @@ our <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCL
     SCLayer(
         "eyes",
         "images/sugar/eyes/{eye_color}.png",
-        eye_color=SCOpt("Eyes", group="Face", values=[ "blue", "green", "grey", "yellow" ])
+        eye_color=("Eyes", "Face", [ "blue", "green", "grey", "yellow" ])
     ),
 )</code></pre>
 </div>
@@ -3268,13 +3271,13 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "eyes",
         "images/sugar/accessories/{face_accessory}.png",
-        face_accessory=SCOpt("Glasses", group="Face", values=[ "glasses", "none" ])
+        face_accessory=("Glasses", "Face", [ "glasses", "none" ])
     ),
     SCLayer(
         "hair_accessory",
         hair_accessory_lcb,
-        hair_accessory=SCOpt("Bow", group="Hair", values=[ "bow", "none" ]),
-        hair_accessory_color=SCOpt("Bow Color", group="Hair", values=[
+        hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
+        hair_accessory_color=("Bow Color", "Hair", [
             "#849FF7",
             "#A583F7",
             "#FFEB79",
@@ -3486,8 +3489,8 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "skin",
         skin_lcb,
-        skin_base=SCOpt("Skin Base", group="Body", values=[ "dark", "medium", "light" ]),
-        skin_color=SCOpt("Skin Color", group="Body", values=[
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]),
+        skin_color=("Skin Color", "Body", [
             "#513021",
             "#874c2c",
             "#803716",
@@ -3501,13 +3504,13 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "clothes",
         "images/sugar/clothes/{clothes}.png",
-        clothes=SCOpt("Clothes", group="Body", values=[ "tshirt", "tie", "bow" ])
+        clothes=("Clothes", "Body", [ "tshirt", "tie", "bow" ])
     ),
     SCLayer(
         "hair",
         hair_lcb,
-        hair_style=SCOpt("Style", group="Hair", values=[ 1, 2, 3 ]),
-        hair_color=SCOpt("Color", group="Hair", values=[
+        hair_style=("Style", "Hair", [ 1, 2, 3 ]),
+        hair_color=("Color", "Hair", [
             "#3D2314",
             "#100C07",
             "#DA680F",
@@ -3524,18 +3527,18 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "eyes",
         "images/sugar/eyes/{eye_color}.png",
-        eye_color=SCOpt("Eyes", group="Face", values=[ "blue", "green", "grey", "yellow" ])
+        eye_color=("Eyes", "Face", [ "blue", "green", "grey", "yellow" ])
     ),
     SCLayer(
         "eyes",
         "images/sugar/accessories/{face_accessory}.png",
-        face_accessory=SCOpt("Glasses", group="Face", values=[ "glasses", "none" ])
+        face_accessory=("Glasses", "Face", [ "glasses", "none" ])
     ),
     SCLayer(
         "hair_accessory",
         hair_accessory_lcb,
-        hair_accessory=SCOpt("Bow", group="Hair", values=[ "bow", "none" ]),
-        hair_accessory_color=SCOpt("Bow Color", group="Hair", values=[
+        hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
+        hair_accessory_color=("Bow Color", "Hair", [
             "#849FF7",
             "#A583F7",
             "#FFEB79",
@@ -3620,7 +3623,8 @@ label start:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-17 01:38:50 -0400
+Version 1.0.0<br>
+Last updated 2023-07-17 13:22:00 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

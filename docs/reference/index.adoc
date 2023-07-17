@@ -1,0 +1,31 @@
+= Ren'Py Sprite Customizer
+:source-highlighter: highlight.js
+:toc: left
+:icons: font
+:stylesheet: ../assets/readthedocs.css
+:sectlinks: 1
+:sectanchors: 1
+:revnumber: any
+
+:renpy-docs: https://www.renpy.org/doc/html
+
+Documentation for the Sprite Customizer (SC) framework.
+
+This document is a work in progress.
+
+
+== Topics
+
+include::pages/topic-sprite-state.adoc[leveloffset=2]
+include::pages/topic-sprite-vs-factory.adoc[leveloffset=2]
+include::pages/topic-layer-callback.adoc[leveloffset=2]
+
+
+== Type Reference
+
+include::pages/type-customized-sprite.adoc[leveloffset=2]
+include::pages/type-customized-sprite-factory.adoc[leveloffset=2]
+include::pages/type-sc-layer.adoc[leveloffset=2]
+include::pages/type-sc-option.adoc[leveloffset=2]
+include::pages/type-sc-state.adoc[leveloffset=2]
+include::pages/type-sc-value-list-option.adoc[leveloffset=2]

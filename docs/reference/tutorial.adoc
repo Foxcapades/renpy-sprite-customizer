@@ -6,6 +6,7 @@
 :stylesheet: ../assets/readthedocs.css
 :sectlinks: 1
 :sectanchors: 1
+:revnumber: any
 
 :docs-url-base: https://foxcapades.github.io/renpy-sprite-customizer
 :custom-sprite: link:{docs-url-base}#custom-sprite[CustomizedSprite]
@@ -89,8 +90,8 @@ define player_customizer = CustomizedSprite(
     SCLayer( <2>
         "skin", <3>
         skin_lcb, <4>
-        skin_base=SCOpt("Skin Base", group="Body", values=[ "dark", "medium", "light" ]), <5>
-        skin_color=SCOpt("Skin Color", group="Body", values=[ <6>
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <5>
+        skin_color=("Skin Color", "Body", [ <6>
             "#513021",
             "#874c2c",
             "#803716",
@@ -246,7 +247,7 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "clothes",
         "images/sugar/clothes/{clothes}.png", <1>
-        clothes=SCOpt("Clothes", group="Body", values=[ "tshirt", "tie", "bow" ])
+        clothes=("Clothes", "Body", [ "tshirt", "tie", "bow" ])
     ),
 )
 ----
@@ -290,8 +291,8 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "hair",
         hair_lcb,
-        hair_style=SCOpt("Style", group="Hair", values=[ 1, 2, 3 ]), <1>
-        hair_color=SCOpt("Color", group="Hair", values=[ <2>
+        hair_style=("Style", "Hair", [ 1, 2, 3 ]), <1>
+        hair_color=("Color", "Hair", [ <2>
             "#3D2314",
             "#100C07",
             "#DA680F",
@@ -327,7 +328,7 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "eyes",
         "images/sugar/eyes/{eye_color}.png",
-        eye_color=SCOpt("Eyes", group="Face", values=[ "blue", "green", "grey", "yellow" ])
+        eye_color=("Eyes", "Face", [ "blue", "green", "grey", "yellow" ])
     ),
 )
 ----
@@ -360,13 +361,13 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "eyes",
         "images/sugar/accessories/{face_accessory}.png",
-        face_accessory=SCOpt("Glasses", group="Face", values=[ "glasses", "none" ])
+        face_accessory=("Glasses", "Face", [ "glasses", "none" ])
     ),
     SCLayer(
         "hair_accessory",
         hair_accessory_lcb,
-        hair_accessory=SCOpt("Bow", group="Hair", values=[ "bow", "none" ]),
-        hair_accessory_color=SCOpt("Bow Color", group="Hair", values=[
+        hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
+        hair_accessory_color=("Bow Color", "Hair", [
             "#849FF7",
             "#A583F7",
             "#FFEB79",
@@ -534,8 +535,8 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "skin",
         skin_lcb,
-        skin_base=SCOpt("Skin Base", group="Body", values=[ "dark", "medium", "light" ]),
-        skin_color=SCOpt("Skin Color", group="Body", values=[
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]),
+        skin_color=("Skin Color", "Body", [
             "#513021",
             "#874c2c",
             "#803716",
@@ -549,13 +550,13 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "clothes",
         "images/sugar/clothes/{clothes}.png",
-        clothes=SCOpt("Clothes", group="Body", values=[ "tshirt", "tie", "bow" ])
+        clothes=("Clothes", "Body", [ "tshirt", "tie", "bow" ])
     ),
     SCLayer(
         "hair",
         hair_lcb,
-        hair_style=SCOpt("Style", group="Hair", values=[ 1, 2, 3 ]),
-        hair_color=SCOpt("Color", group="Hair", values=[
+        hair_style=("Style", "Hair", [ 1, 2, 3 ]),
+        hair_color=("Color", "Hair", [
             "#3D2314",
             "#100C07",
             "#DA680F",
@@ -572,18 +573,18 @@ define player_customizer = CustomizedSprite(
     SCLayer(
         "eyes",
         "images/sugar/eyes/{eye_color}.png",
-        eye_color=SCOpt("Eyes", group="Face", values=[ "blue", "green", "grey", "yellow" ])
+        eye_color=("Eyes", "Face", [ "blue", "green", "grey", "yellow" ])
     ),
     SCLayer(
         "eyes",
         "images/sugar/accessories/{face_accessory}.png",
-        face_accessory=SCOpt("Glasses", group="Face", values=[ "glasses", "none" ])
+        face_accessory=("Glasses", "Face", [ "glasses", "none" ])
     ),
     SCLayer(
         "hair_accessory",
         hair_accessory_lcb,
-        hair_accessory=SCOpt("Bow", group="Hair", values=[ "bow", "none" ]),
-        hair_accessory_color=SCOpt("Bow Color", group="Hair", values=[
+        hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
+        hair_accessory_color=("Bow Color", "Hair", [
             "#849FF7",
             "#A583F7",
             "#FFEB79",

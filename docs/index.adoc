@@ -1,30 +1,10 @@
-= Ren'Py Sprite Customizer
-:source-highlighter: highlight.js
-:toc: left
-:toclevels: 4
-:icons: font
-:stylesheet: assets/readthedocs.css
-:sectlinks: 1
-:sectanchors: 1
+= Sprite Customizer Reference
+:url-base: https://foxcapades.github.io/renpy-sprite-customizer
 
-:renpy-docs: https://www.renpy.org/doc/html
-
-Documentation for the Sprite Customizer (SC) framework.
-
-This document is a work in progress.
-
-
-== Topics
-
-include::pages/topic-sprite-state.adoc[leveloffset=2]
-include::pages/topic-sprite-vs-factory.adoc[leveloffset=2]
-include::pages/topic-layer-callback.adoc[leveloffset=2]
-
-
-== Type Reference
-
-include::pages/type-custom-sprite.adoc[leveloffset=2]
-include::pages/type-custom-sprite-fac.adoc[leveloffset=2]
-include::pages/type-sc-layer.adoc[leveloffset=2]
-include::pages/type-sc-opt.adoc[leveloffset=2]
-include::pages/type-sc-state.adoc[leveloffset=2]
+[cols="2h,4,4"]
+|===
+// | Version | Reference | Tutorial
+| 1.0.0
+| link:{url-base}/versions/1.0.0/[Reference]
+| link:{url-base}/versions/1.0.0/tutorial.html[Tutorial]
+|===

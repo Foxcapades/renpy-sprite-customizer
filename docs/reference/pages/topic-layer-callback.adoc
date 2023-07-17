@@ -4,9 +4,9 @@
 :url-ddisp: {url-renpy-docs}/displayables.html#dynamic-displayables
 :url-lay: {url-renpy-docs}/layeredimage.html
 
-Layer callbacks are functions that are used by <<sc-layer>> instances to
-generate link:{url-disp}[Displayable]s that can be used as components of
-the overall <<custom-sprite>> image.  These functions are one of the two ways
+Layer callbacks are functions that are used by <<sc-layer>> instances to generate
+link:{url-disp}[Displayable]s that can be used as components of the overall
+CusomizedSprite image.  These functions are one of the two ways
 that the Sprite Customizer is able to make use of your project's assets.
 
 == Defining Layer Callbacks
@@ -15,11 +15,10 @@ Before we can talk more about layer callbacks, we need to talk a little bit
 about layers, more specifically, <<sc-layer>>s and how they are constructed.
 
 When constructing a new <<sc-layer>> instance, you may pass it a layer name, a
-_layer callback_, and zero or more customization option groups (<<sc-opt>>s) via
-keyword arguments.  Those keyword arguments are _very_ important to the
-definition of the given layer callback; they name the same arguments that will
-be passed _to_ the layer callback when it is eventually (and repeatedly)
-executed.
+_layer callback_, and zero or more customization option groups via keyword
+arguments.  Those keyword arguments are _very_ important to the definition of
+the given layer callback; they name the same arguments that will be passed _to_
+the layer callback when it is eventually (and repeatedly) executed.
 
 For example, given the following <<sc-layer>> definition:
 
@@ -28,8 +27,8 @@ For example, given the following <<sc-layer>> definition:
 SCLayer(
     "hair",
     hair_lcb,
-    hair_style=SCOpt("Hair Style", [ "afro", "bob", "buns" ]),
-    hair_color=SCOpt("Hair Color", [
+    hair_style=("Hair Style", [ "afro", "bob", "buns" ]),
+    hair_color=("Hair Color", [
         "#3D2314",
         "#100C07",
         "#DA680F",
@@ -49,7 +48,7 @@ we would expect the defined layer callback function (`hair_lcb`) to accept 2
 arguments, `hair_style` and `hair_color`.  We would then expect that function to
 perform some work with those arguments to produce a
 link:{url-disp}[Displayable].  The values passed on those arguments will
-be one of the options in the relevant <<sc-opt>>'s option list.  In our example
+be one of the options in the relevant option list.  In our example
 demonstration's case, we use the `hair_style` value (one of "afro", "bob", or
 "bun") to create a path to the specific image we wish to display; then we use
 the `hair_color` value (one of the listed hex color codes) to apply a tint

@@ -72,12 +72,12 @@ screen sprite_creator_option_group(sprite, group, options):
                 width 25
             vbox:
                 spacing 15
-                for option_key, option_name in options.items():
-                    use sprite_creator_option_group_option(sprite, option_key, option_name)
+                for option_key, option in options.items():
+                    use sprite_creator_option_group_option(sprite, option_key, option)
 
-screen sprite_creator_option_group_option(sprite, option_key, option_name):
+screen sprite_creator_option_group_option(sprite, option_key, option):
     hbox:
-        text option_name:
+        text option.display_name:
             min_width 200
             line_leading 5
 
@@ -85,11 +85,11 @@ screen sprite_creator_option_group_option(sprite, option_key, option_name):
             auto "cc_gui_option_arrow_left_%s"
             xsize 50
             ysize 50
-            action Function(sprite.dec_selection, option_key)
-        text "{:02d}".format(sprite.get_option_selection(option_key)):
+            action Function(option.dec_selection)
+        text "{:02d}".format(option.selection_index + 1):
             line_leading 5
         imagebutton:
             auto "cc_gui_option_arrow_right_%s"
             xsize 50
             ysize 50
-            action Function(sprite.inc_selection, option_key)
+            action Function(option.inc_selection)

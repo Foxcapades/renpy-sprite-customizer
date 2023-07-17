@@ -1,0 +1,180 @@
+[#sc-state]
+= SCState
+
+This class defines an object that is used to hold sprite customization option
+selections. This is used to persist the selected options as part of the game
+saves and reload those selections when loading the game from a save.
+
+[source, python]
+----
+my_sprite_state = SCState()
+my_sprite.set_state(my_sprite_state)
+----
+
+
+[#sc-state-methods]
+== Methods
+
+
+=== `+__init__+`
+
+Initializes the new, blank SCState instance.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `selections`
+| dict
+| A dict of option keys to selections.  May be used to set a custom starting
+state for a <<custom-sprite>>.
+
+| `user_state`
+| dict
+| A dict of option keys to values.  May be used to set a custom starting user
+state.
+|===
+
+
+=== `set_variable`
+
+Store arbitrary user variable that will be passed to all layer callbacks.
+
+[IMPORTANT]
+--
+This method cannot be used to override option selections.  If a user state item
+key conflicts with a sprite customization option, the sprite customization
+option will take priority.
+--
+
+```python
+default sprite_state = SCState()
+
+label start:
+    $ sprite_state.set_variable("mood", "happy")
+    $ sprite.set_state(my_state)
+    ...
+    ...
+    ...
+    $ sprite_state.set_variable("mood", "angry")
+```
+
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Key for the user state item.
+
+| `value`
+| any
+| Value to store.
+|===
+
+
+=== `get_variable`
+
+Retrieve user variable from the <<sc-state>> store by key.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Key for the user state item.
+|===
+
+==== Returns
+
+[cols="1m,9a"]
+|===
+| any
+| User state value.
+|===
+
+
+=== `has_variable`
+
+Tests whether the state contains a user variable value with the given key.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Key of the user variable to test for.
+|===
+
+==== Returns
+
+[cols="1m,9a"]
+|===
+| bool
+| Whether the target user state item exists in the <<sc-state>> instance.
+|===
+
+
+=== `set_selection`
+
+Sets the target selection value.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Key of the selection to set.
+
+| `value`
+| any
+| Value to set
+|===
+
+
+=== `get_selection`
+
+Looks up the target selection value.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Key of the selection to look up.
+|===
+
+==== Returns
+
+[cols="1m,9a"]
+|===
+| any
+| Target selection value (or `None` if no such value is set).
+|===
+
+
+=== `has_selection`
+
+Tests whether the state contains a selection value with the given key.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Key of the selection value to test for.
+|===
+
+==== Returns
+
+[cols="1m,9a"]
+|===
+| bool
+| Whether the target selection item exists in the <<sc-state>> instance.
+|===

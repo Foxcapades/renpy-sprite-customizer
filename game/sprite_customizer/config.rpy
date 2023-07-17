@@ -67,7 +67,7 @@ init python:
 # layer.
 define ccf = CustomizedSpriteFactory(
     # Skin Layer
-    SCLayer("skin", cc_skin, skin_color=SCOpt("Skin", group="Body", values=[
+    SCLayer("skin", cc_skin, skin_color=("Skin", "Body", [
         "#513021",
         "#874c2c",
         "#803716",
@@ -78,14 +78,14 @@ define ccf = CustomizedSpriteFactory(
     ])),
 
     # Clothes Layer
-    SCLayer("clothes", "images/ccp/clothes/{clothes}.png", clothes=SCOpt("Clothes", group="Body", values=[ "cottoncandy", "plaid" ])),
+    SCLayer("clothes", "images/ccp/clothes/{clothes}.png", clothes=("Clothes", "Body", [ "cottoncandy", "plaid" ])),
 
     # Hair Layer
     SCLayer(
         "hair",
         cc_hair,
-        hair_style=SCOpt("Style", group="Hair", values=[ "afro", "bob", "buns" ]),
-        hair_color=SCOpt("Color", group="Hair", values=[
+        hair_style=("Style", "Hair", [ "afro", "bob", "buns" ]),
+        hair_color=("Color", "Hair", [
             "#3D2314",
             "#100C07",
             "#DA680F",
@@ -101,7 +101,7 @@ define ccf = CustomizedSpriteFactory(
     ),
 
     # Accessory Layer
-    SCLayer("accessories", "images/ccp/accessories/{accessory}.png", accessory=SCOpt("Accessory", group="Hair", values=[
+    SCLayer("accessories", "images/ccp/accessories/{accessory}.png", accessory=("Accessory", "Hair", [
         "none",
         "cottoncandy_bow",
         "cottoncandy_clips",
@@ -111,7 +111,7 @@ define ccf = CustomizedSpriteFactory(
 
 
     # Eye Layer
-    SCLayer("eyes", "images/ccp/eyes/{eye_color}_eyes.png", eye_color=SCOpt("Eyes", group="Face", values=[
+    SCLayer("eyes", "images/ccp/eyes/{eye_color}_eyes.png", eye_color=("Eyes", "Face", [
         "blue",
         "brown",
         "green",

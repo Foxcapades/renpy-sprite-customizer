@@ -9,8 +9,6 @@ init -1 python:
         of the game saves and reload those selections when loading the game from
         a save.
 
-        The state is a dict of 1 based indexes of option values.
-
         ```python
         my_sprite_state = SCState()
         my_sprite.set_state(my_sprite_state)
@@ -20,12 +18,14 @@ init -1 python:
             """
             Initializes the new, blank SCState instance.
 
-            Arguments:
+            Arguments
+            ---------
 
-            selection (dict): Initial selection state for the SCState instance.
+            selection : dict
+                Initial selection state for the SCState instance.
 
-            user_state (dict): Initial user variable state for the SCState
-            instance.
+            user_state : dict
+                Initial user variable state for the SCState instance.
             """
             if not isinstance(selections, dict):
                 raise Exception("SCState selections argument must be a dict value.")
@@ -39,92 +39,123 @@ init -1 python:
             self._selections = selections.copy()
             self._user_state = user_state.copy()
 
-        def _user_state_items(self):
-            return self._user_state
-
         def set_variable(self, key, value):
             """
             Store arbitrary user variable that will be passed to all layer
             callbacks.
 
-            Arguments:
+            **NOTE**: This method cannot be used to override option selections.
+            If a user state item key conflicts with a sprite customization
+            option, the sprite customization option will take priority.
 
-            key (str): Key for the user state item.
+            ```python
+            default sprite_state = SCState()
 
-            value (any): Value to store.
+            label start:
+                $ sprite_state.set_variable("mood", "happy")
+                $ sprite.set_state(my_state)
+                ...
+                ...
+                ...
+                $ sprite_state.set_variable("mood", "angry")
+            ```
+
+            Arguments
+            ---------
+
+            key : str
+                Key for the user state item.
+
+            value : any
+                Value to store.
             """
             self._user_state[key] = value
 
         def get_variable(self, key):
             """
-            Retrieve arbitrary user variable from the SCState store by key.
+            Retrieve user variable from the SCState store by key.
 
-            Arguments:
+            Arguments
+            ---------
 
-            key (str): Key for the user state item.
+            key : str
+                Key for the user state item.
 
-            Returns:
+            Returns
+            -------
 
-            any: User state value.
+            any
+                User state value.
             """
             return self._user_state[key]
 
         def get_selection(self, key):
             """
-            Looks up the target selection value.  If the target selection value
-            is unknown to the SCState object, the value `1` will be recorded in
-            the state and returned from this method.
+            Looks up the target selection value.
 
-            Arguments:
+            Arguments
+            ---------
 
-            key (str): Selection key.
+            key : str
+                Key of the selection to look up.
 
-            Returns:
+            Returns
+            -------
 
-            int: Current selection state for the given option selection.
+            any
+                Target selection value (or `None` if no such value is set).
             """
-            if not key in self._selections:
-                self._selections[key] = 1
-
             return self._selections[key]
 
-        def inc_selection(self, key, max):
+        def set_selection(self, key, value):
             """
-            Increment the selection value for the given option to a maximum of
-            `max`, rolling back over to `1` if it would exceed that maximum.
+            Sets the target selection value.
 
-            Arguments:
+            Arguments
+            ---------
 
-            key (str): Key of the selection option whose value should be
-            incremented.
+            key : str
+                Key of the selection to set.
 
-            max (int): Max value the selection option can possibly be.
+            value : any
+                Value to set.
             """
-            if not key in self._selections:
-                self._selections[key] = 2
-            elif self._selections[key] >= max:
-                self._selections[key] = 1
-            else:
-                self._selections[key] += 1
+            self._selections[key] = value
 
-        def dec_selection(self, key, max):
+        def has_selection(self, key):
             """
-            Decrement the selection value for the given option to a minimum of
-            `1`, rolling over to `max` if it would go below `1`.
+            Tests whether the state contains a selection value with the given
+            key.
 
-            Arguments:
+            Arguments
+            ---------
 
-            key (str): Key of the selection option whose value should be
-            decremented.
+            key : str
+                Key of the selection value to test for.
 
-            max (int): Max value the selection option can possibly be.
+            Returns
+            -------
+
+            boolean
+                Whether the state contains the target selection value.
             """
-            if not key in self._selections:
-                self._selections[key] = max
-            elif self._selections[key] == 1:
-                self._selections[key] = max
-            else:
-                self._selections[key] -= 1
+            return key in self._selections
 
-        def randomize(self, key, max):
-            self._selections[key] = renpy.random.randint(1, max)
+        def has_variable(self, key):
+            """
+            Tests whether the state contains a user variable value with the
+            given key.
+
+            Arguments
+            ---------
+
+            key : str
+                Key of the user variable to test for.
+
+            Returns
+            -------
+
+            boolean
+                Whether the state contains the target user variable.
+            """
+            return key in self._user_state

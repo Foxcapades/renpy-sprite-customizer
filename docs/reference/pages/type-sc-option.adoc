@@ -1,0 +1,44 @@
+[#sc-option]
+= SCOption
+
+Base type for Sprite Customizer option types.
+
+
+[#sc-option-properties]
+== Properties
+
+
+=== `key`
+
+[cols="1m,9a"]
+|===
+| str
+| Option keyword.
+|===
+
+
+=== `display_name`
+
+[cols="1m,9a"]
+|===
+| str
+| Display name for the option.
+|===
+
+
+=== `group`
+
+[cols="1m,9a"]
+|===
+| str
+| Group display name for the option.
+|===
+
+
+=== `option_type`
+
+[cols="1m,9a"]
+|===
+| int
+| Option type indicator.
+|===

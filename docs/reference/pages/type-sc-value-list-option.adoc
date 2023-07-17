@@ -1,0 +1,127 @@
+[#sc-value-list-option]
+= SCValueListOption
+:icons: font
+:source-highlighter: highlight.js
+
+*Extends* <<sc-option>>
+
+Represents an option group that is a list or set of option choices that are
+navigated via an index that can be incremented or decremented.
+
+[source, python]
+----
+SCValueListOption("my_option", "My Option", "My Group", [ "some", "choices" ])
+----
+
+[IMPORTANT]
+--
+This option type is state dependent and cannot be used on its own, it **MUST**
+be registered to an <<sc-layer>> instance to be in any way useful.
+--
+
+
+[#sc-value-list-option-properties]
+== Properties
+
+*Includes* <<sc-option-properties, SCOption Properties>>
+
+
+=== `values`
+
+[cols="1m,9a"]
+|===
+| any[]
+| The list of values that are part of this option group.
+|===
+
+
+=== `value_count`
+
+[cols="1m,9a"]
+|===
+| int
+| The number of options in this option group.
+|===
+
+
+=== `selection_index`
+
+[cols="1m,9a"]
+|===
+| int
+| The current selection index for this option group.
+|===
+
+
+=== `selection_value`
+
+[cols="1m,9a"]
+|===
+| any
+| The currently selected value for this option group.
+|===
+
+
+
+[#sc-value-list-option-methods]
+== Methods
+
+
+=== `+__init__+`
+
+[source, python]
+----
+def __init__(self, key, name, group, values, display_digits=2, **kwargs):
+----
+
+Initializes the new SCValueListOption instance with the given arguments.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Keyword for this option.
+
+| `name`
+| str
+| Display name for this option.
+
+| `group`
+| str
+| Group name for this option.
+
+| `values`
+| any[]
+| List of values for this option.
+
+| `display_digits`
+| int
+| Number of digits to display when rendering the selection index as a string.
+The index will be left padded with zeros to reach this digit count.  For
+example, given the `display_digits` value `3`, when rendering the first index as
+a string, the returned string would be "001".
+|===
+
+
+=== `inc_selection`
+
+Increments the selection index for this option group, "selecting" the next value
+in the option list.  If the selection is already on the last item in the option
+group it will "roll over" to the first option in the group when incremented.
+
+
+=== `dec_selection`
+
+Decrements the selection index for this option group, "selecting" the previous
+value in the option list.  If the selection is already on the first item in the
+option group it will "roll over" to the last option in the group when
+decremented.
+
+
+=== `randomize`
+
+Selects a "random" option from this option group and records that selection in
+the user state.
+

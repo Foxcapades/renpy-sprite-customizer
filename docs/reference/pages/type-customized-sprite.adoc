@@ -1,0 +1,189 @@
+[#custom-sprite]
+= CustomizedSprite
+:icons: font
+:source-highlighter: highlight.js
+
+Represents a multi-layered sprite image composed of customizable layers.
+
+This type provides methods for manipulating the layers by changing their
+customizations between each layer's configured customization options.
+
+
+[#custom-sprite-properties]
+== Properties
+
+
+=== `layers`
+
+[cols="1m,9a"]
+|===
+| <<sc-layer>>[]
+| The list of layers attached to this <<custom-sprite>> instance.
+|===
+
+
+=== `option_keys`
+
+[cols="1m,9a"]
+|===
+| str[]
+| A list of the keys for all the options attached to this <<custom-sprite>>
+instance.
+|===
+
+
+=== `option_count`
+
+[cols="1m,9a"]
+|===
+| int
+| The total number of registered options.
+|===
+
+
+[#custom-sprite-methods]
+== Methods
+
+
+=== `+__init__+`
+
+Initializes the new <<custom-sprite>> instance with the given arguments.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `image_name`
+| str
+| Name of the image that will be created for this sprite.  This name is the
+value that will be used when referencing the sprite elsewhere in scripts via
+`show`, `add`, etc..
+
+| `*layers`
+| <<sc-layer>>[]
+| A list of one or more layers from which the sprite should be created.  The
+layers are stacked on top of one another in the passed order.  This means the
+first given layer will be at the "back" of the sprite, where the last given
+layer will be the "front".
+
+| `transform`
+| callable
+| An optional transform function that will be applied to the created image.
+|===
+
+
+=== `set_state`
+
+Sets the internal state object of this <<custom-sprite>> instance to the given
+<<sc-state>> instance.
+
+[source, python]
+----
+define my_sprite = CustomizedSprte("sprite", ...)
+default my_sprite_state = SCState()
+
+label start:
+    $ my_sprite.set_state(my_sprite_state)
+
+label after_load:
+    $ my_sprite.set_state(my_sprite_state)
+----
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `state`
+| <<sc-state>>
+| State object to use for storing customization option selections.
+|===
+
+
+=== `get_options`
+
+Gets a list of the options attached to this <<custom-sprite>> instance.
+
+==== Returns
+
+[cols="1m,9a"]
+|===
+| <<sc-option>>[]
+| List of the options attached to this <<custom-sprite>> instance.
+|===
+
+
+=== `get_options_by_key`
+
+Gets a dict of option keys mapped to SCOption instances for all the options
+attached to this <<custom-sprite>>.
+
+==== Returns
+
+[cols="1m,9a"]
+|===
+| dict
+| Dict of option keys mapped to SCOption instances.
+|===
+
+
+=== `get_options_by_group`
+
+Returns an index of options and display names grouped by layer group name.  This
+index may optionally be ordered by providing a list of the desired group order.
+
+[NOTE]
+--
+Options that do not have a group name declared on them, their
+display name will be used as the group name.
+--
+
+[source, python]
+----
+sprite.get_options_by_group()
+
+sprite.get_options_by_group(["Body", "Face", "Hair"])
+----
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `group_order`
+| str[]
+| Optional list of option group names by which the output dict will be ordered.
+This list *MUST* contain all of the groups declared in the <<sc-layer>>
+definitions, and ONLY those groups.
+|===
+
+==== Returns
+
+[cols="1m,9a"]
+|===
+| dict
+| An index of the declared sprite customization options grouped by the
+configured option groups.
+
+[source, python]
+----
+{
+    "Body": {
+        "skin_color": <SCOption>,
+        "clothes": <SCOption>,
+    },
+    "Face": {
+        "eyes": <SCOption>
+    }
+    "Hair": {
+        "hair_style": <SCOption>,
+        "hair_color": <SCOption>,
+        "accessory": <SCOption>
+    },
+}
+----
+|===
+
+
+=== `randomize`
+
+Randomizes the selections for all the randomizable options on this
+<<custom-sprite>> instance.

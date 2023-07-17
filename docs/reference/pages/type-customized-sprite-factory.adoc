@@ -1,0 +1,61 @@
+[#custom-sprite-factory]
+= CustomizedSpriteFactory
+
+A factory that can be used to generate multiple <<custom-sprite>> instances with
+the same set of base options.
+
+[source, python]
+----
+define sprite_factory = CustomizedSpriteFactory(
+    SCLayer(...),
+    SCLayer(...),
+    SCLayer(...),
+)
+
+define sprite = sprite_factory.new_sprite("my_image")
+----
+
+== Methods
+
+
+=== `+__init__+`
+
+Initializes a new <<custom-sprite-factory>> instance with the given arguments.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `layers`
+| <<sc-layer>>[]
+| A list of one or more layers from which <<custom-sprite>> instances should be
+created.  The layers are stacked on top of one another in the passed order.
+This means the first given layer will be at the "back" of the sprite, where the
+last given layer will be the "front".
+
+| `transform`
+| callable
+| An optional transform function that will be applied to images created by this
+factory.
+|===
+
+
+=== `new_sprite`
+
+Constructs a new <<custom-sprite>> instance with the given name.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `image_name`
+| str
+| Name of the image that will be created for the returned sprite.  This name is
+the value that will be used when referencing the sprite elsewhere in scripts via
+`show`, `add`, etc..
+
+| `transform`
+| callable
+| An optional transform function that will be applied to the image created by
+this method.
+|===

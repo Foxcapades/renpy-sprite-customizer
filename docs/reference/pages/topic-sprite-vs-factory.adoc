@@ -2,7 +2,7 @@
 = Sprite vs. Factory
 
 The <<custom-sprite>> class may be constructed directly or via the
-<<custom-sprite-fac>> type.  Deciding whether to construct the type directly or
+<<custom-sprite-factory>> type.  Deciding whether to construct the type directly or
 via the factory comes down to whether you want to create multiple sprites from
 the same set of layers and options.
 
@@ -11,7 +11,7 @@ options, then it is fine to construct a new <<custom-sprite>> instance
 directly.
 
 If you wish to create more than one sprite out of a set of layers and options,
-then it is best to create a <<custom-sprite-fac>> from those layers and options
+then it is best to create a <<custom-sprite-factory>> from those layers and options
 and use that factory instance to produce new <<custom-sprite>> instances.
 
 .Constructing a Single Sprite

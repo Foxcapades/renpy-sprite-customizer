@@ -45,7 +45,7 @@ that uses the target <<sc-state>> object.
 
 Example::
 The following code snippets attempt to demonstrate a use case for the use of
-additional user-defined state to augment the CustomizedSprite's behavior so as
+additional user-defined state to augment the <<custom-sprite>>'s behavior so as
 to make use of a non-option variable to control how the sprite gets rendered.
 +
 In this particular case, we have a set of sprite "base" images that represent

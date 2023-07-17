@@ -6,14 +6,7 @@
 default player_sprite_state = SCState()
 
 # For the antagonist, set some different defaults than the player.
-default antagonist_sprite_state = SCState(selections={
-    "skin_color": 5,
-    "clothes": 2,
-    "hair_style": 2,
-    "hair_color": 10,
-    "accessory": 4,
-    "eyes": 3
-})
+default antagonist_sprite_state = SCState()
 
 # Define our characters like normal.
 define pc = Character("Player", image="player")

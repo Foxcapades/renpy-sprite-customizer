@@ -46,4 +46,4 @@ init -1 python:
                 if not key in kwargs:
                     kwargs[key] = self._kwargs[key]
 
-            return CustomizedSprite(image_name, *[ layer.clone() for layer in self._layers ], **kwargs)
+            return CustomizedSprite(image_name, *[ layer._clone() for layer in self._layers ], **kwargs)

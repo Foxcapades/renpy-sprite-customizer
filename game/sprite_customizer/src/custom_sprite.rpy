@@ -76,10 +76,9 @@ init -1 python:
             transform (callable): An optional transform function that will be
             applied to the created image.
             """
-            self._layers = layers
-            self._state  = SCState()
-
-            self._option_to_layer = {}
+            self._layers           = layers
+            self._options          = OrderedDict()
+            self._option_to_layer  = OrderedDict()
             self._options_by_group = OrderedDict()
 
             if len(layers) == 0:
@@ -87,30 +86,20 @@ init -1 python:
 
             # For each given item...
             for layer in layers:
-                # ensure that it is an SCLayer
                 if not isinstance(layer, SCLayer):
                     raise Exception("CustomizedSprite arguments 1+ must all be SCLayer instances.")
 
-                # For each option attached to the layer...
-                for option_name, option in layer._options.items():
-                    # If the option is already known to this sprite, then it is
-                    # a duplicate.
-                    if option_name in self._option_to_layer:
-                        raise Exception("Duplicate option \"{}\"".format(option_name))
+                for option_key, option in layer._options.items():
+                    if option_key in self._options:
+                        raise Exception("Duplicate option \"{}\"".format(option_key))
 
-                    # Record the option to layer link
-                    self._option_to_layer[option_name] = layer
+                    self._option_to_layer[option_key] = layer
+                    self._options[option_key] = option
 
-                    opt_group = option.group if option.has_group else option.display_name
-
-                    # Record the group to option link.
-                    if opt_group in self._options_by_group:
-                        self._options_by_group[opt_group].append(option_name)
+                    if option.group in self._options_by_group:
+                        self._options_by_group[option.group].append(option)
                     else:
-                        self._options_by_group[opt_group] = [ option_name ]
-
-                layer.set_state(self._state)
-
+                        self._options_by_group[option.group] = [ option ]
 
             if "transform" in kwargs:
                 if not callable(kwargs["transform"]):
@@ -121,10 +110,10 @@ init -1 python:
                 transform = None
 
             # Build the layered image
-            attrs = [ layers[0].build_image() ]
+            attrs = [ layers[0]._build_image() ]
 
             for i in range(1, len(layers)):
-                attrs.append(layers[i].build_attribute())
+                attrs.append(layers[i]._build_attribute())
 
             if transform == None:
                 renpy.image(image_name, LayeredImage(attrs))
@@ -134,9 +123,55 @@ init -1 python:
                 renpy.image(tmp_name, LayeredImage(attrs))
                 renpy.image(image_name, transform(tmp_name))
 
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+        #
+        #   Properties
+        #
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+        @property
+        def layers(self):
+            """
+            The list of layers attached to this CustomizedSprite instance.
+            """
+            return [ *self._layers ]
+
+        @property
+        def option_keys(self):
+            """
+            A list of the keys for all the options attached to this
+            CustomizedSprite instance.
+            """
+            return self._option_to_layer.keys()
+
+        @property
+        def option_count(self):
+            """
+            Returns the total number of registered options.
+            """
+            return len(self._option_to_layer.keys())
+
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+        #
+        #   Internal Methods
+        #
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
         def _require_option(self, option):
             if not option in self._option_to_layer:
                 raise Exception("Unrecognized CustomizedSprite option \"{}\"".format(option))
+
+
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+        #
+        #   Public Methods
+        #
+        # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 
         def set_state(self, state):
             """
@@ -163,91 +198,34 @@ init -1 python:
             if not isinstance(state, SCState):
                 raise Exception("Value passed to set_state must be an SCState instance.")
 
-            self._state = state
             for layer in self._layers:
-                layer.set_state(state)
+                layer._set_state(state)
 
-        def inc_selection(self, option):
+        def get_options(self):
             """
-            Increments the selection value for the given option.
+            Gets a list of the options attached to this CustomizedSprite
+            instance.
 
-            Arguments:
+            Returns
+            -------
 
-            option (str): Key of the option for which the selection should be
-            incremented.
+            SCOption[]
+                List of the options attached to this CustomizedSprite instance.
             """
-            self._require_option(option)
-            self._option_to_layer[option].inc_selection(option)
+            return self._options.values()
 
-        def dec_selection(self, option):
+        def get_options_by_key(self):
             """
-            Decrements the selection value for the given option.
+            Gets a dict of option keys mapped to SCOption instances for all the
+            options attached to this CustomizedSprite.
 
-            Arguments:
+            Returns
+            -------
 
-            option (str): Key of the option for which the selection should be
-            decremented.
+            dict
+                Dict of option keys mapped to SCOption instances.
             """
-            self._require_option(option)
-            self._option_to_layer[option].dec_selection(option)
-
-        def get_option_display_name(self, option):
-            """
-            Returns the display name for the target option.
-
-            Arguments:
-
-            option (str): Keword for the option whose display name should be
-            returned.
-
-            Returns:
-
-            str: Display name for the target option.
-            """
-            self._require_option(option)
-            return self._option_to_layer[option].get_option_display_name(option)
-
-        def get_option_selection(self, option):
-            self._require_option(option)
-            return self._option_to_layer[option].get_option_selection(option)
-
-        def get_option(self, option):
-            self._require_option(option)
-            return self._option_to_layer[option].get_option(option)
-
-        def get_option_value(self, option):
-            self._require_option(option)
-            return self._option_to_layer[option].get_option_value(option, selection)
-
-        def get_selected_option_value(self, option):
-            """
-            Returns the currently selected option value for the target option.
-
-            ```python
-            my_sprite = CustomizedSprite(
-                "sprite",
-                SCLayer("hair", hair_lcb, hair_style=SCOpt("Hair Style", [ "afro", "bob", "bun" ]))
-            )
-            my_sprite.set_state(SCState())
-
-            my_sprite.get_selected_option_value("hair_style") == "afro"
-
-            my_sprite.inc_selection("hair_style")
-
-            my_sprite.get_selected_option_value("hair_style") == "bob"
-            ```
-
-            Arguments:
-
-            option (str): Keyword for the option whose user selected value
-            should be returned.
-
-            Returns:
-
-            any: The currently selected option value for the target option.
-            """
-            self._require_option(option)
-            return self._option_to_layer[option].get_selected_option_value(option)
+            return self._options.copy()
 
         def get_options_by_group(self, group_order=None):
             """
@@ -281,16 +259,16 @@ init -1 python:
             ```python
             {
                 "Body": {
-                    "skin_color": "Skin Color",
-                    "clothes": "Clothes",
+                    "skin_color": <SCOption>,
+                    "clothes": <SCOption>,
                 },
                 "Face": {
-                    "eyes": "Eye Color"
+                    "eyes": <SCOption>
                 }
                 "Hair": {
-                    "hair_style": "Hair Style",
-                    "hair_color": "Hair Color",
-                    "accessory": "Accessory"
+                    "hair_style": <SCOption>,
+                    "hair_color": <SCOption>,
+                    "accessory": <SCOption>
                 },
             }
             ```
@@ -301,7 +279,7 @@ init -1 python:
                 for group, options in self._options_by_group.items():
                     out[group] = OrderedDict()
                     for option in options:
-                        out[group][option] = self.get_option_display_name(option)
+                        out[group][option] = option
 
             elif isinstance(group_order, list):
                 if len(group_order) != len(self._options_by_group):
@@ -314,42 +292,12 @@ init -1 python:
                         raise Exception("unrecognized option group name \"{}\"".format(group))
 
                     for option in self._options_by_group[group]:
-                        out[group][option] = self.get_option_display_name(option)
+                        out[group][option] = option
 
             else:
                 raise Exception("group_order must be a list, a set, or None")
 
-            return out
-
-
-        @property
-        def layers(self):
-            return [ *self._layers ]
-
-        @property
-        def option_keys(self):
-            """
-            A list of all the option keys.
-            """
-            return self._option_to_layer.keys()
-
-        @property
-        def option_count(self):
-            """
-            Returns the total number of registered options.
-            """
-            return len(self._option_to_layer.keys())
-
-        @property
-        def menu_components(self):
-            """
-            Builds a map of option display names to the actual option keys to be
-            used when generating a menu screen.
-            """
-            out = OrderedDict()
-            for layer in self._layers:
-                for opt in layer._options.keys():
-                    out[layer.get_option_display_name(opt)] = opt
+            print(out)
 
             return out
 
@@ -358,5 +306,5 @@ init -1 python:
             Randomizes the selections for all the options on this
             CustomizedSprite instance.
             """
-            for layer in self._layers:
-                layer.randomize()
+            for option in self._options.values():
+                option.randomize()

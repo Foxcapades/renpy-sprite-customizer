@@ -1,0 +1,50 @@
+[#sc-layer]
+= SCLayer
+
+Represents a single layer in a customizable sprite.
+
+This layer has zero or more customization options provided at construction time
+via named layer option keyword args.  The user's selections of those options are
+then passed to the given `layer_provider` to construct the underlying
+Displayable for the layer.
+
+[source, python]
+----
+SCLayer("name", callback, option=("Option", [ "some", "choices" ]))
+
+# OR
+
+SCLayer("name", "my_image_{option}", option=("Option", [ "some", "choices" ]))
+----
+
+
+[#sc-layer-properties]
+== Properties
+
+
+=== `name`
+
+[cols="1m,9a"]
+|===
+| str
+| Name of the layer.
+|===
+
+
+=== `options`
+
+[cols="1m,9a"]
+|===
+| <<sc-option>>[]
+| List of options attached to this layer.
+|===
+
+
+=== `options_by_key`
+
+[cols="1m,9a"]
+|===
+| dict
+| Dict of option keys mapped to <<sc-option>> instances for all the options
+attached to this layer.
+|===
