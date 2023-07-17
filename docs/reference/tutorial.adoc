@@ -7,6 +7,7 @@
 :sectlinks: 1
 :sectanchors: 1
 :revnumber: any
+:imagesdir: https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/
 
 :docs-url-base: https://foxcapades.github.io/renpy-sprite-customizer
 :custom-sprite: link:{docs-url-base}#custom-sprite[CustomizedSprite]
@@ -222,7 +223,7 @@ label start:
 
 Now we can reload our game as we add layers and see our changes live!
 
-image::../assets/images/tutorial/tutorial-01.png[]
+image::tutorial-01.png[]
 
 === 4. Adding More Layers
 
@@ -256,7 +257,7 @@ define player_customizer = CustomizedSprite(
 . Go ahead and reload the game now and you should see the `tshirt` layer
   rendering on top of the base image.
 +
-image::../assets/images/tutorial/tutorial-02.png[]
+image::tutorial-02.png[]
 
 ==== 4.2 Hair
 
@@ -313,7 +314,7 @@ define player_customizer = CustomizedSprite(
 <2> The second option is a selection of hex codes for hair color options we will
     allow.
 
-image::../assets/images/tutorial/tutorial-03.png[]
+image::tutorial-03.png[]
 
 ==== 4.3 Eyes
 
@@ -333,7 +334,7 @@ define player_customizer = CustomizedSprite(
 )
 ----
 
-image::../assets/images/tutorial/tutorial-04.png[]
+image::tutorial-04.png[]
 
 
 ==== 4.4 Accesories
@@ -377,7 +378,7 @@ define player_customizer = CustomizedSprite(
 )
 ----
 
-image::../assets/images/tutorial/tutorial-05.png[]
+image::tutorial-05.png[]
 
 
 === 5. The Character Customization Screen
@@ -413,7 +414,7 @@ label start:
 
 Play around with what you've made!
 
-image::../assets/images/tutorial/tutorial-06.gif[]
+image::tutorial-06.gif[]
 
 [#char-expressions]
 === 6. Character Expressions
@@ -499,7 +500,7 @@ label start:
     pause 1000000
 ----
 
-image::../assets/images/tutorial/tutorial-07.png[]
+image::tutorial-07.png[]
 
 
 Now we can change our player character sprites expression by using our
