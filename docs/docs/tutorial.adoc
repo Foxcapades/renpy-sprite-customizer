@@ -41,7 +41,7 @@ is recommended)
 
 === 2. The First Steps
 
-==== Prep
+==== 2.1 Prep
 
 . Open up your tutorial project directory in your code editor.
 . Open the `game/sprite_customizer/config.rpy` file.
@@ -64,7 +64,7 @@ define player_customizer = CustomizedSprite(
 )
 ----
 
-==== Adding Our First Layer!
+==== 2.2 Adding Our First Layer!
 
 Now we are going to add our first layer to the {custom-sprite}.  Layers are
 declared by creating new {sc-layer} instances and passing in a set of values
