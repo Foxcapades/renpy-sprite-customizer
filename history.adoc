@@ -1,0 +1,69 @@
+= Version History
+
+== Version 1.x.x
+
+=== v1.0.0
+
+==== Changes
+
+
+== Version 0.x.x
+
+=== v0.7.1
+
+==== Fixes
+
+* Remove save files from release zip.
+
+
+=== v0.7.0
+
+==== Features
+
+* Allow template strings instead of layer callbacks for simple layers.
+
+
+=== v0.6.0
+
+==== Features
+
+* Added option groups.
+* Added non-dynamic layer transforms.
+
+
+=== v0.5.0
+
+==== Features
+
+* Arbitrary user state which will be passed through to layer callbacks.
+* Global transforms on customized sprites.
+
+
+=== v0.4.0
+
+The great renaming.
+
+.Renamed:
+* `character_creator` screen to `sprite_creator`
+* `CustomizedCharacter` class to `CustomizedSprite`
+* `CustomizedCharacterFactory` class to `CustomizedSpriteFactory`
+* `CCLayer` class to `SCLayer`
+* `CCOpt` class to `SCOpt`
+* `CCState` class to `SCState`
+* `customized_character` method to `new_sprite`
+
+
+=== v0.3.0
+
+Updated demo character customization screens for aesthetics reasons.
+
+
+=== v0.2.0
+
+Updated demonstration to use ``layeredimage``s for the character sprites to
+demo combining CustomizedSprites with layered images.
+
+
+=== v0.1.0
+
+Initial release.
