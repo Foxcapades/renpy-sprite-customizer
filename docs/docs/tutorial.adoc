@@ -32,7 +32,7 @@ is recommended)
 . In the new project directory, delete the `game/images/ccp` directory and its
   contents.
 . Create a new directory under `game/images` called "sugar".
-. Download link:https://github.com/Foxcapades/renpy-sprite-customizer/raw/main/docs/assets/sugar-life.zip[the tutorial asset pack]footnote:[Sprites from link:https://butterymilk.itch.io/sugary-life[the Sugary Life asset pack]] and unzip it into the `game/images/sugar` directory.
+. Download link:https://github.com/Foxcapades/renpy-sprite-customizer/raw/main/docs/assets/sugar-life.zip[the tutorial asset pack] and unzip it into the `game/images/sugar` directory.
 .. Your `game/images/sugar` directory should now contain multiple subdirectories
    named "accessories", "brows", "clothes", etc...
 .. Explore the directories to familiarize yourself with the assets we will be
@@ -643,3 +643,7 @@ label start:
     pause 1000000
 ----
 ====
+
+== Credits
+
+* Sprite Pack: link:https://butterymilk.itch.io/sugary-life[Sugary Life by Buttery Milk]
