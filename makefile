@@ -1,4 +1,5 @@
-VERSION := $(shell grep 'define config.version' game/options.rpy | sed 's/.\+"\(.\+\)"/\1/')
+VERSION := "1.0.1"
+FEATURE := "1.0.0"
 
 .PHONY: default
 default:
@@ -11,7 +12,7 @@ build-src-release:
 
 .PHONY: build-docs
 build-docs:
-	@mkdir -p docs/versions/$(VERSION)
-	@asciidoctor -b html5 -o docs/index.html -a revnumber=$(VERSION) docs/index.adoc
-	@asciidoctor -b html5 -o docs/versions/$(VERSION)/index.html -a revnumber=$(VERSION) docs/reference/index.adoc
-	@asciidoctor -b html5 -o docs/versions/$(VERSION)/tutorial.html -a revnumber=$(VERSION) docs/reference/tutorial.adoc
+	@mkdir -p docs/versions/$(FEATURE)
+	@asciidoctor -b html5 -o docs/index.html -a revnumber=$(FEATURE) docs/index.adoc
+	@asciidoctor -b html5 -o docs/versions/$(FEATURE)/index.html -a revnumber=$(FEATURE) docs/reference/index.adoc
+	@asciidoctor -b html5 -o docs/versions/$(FEATURE)/tutorial.html -a revnumber=$(FEATURE) docs/reference/tutorial.adoc

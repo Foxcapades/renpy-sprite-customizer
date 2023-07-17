@@ -297,8 +297,6 @@ init -1 python:
             else:
                 raise Exception("group_order must be a list, a set, or None")
 
-            print(out)
-
             return out
 
         def randomize(self):
