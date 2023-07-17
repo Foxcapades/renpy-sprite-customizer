@@ -3,6 +3,8 @@
 :toc: left
 :icons: font
 :stylesheet: assets/readthedocs.css
+:sectlinks: 1
+:sectanchors: 1
 
 :renpy-docs: https://www.renpy.org/doc/html
 
