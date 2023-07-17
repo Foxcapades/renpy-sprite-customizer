@@ -1,4 +1,4 @@
-= Tutorial
+= Sprite Customizer Tutorial
 :toc:
 :toclevels: 3
 :source-highlighter: highlight.js
