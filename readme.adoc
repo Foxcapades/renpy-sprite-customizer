@@ -13,14 +13,16 @@ link:{renpy-docs}/layeredimage.html[LayeredImage]s.
 The goal of this project is to allow game creators to plug in their own assets
 and screens to set up character or sprite customization in their own games.
 
-This project is currently in its early stages so, while it works fine, the
-included ``screen``s are not the prettiest.  Luckily this framework provides
-tools to assist in customizing those ``screen``s.
-
 == Preview
 
 image::docs/previews/demo.gif[]
 
+[NOTE]
+--
+The included character customization screen is for demonstration purposes only.
+It is recommended that users of this framework build their own customization
+screens using the API demonstrated by the demo screens.
+--
 
 == Project Layout
 
