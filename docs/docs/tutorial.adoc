@@ -6,6 +6,7 @@
 
 :docs-url-base: https://foxcapades.github.io/renpy-sprite-customizer
 :custom-sprite: link:{docs-url-base}#custom-sprite[CustomizedSprite]
+:sc-layer: link:https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer[SCLayer]
 :lcb-docs: link:{docs-url-base}#_layer_callbacks[Layer Callback]
 :displayable-docs: link:https://www.renpy.org/doc/html/displayables.html#displayables[Displayable]
 :tint-matrix: link:https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix[TintMatrix]
@@ -25,7 +26,7 @@ is recommended)
 
 . Create a new project directory under your Ren'Py workspace directory titled
   "CharacterCreatorTutorial" (or whatever you would like to call it).
-. Download the link:{url-github-repo}/releases/latest[latest release] of the
+. Download the link:https://github.com/Foxcapades/renpy-sprite-customizer/releases/latest[latest release] of the
   Sprite Customizer (specifically the 'base-project' zip file). and unzip it
   into your new project directory.
 . In the new project directory, delete the `game/images/ccp` directory and its
@@ -65,7 +66,7 @@ define player_customizer = CustomizedSprite(
 ==== Adding Our First Layer!
 
 Now we are going to add our first layer to the {custom-sprite}.  Layers are
-declared by creating new <<sc-layer>> instances and passing in a set of values
+declared by creating new {sc-layer} instances and passing in a set of values
 that tell it what options it has and how to render them.
 
 Since layers are stacked on top of each other, the first layer is generally
@@ -101,7 +102,7 @@ define player_customizer = CustomizedSprite(
 ----
 <1> <<skin-lcb>> is used to generate the {displayable-docs} that will be used as
     the base layer for our customized sprite.
-<2> <<sc-layer>> constructor call.
+<2> {sc-layer} constructor call.
 <3> Name of the layer.
 <4> Reference to our `skin_lcb` callback, passing the callback to the new layer.
 <5> Skin base option, directly relates to the skin base image files included in
@@ -126,13 +127,13 @@ This function takes our two option values ("skin_base" and "skin_color") and
 uses them to provide a path to the target file and apply a TintMatrix to that
 target file.
 
-We pass this function to the created <<sc-layer>> instance to tell the layer how
+We pass this function to the created {sc-layer} instance to tell the layer how
 to render that part of the customized sprite.
 
 [#first-sc-layer]
 ===== Our First SCLayer
 
-Our first <<sc-layer>> instance is constructed with the following arguments:
+Our first {sc-layer} instance is constructed with the following arguments:
 
 . The layer name
 . A callback that will be used to generate our layer image
@@ -221,7 +222,7 @@ Next we will add the clothes layer, this layer is a simple image swap layer so
 the definition of it will be more simple than the skin layer.
 
 . In the {custom-sprite} declaration, add a new argument that is another
-<<sc-layer>> constructor:
+{sc-layer} constructor:
 +
 [source, python]
 ----
@@ -304,7 +305,7 @@ image::../assets/images/tutorial/tutorial-03.png[]
 ==== 4.3 Eyes
 
 The eyes layer is another simple layer without a transform, so we can construct
-our <<sc-layer>> instance an image path rather than a callback.
+our {sc-layer} instance an image path rather than a callback.
 
 [source, python]
 ----
