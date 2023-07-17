@@ -1,8 +1,7 @@
 = Ren'Py Sprite Customizer
 :renpy-docs: https://www.renpy.org/doc/html
 
-link:https://foxcapades.github.io/renpy-sprite-customizer/[Docs] |
-link:https://foxcapades.github.io/renpy-sprite-customizer/docs/tutorial.html[Tutorial] |
+link:https://foxcapades.github.io/renpy-sprite-customizer/[Documentation] |
 link:https://foxcapades.itch.io/renpy-sprite-customizer[Itch.io]
 
 
