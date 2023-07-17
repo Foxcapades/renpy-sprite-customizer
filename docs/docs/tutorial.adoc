@@ -1,0 +1,636 @@
+= Tutorial
+:toc:
+:toclevels: 3
+:source-highlighter: highlight.js
+:icons: font
+
+:docs-url-base: https://foxcapades.github.io/renpy-sprite-customizer
+:custom-sprite: link:{docs-url-base}#custom-sprite[CustomizedSprite]
+:lcb-docs: link:{docs-url-base}#_layer_callbacks[Layer Callback]
+:displayable-docs: link:https://www.renpy.org/doc/html/displayables.html#displayables[Displayable]
+:tint-matrix: link:https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix[TintMatrix]
+
+*This document is a work in progress!*
+
+== Prerequisites
+
+* Ren'Py
+* A code editor (link:https://code.visualstudio.com/[VSCode] with the
+link:https://marketplace.visualstudio.com/items?itemName=LuqueDaniel.languague-renpy[Ren'Py Plugin]
+is recommended)
+
+== Walkthrough
+
+=== 1. Project Preparation
+
+. Create a new project directory under your Ren'Py workspace directory titled
+  "CharacterCreatorTutorial" (or whatever you would like to call it).
+. Download the link:{url-github-repo}/releases/latest[latest release] of the
+  Sprite Customizer (specifically the 'base-project' zip file). and unzip it
+  into your new project directory.
+. In the new project directory, delete the `game/images/ccp` directory and its
+  contents.
+. Create a new directory under `game/images` called "sugar".
+. Download link:https://github.com/Foxcapades/renpy-sprite-customizer/raw/main/docs/assets/sugar-life.zip[the tutorial asset pack]footnote:[Sprites from link:https://butterymilk.itch.io/sugary-life[the Sugary Life asset pack]] and unzip it into the `game/images/sugar` directory.
+.. Your `game/images/sugar` directory should now contain multiple subdirectories
+   named "accessories", "brows", "clothes", etc...
+.. Explore the directories to familiarize yourself with the assets we will be
+   using in this tutorial.
+
+=== 2. The First Steps
+
+==== Prep
+
+. Open up your tutorial project directory in your code editor.
+. Open the `game/sprite_customizer/config.rpy` file.
+. Delete all the file's contents, leaving it empty.
+. Add a new `define` statement for our {custom-sprite}, it's best to go ahead
+  and make the declaration multi-line as we are going to be adding a lot to it.
++
+[source, python, linenums]
+----
+define player_customizer = CustomizedSprite(
+)
+----
+.. Give it a name that we can use in our `show` statements.  We are going to
+name it `player_base` for reasons we will explore <<char-expressions,later>>.
++
+[source, python, linenums]
+----
+define player_customizer = CustomizedSprite(
+  "player_base",
+)
+----
+
+==== Adding Our First Layer!
+
+Now we are going to add our first layer to the {custom-sprite}.  Layers are
+declared by creating new <<sc-layer>> instances and passing in a set of values
+that tell it what options it has and how to render them.
+
+Since layers are stacked on top of each other, the first layer is generally
+going to be the base or skin layer.  In our case we have multiple customization
+options for the skin layer, so this will be one of the more complex examples.
+
+The full snippet is as follows, but we will break down what it means below.
+
+[source, python, linenums]
+----
+init python:
+    def skin_lcb(skin_base, skin_color, **kwargs): <1>
+        return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+
+define player_customizer = CustomizedSprite(
+    "player_base",
+    SCLayer( <2>
+        "skin", <3>
+        skin_lcb, <4>
+        skin_base=SCOpt("Skin Base", group="Body", values=[ "dark", "medium", "light" ]), <5>
+        skin_color=SCOpt("Skin Color", group="Body", values=[ <6>
+            "#513021",
+            "#874c2c",
+            "#803716",
+            "#b66837",
+            "#a96238",
+            "#f9bf91",
+            "#ecc19f",
+            "#9e9a73",
+        ])
+    )
+)
+----
+<1> <<skin-lcb>> is used to generate the {displayable-docs} that will be used as
+    the base layer for our customized sprite.
+<2> <<sc-layer>> constructor call.
+<3> Name of the layer.
+<4> Reference to our `skin_lcb` callback, passing the callback to the new layer.
+<5> Skin base option, directly relates to the skin base image files included in
+    the tutorial sprite pack ("dark.png", "medium.png", "light.png").
+<6> Skin color option.  A collection of hex codes that will be used to make a
+    TintMatrix to apply the skin color to our grayscale base images.
+
+[#skin-lcb]
+===== The `skin_lcb` Callback
+
+[source, python]
+----
+def skin_lcb(skin_base, skin_color, **kwargs):
+    return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+----
+
+The `skin_lcb` function is a {lcb-docs} that is used to build the
+{displayable-docs} that will be used as the base layer for our
+{custom-sprite} instance.
+
+This function takes our two option values ("skin_base" and "skin_color") and
+uses them to provide a path to the target file and apply a TintMatrix to that
+target file.
+
+We pass this function to the created <<sc-layer>> instance to tell the layer how
+to render that part of the customized sprite.
+
+[#first-sc-layer]
+===== Our First SCLayer
+
+Our first <<sc-layer>> instance is constructed with the following arguments:
+
+. The layer name
+. A callback that will be used to generate our layer image
+. An option group named `skin_base`
+. An option group named `skin_color`
+
+The layer name should be unique across all the layers in a single
+{custom-sprite} instance.
+
+The callback is described above in <<skin-lcb>>.
+
+The first option group, `skin_base`, is a list of the distinct portion of the
+paths to the target image files.  In our case, the paths are all the same except
+for the file name (minus the extension) which is one of "dark", "medium", or
+"light".
+
+The second option group, `skin_color`, is a list of hex color codes that will be
+used to apply a {tint-matrix} to the selected grayscale base image.
+
+=== 3. Showing Our Image
+
+Now we have a base sprite (even if it's just a skin layer), lets show it so we
+can watch our progress in-game via script reloads.
+
+. Open `game/script.rpy` and delete all its contents.
+. Create a new <<sc-state>> object to hold our custom sprite option selections.
++
+[source, python]
+----
+default customizer_state = SCState()
+----
+. Add an link:https://www.renpy.org/doc/html/label.html#special-labels[`after_load`]
+  label and a python line to load our
+  link:https://foxcapades.github.io/renpy-sprite-customizer/#_sprite_state[state]
+  into the sprite customizer on game load time (without this the option
+  selections will not show when loading a game).
++
+[source, python]
+----
+label after_load:
+    $ player_customizer.set_state(customizer_state)
+----
++
+. Add our `start` label and another python line to load our
+  link:https://foxcapades.github.io/renpy-sprite-customizer/#_sprite_state[state]
+  into the sprite customizer.  This is done so that the player's choices will be
+  stored as part of the game save files.
++
+[source, python]
+----
+label start:
+    $ player_customizer.set_state(customizer_state)
+----
+. Show our customized sprite.
++
+[source, python]
+----
+label start:
+    $ player_customizer.set_state(customizer_state)
+    show player_base <1>
+----
+<1> "player_base" is the name we gave our {custom-sprite} instance in
+    `config.rpy`
+. Add a `pause` so the game doesn't end immediately.
++
+[source, python]
+----
+label start:
+    $ player_customizer.set_state(customizer_state)
+    show player_base
+    pause 1000000
+----
+
+Now we can reload our game as we add layers and see our changes live!
+
+image::../assets/images/tutorial/tutorial-01.png[]
+
+=== 4. Adding More Layers
+
+Now that we can see what we are doing, let's go back to `config.rpy` and add
+more layers.
+
+==== 4.1 Clothes
+
+Next we will add the clothes layer, this layer is a simple image swap layer so
+the definition of it will be more simple than the skin layer.
+
+. In the {custom-sprite} declaration, add a new argument that is another
+<<sc-layer>> constructor:
++
+[source, python]
+----
+define player_customizer = CustomizedSprite(
+    "player_base",
+    SCLayer(
+        ...
+    ),
+    SCLayer(
+        "clothes",
+        "images/sugar/clothes/{clothes}.png", <1>
+        clothes=SCOpt("Clothes", group="Body", values=[ "tshirt", "tie", "bow" ])
+    ),
+)
+----
+<1> For this layer, since we will just be swapping images out without any
+    transforms, we can pass a template path instead of a callback.
+. Go ahead and reload the game now and you should see the `tshirt` layer
+  rendering on top of the base image.
++
+image::../assets/images/tutorial/tutorial-02.png[]
+
+==== 4.2 Hair
+
+Now we will stack the hair layer onto our sprite.  This layer is another one
+with multiple images as well as color options, so we will be declaring another
+callback.
+
+Under our existing `skin_lcb` callback in the `init python` block we will add
+a new function named `hair_lcb` which does the same thing the `skin_lcb`
+function does but with a different image path.
+
+[source, python]
+----
+init python:
+    def skin_lcb(skin_base, skin_color, **kwargs):
+        return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+
+    def hair_lcb(hair_style, hair_color, **kwargs):
+        return Transform(f"images/sugar/hair/hair{hair_style}.png", matrixcolor=TintMatrix(hair_color))
+----
+
+Lets look at this callback quickly.  As it takes the arguments `hair_style` and
+`hair_color` which means our new layer must have those options attached to it.
+
+Now that that's out of the way, lets add our hair layer.
+
+[source, python]
+----
+define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "hair",
+        hair_lcb,
+        hair_style=SCOpt("Style", group="Hair", values=[ 1, 2, 3 ]), <1>
+        hair_color=SCOpt("Color", group="Hair", values=[ <2>
+            "#3D2314",
+            "#100C07",
+            "#DA680F",
+            "#FFCC47",
+            "#9A9E9F",
+            "#FAFAFA",
+            "#801818",
+            "#580271",
+            "#1592CA",
+            "#11694E",
+            "#FF87C5"
+        ])
+    ),
+)
+----
+<1> The first option just has the values `1`, `2`, and `3` as that is the only
+    part of the image name that differs between hair style images.
+<2> The second option is a selection of hex codes for hair color options we will
+    allow.
+
+image::../assets/images/tutorial/tutorial-03.png[]
+
+==== 4.3 Eyes
+
+The eyes layer is another simple layer without a transform, so we can construct
+our <<sc-layer>> instance an image path rather than a callback.
+
+[source, python]
+----
+define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "eyes",
+        "images/sugar/eyes/{eye_color}.png",
+        eye_color=SCOpt("Eyes", group="Face", values=[ "blue", "green", "grey", "yellow" ])
+    ),
+)
+----
+
+image::../assets/images/tutorial/tutorial-04.png[]
+
+
+==== 4.4 Accesories
+
+Our sprite pack comes with glasses and a bow, so we may as well add layers for
+those too.
+
+This is a good chance to talk about _removing_ options.  Right now, there is no
+way to do this via the Sprite Customizer other than using a blank PNG file which
+is what we will do to "remove" the accessory layers.
+
+The glasses layer is a simple image path layer, while the bow layer has color
+options like the skin and hair.
+
+[source, python]
+----
+init python:
+    ...
+    def hair_accessory_lcb(hair_accessory, hair_accessory_color, **kwargs):
+        return Transform(f"images/sugar/accessories/{hair_accessory}.png", matrixcolor=TintMatrix(hair_accessory_color))
+
+define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "eyes",
+        "images/sugar/accessories/{face_accessory}.png",
+        face_accessory=SCOpt("Glasses", group="Face", values=[ "glasses", "none" ])
+    ),
+    SCLayer(
+        "hair_accessory",
+        hair_accessory_lcb,
+        hair_accessory=SCOpt("Bow", group="Hair", values=[ "bow", "none" ]),
+        hair_accessory_color=SCOpt("Bow Color", group="Hair", values=[
+            "#849FF7",
+            "#A583F7",
+            "#FFEB79",
+            "#FFD579"
+        ])
+    ),
+)
+----
+
+image::../assets/images/tutorial/tutorial-05.png[]
+
+
+=== 5. The Character Customization Screen
+
+Now we have added all our base options (the remaining options will be used in
+a `layeredimage` for mood), lets show the included character customization
+screen and play with what we've made so far.
+
+To do this, go back to the `script.rpy` file and add call the customization
+screen.
+
+.`script.rpy`
+[source, python]
+----
+default customizer_state = SCState()
+
+label start:
+    $ player_customizer.set_state(customizer_state)
+    show player_base
+    pause 1000000
+
+    $ quick_menu = False <1>
+    call screen sprite_creator("player_base", player_customizer) <2>
+    $ quick_menu = True <3>
+
+    pause 1000000
+----
+<1> Hide the quick menu as it looks out of place with the `sprite_creator`
+    screen open.
+<2> Call the `sprite_creator` screen passing in the name of our player image
+    as well as a reference to the {custom-sprite} instance itself.
+<3> Reshow the quick menu when we leave the character customization screen.
+
+Play around with what you've made!
+
+image::../assets/images/tutorial/tutorial-06.gif[]
+
+[#char-expressions]
+=== 6. Character Expressions
+
+Now that we have a base for character, we can make the
+link:https://www.renpy.org/doc/html/layeredimage.html[Layered Images] necesesary
+to have character expressions.  We won't go into too much detail here as this is
+a standard Ren'Py feature.
+
+. Open up the `game/images.rpy` file and delete all of its contents.
+. Create a new `layeredimage` named "player".
++
+[source, python]
+----
+layeredimage player:
+----
+. Add an `always` attribute to show our customized sprite, `player_base`.
++
+[source, python]
+----
+layeredimage player:
+    always:
+        "player_base"
+----
+. Add a new group named "eyebrows" for our eyebrow expression sprites, "angry"
+  "neutral", "questioning", "raised", and "sad" and add those sprite paths.
++
+[source, python]
+----
+layeredimage player:
+    always:
+        "player_base"
+
+    group eyebrows:
+        attribute angry_brows:
+            "images/sugar/brows/angry.png"
+        attribute neutral_brows default:
+            "images/sugar/brows/neutral.png"
+        attribute questioning_brows:
+            "images/sugar/brows/questioning.png"
+        attribute raised_brows:
+            "images/sugar/brows/raised.png"
+        attribute sad_brows:
+            "images/sugar/brows/sad.png"
+----
+. Add another group named "mouth" for our mouth expression sprites, "frown",
+  "happy", "smile", and "surprised".
++
+[source, python]
+----
+layeredimage player:
+    ...
+    group mouth:
+        attribute frown:
+            "images/sugar/mouth/frown.png"
+        attribute happy:
+            "images/sugar/mouth/happy.png"
+        attribute smile default:
+            "images/sugar/mouth/smile.png"
+        attribute surprised:
+            "images/sugar/mouth/surprised.png"
+----
+
+
+Now we have constructed a layered image with expressions that we can use as our
+character sprite.  To do this we need to go back to `script.rpy` and edit the
+references to `player_base` to say "player" instead.  This will use our new
+layered image rather than the raw custom sprite it's based on.
+
+[source, python]
+----
+default customizer_state = SCState()
+
+label start:
+    $ player_customizer.set_state(customizer_state)
+    show player
+    pause 1000000
+
+    $ quick_menu = False
+    call screen sprite_creator("player", player_customizer)
+    $ quick_menu = True
+
+    pause 1000000
+----
+
+image::../assets/images/tutorial/tutorial-07.png[]
+
+
+Now we can change our player character sprites expression by using our
+`layeredimage`'s attributes like so:
+
+[source, python]
+----
+    show player raised_brows surprised
+    # or
+    show player angry_brows frown
+    # etc...
+----
+
+== Completed Source
+
+.`game/sprite_customizer/config.rpy`
+[%collapsible]
+====
+[source, python]
+----
+init python:
+    def skin_lcb(skin_base, skin_color, **kwargs):
+        return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+
+    def hair_lcb(hair_style, hair_color, **kwargs):
+        return Transform(f"images/sugar/hair/hair{hair_style}.png", matrixcolor=TintMatrix(hair_color))
+
+    def hair_accessory_lcb(hair_accessory, hair_accessory_color, **kwargs):
+        return Transform(f"images/sugar/accessories/{hair_accessory}.png", matrixcolor=TintMatrix(hair_accessory_color))
+
+define player_customizer = CustomizedSprite(
+    "player_base",
+    SCLayer(
+        "skin",
+        skin_lcb,
+        skin_base=SCOpt("Skin Base", group="Body", values=[ "dark", "medium", "light" ]),
+        skin_color=SCOpt("Skin Color", group="Body", values=[
+            "#513021",
+            "#874c2c",
+            "#803716",
+            "#b66837",
+            "#a96238",
+            "#f9bf91",
+            "#ecc19f",
+            "#9e9a73",
+        ])
+    ),
+    SCLayer(
+        "clothes",
+        "images/sugar/clothes/{clothes}.png",
+        clothes=SCOpt("Clothes", group="Body", values=[ "tshirt", "tie", "bow" ])
+    ),
+    SCLayer(
+        "hair",
+        hair_lcb,
+        hair_style=SCOpt("Style", group="Hair", values=[ 1, 2, 3 ]),
+        hair_color=SCOpt("Color", group="Hair", values=[
+            "#3D2314",
+            "#100C07",
+            "#DA680F",
+            "#FFCC47",
+            "#9A9E9F",
+            "#FAFAFA",
+            "#801818",
+            "#580271",
+            "#1592CA",
+            "#11694E",
+            "#FF87C5"
+        ])
+    ),
+    SCLayer(
+        "eyes",
+        "images/sugar/eyes/{eye_color}.png",
+        eye_color=SCOpt("Eyes", group="Face", values=[ "blue", "green", "grey", "yellow" ])
+    ),
+    SCLayer(
+        "eyes",
+        "images/sugar/accessories/{face_accessory}.png",
+        face_accessory=SCOpt("Glasses", group="Face", values=[ "glasses", "none" ])
+    ),
+    SCLayer(
+        "hair_accessory",
+        hair_accessory_lcb,
+        hair_accessory=SCOpt("Bow", group="Hair", values=[ "bow", "none" ]),
+        hair_accessory_color=SCOpt("Bow Color", group="Hair", values=[
+            "#849FF7",
+            "#A583F7",
+            "#FFEB79",
+            "#FFD579"
+        ])
+    ),
+)
+----
+====
+
+.`game/images.rpy`
+[%collapsible]
+====
+[source, python]
+----
+layeredimage player:
+    always:
+        "player_base"
+
+    group eyebrows:
+        attribute angry_brows:
+            "images/sugar/brows/angry.png"
+        attribute neutral_brows default:
+            "images/sugar/brows/neutral.png"
+        attribute questioning_brows:
+            "images/sugar/brows/questioning.png"
+        attribute raised_brows:
+            "images/sugar/brows/raised.png"
+        attribute sad_brows:
+            "images/sugar/brows/sad.png"
+
+    group mouth:
+        attribute frown:
+            "images/sugar/mouth/frown.png"
+        attribute happy:
+            "images/sugar/mouth/happy.png"
+        attribute smile default:
+            "images/sugar/mouth/smile.png"
+        attribute surprised:
+            "images/sugar/mouth/surprised.png"
+----
+====
+
+.`game/script.rpy`
+[%collapsible]
+====
+[source, python]
+----
+default customizer_state = SCState()
+
+label start:
+    $ player_customizer.set_state(customizer_state)
+
+    show player
+    pause 1000000
+
+    $ quick_menu = False
+    call screen sprite_creator("player", player_customizer)
+    $ quick_menu = True
+
+    pause 1000000
+----
+====

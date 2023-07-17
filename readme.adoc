@@ -2,7 +2,9 @@
 :renpy-docs: https://www.renpy.org/doc/html
 
 link:https://foxcapades.github.io/renpy-sprite-customizer/[Docs] |
-link:https://foxcapades.itch.io/renpy-sprite-customizer[Itch.IO]
+link:https://foxcapades.github.io/renpy-sprite-customizer/docs/tutorial.html[Tutorial] |
+link:https://foxcapades.itch.io/renpy-sprite-customizer[Itch.io]
+
 
 A pluggable sprite customization framework that allows the creation of any
 number of playtime-customizable sprites using Ren'Py's
