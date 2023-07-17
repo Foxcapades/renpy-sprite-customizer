@@ -127,6 +127,14 @@ This function takes our two option values ("skin_base" and "skin_color") and
 uses them to provide a path to the target file and apply a TintMatrix to that
 target file.
 
+[IMPORTANT]
+--
+The names of a callback's arguments must be the same as the names of the options
+on the relevant layer.  Since, in this case, our layer has two options named
+`skin_base` and `skin_color`, those two options will be passed to the callback
+under arguments with those names.
+--
+
 We pass this function to the created {sc-layer} instance to tell the layer how
 to render that part of the customized sprite.
 

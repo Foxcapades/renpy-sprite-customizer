@@ -670,6 +670,23 @@ TintMatrix to apply the skin color to our grayscale base images.</td>
 uses them to provide a path to the target file and apply a TintMatrix to that
 target file.</p>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The names of a callback&#8217;s arguments must be the same as the names of the options
+on the relevant layer.  Since, in this case, our layer has two options named
+<code>skin_base</code> and <code>skin_color</code>, those two options will be passed to the callback
+under arguments with those names.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>We pass this function to the created <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> instance to tell the layer how
 to render that part of the customized sprite.</p>
@@ -1329,7 +1346,7 @@ label start:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-07-16 23:58:11 -0400
+Last updated 2023-07-17 00:02:22 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
