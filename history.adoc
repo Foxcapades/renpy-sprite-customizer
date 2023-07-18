@@ -2,6 +2,13 @@
 
 == Version 1.x.x
 
+=== v1.1.1
+
+==== Fixes
+
+* Fixes issue with showing multiple text inputs at the same time.
+
+
 === v1.1.0
 
 ==== Features

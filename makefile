@@ -11,13 +11,23 @@ clean:
 	@find . -name '*.rpyc' | xargs -I'{}' rm {}
 
 
-.PHONY: build-src-release
-build-src-release: clean
+.PHONY: release
+release: build-base-project-zip build-slim-zip
+
+
+.PHONY: build-base-project-zip
+build-base-project-zip: clean
 	@mkdir -p releases
-	@zip -r "releases/base-project-$(VERSION).zip" game license -x game/saves/**\*
+	@zip -r "releases/sc-base-project-$(VERSION).zip" game license -x game/saves/**\*
 
 
-.PHONY: build-docs
+.PHONY: build-slim-zip
+build-slim-zip: clean
+	@mkdir -p releases
+	@zip -r "releases/sc-slim-$(VERSION).zip" game/sprite_customizer license
+
+
+.PHONY: docs
 build-docs:
 	@mkdir -p docs/versions/$(FEATURE)
 	@asciidoctor -b html5 -o docs/index.html -a revnumber=$(FEATURE) docs/index.adoc
