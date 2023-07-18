@@ -21,13 +21,13 @@ class SCTextOption(SCOption):
     """
     def __init__(
         self,
-        key,
-        name,
-        group,
-        default="",
-        prefix=None,
-        suffix=None,
-        max_len=None,
+        key: str,
+        name: str,
+        group: str,
+        default: str = "",
+        prefix: str | None = None,
+        suffix: str | None = None,
+        max_len: int | None = None,
         **kwargs
     ):
         """
@@ -93,7 +93,7 @@ class SCTextOption(SCOption):
 
 
     @property
-    def default(self):
+    def default(self) -> str:
         """
         The default value set on this option.
 
@@ -103,7 +103,7 @@ class SCTextOption(SCOption):
         return self._default
 
     @property
-    def selection_value(self):
+    def selection_value(self) -> str:
         """
         The current user selection value for this option.
         """
@@ -113,7 +113,7 @@ class SCTextOption(SCOption):
         return self._state.get_selection(self._key)
 
     @property
-    def current_value(self):
+    def current_value(self) -> str:
         """
         The current value for this text input.  This is not the same as the
         selection value.  This value is used to track the text the user has set
@@ -128,14 +128,14 @@ class SCTextOption(SCOption):
         return self._current
 
     @property
-    def has_prefix(self):
+    def has_prefix(self) -> bool:
         """
         Whether this option has a prefix value set.
         """
         return self._prefix != None
 
     @property
-    def prefix(self):
+    def prefix(self) -> str | None:
         """
         This option's prefix value.
 
@@ -145,14 +145,14 @@ class SCTextOption(SCOption):
         return self._prefix
 
     @property
-    def has_suffix(self):
+    def has_suffix(self) -> bool:
         """
         Whether this option has a suffix value set.
         """
         return self._suffix != None
 
     @property
-    def suffix(self):
+    def suffix(self) -> str | None:
         """
         This option's suffix value.
 
@@ -162,14 +162,14 @@ class SCTextOption(SCOption):
         return self._suffix
 
     @property
-    def has_max_len(self):
+    def has_max_len(self) -> bool:
         """
         Whether this option has a max_len value set.
         """
         return self._max_len != None
 
     @property
-    def max_len(self):
+    def max_len(self) -> int | None:
         """
         Max length.
 
@@ -214,7 +214,7 @@ class SCTextOption(SCOption):
         """
         self._req_state().set_selection(self._key, self._current)
 
-    def set_value(self, value):
+    def set_value(self, value: str):
         """
         Sets the `current_value` of this option to the given value.
 
@@ -247,15 +247,15 @@ class SCValidatableTextOption(SCTextOption):
     """
     def __init__(
         self,
-        key,
-        name,
-        group,
-        validator,
-        default="",
-        autocommit=False,
-        prefix=None,
-        suffix=None,
-        max_len=None,
+        key: str,
+        name: str,
+        group: str,
+        validator: function,
+        default: str = "",
+        autocommit: bool = False,
+        prefix: str | None = None,
+        suffix: str | None = None,
+        max_len: int | None = None,
         **kwargs
     ):
         """
@@ -322,7 +322,7 @@ class SCValidatableTextOption(SCTextOption):
 
 
     @property
-    def is_valid(self):
+    def is_valid(self) -> bool:
         """
         Whether the `current_value` of this option is valid against the given
         validation function.
@@ -371,7 +371,7 @@ class SCValidatableTextOption(SCTextOption):
         if self.is_valid:
             super().commit_to_selection()
 
-    def set_value(self, value):
+    def set_value(self, value: str):
         """
         Sets the `current_value` of this option to the given value.
 

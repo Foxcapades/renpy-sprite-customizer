@@ -2,10 +2,12 @@ from renpy.store import DynamicDisplayable, Attribute # type: ignore
 
 from options.option_ren import SCOption
 from options.list_option_ren import SCValueListOption
+from .state_ren import SCState
 
 """renpy
 init -1 python:
 """
+
 
 class SCLayer:
     """
@@ -27,7 +29,13 @@ class SCLayer:
     ```
     """
 
-    def __init__(self, name, layer_provider, transform=None, **options):
+    def __init__(
+        self,
+        name: str,
+        layer_provider: str|function,
+        transform: function = None,
+        **options: SCOption
+    ):
         """
         Initializes the new `SCLayer` instance with the given arguments.
 
@@ -77,11 +85,11 @@ class SCLayer:
         if not (callable(layer_provider) or isinstance(layer_provider, str)):
             raise Exception("SCLayer layer_provider must be callable or a string.")
 
-        self._name  = name
-        self._provider = layer_provider
-        self._state = None
-        self._options = {}
-        self._transform = transform
+        self._name: str = name
+        self._provider: str|function = layer_provider
+        self._state: SCState | None = None
+        self._options: dict[str, SCOption] = {}
+        self._transform: function = transform
 
         for key, opt in options.items():
             if isinstance(opt, SCOption):
@@ -98,7 +106,6 @@ class SCLayer:
             else:
                 raise Exception("SCLayer option \"{}\" was not a tuple or SCOption instance.".format(key))
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   Properties
@@ -106,25 +113,24 @@ class SCLayer:
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         Name of the layer.
         """
         return self._name
 
     @property
-    def options(self):
+    def options(self) -> list[SCOption]:
         """
         List of options attached to this layer.
         """
         return self._options.values()
 
     @property
-    def options_by_key(self):
+    def options_by_key(self) -> dict[str, SCOption]:
         """
         """
         return self._options.copy()
-
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
@@ -132,9 +138,8 @@ class SCLayer:
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-
     @staticmethod
-    def _2_tuple_to_opt(key, tup):
+    def _2_tuple_to_opt(key, tup: tuple[str, list[any]]) -> SCValueListOption:
         """
         Converts a two-tuple keyword arg from __init__ into an SCOption
         instance.
@@ -151,13 +156,13 @@ class SCLayer:
         if not isinstance(tup[0], str):
             raise Exception("invalid 2 tuple passed as option {}, first value must be a string".format(key))
 
-        if isinstance(tup[1], list) or isinstance(tup[1], set):
+        if isinstance(tup[1], list[any]) or isinstance(tup[1], set):
             return SCValueListOption(key, tup[0], tup[0], tup[1].copy())
 
         raise Exception("invalid 2 tuple passed as option {}, second value must be a list or set".format(key))
 
     @staticmethod
-    def _3_tuple_to_opt(key, tup):
+    def _3_tuple_to_opt(key, tup: tuple[str, str, list[any]]) -> SCValueListOption:
         """
         Converts a three-tuple keyword arg from __init__ into an SCOption
         instance.
@@ -183,7 +188,7 @@ class SCLayer:
 
         raise Exception("invalid 3 tuple passed as option {}, third value must be a list or set".format(key))
 
-    def _require_option(self, key):
+    def _require_option(self, key: str) -> SCOption:
         """
         Requires that the given option keyword is known to this layer, then
         returns the target option.
@@ -199,13 +204,13 @@ class SCLayer:
 
         return self._options[key]
 
-    def _render(self, st, at, **kwargs):
+    def _render(self, st: float, at: float, **kwargs: any) -> tuple[any, float]:
         if callable(self._provider):
             return self._render_function(st, at, **kwargs)
         else:
-            return self._render_string(st, at, **kwargs)
+            return self._render_string(**kwargs)
 
-    def _render_string(self, st, at, **kwargs):
+    def _render_string(self, **kwargs: any) -> tuple[str, float]:
         out = self._provider
         vals = kwargs.copy()
 
@@ -220,7 +225,7 @@ class SCLayer:
 
         return (out, 0.0)
 
-    def _render_function(self, st, at, **kwargs):
+    def _render_function(self, st: float, at: float, **kwargs: any) -> tuple[any, float]:
         kwargs["st"] = st
         kwargs["at"] = at
 
@@ -236,12 +241,12 @@ class SCLayer:
 
         return out if isinstance(out, tuple) else (out, 0.0)
 
-    def _set_state(self, state):
+    def _set_state(self, state: SCState):
         self._state = state
         for opt in self._options.values():
             opt._set_state(state)
 
-    def _append_options_to_dict(self, d):
+    def _append_options_to_dict(self, d: dict[str, SCOption]):
         for key, opt in self._options.values():
             d[key] = opt
 
@@ -262,7 +267,6 @@ class SCLayer:
             options[key] = option._clone()
 
         return SCLayer(self._name, self._provider, self._transform, **options)
-
 
     def _build_image(self):
         """

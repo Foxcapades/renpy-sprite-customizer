@@ -1,5 +1,5 @@
 [#sc-text-option]
-= SCTextOption
+= `SCTextOption`
 :icons: font
 :source-highlighter: highlight.js
 
@@ -138,7 +138,17 @@ rendering this option as an input.
 
 [source, python]
 ----
-def __init__(self, key, name, group, default="", prefix=None, suffix=None, max_len=None, **kwargs)
+def __init__(
+    self,
+    key: str,
+    name: str,
+    group: str,
+    default: str = "",
+    prefix: str | None = None,
+    suffix: str | None = None,
+    max_len: int | None = None,
+    **kwargs
+)
 ----
 
 Initializes the new <<sc-text-option>> instance with the given arguments.
@@ -198,7 +208,7 @@ Commits the `current_value` of this option to the user selections.
 
 [source, python]
 ----
-def set_value(self, value)
+def set_value(self, value: str)
 ----
 
 Sets the `current_value` of this option to the given value.

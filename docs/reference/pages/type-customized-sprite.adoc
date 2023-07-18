@@ -1,5 +1,5 @@
 [#custom-sprite]
-= CustomizedSprite
+= `CustomizedSprite`
 :icons: font
 :source-highlighter: highlight.js
 
@@ -11,7 +11,6 @@ customizations between each layer's configured customization options.
 
 [#custom-sprite-properties]
 == Properties
-
 
 === `layers`
 
@@ -47,6 +46,11 @@ instance.
 
 === `+__init__+`
 
+[source, python]
+----
+def __init__(self, image_name: str, *layers: SCLayer, **kwargs: any)
+----
+
 Initializes the new <<custom-sprite>> instance with the given arguments.
 
 ==== Arguments
@@ -73,6 +77,11 @@ layer will be the "front".
 
 
 === `set_state`
+
+[source, python]
+----
+def set_state(self, state: SCState)
+----
 
 Sets the internal state object of this <<custom-sprite>> instance to the given
 <<sc-state>> instance.
@@ -101,6 +110,11 @@ label after_load:
 
 === `get_options`
 
+[source, python]
+----
+def get_options(self) -> list
+----
+
 Gets a list of the options attached to this <<custom-sprite>> instance.
 
 ==== Returns
@@ -114,6 +128,11 @@ Gets a list of the options attached to this <<custom-sprite>> instance.
 
 === `get_options_by_key`
 
+[source, python]
+----
+def get_options_by_key(self) -> OrderedDict
+----
+
 Gets a dict of option keys mapped to SCOption instances for all the options
 attached to this <<custom-sprite>>.
 
@@ -121,12 +140,17 @@ attached to this <<custom-sprite>>.
 
 [cols="1m,9a"]
 |===
-| dict
+| OrderedDict
 | Dict of option keys mapped to SCOption instances.
 |===
 
 
 === `get_options_by_group`
+
+[souce, python]
+----
+def get_options_by_group(self, group_order: list|None = None) -> OrderedDict
+----
 
 Returns an index of options and display names grouped by layer group name.  This
 index may optionally be ordered by providing a list of the desired group order.
@@ -159,7 +183,7 @@ definitions, and ONLY those groups.
 
 [cols="1m,9a"]
 |===
-| dict
+| OrderedDict
 | An index of the declared sprite customization options grouped by the
 configured option groups.
 
@@ -184,6 +208,11 @@ configured option groups.
 
 
 === `randomize`
+
+[source, python]
+----
+def randomize(self)
+----
 
 Randomizes the selections for all the randomizable options on this
 <<custom-sprite>> instance.

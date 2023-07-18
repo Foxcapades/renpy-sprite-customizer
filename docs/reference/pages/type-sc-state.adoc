@@ -1,5 +1,5 @@
 [#sc-state]
-= SCState
+= `SCState`
 
 This class defines an object that is used to hold sprite customization option
 selections. This is used to persist the selected options as part of the game
@@ -15,8 +15,12 @@ my_sprite.set_state(my_sprite_state)
 [#sc-state-methods]
 == Methods
 
-
 === `+__init__+`
+
+[source, python]
+----
+def __init__(self, selections: dict = {}, user_state: dict = {})
+----
 
 Initializes the new, blank SCState instance.
 
@@ -37,6 +41,11 @@ state.
 
 
 === `set_variable`
+
+[source, python]
+----
+def set_variable(self, key: str, value: any)
+----
 
 Store arbitrary user variable that will be passed to all layer callbacks.
 
@@ -59,7 +68,6 @@ label start:
     $ sprite_state.set_variable("mood", "angry")
 ```
 
-
 ==== Arguments
 
 [cols="1h,1m,8a"]
@@ -75,6 +83,11 @@ label start:
 
 
 === `get_variable`
+
+[source, python]
+----
+def get_variable(self, key: str) -> any
+----
 
 Retrieve user variable from the <<sc-state>> store by key.
 
@@ -98,6 +111,11 @@ Retrieve user variable from the <<sc-state>> store by key.
 
 === `has_variable`
 
+[source, python]
+----
+def has_variable(self, key: str) -> bool
+----
+
 Tests whether the state contains a user variable value with the given key.
 
 ==== Arguments
@@ -120,6 +138,11 @@ Tests whether the state contains a user variable value with the given key.
 
 === `set_selection`
 
+[source, python]
+----
+def set_selection(self, key: str, value: any)
+----
+
 Sets the target selection value.
 
 ==== Arguments
@@ -137,6 +160,11 @@ Sets the target selection value.
 
 
 === `get_selection`
+
+[source, python]
+----
+def get_selection(self, key: str) -> any
+----
 
 Looks up the target selection value.
 
@@ -159,6 +187,11 @@ Looks up the target selection value.
 
 
 === `has_selection`
+
+[source, python]
+----
+def has_selection(self, key: str) -> bool
+----
 
 Tests whether the state contains a selection value with the given key.
 

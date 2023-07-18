@@ -1,5 +1,5 @@
 [#sc-layer]
-= SCLayer
+= `SCLayer`
 
 Represents a single layer in a customizable sprite.
 
@@ -47,4 +47,55 @@ SCLayer("name", "my_image_{option}", option=("Option", [ "some", "choices" ]))
 | dict
 | Dict of option keys mapped to <<sc-option>> instances for all the options
 attached to this layer.
+|===
+
+
+[#sc-layer-methods]
+== Methods
+
+=== `+__init__+`
+
+[source, python]
+----
+def __init__(
+    self,
+    name: str,
+    layer_provider: str|function,
+    transform: function = None,
+    **options: SCOption
+)
+----
+
+Initializes the new `SCLayer` instance with the given arguments.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| name
+| str
+| Internal name of the layer.  This value should be all lowercase and should
+only contain letters, numbers, and underscores.
+
+| layer_provider
+| callable \| str
+| Either a Layer Callback used to create the displayable that backs this layer,
+or a template string containing `{var_name}` variables that will be injected
+based on the selected options.
+
+| transform
+| callable \| None
+| Optional transform function.  This function takes a Displayable as a single
+argument and returns a Displayable.  Allows performing arbitrary transforms to
+the whole layer regardless of option selections.
+
+| **options
+| kwargs
+| Keyword arguments that define the options available to this layer.  Keyword
+args must be one of the following types:
+
+* An <<sc-opt>> instance.
+* An <<sc-option>> instance.
+* A tuple of 2 values: `(display_name, value_list)`
+* A tuple of 3 values: `(display_name, group, value_list)`
 |===

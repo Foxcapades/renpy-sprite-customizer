@@ -20,7 +20,15 @@ class SCValueListOption(SCOption):
     useful.
     """
 
-    def __init__(self, key, name, group, values, display_digits=2, **kwargs):
+    def __init__(
+        self,
+        key: str,
+        name: str,
+        group: str,
+        values: list[any] | set[any],
+        display_digits: int = 2,
+        **kwargs
+    ):
         """
         Initializes the new SCValueListOption instance with the given
         arguments.
@@ -63,7 +71,7 @@ class SCValueListOption(SCOption):
 
         self._display_pattern = "{{0{}d}}".format(display_digits)
 
-        self._values = [ value for value in values ]
+        self._values: list[any] = [ value for value in values ]
 
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -74,21 +82,21 @@ class SCValueListOption(SCOption):
 
 
     @property
-    def values(self):
+    def values(self) -> list[any]:
         """
         The list of values that are part of this option group.
         """
         return self._values.copy()
 
     @property
-    def value_count(self):
+    def value_count(self) -> int:
         """
         The number of options in this option group.
         """
         return len(self._values)
 
     @property
-    def selection_index(self):
+    def selection_index(self) -> int:
         """
         Index of the current selection for this option group.
         """
@@ -98,7 +106,7 @@ class SCValueListOption(SCOption):
             return 0
 
     @property
-    def selection_value(self):
+    def selection_value(self) -> any:
         """
         The currently selected value for this option group.
         """

@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<title>Sprite Customizer Tutorial</title>
+<style>
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,700italic,400italic);
@@ -2702,3 +2711,998 @@ a > code {
   border: none !important;
   color: #2980b9 !important;
 }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Sprite Customizer Tutorial</h1>
+<div class="details">
+<span id="revnumber">version 1.2.0</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_prerequisites">Prerequisites</a></li>
+<li><a href="#_walkthrough">Walkthrough</a>
+<ul class="sectlevel2">
+<li><a href="#_1_project_preparation">1. Project Preparation</a></li>
+<li><a href="#_2_the_first_steps">2. The First Steps</a>
+<ul class="sectlevel3">
+<li><a href="#_2_1_prep">2.1 Prep</a></li>
+<li><a href="#_2_2_adding_our_first_layer">2.2 Adding Our First Layer!</a></li>
+</ul>
+</li>
+<li><a href="#_3_showing_our_image">3. Showing Our Image</a></li>
+<li><a href="#_4_adding_more_layers">4. Adding More Layers</a>
+<ul class="sectlevel3">
+<li><a href="#_4_1_clothes">4.1 Clothes</a></li>
+<li><a href="#_4_2_hair">4.2 Hair</a></li>
+<li><a href="#_4_3_eyes">4.3 Eyes</a></li>
+<li><a href="#_4_4_glasses">4.4 Glasses</a></li>
+<li><a href="#_4_6_bow">4.6 Bow</a></li>
+</ul>
+</li>
+<li><a href="#_6_the_character_customization_screen">6. The Character Customization Screen</a></li>
+<li><a href="#char-expressions">6. Character Expressions</a></li>
+</ul>
+</li>
+<li><a href="#_completed_source">Completed Source</a></li>
+<li><a href="#_credits">Credits</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>This document is a work in progress!</strong></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a><a class="link" href="#_prerequisites">Prerequisites</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Ren&#8217;Py</p>
+</li>
+<li>
+<p>A code editor (<a href="https://code.visualstudio.com/">VSCode</a> with the
+<a href="https://marketplace.visualstudio.com/items?itemName=LuqueDaniel.languague-renpy">Ren&#8217;Py Plugin</a>
+is recommended)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_walkthrough"><a class="anchor" href="#_walkthrough"></a><a class="link" href="#_walkthrough">Walkthrough</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_project_preparation"><a class="anchor" href="#_1_project_preparation"></a><a class="link" href="#_1_project_preparation">1. Project Preparation</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new project directory under your Ren&#8217;Py workspace directory titled
+"CharacterCreatorTutorial" (or whatever you would like to call it).</p>
+</li>
+<li>
+<p>Download the <a href="https://github.com/Foxcapades/renpy-sprite-customizer/releases/latest">latest release</a> of the
+Sprite Customizer (specifically the 'base-project' zip file). and unzip it
+into your new project directory.</p>
+</li>
+<li>
+<p>In the new project directory, delete the <code>game/images/ccp</code> directory and its
+contents.</p>
+</li>
+<li>
+<p>Create a new directory under <code>game/images</code> called "sugar".</p>
+</li>
+<li>
+<p>Download <a href="https://github.com/Foxcapades/renpy-sprite-customizer/raw/main/docs/assets/sugar-life.zip">the tutorial asset pack</a> and unzip it into the <code>game/images/sugar</code> directory.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Your <code>game/images/sugar</code> directory should now contain multiple subdirectories
+named "accessories", "brows", "clothes", etc&#8230;&#8203;</p>
+</li>
+<li>
+<p>Explore the directories to familiarize yourself with the assets we will be
+using in this tutorial.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_the_first_steps"><a class="anchor" href="#_2_the_first_steps"></a><a class="link" href="#_2_the_first_steps">2. The First Steps</a></h3>
+<div class="sect3">
+<h4 id="_2_1_prep"><a class="anchor" href="#_2_1_prep"></a><a class="link" href="#_2_1_prep">2.1 Prep</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open up your tutorial project directory in your code editor.</p>
+</li>
+<li>
+<p>Open the <code>game/sprite_customizer/config.rpy</code> file.</p>
+</li>
+<li>
+<p>Delete all the file&#8217;s contents, leaving it empty.</p>
+</li>
+<li>
+<p>Add a new <code>define</code> statement for our <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a>, it&#8217;s best to go ahead
+and make the declaration multi-line as we are going to be adding a lot to it.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+)</code></pre>
+</div>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Give it a name that we can use in our <code>show</code> statements.  We are going to
+name it <code>player_base</code> for reasons we will explore <a href="#char-expressions">later</a>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+  "player_base",
+)</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2_2_adding_our_first_layer"><a class="anchor" href="#_2_2_adding_our_first_layer"></a><a class="link" href="#_2_2_adding_our_first_layer">2.2 Adding Our First Layer!</a></h4>
+<div class="paragraph">
+<p>Now we are going to add our first layer to the <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a>.  Layers are
+declared by creating new <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> instances and passing in a set of values
+that tell it what options it has and how to render them.</p>
+</div>
+<div class="paragraph">
+<p>Since layers are stacked on top of each other, the first layer is generally
+going to be the base or skin layer.  In our case we have multiple customization
+options for the skin layer, so this will be one of the more complex examples.</p>
+</div>
+<div class="paragraph">
+<p>The full snippet is as follows, but we will break down what it means below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
+    def skin_lcb(skin_base, skin_color, **kwargs): <i class="conum" data-value="1"></i><b>(1)</b>
+        return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+
+define player_customizer = CustomizedSprite(
+    "player_base",
+    SCLayer( <i class="conum" data-value="2"></i><b>(2)</b>
+        "skin", <i class="conum" data-value="3"></i><b>(3)</b>
+        skin_lcb, <i class="conum" data-value="4"></i><b>(4)</b>
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <i class="conum" data-value="5"></i><b>(5)</b>
+        skin_color=("Skin Color", "Body", [ <i class="conum" data-value="6"></i><b>(6)</b>
+            "#613021",
+            "#874c2c",
+            "#803716",
+            "#b66837",
+            "#a96238",
+            "#f9bf91",
+            "#ecc19f",
+            "#9e9a73",
+        ])
+    )
+)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><a href="#skin-lcb">The <code>skin_lcb</code> Callback</a> is used to generate the <a href="https://www.renpy.org/doc/html/displayables.html#displayables">Displayable</a> that will be used as
+the base layer for our customized sprite.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> constructor call.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Name of the layer.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Reference to our <code>skin_lcb</code> callback, passing the callback to the new layer.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Skin base option, directly relates to the skin base image files included in
+the tutorial sprite pack ("dark.png", "medium.png", "light.png").</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Skin color option.  A collection of hex codes that will be used to make a
+TintMatrix to apply the skin color to our grayscale base images.</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="skin-lcb"><a class="anchor" href="#skin-lcb"></a><a class="link" href="#skin-lcb">The <code>skin_lcb</code> Callback</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">def skin_lcb(skin_base, skin_color, **kwargs):
+    return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>skin_lcb</code> function is a <a href="https://foxcapades.github.io/renpy-sprite-customizer#_layer_callbacks">Layer Callback</a> that is used to build the
+<a href="https://www.renpy.org/doc/html/displayables.html#displayables">Displayable</a> that will be used as the base layer for our
+<a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> instance.</p>
+</div>
+<div class="paragraph">
+<p>This function takes our two option values ("skin_base" and "skin_color") and
+uses them to provide a path to the target file and apply a TintMatrix to that
+target file.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The names of a callback&#8217;s arguments must be the same as the names of the options
+on the relevant layer.  Since, in this case, our layer has two options named
+<code>skin_base</code> and <code>skin_color</code>, those two options will be passed to the callback
+under arguments with those names.  The ordering of the arguments does not
+matter.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We pass this function to the created <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> instance to tell the layer how
+to render that part of the customized sprite.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="first-sc-layer"><a class="anchor" href="#first-sc-layer"></a><a class="link" href="#first-sc-layer">Our First SCLayer</a></h5>
+<div class="paragraph">
+<p>Our first <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> instance is constructed with the following arguments:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The layer name</p>
+</li>
+<li>
+<p>A callback that will be used to generate our layer image</p>
+</li>
+<li>
+<p>An option group named <code>skin_base</code></p>
+</li>
+<li>
+<p>An option group named <code>skin_color</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The layer name should be unique across all the layers in a single
+<a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> instance.</p>
+</div>
+<div class="paragraph">
+<p>The callback is described above in <a href="#skin-lcb">The <code>skin_lcb</code> Callback</a>.</p>
+</div>
+<div class="paragraph">
+<p>The first option group, <code>skin_base</code>, is a list of the distinct portion of the
+paths to the target image files.  In our case, the paths are all the same except
+for the file name (minus the extension) which is one of "dark", "medium", or
+"light".</p>
+</div>
+<div class="paragraph">
+<p>The second option group, <code>skin_color</code>, is a list of hex color codes that will be
+used to apply a <a href="https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix">TintMatrix</a> to the selected grayscale base image.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_showing_our_image"><a class="anchor" href="#_3_showing_our_image"></a><a class="link" href="#_3_showing_our_image">3. Showing Our Image</a></h3>
+<div class="paragraph">
+<p>Now we have a base sprite (even if it&#8217;s just a skin layer), lets show it so we
+can watch our progress in-game via script reloads.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open <code>game/script.rpy</code> and delete all its contents.</p>
+</li>
+<li>
+<p>Create a new <a href="#sc-state">[sc-state]</a> object to hold our custom sprite option selections.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add an <a href="https://www.renpy.org/doc/html/label.html#special-labels"><code>after_load</code></a>
+label and a python line to load our
+<a href="https://foxcapades.github.io/renpy-sprite-customizer/#_sprite_state">state</a>
+into the sprite customizer on game load time (without this the option
+selections will not show when loading a game).</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label after_load:
+    $ player_customizer.set_state(customizer_state)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add our <code>start</code> label and another python line to load our
+<a href="https://foxcapades.github.io/renpy-sprite-customizer/#_sprite_state">state</a>
+into the sprite customizer.  This is done so that the player&#8217;s choices will be
+stored as part of the game save files.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label start:
+    $ player_customizer.set_state(customizer_state)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Show our customized sprite.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label start:
+    $ player_customizer.set_state(customizer_state)
+    show player_base <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>"player_base" is the name we gave our <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> instance in
+<code>config.rpy</code></td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Add a <code>pause</code> so the game doesn&#8217;t end immediately.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label start:
+    $ player_customizer.set_state(customizer_state)
+    show player_base
+    pause 1000000</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now we can reload our game as we add layers and see our changes live!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-01.png" alt="tutorial 01">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_adding_more_layers"><a class="anchor" href="#_4_adding_more_layers"></a><a class="link" href="#_4_adding_more_layers">4. Adding More Layers</a></h3>
+<div class="paragraph">
+<p>Now that we can see what we are doing, let&#8217;s go back to <code>config.rpy</code> and add
+more layers.</p>
+</div>
+<div class="sect3">
+<h4 id="_4_1_clothes"><a class="anchor" href="#_4_1_clothes"></a><a class="link" href="#_4_1_clothes">4.1 Clothes</a></h4>
+<div class="paragraph">
+<p>Next we will add the clothes layer, this layer is a simple image swap layer so
+the definition of it will be more simple than the skin layer.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> declaration, add a new argument that is another
+<a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> constructor:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+    "player_base",
+    SCLayer(
+        ...
+    ),
+    SCLayer(
+        "clothes",
+        "images/sugar/clothes/{clothes}.png", <i class="conum" data-value="1"></i><b>(1)</b>
+        clothes=("Clothes", "Body", [ "tshirt", "tie", "bow" ])
+    ),
+)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>For this layer, since we will just be swapping images out without any
+transforms, we can pass a template path instead of a callback.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Go ahead and reload the game now and you should see the <code>tshirt</code> layer
+rendering on top of the base image.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-02.png" alt="tutorial 02">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_2_hair"><a class="anchor" href="#_4_2_hair"></a><a class="link" href="#_4_2_hair">4.2 Hair</a></h4>
+<div class="paragraph">
+<p>Now we will stack the hair layer onto our sprite.  This layer is another one
+with multiple images as well as color options, so we will be declaring another
+callback.</p>
+</div>
+<div class="paragraph">
+<p>Under our existing <code>skin_lcb</code> callback in the <code>init python</code> block we will add
+a new function named <code>hair_lcb</code> which does the same thing the <code>skin_lcb</code>
+function does but with a different image path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
+    def skin_lcb(skin_base, skin_color, **kwargs):
+        return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+
+    def hair_lcb(hair_style, hair_color, **kwargs):
+        return Transform(f"images/sugar/hair/hair{hair_style}.png", matrixcolor=TintMatrix(hair_color))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lets look at this callback quickly.  As it takes the arguments <code>hair_style</code> and
+<code>hair_color</code> which means our new layer must have those options attached to it.</p>
+</div>
+<div class="paragraph">
+<p>Now that that&#8217;s out of the way, lets add our hair layer.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "hair",
+        hair_lcb,
+        hair_style=("Style", "Hair", [ 1, 2, 3 ]), <i class="conum" data-value="1"></i><b>(1)</b>
+        hair_color=("Color", "Hair", [ <i class="conum" data-value="2"></i><b>(2)</b>
+            "#3D2314",
+            "#100C07",
+            "#DA680F",
+            "#FFCC47",
+            "#9A9E9F",
+            "#FAFAFA",
+            "#801818",
+            "#680271",
+            "#1692CA",
+            "#11694E",
+            "#FF87C6"
+        ])
+    ),
+)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The first option just has the values <code>1</code>, <code>2</code>, and <code>3</code> as that is the only
+part of the image name that differs between hair style images.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The second option is a selection of hex codes for hair color options we will
+allow.</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-03.png" alt="tutorial 03">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_3_eyes"><a class="anchor" href="#_4_3_eyes"></a><a class="link" href="#_4_3_eyes">4.3 Eyes</a></h4>
+<div class="paragraph">
+<p>The eyes layer is another simple layer without a transform, so we can construct
+our <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> instance an image path rather than a callback.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "eyes",
+        "images/sugar/eyes/{eye_color}.png",
+        eye_color=("Eyes", "Face", [ "blue", "green", "grey", "yellow" ])
+    ),
+)</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-04.png" alt="tutorial 04">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_4_glasses"><a class="anchor" href="#_4_4_glasses"></a><a class="link" href="#_4_4_glasses">4.4 Glasses</a></h4>
+<div class="paragraph">
+<p>Our sprite pack comes with one glasses sprite that we will want to toggle on and
+off.  For this use case, it doesn&#8217;t make much sense to provide a list of options
+since there are only two, "glasses.png" and "none.png".  To implement this
+yes/no choice we can use a new option type <code>SCBooleanOption</code> which is purpose
+built for this kind of situation.</p>
+</div>
+<div class="paragraph">
+<p>This is also a good point to talk about <em>removing</em> options.  Right now, there is
+now way to do this via the Sprite Customizer other than by using a blank PNG
+file.  This is what we will be doing for the glasses and other accessories.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "eyes",
+        "images/sugar/accessories/{face_accessory}.png",
+        face_accessory=SCBooleanOption(
+            "face_accessory", <i class="conum" data-value="1"></i><b>(1)</b>
+            "Glasses", <i class="conum" data-value="2"></i><b>(2)</b>
+            "Face", <i class="conum" data-value="3"></i><b>(3)</b>
+            False, <i class="conum" data-value="4"></i><b>(4)</b>
+            ("glasses", "none") <i class="conum" data-value="5"></i><b>(5)</b>
+        )
+    )</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>For <code>SCOption</code> types like <code>SCBooleanOption</code>, the keyword for the option must
+be passed in the constructor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The display name for the option.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The group name.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The default state for the option, <code>False</code> here equates to <code>"none"</code> in the
+option tuple.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The option value tuple, the first value is what will be used when the
+boolean value is <code>True</code>, the second value will be used when the boolean value is
+<code>False</code>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_6_bow"><a class="anchor" href="#_4_6_bow"></a><a class="link" href="#_4_6_bow">4.6 Bow</a></h4>
+<div class="paragraph">
+<p>In addition to glasses, our sprite pack comes with another accessory; a bow.
+We will want to be able to both toggle the bow on and off, but also for this
+example, we want to apply colors to the bow.</p>
+</div>
+<div class="paragraph">
+<p>Here we will be constructing another layer callback which will take a value from
+a standard option as well as an <code>SCBooleanOption</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
+    ...
+    def hair_accessory_lcb(hair_accessory, hair_accessory_color, **kwargs):
+        return Transform(f"images/sugar/accessories/{hair_accessory}.png", matrixcolor=TintMatrix(hair_accessory_color))
+
+define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "hair_accessory",
+        hair_accessory_lcb,
+        hair_accessory=SCBooleanOption(
+            "hair_accessory",
+            "Bow",
+            "Hair",
+            False,
+            ("bow", "none")
+        ),
+        hair_accessory_color=("Bow Color", "Hair", [
+            "#849FF7",
+            "#A683F7",
+            "#FFEB79",
+            "#FFD679"
+        ])
+    ),
+)</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-06.png" alt="tutorial 06">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_the_character_customization_screen"><a class="anchor" href="#_6_the_character_customization_screen"></a><a class="link" href="#_6_the_character_customization_screen">6. The Character Customization Screen</a></h3>
+<div class="paragraph">
+<p>Now we have added all our base options (the remaining options will be used in
+a <code>layeredimage</code> for mood), lets show the included character customization
+screen and play with what we&#8217;ve made so far.</p>
+</div>
+<div class="paragraph">
+<p>To do this, go back to the <code>script.rpy</code> file and add call the customization
+screen.</p>
+</div>
+<div class="listingblock">
+<div class="title"><code>script.rpy</code></div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
+
+label start:
+    $ player_customizer.set_state(customizer_state)
+    show player_base
+    pause 1000000
+
+    $ quick_menu = False <i class="conum" data-value="1"></i><b>(1)</b>
+    call screen sprite_creator("player_base", player_customizer) <i class="conum" data-value="2"></i><b>(2)</b>
+    $ quick_menu = True <i class="conum" data-value="3"></i><b>(3)</b>
+
+    pause 1000000</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Hide the quick menu as it looks out of place with the <code>sprite_creator</code>
+screen open.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Call the <code>sprite_creator</code> screen passing in the name of our player image
+as well as a reference to the <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> instance itself.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Reshow the quick menu when we leave the character customization screen.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Play around with what you&#8217;ve made!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-07.gif" alt="tutorial 07">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="char-expressions"><a class="anchor" href="#char-expressions"></a><a class="link" href="#char-expressions">6. Character Expressions</a></h3>
+<div class="paragraph">
+<p>Now that we have a base for character, we can make the
+<a href="https://www.renpy.org/doc/html/layeredimage.html">Layered Images</a> necesesary
+to have character expressions.  We won&#8217;t go into too much detail here as this is
+a standard Ren&#8217;Py feature.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open up the <code>game/images.rpy</code> file and delete all of its contents.</p>
+</li>
+<li>
+<p>Create a new <code>layeredimage</code> named "player".</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add an <code>always</code> attribute to show our customized sprite, <code>player_base</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
+    always:
+        "player_base"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add a new group named "eyebrows" for our eyebrow expression sprites, "angry"
+"neutral", "questioning", "raised", and "sad" and add those sprite paths.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
+    always:
+        "player_base"
+
+    group eyebrows:
+        attribute angry_brows:
+            "images/sugar/brows/angry.png"
+        attribute neutral_brows default:
+            "images/sugar/brows/neutral.png"
+        attribute questioning_brows:
+            "images/sugar/brows/questioning.png"
+        attribute raised_brows:
+            "images/sugar/brows/raised.png"
+        attribute sad_brows:
+            "images/sugar/brows/sad.png"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add another group named "mouth" for our mouth expression sprites, "frown",
+"happy", "smile", and "surprised".</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
+    ...
+    group mouth:
+        attribute frown:
+            "images/sugar/mouth/frown.png"
+        attribute happy:
+            "images/sugar/mouth/happy.png"
+        attribute smile default:
+            "images/sugar/mouth/smile.png"
+        attribute surprised:
+            "images/sugar/mouth/surprised.png"</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now we have constructed a layered image with expressions that we can use as our
+character sprite.  To do this we need to go back to <code>script.rpy</code> and edit the
+references to <code>player_base</code> to say "player" instead.  This will use our new
+layered image rather than the raw custom sprite it&#8217;s based on.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
+
+label start:
+    $ player_customizer.set_state(customizer_state)
+    show player
+    pause 1000000
+
+    $ quick_menu = False
+    call screen sprite_creator("player", player_customizer)
+    $ quick_menu = True
+
+    pause 1000000</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-08.png" alt="tutorial 08">
+</div>
+</div>
+<div class="paragraph">
+<p>Now we can change our player character sprites expression by using our
+`layeredimage&#8217;s attributes like so:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">    show player raised_brows surprised
+    # or
+    show player angry_brows frown
+    # etc...</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_completed_source"><a class="anchor" href="#_completed_source"></a><a class="link" href="#_completed_source">Completed Source</a></h2>
+<div class="sectionbody">
+<details>
+<summary class="title"><code>game/sprite_customizer/config.rpy</code></summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
+    def skin_lcb(skin_base, skin_color, **kwargs):
+        return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+
+    def hair_lcb(hair_style, hair_color, **kwargs):
+        return Transform(f"images/sugar/hair/hair{hair_style}.png", matrixcolor=TintMatrix(hair_color))
+
+    def hair_accessory_lcb(hair_accessory, hair_accessory_color, **kwargs):
+        return Transform(f"images/sugar/accessories/{hair_accessory}.png", matrixcolor=TintMatrix(hair_accessory_color))
+
+define player_customizer = CustomizedSprite(
+    "player_base",
+    SCLayer(
+        "skin",
+        skin_lcb,
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]),
+        skin_color=("Skin Color", "Body", [
+            "#613021",
+            "#874c2c",
+            "#803716",
+            "#b66837",
+            "#a96238",
+            "#f9bf91",
+            "#ecc19f",
+            "#9e9a73",
+        ])
+    ),
+    SCLayer(
+        "clothes",
+        "images/sugar/clothes/{clothes}.png",
+        clothes=("Clothes", "Body", [ "tshirt", "tie", "bow" ])
+    ),
+    SCLayer(
+        "hair",
+        hair_lcb,
+        hair_style=("Style", "Hair", [ 1, 2, 3 ]),
+        hair_color=("Color", "Hair", [
+            "#3D2314",
+            "#100C07",
+            "#DA680F",
+            "#FFCC47",
+            "#9A9E9F",
+            "#FAFAFA",
+            "#801818",
+            "#680271",
+            "#1692CA",
+            "#11694E",
+            "#FF87C6"
+        ])
+    ),
+    SCLayer(
+        "eyes",
+        "images/sugar/eyes/{eye_color}.png",
+        eye_color=("Eyes", "Face", [ "blue", "green", "grey", "yellow" ])
+    ),
+    SCLayer(
+        "eyes",
+        "images/sugar/accessories/{face_accessory}.png",
+        face_accessory=("Glasses", "Face", [ "glasses", "none" ])
+    ),
+    SCLayer(
+        "hair_accessory",
+        hair_accessory_lcb,
+        hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
+        hair_accessory_color=("Bow Color", "Hair", [
+            "#849FF7",
+            "#A683F7",
+            "#FFEB79",
+            "#FFD679"
+        ])
+    ),
+)</code></pre>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title"><code>game/images.rpy</code></summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
+    always:
+        "player_base"
+
+    group eyebrows:
+        attribute angry_brows:
+            "images/sugar/brows/angry.png"
+        attribute neutral_brows default:
+            "images/sugar/brows/neutral.png"
+        attribute questioning_brows:
+            "images/sugar/brows/questioning.png"
+        attribute raised_brows:
+            "images/sugar/brows/raised.png"
+        attribute sad_brows:
+            "images/sugar/brows/sad.png"
+
+    group mouth:
+        attribute frown:
+            "images/sugar/mouth/frown.png"
+        attribute happy:
+            "images/sugar/mouth/happy.png"
+        attribute smile default:
+            "images/sugar/mouth/smile.png"
+        attribute surprised:
+            "images/sugar/mouth/surprised.png"</code></pre>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title"><code>game/script.rpy</code></summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
+
+label start:
+    $ player_customizer.set_state(customizer_state)
+
+    show player
+    pause 1000000
+
+    $ quick_menu = False
+    call screen sprite_creator("player", player_customizer)
+    $ quick_menu = True
+
+    pause 1000000</code></pre>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_credits"><a class="anchor" href="#_credits"></a><a class="link" href="#_credits">Credits</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Sprite Pack: <a href="https://butterymilk.itch.io/sugary-life">Sugary Life by Buttery Milk</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 1.2.0<br>
+Last updated 2023-07-18 13:46:13 -0400
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
+<script>
+if (!hljs.initHighlighting.called) {
+  hljs.initHighlighting.called = true
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
+}
+</script>
+</body>
+</html>

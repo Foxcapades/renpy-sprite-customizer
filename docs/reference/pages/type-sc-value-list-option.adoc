@@ -1,5 +1,5 @@
 [#sc-value-list-option]
-= SCValueListOption
+= `SCValueListOption`
 :icons: font
 :source-highlighter: highlight.js
 
@@ -70,7 +70,15 @@ be registered to an <<sc-layer>> instance to be in any way useful.
 
 [source, python]
 ----
-def __init__(self, key, name, group, values, display_digits=2, **kwargs)
+def __init__(
+    self,
+    key: str,
+    name: str,
+    group: str,
+    values: list[any] | set[any],
+    display_digits: int = 2,
+    **kwargs
+)
 ----
 
 Initializes the new SCValueListOption instance with the given arguments.

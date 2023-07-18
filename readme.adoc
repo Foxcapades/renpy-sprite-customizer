@@ -55,9 +55,9 @@ The `config.rpy` file is where the demo sprites are defined.  This file is
 intended to be used to hold your Customized Sprite configuration(s) and layer
 callbacks.
 
-==== `gui.rpy`
+==== `screens.rpy`
 
-The `gui.rpy` file is where the default Sprite Customizer screen is defined.
+The `screens.rpy` file is where the demo Sprite Customizer screen is defined.
 
 This is where you go if you want to redefine or alter the Sprite Customization
 screen.

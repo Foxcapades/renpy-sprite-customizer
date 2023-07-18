@@ -1,3 +1,5 @@
+from ..state_ren import SCState
+
 """renpy
 init -2 python:
 """
@@ -12,6 +14,7 @@ init -2 python:
 
 SC_OPTION_TYPE_VALUE_LIST = 0
 SC_OPTION_TYPE_TEXT_INPUT = 1
+SC_OPTION_TYPE_BOOLEAN    = 2
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -25,7 +28,24 @@ class SCOption:
     """
     Base type for Sprite Customizer option types.
     """
-    def __init__(self, key, name, group, option_type):
+    def __init__(self, key: str, name: str, group: str, option_type: int):
+        """
+        Initializes the new SCOption instance with the given arguments.
+
+        Arguments
+        ---------
+        key : str
+            Option keyword.
+
+        name : str
+            Option display name.
+
+        group : str
+            Option group.
+
+        option_type : int
+            Option type indicator.
+        """
         if not isinstance(key, str):
             raise Exception("\"key\" argument must be a string")
 
@@ -42,7 +62,7 @@ class SCOption:
         self._name = name
         self._group = group
         self._type = option_type
-        self._state = None
+        self._state: SCState | None = None
 
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -53,35 +73,35 @@ class SCOption:
 
 
     @property
-    def key(self):
+    def key(self) -> str:
         """
         str : Option keyword.
         """
         return self._key
 
     @property
-    def display_name(self):
+    def display_name(self) -> str:
         """
         str : Display name for the option.
         """
         return self._name
 
     @property
-    def group(self):
+    def group(self) -> str:
         """
         str : Group display name for the option.
         """
         return self._group
 
     @property
-    def option_type(self):
+    def option_type(self) -> int:
         """
         int : Option type indicator.
         """
         return self._type
 
     @property
-    def selection_value(self):
+    def selection_value(self) -> any:
         raise Exception("selection_value must be implemented by extending classes!")
 
 
@@ -92,10 +112,10 @@ class SCOption:
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
-    def _set_state(self, state):
+    def _set_state(self, state: SCState):
         self._state = state
 
-    def _req_state(self):
+    def _req_state(self) -> SCState:
         if self._state == None:
             raise Exception("CustomizedSprite state is not yet set!  Did you forget to call `set_state`?")
 
