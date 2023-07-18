@@ -28,7 +28,7 @@ build-slim-zip: clean
 
 
 .PHONY: docs
-build-docs:
+docs:
 	@mkdir -p docs/versions/$(FEATURE)
 	@asciidoctor -b html5 -o docs/index.html -a revnumber=$(FEATURE) docs/index.adoc
 	@asciidoctor -b html5 -o docs/versions/$(FEATURE)/index.html -a revnumber=$(FEATURE) docs/reference/index.adoc
