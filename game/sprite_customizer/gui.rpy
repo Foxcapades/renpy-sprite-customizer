@@ -59,7 +59,6 @@ screen sprite_creator_right(customizer):
                 textbutton "Done":
                     action Return(0)
 
-
 screen sprite_creator_option_group(sprite, group, options):
     vbox:
         spacing 20
@@ -81,6 +80,11 @@ screen sprite_creator_option_group_option(sprite, option_key, option):
             min_width 200
             line_leading 5
 
+        if isinstance(option, SCValueListOption):
+            use sprite_creator_value_list_option(option)
+
+screen sprite_creator_value_list_option(option):
+    hbox:
         imagebutton:
             auto "cc_gui_option_arrow_left_%s"
             xsize 50
