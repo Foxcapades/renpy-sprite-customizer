@@ -5,10 +5,17 @@ FEATURE := $(shell grep 'define config.version' game/options.rpy | sed 's/.\+"\(
 default:
 	@echo "What are you doing?"
 
+
+.PHONY: clean
+clean:
+	@find . -name '*.rpyc' | xargs -I'{}' rm {}
+
+
 .PHONY: build-src-release
-build-src-release:
+build-src-release: clean
 	@mkdir -p releases
 	@zip -r "releases/base-project-$(VERSION).zip" game license -x game/saves/**\*
+
 
 .PHONY: build-docs
 build-docs:
