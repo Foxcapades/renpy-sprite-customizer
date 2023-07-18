@@ -78,25 +78,10 @@ define ccf = CustomizedSpriteFactory(
         "#ecc19f"
     ])),
 
-    # Text Input Demo: Skin Color
-    # SCLayer(
-    #     "skin",
-    #     cc_skin,
-    #     skin_color=SCValidatableTextOption(
-    #         "skin_color",
-    #         "Skin",
-    #         "Body",
-    #         sc_validator_hex_color,
-    #         "#513021",
-    #         max_len=7,
-    #         autocommit=True,
-    #     )
-    # ),
-
     # Clothes Layer
     SCLayer("clothes", "images/ccp/clothes/{clothes}.png", clothes=("Clothes", "Body", [ "cottoncandy", "plaid" ])),
 
-    # Hair Layer
+    # Hair Layer : Value List for Color
     SCLayer(
         "hair",
         cc_hair,
@@ -115,6 +100,22 @@ define ccf = CustomizedSpriteFactory(
             "#FF87C5"
         ]),
     ),
+
+    # Hair Layer : Text Input for Color
+    # SCLayer(
+    #     "hair",
+    #     cc_hair,
+    #     hair_style=("Style", "Hair", [ "afro", "bob", "buns" ]),
+    #     hair_color=SCValidatableTextOption(
+    #         "hair_color",
+    #         "Color",
+    #         "Hair",
+    #         sc_validator_hex_color,
+    #         "#ff0000",
+    #         max_len=7,
+    #         autocommit=True
+    #     ),
+    # ),
 
     # Accessory Layer
     SCLayer("accessories", "images/ccp/accessories/{accessory}.png", accessory=("Accessory", "Hair", [

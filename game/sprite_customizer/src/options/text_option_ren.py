@@ -323,6 +323,10 @@ class SCValidatableTextOption(SCTextOption):
 
     @property
     def is_valid(self):
+        """
+        Whether the `current_value` of this option is valid against the given
+        validation function.
+        """
         out = self._validator(self.current_value)
 
         if not isinstance(out, bool):

@@ -1,3 +1,9 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+#    Images
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 image cc_gui_option_arrow_right_idle:
     "sprite_customizer/img/arrow.png"
     xsize 50
@@ -12,6 +18,13 @@ image cc_gui_option_arrow_left_idle:
     xzoom -1.0
 
 image cc_gui_option_arrow_left_hover = Transform("cc_gui_option_arrow_left_idle", matrixcolor=BrightnessMatrix(-0.5))
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+#    Screens
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
 screen sprite_creator(sprite, customizer):
@@ -92,6 +105,8 @@ screen sprite_creator_option_group_option(sprite, option_key, option):
 # Sprite Creator : Value List Option Selector
 screen sprite_creator_value_list_option(option):
     hbox:
+        xsize 200
+
         imagebutton:
             auto "cc_gui_option_arrow_left_%s"
             xsize 50
@@ -108,9 +123,20 @@ screen sprite_creator_value_list_option(option):
 
 # Sprite Creator : Text Option Input
 screen sprite_creator_text_option(option):
-    hbox:
+    default option_value = SCTextInput(option)
+
+    button:
+        xsize 175
+
+        key_events True
+        action option_value.Toggle()
+
+        background "#2e2c2c"
+        hover_background "#383535"
+
         input:
-            value SCTextInput(option)
+            value option_value
+            copypaste True
 
             if option.has_prefix:
                 prefix option.prefix
@@ -121,14 +147,25 @@ screen sprite_creator_text_option(option):
             if option.has_max_len:
                 length option.max_len
 
-            copypaste True
+
+
 
 
 # Sprite Creator : Validatable Text Option Input
 screen sprite_creator_validatable_text_option(option):
-    hbox:
+    default option_value = SCTextInput(option)
+
+    button:
+        xsize 175
+
+        key_events True
+        background "#2e2c2c"
+        hover_background "#383535"
+        action option_value.Toggle()
+
         input:
-            value SCTextInput(option)
+            value option_value
+            copypaste True
 
             if not option.is_valid:
                 color "#FF0000"
@@ -142,4 +179,3 @@ screen sprite_creator_validatable_text_option(option):
             if option.has_max_len:
                 length option.max_len
 
-            copypaste True

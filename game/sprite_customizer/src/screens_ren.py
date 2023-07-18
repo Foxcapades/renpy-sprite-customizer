@@ -12,6 +12,7 @@ class SCTextInput(InputValue):
         if not isinstance(option, SCTextOption):
             raise Exception("option must be an SCTextOption instance")
 
+        self.default = False
         self._option = option
 
     def get_text(self):
@@ -23,3 +24,5 @@ class SCTextInput(InputValue):
 
     def enter(self):
         self._option.commit_to_selection()
+        renpy.run(self.Disable())
+        raise renpy.IgnoreEvent()
