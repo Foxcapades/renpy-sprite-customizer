@@ -416,8 +416,6 @@ define player_customizer = CustomizedSprite(
 )
 ----
 
-image::tutorial-06.png[]
-
 
 === 6. The Character Customization Screen
 
@@ -452,7 +450,7 @@ label start:
 
 Play around with what you've made!
 
-image::tutorial-07.gif[]
+image::tutorial-06.gif[]
 
 [#char-expressions]
 === 6. Character Expressions
