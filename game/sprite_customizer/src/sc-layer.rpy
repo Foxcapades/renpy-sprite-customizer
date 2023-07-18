@@ -145,12 +145,7 @@ init -1 python:
                 raise Exception("invalid 2 tuple passed as option {}, first value must be a string".format(key))
 
             if isinstance(tup[1], list) or isinstance(tup[1], set):
-                return SCValueListOption(
-                    key,
-                    opt.display_name,
-                    opt.group if opt.group != None else opt.display_name,
-                    tup[1].copy(),
-                )
+                return SCValueListOption(key, tup[0], tup[0], tup[1].copy())
 
             raise Exception("invalid 2 tuple passed as option {}, second value must be a list or set".format(key))
 
