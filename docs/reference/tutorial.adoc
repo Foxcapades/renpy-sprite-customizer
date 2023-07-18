@@ -536,9 +536,6 @@ label start:
     pause 1000000
 ----
 
-image::tutorial-08.png[]
-
-
 Now we can change our player character sprites expression by using our
 `layeredimage`'s attributes like so:
 
