@@ -2,6 +2,14 @@
 
 == Version 1.x.x
 
+=== v1.2.1
+
+==== Fixes
+
+* Fixes bug with leftover state when restarting immediately after character
+creation.
+
+
 === v1.2.0
 
 ==== Features
