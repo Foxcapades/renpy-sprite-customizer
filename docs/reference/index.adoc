@@ -28,4 +28,10 @@ include::pages/type-customized-sprite-factory.adoc[leveloffset=2]
 include::pages/type-sc-layer.adoc[leveloffset=2]
 include::pages/type-sc-option.adoc[leveloffset=2]
 include::pages/type-sc-state.adoc[leveloffset=2]
+include::pages/type-sc-text-option.adoc[leveloffset=2]
+include::pages/type-sc-validatable-text-option.adoc[leveloffset=2]
 include::pages/type-sc-value-list-option.adoc[leveloffset=2]
+
+== Miscellaneous
+
+include::pages/misc-funcs.adoc[leveloffset=2]

@@ -50,6 +50,7 @@ init python:
         """
         return Transform("images/ccp/hair/{}.png".format(hair_style), matrixcolor=TintMatrix(hair_color))
 
+
 # Customized Sprite Factory Declaration.
 #
 # This demonstrates the creation of a customized character sprite.  The creation
@@ -76,6 +77,21 @@ define ccf = CustomizedSpriteFactory(
         "#f9bf91",
         "#ecc19f"
     ])),
+
+    # Text Input Demo: Skin Color
+    # SCLayer(
+    #     "skin",
+    #     cc_skin,
+    #     skin_color=SCValidatableTextOption(
+    #         "skin_color",
+    #         "Skin",
+    #         "Body",
+    #         sc_validator_hex_color,
+    #         "#513021",
+    #         max_len=7,
+    #         autocommit=True,
+    #     )
+    # ),
 
     # Clothes Layer
     SCLayer("clothes", "images/ccp/clothes/{clothes}.png", clothes=("Clothes", "Body", [ "cottoncandy", "plaid" ])),

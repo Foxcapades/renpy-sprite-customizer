@@ -1,5 +1,5 @@
-VERSION := "1.0.2"
-FEATURE := "1.0.0"
+VERSION := $(shell grep 'define config.version' game/options.rpy | sed 's/.\+"\(.\+\)"/\1/')
+FEATURE := $(shell grep 'define config.version' game/options.rpy | sed 's/.\+"\(.\+\)"/\1/;s/\([0-9]\+\.[0-9]\+\).\+/\1.0/')
 
 .PHONY: default
 default:

@@ -74,6 +74,7 @@ screen sprite_creator_option_group(sprite, group, options):
                 for option_key, option in options.items():
                     use sprite_creator_option_group_option(sprite, option_key, option)
 
+
 screen sprite_creator_option_group_option(sprite, option_key, option):
     hbox:
         text option.display_name:
@@ -82,7 +83,13 @@ screen sprite_creator_option_group_option(sprite, option_key, option):
 
         if isinstance(option, SCValueListOption):
             use sprite_creator_value_list_option(option)
+        elif isinstance(option, SCValidatableTextOption):
+            use sprite_creator_validatable_text_option(option)
+        elif isinstance(option, SCTextOption):
+            use sprite_creator_text_option(option)
 
+
+# Sprite Creator : Value List Option Selector
 screen sprite_creator_value_list_option(option):
     hbox:
         imagebutton:
@@ -97,3 +104,42 @@ screen sprite_creator_value_list_option(option):
             xsize 50
             ysize 50
             action Function(option.inc_selection)
+
+
+# Sprite Creator : Text Option Input
+screen sprite_creator_text_option(option):
+    hbox:
+        input:
+            value SCTextInput(option)
+
+            if option.has_prefix:
+                prefix option.prefix
+
+            if option.has_suffix:
+                suffix option.suffix
+
+            if option.has_max_len:
+                length option.max_len
+
+            copypaste True
+
+
+# Sprite Creator : Validatable Text Option Input
+screen sprite_creator_validatable_text_option(option):
+    hbox:
+        input:
+            value SCTextInput(option)
+
+            if not option.is_valid:
+                color "#FF0000"
+
+            if option.has_prefix:
+                prefix option.prefix
+
+            if option.has_suffix:
+                suffix option.suffix
+
+            if option.has_max_len:
+                length option.max_len
+
+            copypaste True

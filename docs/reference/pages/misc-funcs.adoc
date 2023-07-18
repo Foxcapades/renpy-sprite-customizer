@@ -1,0 +1,32 @@
+[#util-funcs]
+= Util Functions
+
+
+[#fn-sc-validator-hex-color]
+== `sc_validator_hex_color`
+
+[source, python]
+----
+def sc_validator_hex_color(text)
+----
+
+Hex color string validator for use with <<sc-validatable-text-option>>
+instances.  Verifies that the given input string resembles a valid hex color
+code.
+
+=== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `text`
+| str
+| String to test.
+|===
+
+=== Returns
+
+[cols="1m,9a"]
+|===
+| bool
+| Whether the given value was a valid hex color string.
+|===
