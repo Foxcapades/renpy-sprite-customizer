@@ -1,6 +1,7 @@
 from renpy.store import DynamicDisplayable, Attribute # type: ignore
 
-from options.option_ren import SCOption, SCValueListOption
+from options.option_ren import SCOption
+from options.list_option_ren import SCValueListOption
 
 """renpy
 init -1 python:
