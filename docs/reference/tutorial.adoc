@@ -91,9 +91,9 @@ define player_customizer = CustomizedSprite(
     SCLayer( <2>
         "skin", <3>
         skin_lcb, <4>
-        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <5>
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <6>
         skin_color=("Skin Color", "Body", [ <6>
-            "#513021",
+            "#613021",
             "#874c2c",
             "#803716",
             "#b66837",
@@ -110,7 +110,7 @@ define player_customizer = CustomizedSprite(
 <2> {sc-layer} constructor call.
 <3> Name of the layer.
 <4> Reference to our `skin_lcb` callback, passing the callback to the new layer.
-<5> Skin base option, directly relates to the skin base image files included in
+<6> Skin base option, directly relates to the skin base image files included in
     the tutorial sprite pack ("dark.png", "medium.png", "light.png").
 <6> Skin color option.  A collection of hex codes that will be used to make a
     TintMatrix to apply the skin color to our grayscale base images.
@@ -301,10 +301,10 @@ define player_customizer = CustomizedSprite(
             "#9A9E9F",
             "#FAFAFA",
             "#801818",
-            "#580271",
-            "#1592CA",
+            "#680271",
+            "#1692CA",
             "#11694E",
-            "#FF87C5"
+            "#FF87C6"
         ])
     ),
 )
@@ -337,17 +337,54 @@ define player_customizer = CustomizedSprite(
 image::tutorial-04.png[]
 
 
-==== 4.4 Accesories
+==== 4.4 Glasses
 
-Our sprite pack comes with glasses and a bow, so we may as well add layers for
-those too.
+Our sprite pack comes with one glasses sprite that we will want to toggle on and
+off.  For this use case, it doesn't make much sense to provide a list of options
+since there are only two, "glasses.png" and "none.png".  To implement this
+yes/no choice we can use a new option type `SCBooleanOption` which is purpose
+built for this kind of situation.
 
-This is a good chance to talk about _removing_ options.  Right now, there is no
-way to do this via the Sprite Customizer other than using a blank PNG file which
-is what we will do to "remove" the accessory layers.
+This is also a good point to talk about _removing_ options.  Right now, there is
+now way to do this via the Sprite Customizer other than by using a blank PNG
+file.  This is what we will be doing for the glasses and other accessories.
 
-The glasses layer is a simple image path layer, while the bow layer has color
-options like the skin and hair.
+[source%nowrap, python]
+----
+define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "eyes",
+        "images/sugar/accessories/{face_accessory}.png",
+        face_accessory=SCBooleanOption(
+            "face_accessory", <1>
+            "Glasses", <2>
+            "Face", <3>
+            False, <4>
+            ("glasses", "none") <6>
+        )
+    )
+----
+<1> For `SCOption` types like `SCBooleanOption`, the keyword for the option must
+be passed in the constructor.
+<2> The display name for the option.
+<3> The group name.
+<4> The default state for the option, `False` here equates to `"none"` in the
+option tuple.
+<6> The option value tuple, the first value is what will be used when the
+boolean value is `True`, the second value will be used when the boolean value is
+`False`.
+
+
+==== 4.6 Bow
+
+In addition to glasses, our sprite pack comes with another accessory; a bow.
+We will want to be able to both toggle the bow on and off, but also for this
+example, we want to apply colors to the bow.
+
+Here we will be constructing another layer callback which will take a value from
+a standard option as well as an `SCBooleanOption`.
 
 [source%nowrap, python]
 ----
@@ -360,28 +397,29 @@ define player_customizer = CustomizedSprite(
     "player_base",
     ...
     SCLayer(
-        "eyes",
-        "images/sugar/accessories/{face_accessory}.png",
-        face_accessory=("Glasses", "Face", [ "glasses", "none" ])
-    ),
-    SCLayer(
         "hair_accessory",
         hair_accessory_lcb,
-        hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
+        hair_accessory=SCBooleanOption(
+            "hair_accessory",
+            "Bow",
+            "Hair",
+            False,
+            ("bow", "none")
+        ),
         hair_accessory_color=("Bow Color", "Hair", [
             "#849FF7",
-            "#A583F7",
+            "#A683F7",
             "#FFEB79",
-            "#FFD579"
+            "#FFD679"
         ])
     ),
 )
 ----
 
-image::tutorial-05.png[]
+image::tutorial-06.png[]
 
 
-=== 5. The Character Customization Screen
+=== 6. The Character Customization Screen
 
 Now we have added all our base options (the remaining options will be used in
 a `layeredimage` for mood), lets show the included character customization
@@ -414,7 +452,7 @@ label start:
 
 Play around with what you've made!
 
-image::tutorial-06.gif[]
+image::tutorial-07.gif[]
 
 [#char-expressions]
 === 6. Character Expressions
@@ -500,7 +538,7 @@ label start:
     pause 1000000
 ----
 
-image::tutorial-07.png[]
+image::tutorial-08.png[]
 
 
 Now we can change our player character sprites expression by using our
@@ -538,7 +576,7 @@ define player_customizer = CustomizedSprite(
         skin_lcb,
         skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]),
         skin_color=("Skin Color", "Body", [
-            "#513021",
+            "#613021",
             "#874c2c",
             "#803716",
             "#b66837",
@@ -565,10 +603,10 @@ define player_customizer = CustomizedSprite(
             "#9A9E9F",
             "#FAFAFA",
             "#801818",
-            "#580271",
-            "#1592CA",
+            "#680271",
+            "#1692CA",
             "#11694E",
-            "#FF87C5"
+            "#FF87C6"
         ])
     ),
     SCLayer(
@@ -587,9 +625,9 @@ define player_customizer = CustomizedSprite(
         hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
         hair_accessory_color=("Bow Color", "Hair", [
             "#849FF7",
-            "#A583F7",
+            "#A683F7",
             "#FFEB79",
-            "#FFD579"
+            "#FFD679"
         ])
     ),
 )
