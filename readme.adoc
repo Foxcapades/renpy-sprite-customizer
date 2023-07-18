@@ -12,6 +12,11 @@ link:{renpy-docs}/layeredimage.html[LayeredImage]s.
 The goal of this project is to allow game creators to plug in their own assets
 and screens to set up character or sprite customization in their own games.
 
+[IMPORTANT]
+--
+Presently this framework is only compatible with Ren'Py 8+ and Python 3.
+--
+
 == Preview
 
 image::docs/previews/demo.gif[]
