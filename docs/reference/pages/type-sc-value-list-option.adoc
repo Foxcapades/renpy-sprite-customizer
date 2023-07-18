@@ -62,7 +62,6 @@ be registered to an <<sc-layer>> instance to be in any way useful.
 |===
 
 
-
 [#sc-value-list-option-methods]
 == Methods
 
@@ -71,7 +70,7 @@ be registered to an <<sc-layer>> instance to be in any way useful.
 
 [source, python]
 ----
-def __init__(self, key, name, group, values, display_digits=2, **kwargs):
+def __init__(self, key, name, group, values, display_digits=2, **kwargs)
 ----
 
 Initializes the new SCValueListOption instance with the given arguments.
@@ -107,12 +106,22 @@ a string, the returned string would be "001".
 
 === `inc_selection`
 
+[source, python]
+----
+def inc_selection(self)
+----
+
 Increments the selection index for this option group, "selecting" the next value
 in the option list.  If the selection is already on the last item in the option
 group it will "roll over" to the first option in the group when incremented.
 
 
 === `dec_selection`
+
+[source, python]
+----
+def dec_selection(self)
+----
 
 Decrements the selection index for this option group, "selecting" the previous
 value in the option list.  If the selection is already on the first item in the
@@ -121,6 +130,11 @@ decremented.
 
 
 === `randomize`
+
+[source, python]
+----
+def randomize(self)
+----
 
 Selects a "random" option from this option group and records that selection in
 the user state.

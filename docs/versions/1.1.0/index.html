@@ -4646,7 +4646,7 @@ be registered to an <a href="#sc-layer">SCLayer</a> instance to be in any way us
 <h5 id="_init_6"><a class="anchor" href="#_init_6"></a><a class="link" href="#_init_6"><code>__init__</code></a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, key, name, group, values, display_digits=2, **kwargs):</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, key, name, group, values, display_digits=2, **kwargs)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4705,6 +4705,11 @@ a string, the returned string would be "001".</p>
 </div>
 <div class="sect4">
 <h5 id="_inc_selection"><a class="anchor" href="#_inc_selection"></a><a class="link" href="#_inc_selection"><code>inc_selection</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def inc_selection(self)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Increments the selection index for this option group, "selecting" the next value
 in the option list.  If the selection is already on the last item in the option
@@ -4713,6 +4718,11 @@ group it will "roll over" to the first option in the group when incremented.</p>
 </div>
 <div class="sect4">
 <h5 id="_dec_selection"><a class="anchor" href="#_dec_selection"></a><a class="link" href="#_dec_selection"><code>dec_selection</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def dec_selection(self)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Decrements the selection index for this option group, "selecting" the previous
 value in the option list.  If the selection is already on the first item in the
@@ -4722,6 +4732,11 @@ decremented.</p>
 </div>
 <div class="sect4">
 <h5 id="_randomize_2"><a class="anchor" href="#_randomize_2"></a><a class="link" href="#_randomize_2"><code>randomize</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def randomize(self)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Selects a "random" option from this option group and records that selection in
 the user state.</p>
@@ -4792,7 +4807,7 @@ code.</p>
 <div id="footer">
 <div id="footer-text">
 Version 1.1.0<br>
-Last updated 2023-07-18 03:20:06 -0400
+Last updated 2023-07-18 03:39:20 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
