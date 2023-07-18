@@ -2,6 +2,12 @@
 
 == Version 1.x.x
 
+=== v1.0.1
+
+==== Fixes
+
+* Removed debug log line that was accidentally left in the release.
+
 === v1.0.0
 
 ==== Changes
