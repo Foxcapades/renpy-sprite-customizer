@@ -86,7 +86,6 @@ class SCBooleanOption(SCOption):
             self._when_false = False
 
         self._default = default
-        self._value = default
 
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -102,7 +101,7 @@ class SCBooleanOption(SCOption):
         bool
             The current boolean value of this SCBooleanOption.
         """
-        return self._value
+        return self.selection_value == self._when_true
 
     @property
     def selection_value(self) -> any:
@@ -157,7 +156,6 @@ class SCBooleanOption(SCOption):
         if not isinstance(value, bool):
             raise Exception('"value" must be a boolean value')
 
-        self._value = value
         self._req_state().set_selection(self._key, self._pick_value(value))
 
     def toggle(self):
@@ -166,7 +164,7 @@ class SCBooleanOption(SCOption):
         `True` before calling this method, it will be `False` after calling this
         method and vice versa.
         """
-        self.set_selection(not self._value)
+        self.set_selection(not self.value)
 
     def randomize(self):
         """
