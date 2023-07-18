@@ -16,7 +16,7 @@ class SCState:
     my_sprite.set_state(my_sprite_state)
     ```
     """
-    def __init__(self, selections={}, user_state={}):
+    def __init__(self, selections: dict = {}, user_state: dict = {}):
         """
         Initializes the new, blank SCState instance.
 
@@ -41,7 +41,7 @@ class SCState:
         self._selections = selections.copy()
         self._user_state = user_state.copy()
 
-    def set_variable(self, key, value):
+    def set_variable(self, key: str, value: any):
         """
         Store arbitrary user variable that will be passed to all layer
         callbacks.
@@ -73,7 +73,7 @@ class SCState:
         """
         self._user_state[key] = value
 
-    def get_variable(self, key):
+    def get_variable(self, key: str) -> any:
         """
         Retrieve user variable from the SCState store by key.
 
@@ -91,7 +91,7 @@ class SCState:
         """
         return self._user_state[key]
 
-    def get_selection(self, key):
+    def get_selection(self, key: str) -> any:
         """
         Looks up the target selection value.
 
@@ -109,7 +109,7 @@ class SCState:
         """
         return self._selections[key]
 
-    def set_selection(self, key, value):
+    def set_selection(self, key: str, value: any):
         """
         Sets the target selection value.
 
@@ -124,7 +124,7 @@ class SCState:
         """
         self._selections[key] = value
 
-    def has_selection(self, key):
+    def has_selection(self, key: str) -> bool:
         """
         Tests whether the state contains a selection value with the given
         key.
@@ -143,7 +143,7 @@ class SCState:
         """
         return key in self._selections
 
-    def has_variable(self, key):
+    def has_variable(self, key: str) -> bool:
         """
         Tests whether the state contains a user variable value with the
         given key.

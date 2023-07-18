@@ -7,7 +7,6 @@ Base type for Sprite Customizer option types.
 [#sc-option-properties]
 == Properties
 
-
 === `key`
 
 [cols="1m,9a"]
@@ -42,3 +41,47 @@ Base type for Sprite Customizer option types.
 | int
 | Option type indicator.
 |===
+
+
+[#sc-option-methods]
+== Methods
+
+=== `+__init__+`
+
+[source, python]
+----
+def __init__(self, key: str, name: str, group: str, option_type: int)
+----
+
+Initializes the new SCOption instance with the given arguments.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Option keyword.
+
+| `name`
+| str
+| Option display name.
+
+| `group`
+| str
+| Option group.
+
+| `option_type`
+| int
+| Option type indicator.
+|===
+
+=== `randomize`
+
+[source, python]
+----
+def randomize(self)
+----
+
+Extension point method for randomizable options to override and provide their
+own randomization logic.

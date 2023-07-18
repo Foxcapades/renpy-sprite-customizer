@@ -2,7 +2,7 @@
 init -1 python:
 """
 
-def _sc_validator_hex_color_char(c):
+def _sc_validator_hex_color_char(c: str) -> bool:
     """
     Tests whether the given character is a valid hex digit.
 
@@ -18,7 +18,7 @@ def _sc_validator_hex_color_char(c):
     """
     return '0' <= c <= '9' or 'a' <= c <= 'f' or 'A' <= c <= 'F'
 
-def sc_validator_hex_color(text):
+def sc_validator_hex_color(text: str) -> bool:
     """
     Hex color string validator for use with SCValidatableTextOption instances.
     Verifies that the given input string resembles a valid hex color code.

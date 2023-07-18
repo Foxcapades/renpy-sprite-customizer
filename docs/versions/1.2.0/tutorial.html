@@ -792,9 +792,6 @@ svg {
   font-style: normal !important;
   letter-spacing: 0;
   padding: 0;
-  background-color: #f2f2f2;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
   line-height: inherit
 }
 
@@ -2451,11 +2448,7 @@ table.tableblock.grid-all td.tableblock {
   font-style: normal !important;
   letter-spacing: 0;
   padding: 0px 4px;
-  background-color: #f6f6f6;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
   line-height: inherit;
-  border: solid #ddd7d7 1px;
   color: #e74c3c
 }
 
@@ -2747,10 +2740,11 @@ a > code {
 <li><a href="#_4_1_clothes">4.1 Clothes</a></li>
 <li><a href="#_4_2_hair">4.2 Hair</a></li>
 <li><a href="#_4_3_eyes">4.3 Eyes</a></li>
-<li><a href="#_4_4_accesories">4.4 Accesories</a></li>
+<li><a href="#_4_4_glasses">4.4 Glasses</a></li>
+<li><a href="#_4_6_bow">4.6 Bow</a></li>
 </ul>
 </li>
-<li><a href="#_5_the_character_customization_screen">5. The Character Customization Screen</a></li>
+<li><a href="#_6_the_character_customization_screen">6. The Character Customization Screen</a></li>
 <li><a href="#char-expressions">6. Character Expressions</a></li>
 </ul>
 </li>
@@ -2894,9 +2888,9 @@ define player_customizer = CustomizedSprite(
     SCLayer( <i class="conum" data-value="2"></i><b>(2)</b>
         "skin", <i class="conum" data-value="3"></i><b>(3)</b>
         skin_lcb, <i class="conum" data-value="4"></i><b>(4)</b>
-        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <i class="conum" data-value="5"></i><b>(5)</b>
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <i class="conum" data-value="6"></i><b>(6)</b>
         skin_color=("Skin Color", "Body", [ <i class="conum" data-value="6"></i><b>(6)</b>
-            "#513021",
+            "#613021",
             "#874c2c",
             "#803716",
             "#b66837",
@@ -3207,10 +3201,10 @@ function does but with a different image path.</p>
             "#9A9E9F",
             "#FAFAFA",
             "#801818",
-            "#580271",
-            "#1592CA",
+            "#680271",
+            "#1692CA",
             "#11694E",
-            "#FF87C5"
+            "#FF87C6"
         ])
     ),
 )</code></pre>
@@ -3262,19 +3256,76 @@ our <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCL
 </div>
 </div>
 <div class="sect3">
-<h4 id="_4_4_accesories"><a class="anchor" href="#_4_4_accesories"></a><a class="link" href="#_4_4_accesories">4.4 Accesories</a></h4>
+<h4 id="_4_4_glasses"><a class="anchor" href="#_4_4_glasses"></a><a class="link" href="#_4_4_glasses">4.4 Glasses</a></h4>
 <div class="paragraph">
-<p>Our sprite pack comes with glasses and a bow, so we may as well add layers for
-those too.</p>
+<p>Our sprite pack comes with one glasses sprite that we will want to toggle on and
+off.  For this use case, it doesn&#8217;t make much sense to provide a list of options
+since there are only two, "glasses.png" and "none.png".  To implement this
+yes/no choice we can use a new option type <code>SCBooleanOption</code> which is purpose
+built for this kind of situation.</p>
 </div>
 <div class="paragraph">
-<p>This is a good chance to talk about <em>removing</em> options.  Right now, there is no
-way to do this via the Sprite Customizer other than using a blank PNG file which
-is what we will do to "remove" the accessory layers.</p>
+<p>This is also a good point to talk about <em>removing</em> options.  Right now, there is
+now way to do this via the Sprite Customizer other than by using a blank PNG
+file.  This is what we will be doing for the glasses and other accessories.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "eyes",
+        "images/sugar/accessories/{face_accessory}.png",
+        face_accessory=SCBooleanOption(
+            "face_accessory", <i class="conum" data-value="1"></i><b>(1)</b>
+            "Glasses", <i class="conum" data-value="2"></i><b>(2)</b>
+            "Face", <i class="conum" data-value="3"></i><b>(3)</b>
+            False, <i class="conum" data-value="4"></i><b>(4)</b>
+            ("glasses", "none") <i class="conum" data-value="6"></i><b>(6)</b>
+        )
+    )</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>For <code>SCOption</code> types like <code>SCBooleanOption</code>, the keyword for the option must
+be passed in the constructor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The display name for the option.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The group name.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The default state for the option, <code>False</code> here equates to <code>"none"</code> in the
+option tuple.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The option value tuple, the first value is what will be used when the
+boolean value is <code>True</code>, the second value will be used when the boolean value is
+<code>False</code>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_6_bow"><a class="anchor" href="#_4_6_bow"></a><a class="link" href="#_4_6_bow">4.6 Bow</a></h4>
+<div class="paragraph">
+<p>In addition to glasses, our sprite pack comes with another accessory; a bow.
+We will want to be able to both toggle the bow on and off, but also for this
+example, we want to apply colors to the bow.</p>
 </div>
 <div class="paragraph">
-<p>The glasses layer is a simple image path layer, while the bow layer has color
-options like the skin and hair.</p>
+<p>Here we will be constructing another layer callback which will take a value from
+a standard option as well as an <code>SCBooleanOption</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3287,19 +3338,20 @@ define player_customizer = CustomizedSprite(
     "player_base",
     ...
     SCLayer(
-        "eyes",
-        "images/sugar/accessories/{face_accessory}.png",
-        face_accessory=("Glasses", "Face", [ "glasses", "none" ])
-    ),
-    SCLayer(
         "hair_accessory",
         hair_accessory_lcb,
-        hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
+        hair_accessory=SCBooleanOption(
+            "hair_accessory",
+            "Bow",
+            "Hair",
+            False,
+            ("bow", "none")
+        ),
         hair_accessory_color=("Bow Color", "Hair", [
             "#849FF7",
-            "#A583F7",
+            "#A683F7",
             "#FFEB79",
-            "#FFD579"
+            "#FFD679"
         ])
     ),
 )</code></pre>
@@ -3307,13 +3359,13 @@ define player_customizer = CustomizedSprite(
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-05.png" alt="tutorial 05">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-06.png" alt="tutorial 06">
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_5_the_character_customization_screen"><a class="anchor" href="#_5_the_character_customization_screen"></a><a class="link" href="#_5_the_character_customization_screen">5. The Character Customization Screen</a></h3>
+<h3 id="_6_the_character_customization_screen"><a class="anchor" href="#_6_the_character_customization_screen"></a><a class="link" href="#_6_the_character_customization_screen">6. The Character Customization Screen</a></h3>
 <div class="paragraph">
 <p>Now we have added all our base options (the remaining options will be used in
 a <code>layeredimage</code> for mood), lets show the included character customization
@@ -3363,7 +3415,7 @@ as well as a reference to the <a href="https://foxcapades.github.io/renpy-sprite
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-06.gif" alt="tutorial 06">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-07.gif" alt="tutorial 07">
 </div>
 </div>
 </div>
@@ -3466,7 +3518,7 @@ label start:
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-07.png" alt="tutorial 07">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/tutorial-08.png" alt="tutorial 08">
 </div>
 </div>
 <div class="paragraph">
@@ -3509,7 +3561,7 @@ define player_customizer = CustomizedSprite(
         skin_lcb,
         skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]),
         skin_color=("Skin Color", "Body", [
-            "#513021",
+            "#613021",
             "#874c2c",
             "#803716",
             "#b66837",
@@ -3536,10 +3588,10 @@ define player_customizer = CustomizedSprite(
             "#9A9E9F",
             "#FAFAFA",
             "#801818",
-            "#580271",
-            "#1592CA",
+            "#680271",
+            "#1692CA",
             "#11694E",
-            "#FF87C5"
+            "#FF87C6"
         ])
     ),
     SCLayer(
@@ -3558,9 +3610,9 @@ define player_customizer = CustomizedSprite(
         hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
         hair_accessory_color=("Bow Color", "Hair", [
             "#849FF7",
-            "#A583F7",
+            "#A683F7",
             "#FFEB79",
-            "#FFD579"
+            "#FFD679"
         ])
     ),
 )</code></pre>
@@ -3642,7 +3694,7 @@ label start:
 <div id="footer">
 <div id="footer-text">
 Version 1.2.0<br>
-Last updated 2023-07-17 23:29:42 -0400
+Last updated 2023-07-18 12:26:26 -0400
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

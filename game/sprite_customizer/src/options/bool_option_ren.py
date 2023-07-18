@@ -37,7 +37,15 @@ class SCBooleanOption(SCOption):
         The selection value to set when this option is `False`.
     """
 
-    def __init__(self, key, name, group, default=False, values=None, **kwargs):
+    def __init__(
+        self,
+        key: str,
+        name: str,
+        group: str,
+        default: bool = False,
+        values: tuple[any, any] | None = None,
+        **kwargs
+    ):
         """
         Initializes the new SCBooleanOption instance with the given arguments.
 
@@ -89,7 +97,7 @@ class SCBooleanOption(SCOption):
 
 
     @property
-    def value(self):
+    def value(self) -> bool:
         """
         bool
             The current boolean value of this SCBooleanOption.
@@ -97,7 +105,7 @@ class SCBooleanOption(SCOption):
         return self._value
 
     @property
-    def selection_value(self):
+    def selection_value(self) -> any:
         """
         any
             The current selection value for this SCBooleanOption.
@@ -124,7 +132,7 @@ class SCBooleanOption(SCOption):
             (self._when_true, self._when_false),
         )
 
-    def _pick_value(self, tf):
+    def _pick_value(self, tf: bool) -> any:
         return self._when_true if tf else self._when_false
 
 
@@ -135,7 +143,7 @@ class SCBooleanOption(SCOption):
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
-    def set_selection(self, value):
+    def set_selection(self, value: bool):
         """
         Sets the selection based on the given boolean `value`.  The selection
         will be set to one of the values provided in the `values` tuple in the

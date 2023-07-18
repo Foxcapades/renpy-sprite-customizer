@@ -45,7 +45,15 @@ registered to an SCLayer instance to be in any way useful.
 
 [source, python]
 ----
-def __init__(self, key, name, group, default=False, values=None, **kwargs)
+def __init__(
+    self,
+    key: str,
+    name: str,
+    group: str,
+    default: bool = False,
+    values: tuple[any, any] | None = None,
+    **kwargs
+)
 ----
 
 Initializes the new <<sc-boolean-option>> instance with the given arguments.
@@ -85,7 +93,7 @@ Defaults to `(True, False)`.
 
 [source, python]
 ----
-def set_selection(self, value)
+def set_selection(self, value: bool)
 ----
 
 Sets the selection based on the given boolean `value`.  The selection will be

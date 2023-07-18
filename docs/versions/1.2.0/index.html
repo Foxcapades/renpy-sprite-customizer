@@ -792,9 +792,6 @@ svg {
   font-style: normal !important;
   letter-spacing: 0;
   padding: 0;
-  background-color: #f2f2f2;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
   line-height: inherit
 }
 
@@ -2451,11 +2448,7 @@ table.tableblock.grid-all td.tableblock {
   font-style: normal !important;
   letter-spacing: 0;
   padding: 0px 4px;
-  background-color: #f6f6f6;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
   line-height: inherit;
-  border: solid #ddd7d7 1px;
   color: #e74c3c
 }
 
@@ -3186,6 +3179,11 @@ instance.</p>
 <h4 id="custom-sprite-methods"><a class="anchor" href="#custom-sprite-methods"></a><a class="link" href="#custom-sprite-methods">Methods</a></h4>
 <div class="sect4">
 <h5 id="_init"><a class="anchor" href="#_init"></a><a class="link" href="#_init"><code>__init__</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, image_name: str, *layers: SCLayer, **kwargs: any)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Initializes the new <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance with the given arguments.</p>
 </div>
@@ -3230,6 +3228,11 @@ layer will be the "front".</p>
 </div>
 <div class="sect4">
 <h5 id="_set_state"><a class="anchor" href="#_set_state"></a><a class="link" href="#_set_state"><code>set_state</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def set_state(self, state: SCState)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Sets the internal state object of this <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance to the given
 <a href="#sc-state"><code>SCState</code></a> instance.</p>
@@ -3268,6 +3271,11 @@ label after_load:
 </div>
 <div class="sect4">
 <h5 id="_get_options"><a class="anchor" href="#_get_options"></a><a class="link" href="#_get_options"><code>get_options</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def get_options(self) -&gt; list</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Gets a list of the options attached to this <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance.</p>
 </div>
@@ -3291,6 +3299,11 @@ label after_load:
 </div>
 <div class="sect4">
 <h5 id="_get_options_by_key"><a class="anchor" href="#_get_options_by_key"></a><a class="link" href="#_get_options_by_key"><code>get_options_by_key</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def get_options_by_key(self) -&gt; OrderedDict</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Gets a dict of option keys mapped to SCOption instances for all the options
 attached to this <a href="#custom-sprite"><code>CustomizedSprite</code></a>.</p>
@@ -3304,7 +3317,7 @@ attached to this <a href="#custom-sprite"><code>CustomizedSprite</code></a>.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dict</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OrderedDict</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Dict of option keys mapped to SCOption instances.</p>
 </div></div></td>
@@ -3315,6 +3328,11 @@ attached to this <a href="#custom-sprite"><code>CustomizedSprite</code></a>.</p>
 </div>
 <div class="sect4">
 <h5 id="_get_options_by_group"><a class="anchor" href="#_get_options_by_group"></a><a class="link" href="#_get_options_by_group"><code>get_options_by_group</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre>def get_options_by_group(self, group_order: list|None = None) -&gt; OrderedDict</pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Returns an index of options and display names grouped by layer group name.  This
 index may optionally be ordered by providing a list of the desired group order.</p>
@@ -3371,7 +3389,7 @@ definitions, and ONLY those groups.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dict</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OrderedDict</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>An index of the declared sprite customization options grouped by the
 configured option groups.</p>
@@ -3401,6 +3419,11 @@ configured option groups.</p>
 </div>
 <div class="sect4">
 <h5 id="_randomize"><a class="anchor" href="#_randomize"></a><a class="link" href="#_randomize"><code>randomize</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def randomize(self)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Randomizes the selections for all the randomizable options on this
 <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance.</p>
@@ -3429,6 +3452,11 @@ define sprite = sprite_factory.new_sprite("my_image")</code></pre>
 <h4 id="_methods"><a class="anchor" href="#_methods"></a><a class="link" href="#_methods">Methods</a></h4>
 <div class="sect4">
 <h5 id="_init_2"><a class="anchor" href="#_init_2"></a><a class="link" href="#_init_2"><code>__init__</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, *layers: SCLayer, **kwargs: any)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Initializes a new <a href="#custom-sprite-factory"><code>CustomizedSpriteFactory</code></a> instance with the given arguments.</p>
 </div>
@@ -3465,6 +3493,11 @@ factory.</p>
 </div>
 <div class="sect4">
 <h5 id="_new_sprite"><a class="anchor" href="#_new_sprite"></a><a class="link" href="#_new_sprite"><code>new_sprite</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def new_sprite(self, image_name: str, **kwargs: any)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Constructs a new <a href="#custom-sprite"><code>CustomizedSprite</code></a> instance with the given name.</p>
 </div>
@@ -3572,7 +3605,15 @@ registered to an SCLayer instance to be in any way useful.</p>
 <h5 id="_init_3"><a class="anchor" href="#_init_3"></a><a class="link" href="#_init_3"><code>__init__</code></a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, key, name, group, default=False, values=None, **kwargs)</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(
+    self,
+    key: str,
+    name: str,
+    group: str,
+    default: bool = False,
+    values: tuple[any, any] | None = None,
+    **kwargs
+)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3636,7 +3677,7 @@ this option is <code>False</code>.</p>
 <h5 id="_set_selection"><a class="anchor" href="#_set_selection"></a><a class="link" href="#_set_selection"><code>set_selection</code></a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def set_selection(self, value)</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def set_selection(self, value: bool)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -3766,6 +3807,88 @@ attached to this layer.</p>
 </table>
 </div>
 </div>
+<div class="sect3">
+<h4 id="sc-layer-methods"><a class="anchor" href="#sc-layer-methods"></a><a class="link" href="#sc-layer-methods">Methods</a></h4>
+<div class="sect4">
+<h5 id="_init_4"><a class="anchor" href="#_init_4"></a><a class="link" href="#_init_4"><code>__init__</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(
+    self,
+    name: str,
+    layer_provider: str|function,
+    transform: function = None,
+    **options: SCOption
+)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Initializes the new <code>SCLayer</code> instance with the given arguments.</p>
+</div>
+<div class="sect5">
+<h6 id="_arguments_7"><a class="anchor" href="#_arguments_7"></a><a class="link" href="#_arguments_7">Arguments</a></h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">name</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Internal name of the layer.  This value should be all lowercase and should
+only contain letters, numbers, and underscores.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">layer_provider</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>callable | str</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Either a Layer Callback used to create the displayable that backs this layer,
+or a template string containing <code>{var_name}</code> variables that will be injected
+based on the selected options.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">transform</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>callable | None</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Optional transform function.  This function takes a Displayable as a single
+argument and returns a Displayable.  Allows performing arbitrary transforms to
+the whole layer regardless of option selections.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">**options</p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kwargs</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Keyword arguments that define the options available to this layer.  Keyword
+args must be one of the following types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An <a href="#sc-opt">[sc-opt]</a> instance.</p>
+</li>
+<li>
+<p>An <a href="#sc-option"><code>SCOption</code></a> instance.</p>
+</li>
+<li>
+<p>A tuple of 2 values: <code>(display_name, value_list)</code></p>
+</li>
+<li>
+<p>A tuple of 3 values: <code>(display_name, group, value_list)</code></p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="sc-option"><a class="anchor" href="#sc-option"></a><a class="link" href="#sc-option"><code>SCOption</code></a></h3>
@@ -3843,6 +3966,72 @@ attached to this layer.</p>
 </table>
 </div>
 </div>
+<div class="sect3">
+<h4 id="sc-option-methods"><a class="anchor" href="#sc-option-methods"></a><a class="link" href="#sc-option-methods">Methods</a></h4>
+<div class="sect4">
+<h5 id="_init_5"><a class="anchor" href="#_init_5"></a><a class="link" href="#_init_5"><code>__init__</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, key: str, name: str, group: str, option_type: int)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Initializes the new SCOption instance with the given arguments.</p>
+</div>
+<div class="sect5">
+<h6 id="_arguments_8"><a class="anchor" href="#_arguments_8"></a><a class="link" href="#_arguments_8">Arguments</a></h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>key</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Option keyword.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Option display name.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>group</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>str</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Option group.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><code>option_type</code></p></th>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Option type indicator.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_randomize_3"><a class="anchor" href="#_randomize_3"></a><a class="link" href="#_randomize_3"><code>randomize</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def randomize(self)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Extension point method for randomizable options to override and provide their
+own randomization logic.</p>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="sc-state"><a class="anchor" href="#sc-state"></a><a class="link" href="#sc-state"><code>SCState</code></a></h3>
@@ -3860,12 +4049,17 @@ my_sprite.set_state(my_sprite_state)</code></pre>
 <div class="sect3">
 <h4 id="sc-state-methods"><a class="anchor" href="#sc-state-methods"></a><a class="link" href="#sc-state-methods">Methods</a></h4>
 <div class="sect4">
-<h5 id="_init_4"><a class="anchor" href="#_init_4"></a><a class="link" href="#_init_4"><code>__init__</code></a></h5>
+<h5 id="_init_6"><a class="anchor" href="#_init_6"></a><a class="link" href="#_init_6"><code>__init__</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, selections: dict = {}, user_state: dict = {})</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Initializes the new, blank SCState instance.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_7"><a class="anchor" href="#_arguments_7"></a><a class="link" href="#_arguments_7">Arguments</a></h6>
+<h6 id="_arguments_9"><a class="anchor" href="#_arguments_9"></a><a class="link" href="#_arguments_9">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3895,6 +4089,11 @@ state.</p>
 </div>
 <div class="sect4">
 <h5 id="_set_variable"><a class="anchor" href="#_set_variable"></a><a class="link" href="#_set_variable"><code>set_variable</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def set_variable(self, key: str, value: any)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Store arbitrary user variable that will be passed to all layer callbacks.</p>
 </div>
@@ -3928,7 +4127,7 @@ label start:
 </div>
 </div>
 <div class="sect5">
-<h6 id="_arguments_8"><a class="anchor" href="#_arguments_8"></a><a class="link" href="#_arguments_8">Arguments</a></h6>
+<h6 id="_arguments_10"><a class="anchor" href="#_arguments_10"></a><a class="link" href="#_arguments_10">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3956,11 +4155,16 @@ label start:
 </div>
 <div class="sect4">
 <h5 id="_get_variable"><a class="anchor" href="#_get_variable"></a><a class="link" href="#_get_variable"><code>get_variable</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def get_variable(self, key: str) -&gt; any</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Retrieve user variable from the <a href="#sc-state"><code>SCState</code></a> store by key.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_9"><a class="anchor" href="#_arguments_9"></a><a class="link" href="#_arguments_9">Arguments</a></h6>
+<h6 id="_arguments_11"><a class="anchor" href="#_arguments_11"></a><a class="link" href="#_arguments_11">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -3998,11 +4202,16 @@ label start:
 </div>
 <div class="sect4">
 <h5 id="_has_variable"><a class="anchor" href="#_has_variable"></a><a class="link" href="#_has_variable"><code>has_variable</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def has_variable(self, key: str) -&gt; bool</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Tests whether the state contains a user variable value with the given key.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_10"><a class="anchor" href="#_arguments_10"></a><a class="link" href="#_arguments_10">Arguments</a></h6>
+<h6 id="_arguments_12"><a class="anchor" href="#_arguments_12"></a><a class="link" href="#_arguments_12">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4040,11 +4249,16 @@ label start:
 </div>
 <div class="sect4">
 <h5 id="_set_selection_2"><a class="anchor" href="#_set_selection_2"></a><a class="link" href="#_set_selection_2"><code>set_selection</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def set_selection(self, key: str, value: any)</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Sets the target selection value.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_11"><a class="anchor" href="#_arguments_11"></a><a class="link" href="#_arguments_11">Arguments</a></h6>
+<h6 id="_arguments_13"><a class="anchor" href="#_arguments_13"></a><a class="link" href="#_arguments_13">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4072,11 +4286,16 @@ label start:
 </div>
 <div class="sect4">
 <h5 id="_get_selection"><a class="anchor" href="#_get_selection"></a><a class="link" href="#_get_selection"><code>get_selection</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def get_selection(self, key: str) -&gt; any</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Looks up the target selection value.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_12"><a class="anchor" href="#_arguments_12"></a><a class="link" href="#_arguments_12">Arguments</a></h6>
+<h6 id="_arguments_14"><a class="anchor" href="#_arguments_14"></a><a class="link" href="#_arguments_14">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4114,11 +4333,16 @@ label start:
 </div>
 <div class="sect4">
 <h5 id="_has_selection"><a class="anchor" href="#_has_selection"></a><a class="link" href="#_has_selection"><code>has_selection</code></a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def has_selection(self, key: str) -&gt; bool</code></pre>
+</div>
+</div>
 <div class="paragraph">
 <p>Tests whether the state contains a selection value with the given key.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_13"><a class="anchor" href="#_arguments_13"></a><a class="link" href="#_arguments_13">Arguments</a></h6>
+<h6 id="_arguments_15"><a class="anchor" href="#_arguments_15"></a><a class="link" href="#_arguments_15">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4387,7 +4611,7 @@ rendering this option as an input.</p>
 <div class="sect3">
 <h4 id="_methods_3"><a class="anchor" href="#_methods_3"></a><a class="link" href="#_methods_3">Methods</a></h4>
 <div class="sect4">
-<h5 id="_init_5"><a class="anchor" href="#_init_5"></a><a class="link" href="#_init_5"><code>__init__</code></a></h5>
+<h5 id="_init_7"><a class="anchor" href="#_init_7"></a><a class="link" href="#_init_7"><code>__init__</code></a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, key, name, group, default="", prefix=None, suffix=None, max_len=None, **kwargs)</code></pre>
@@ -4397,7 +4621,7 @@ rendering this option as an input.</p>
 <p>Initializes the new <a href="#sc-text-option"><code>SCTextOption</code></a> instance with the given arguments.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_14"><a class="anchor" href="#_arguments_14"></a><a class="link" href="#_arguments_14">Arguments</a></h6>
+<h6 id="_arguments_16"><a class="anchor" href="#_arguments_16"></a><a class="link" href="#_arguments_16">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4497,7 +4721,7 @@ when rendering this option.</p>
 <p>Sets the <code>current_value</code> of this option to the given value.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_15"><a class="anchor" href="#_arguments_15"></a><a class="link" href="#_arguments_15">Arguments</a></h6>
+<h6 id="_arguments_17"><a class="anchor" href="#_arguments_17"></a><a class="link" href="#_arguments_17">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4579,7 +4803,7 @@ validation function.</p>
 <div class="sect3">
 <h4 id="_methods_4"><a class="anchor" href="#_methods_4"></a><a class="link" href="#_methods_4">Methods</a></h4>
 <div class="sect4">
-<h5 id="_init_6"><a class="anchor" href="#_init_6"></a><a class="link" href="#_init_6"><code>__init__</code></a></h5>
+<h5 id="_init_8"><a class="anchor" href="#_init_8"></a><a class="link" href="#_init_8"><code>__init__</code></a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(
@@ -4723,7 +4947,7 @@ value is valid.</p>
 will be automatically committed to the user selections.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_16"><a class="anchor" href="#_arguments_16"></a><a class="link" href="#_arguments_16">Arguments</a></h6>
+<h6 id="_arguments_18"><a class="anchor" href="#_arguments_18"></a><a class="link" href="#_arguments_18">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4850,7 +5074,7 @@ be registered to an <a href="#sc-layer"><code>SCLayer</code></a> instance to be 
 <div class="sect3">
 <h4 id="sc-value-list-option-methods"><a class="anchor" href="#sc-value-list-option-methods"></a><a class="link" href="#sc-value-list-option-methods">Methods</a></h4>
 <div class="sect4">
-<h5 id="_init_7"><a class="anchor" href="#_init_7"></a><a class="link" href="#_init_7"><code>__init__</code></a></h5>
+<h5 id="_init_9"><a class="anchor" href="#_init_9"></a><a class="link" href="#_init_9"><code>__init__</code></a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, key, name, group, values, display_digits=2, **kwargs)</code></pre>
@@ -4860,7 +5084,7 @@ be registered to an <a href="#sc-layer"><code>SCLayer</code></a> instance to be 
 <p>Initializes the new SCValueListOption instance with the given arguments.</p>
 </div>
 <div class="sect5">
-<h6 id="_arguments_17"><a class="anchor" href="#_arguments_17"></a><a class="link" href="#_arguments_17">Arguments</a></h6>
+<h6 id="_arguments_19"><a class="anchor" href="#_arguments_19"></a><a class="link" href="#_arguments_19">Arguments</a></h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">
@@ -4938,7 +5162,7 @@ decremented.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_randomize_3"><a class="anchor" href="#_randomize_3"></a><a class="link" href="#_randomize_3"><code>randomize</code></a></h5>
+<h5 id="_randomize_4"><a class="anchor" href="#_randomize_4"></a><a class="link" href="#_randomize_4"><code>randomize</code></a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def randomize(self)</code></pre>
@@ -4962,7 +5186,7 @@ the user state.</p>
 <h4 id="fn-sc-validator-hex-color"><a class="anchor" href="#fn-sc-validator-hex-color"></a><a class="link" href="#fn-sc-validator-hex-color"><code>sc_validator_hex_color</code></a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def sc_validator_hex_color(text)</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def sc_validator_hex_color(text: str) -&gt; bool</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4971,7 +5195,7 @@ instances.  Verifies that the given input string resembles a valid hex color
 code.</p>
 </div>
 <div class="sect4">
-<h5 id="_arguments_18"><a class="anchor" href="#_arguments_18"></a><a class="link" href="#_arguments_18">Arguments</a></h5>
+<h5 id="_arguments_20"><a class="anchor" href="#_arguments_20"></a><a class="link" href="#_arguments_20">Arguments</a></h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 10%;">

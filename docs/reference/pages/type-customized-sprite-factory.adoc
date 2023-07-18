@@ -15,10 +15,15 @@ define sprite_factory = CustomizedSpriteFactory(
 define sprite = sprite_factory.new_sprite("my_image")
 ----
 
+
 == Methods
 
-
 === `+__init__+`
+
+[source, python]
+----
+def __init__(self, *layers: SCLayer, **kwargs: any)
+----
 
 Initializes a new <<custom-sprite-factory>> instance with the given arguments.
 
@@ -41,6 +46,11 @@ factory.
 
 
 === `new_sprite`
+
+[source, python]
+----
+def new_sprite(self, image_name: str, **kwargs: any)
+----
 
 Constructs a new <<custom-sprite>> instance with the given name.
 

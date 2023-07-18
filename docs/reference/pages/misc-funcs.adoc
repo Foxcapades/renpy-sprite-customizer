@@ -7,7 +7,7 @@
 
 [source, python]
 ----
-def sc_validator_hex_color(text)
+def sc_validator_hex_color(text: str) -> bool
 ----
 
 Hex color string validator for use with <<sc-validatable-text-option>>

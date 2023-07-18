@@ -9,6 +9,7 @@ link:{url-disp}[Displayable]s that can be used as components of the overall
 CusomizedSprite image.  These functions are one of the two ways
 that the Sprite Customizer is able to make use of your project's assets.
 
+
 == Defining Layer Callbacks
 
 Before we can talk more about layer callbacks, we need to talk a little bit
@@ -120,6 +121,7 @@ init python:
 
 If a redraw time is not returned by the layer callback, a default value of `0.0`
 is used.
+
 
 === Advanced Animations
 
