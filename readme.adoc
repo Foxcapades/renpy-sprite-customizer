@@ -49,18 +49,20 @@ Sprite Customizer.
 This is where you would go if you want to hack the behavior of the Sprite
 Customizer.
 
-==== `config.rpy`
-
-The `config.rpy` file is where the demo sprites are defined.  This file is
-intended to be used to hold your Customized Sprite configuration(s) and layer
-callbacks.
-
 ==== `screens.rpy`
 
 The `screens.rpy` file is where the demo Sprite Customizer screen is defined.
 
 This is where you go if you want to redefine or alter the Sprite Customization
 screen.
+
+
+=== link:game/customized_sprites.rpy[`customized_sprites.rpy`]
+
+The `customized_sprites.rpy` file is where the demo sprites are defined.  This
+file is intended to be used to hold your Customized Sprite configuration(s) and
+layer callbacks.
+
 
 === link:game/images.rpy[`images.rpy`]
 
