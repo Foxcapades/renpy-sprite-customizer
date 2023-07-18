@@ -1,0 +1,213 @@
+[#sc-text-option]
+= SCTextOption
+:icons: font
+:source-highlighter: highlight.js
+
+*Extends* <<sc-option>>
+
+Represents an option that is a string value that may be set by the player.
+
+This option is intended to be updated by a text input, but may be updated by any
+source of a string value.
+
+[source, python]
+----
+SCTextOption("my_option", "My Option", "My Group", "default value")
+----
+
+[IMPORTANT]
+--
+This option type is state dependent and cannot be used on its own, it *MUST* be
+registered to an SCLayer instance to be in any way useful.
+--
+
+
+[#sc-text-option-properties]
+== Properties
+
+*Includes* <<sc-option-properties, SCOption Properties>>
+
+=== `default`
+
+[cols="1m,9a"]
+|===
+| str
+| The default value set on this option.
+
+The default value is used as the value of this option when no value has yet been
+set.
+|===
+
+
+=== `selection_value`
+
+[cols="1m,9a"]
+|===
+| str
+| The current user selection value for this option.
+|===
+
+
+=== `current_value`
+
+[cols="1m,9a"]
+|===
+| str
+| The current value for this text input.  This is not the same as the selection
+value.  This value is used to track the text the user has set before they
+attempted to "commit" their change to an option selection.
+
+This is primarily used by screen inputs to store the value as it is being typed
+but before it is saved.
+|===
+
+
+=== `has_prefix`
+
+[cols="1m,9a"]
+|===
+| bool
+| Whether this option has a prefix value set.
+|===
+
+
+=== `prefix`
+
+[cols="1m,9a"]
+|===
+| str
+| This option's prefix value.
+
+The prefix is a static value that should appear before the option text when
+rendering this option as an input.
+|===
+
+
+=== `has_suffix`
+
+[cols="1m,9a"]
+|===
+| bool
+| Whether this option has a suffix value set.
+|===
+
+
+=== `suffix`
+
+[cols="1m,9a"]
+|===
+| str
+| This option's suffix value.
+
+The suffix is a static value that should appear after the option text when
+rendering this option as an input.
+|===
+
+
+=== `has_max_len`
+
+[cols="1m,9a"]
+|===
+| bool
+| Whether this option has a max_len value set.
+|===
+
+
+=== `max_len`
+
+[cols="1m,9a"]
+|===
+| int
+| Max length.
+
+This value is to be used when rendering the current option as an input to
+prevent users from inputting a value that is too long.
+
+[WARNING]
+--
+The max length is *NOT* enforced automatically, it is only for use when
+rendering this option as an input.
+--
+|===
+
+
+== Methods
+
+
+=== `+__init__+`
+
+[source, python]
+----
+def __init__(self, key, name, group, default="", prefix=None, suffix=None, max_len=None, **kwargs)
+----
+
+Initializes the new <<sc-text-option>> instance with the given arguments.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Key for this option.
+
+| `name`
+| str
+| Display name for this option.
+
+| `group`
+| str
+| Group name for this option.
+
+| `default`
+| str
+| Optional default/starting value to use when no value has yet been set.
+
+| `prefix`
+| str
+| Optional static prefix that should appear before the value when rendering this
+option as an input.
+
+| `suffix`
+| str
+| Optional static suffix that should appear after the value when rendering this
+option as an input.
+
+| `max_len`
+| int
+| Optional maximum allowed length for the text value.
+
+[WARNING]
+--
+The max length is *NOT* enforced by this type, it must be enforced by the input
+when rendering this option.
+--
+|===
+
+
+=== `commit_to_selection`
+
+[source, python]
+----
+def commit_to_selection(self)
+----
+
+Commits the `current_value` of this option to the user selections.
+
+=== `set_value`
+
+[source, python]
+----
+def set_value(self, value)
+----
+
+Sets the `current_value` of this option to the given value.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `value`
+| str
+| New current value to set.
+|===

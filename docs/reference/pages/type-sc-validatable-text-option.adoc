@@ -1,0 +1,147 @@
+[#sc-validatable-text-option]
+= SCValidatableTextOption
+
+*Extends* <<sc-text-option>>
+
+Represents an option that is a string value that may be set by the player but
+must be valid according to a given validator function.
+
+This option is intended to be updated by a text input, but may be updated by any
+source of a string value.
+
+[source, python]
+----
+SCValidatableTextOption("my_option", "My Option", "My Group", validator_func, "default value")
+----
+
+[IMPORTANT]
+--
+This option type is state dependent and cannot be used on its own, it *MUST* be
+registered to an SCLayer instance to be in any way useful.
+--
+
+
+== Properties
+
+*Includes* <<sc-option-properties, SCOption Properties>> +
+*Includes* <<sc-text-option-properties, SCTextOption Properties>>
+
+
+=== `is_valid`
+
+[cols="1m,9a"]
+|===
+| bool
+| Whether the `current_value` of this option is valid against the given
+validation function.
+|===
+
+
+== Methods
+
+
+=== `+__init__+`
+
+[source, python]
+----
+def __init__(
+    self,
+    key,
+    name,
+    group,
+    validator,
+    default="",
+    autocommit=False,
+    prefix=None,
+    suffix=None,
+    max_len=None,
+    **kwargs
+)
+----
+
+Initializes the new SCValidatableTextOptoin instance with the given arguments.
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Key for this option.
+
+| `name`
+| str
+| Display name for this option.
+
+| `group`
+| str
+| Group name for this option.
+
+| `validator`
+| callable
+| A function that should take a string value as its single argument and return a
+boolean flag indicating whether the given value was valid.
+
+See <<#fn-sc-validator-hex-color>>.
+
+| `default`
+| str
+| Optional default/starting value to use when no value has yet been set.
+
+| `autocommit`
+| bool
+| Optional flag indicating whether the `current_value` should be automatically
+committed as soon as it is valid, without requiring a call to
+`commit_to_selection`.  Defaults to `False`.
+
+| `prefix`
+| str
+| Optional static prefix that should appear before the value when rendering this
+option as an input.
+
+| `suffix`
+| str
+| Optional wtatic suffix that should appear after the value when rendering this
+option as an input.
+
+| `max_len`
+| int
+| Optional maximum allowed length for the text value.
+
+[WARNING]
+--
+The max length is *NOT* enforced by this type, it must be enforced by the input
+when rendering this option.
+--
+|===
+
+
+=== `commit_to_selection`
+
+[source, python]
+----
+def commit_to_selection(self)
+----
+
+Commits the `current_value` of this option to the user selections only if the
+value is valid.
+
+
+=== `set_value`
+
+[source, python]
+----
+def set_value(self, value)
+----
+
+Sets the `current_value` of this option to the given value.
+
+Additionally, if `autocommit` is `True` and the given value is valid, it
+will be automatically committed to the user selections.
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| `value`
+| str
+| New current value to set.
+|===
