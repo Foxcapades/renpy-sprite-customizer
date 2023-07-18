@@ -1,5 +1,5 @@
 [#sc-layer]
-= SCLayer
+= `SCLayer`
 
 Represents a single layer in a customizable sprite.
 

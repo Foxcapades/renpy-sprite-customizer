@@ -1,5 +1,5 @@
 [#sc-option]
-= SCOption
+= `SCOption`
 
 Base type for Sprite Customizer option types.
 

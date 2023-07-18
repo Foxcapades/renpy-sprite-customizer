@@ -25,6 +25,7 @@ include::pages/topic-layer-callback.adoc[leveloffset=2]
 
 include::pages/type-customized-sprite.adoc[leveloffset=2]
 include::pages/type-customized-sprite-factory.adoc[leveloffset=2]
+include::pages/type-sc-boolean-option.adoc[leveloffset=2]
 include::pages/type-sc-layer.adoc[leveloffset=2]
 include::pages/type-sc-option.adoc[leveloffset=2]
 include::pages/type-sc-state.adoc[leveloffset=2]

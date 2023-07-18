@@ -1,5 +1,5 @@
 [#sc-text-option]
-= SCTextOption
+= `SCTextOption`
 :icons: font
 :source-highlighter: highlight.js
 

@@ -1,5 +1,5 @@
 [#sc-validatable-text-option]
-= SCValidatableTextOption
+= `SCValidatableTextOption`
 
 *Extends* <<sc-text-option>>
 

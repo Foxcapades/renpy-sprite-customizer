@@ -1,5 +1,5 @@
 [#sc-state]
-= SCState
+= `SCState`
 
 This class defines an object that is used to hold sprite customization option
 selections. This is used to persist the selected options as part of the game

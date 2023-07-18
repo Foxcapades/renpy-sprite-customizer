@@ -19,6 +19,26 @@ image cc_gui_option_arrow_left_idle:
 
 image cc_gui_option_arrow_left_hover = Transform("cc_gui_option_arrow_left_idle", matrixcolor=BrightnessMatrix(-0.5))
 
+image cc_checkbox_blank_idle:
+    "sprite_customizer/img/checkbox_blank_idle.png"
+    xsize 50
+    ysize 50
+
+image cc_checkbox_blank_hover:
+    "sprite_customizer/img/checkbox_blank_hover.png"
+    xsize 50
+    ysize 50
+
+image cc_checkbox_checked_idle:
+    "sprite_customizer/img/checkbox_checked_idle.png"
+    xsize 50
+    ysize 50
+
+image cc_checkbox_checked_hover:
+    "sprite_customizer/img/checkbox_checked_hover.png"
+    xsize 50
+    ysize 50
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
@@ -100,9 +120,20 @@ screen sprite_creator_option_group_option(sprite, option_key, option):
             use sprite_creator_validatable_text_option(option)
         elif isinstance(option, SCTextOption):
             use sprite_creator_text_option(option)
+        elif isinstance(option, SCBooleanOption):
+            use sprite_creator_boolean_option(option)
 
 
-# Sprite Creator : Value List Option Selector
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+#    Option Components
+#
+# The following screens are components for rendering specific types of options.
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+# Value List Option Selector
 screen sprite_creator_value_list_option(option):
     hbox:
         xsize 200
@@ -121,7 +152,7 @@ screen sprite_creator_value_list_option(option):
             action Function(option.inc_selection)
 
 
-# Sprite Creator : Text Option Input
+# Text Option Input
 screen sprite_creator_text_option(option):
     default option_value = SCTextInput(option)
 
@@ -148,10 +179,7 @@ screen sprite_creator_text_option(option):
                 length option.max_len
 
 
-
-
-
-# Sprite Creator : Validatable Text Option Input
+# Validatable Text Option Input
 screen sprite_creator_validatable_text_option(option):
     default option_value = SCTextInput(option)
 
@@ -179,3 +207,20 @@ screen sprite_creator_validatable_text_option(option):
             if option.has_max_len:
                 length option.max_len
 
+
+# Boolean Option Input
+screen sprite_creator_boolean_option(option):
+    hbox:
+        xsize 200
+        ysize 50
+
+        imagebutton:
+            xcenter 0.5
+            ycenter 0.5
+
+            if option.value:
+                auto "cc_checkbox_checked_%s"
+            else:
+                auto "cc_checkbox_blank_%s"
+
+            action Function(option.toggle)

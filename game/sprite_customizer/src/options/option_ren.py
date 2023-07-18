@@ -12,6 +12,7 @@ init -2 python:
 
 SC_OPTION_TYPE_VALUE_LIST = 0
 SC_OPTION_TYPE_TEXT_INPUT = 1
+SC_OPTION_TYPE_BOOLEAN    = 2
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

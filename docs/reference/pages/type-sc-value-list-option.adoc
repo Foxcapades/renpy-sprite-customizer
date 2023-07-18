@@ -1,5 +1,5 @@
 [#sc-value-list-option]
-= SCValueListOption
+= `SCValueListOption`
 :icons: font
 :source-highlighter: highlight.js
 

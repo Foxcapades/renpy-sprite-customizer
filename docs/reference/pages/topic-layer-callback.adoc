@@ -47,7 +47,7 @@ SCLayer(
 we would expect the defined layer callback function (`hair_lcb`) to accept 2
 arguments, `hair_style` and `hair_color`.  We would then expect that function to
 perform some work with those arguments to produce a
-link:{url-disp}[Displayable].  The values passed on those arguments will
+link:{url-disp}[`Displayable`].  The values passed on those arguments will
 be one of the options in the relevant option list.  In our example
 demonstration's case, we use the `hair_style` value (one of "afro", "bob", or
 "bun") to create a path to the specific image we wish to display; then we use
@@ -76,9 +76,10 @@ SCLayer("mic_stand", mic_stand_lcb)
 == Animating Layers
 
 As the whole Sprite Customization framework is built on
-link:{url-ddisp}[DynamicDisplayable]s, it may be desirable to put those
+link:{url-ddisp}[`DynamicDisplayable`]s, it may be desirable to put those
 Displayables to work with animations.  Luckily, the same values passed to a
-DynamicDisplayable's callback are accessible from an SC layer callback as well.
+``DynamicDisplayable``'s callback are accessible from an SC layer callback as
+well.
 
 In addition to the customization options, the typical ``st``-``at`` pair are
 passed to layer callbacks and can be accessed by declaring those parameters as
@@ -103,7 +104,7 @@ init python:
 ----
 
 Those of you that are already familiar with
-link:{url-ddisp}[DynamicDisplayable]s and their callbacks may be wondering how
+link:{url-ddisp}[`DynamicDisplayable`]s and their callbacks may be wondering how
 and where a redraw time may be defined.  Luckily, if needed, that may also be
 returned from SC layer callbacks:
 
@@ -126,7 +127,7 @@ The following example demonstrates an advanced animation where a character
 sprite blinks their eyes at a semi-random interval.  This is also a
 demonstration of where the Customized Sprite frameworks starts to break down;
 at this point it may be worthwhile to consider assembling the
-link:{url-ddisp}[DynamicDisplayable]s and link:{url-lay}[LayeredImage]s
+link:{url-ddisp}[`DynamicDisplayable`]s and link:{url-lay}[`LayeredImage`]s
 manually unless you are comfortable writing animations in Python.
 
 [source, python]

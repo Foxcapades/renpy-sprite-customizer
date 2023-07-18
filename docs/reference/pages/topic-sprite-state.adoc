@@ -6,7 +6,9 @@ selection state for the sprites is stored in a runtime variable of type
 <<sc-state>>.
 
 This state should be created via a runtime variable in a python line, or,
-preferrably, a `default` statement.
+preferrably, a
+link:https://www.renpy.org/doc/html/python.html#default-statement[`default`]
+statement.
 
 [source, python]
 ----

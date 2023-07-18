@@ -1,5 +1,5 @@
 [#custom-sprite-factory]
-= CustomizedSpriteFactory
+= `CustomizedSpriteFactory`
 
 A factory that can be used to generate multiple <<custom-sprite>> instances with
 the same set of base options.

@@ -1,0 +1,125 @@
+[#sc-boolean-option]
+= `SCBooleanOption`
+:icons: font
+:source-highlighter: highlight.js
+
+Represents a toggleable option that can be represented by boolean flag.
+
+This option is intended to be updated by a toggle switch or checkbox of some
+kind.
+
+```python
+SCBooleanOption("my_option", "My Option", "My Group", False, ("Hello", "Goodbye"))
+```
+
+[IMPORTANT]
+--
+This option type is state dependent and cannot be used on its own, it *MUST* be
+registered to an SCLayer instance to be in any way useful.
+--
+
+
+== Properties
+
+=== `value`
+
+[cols="1m,9a"]
+|===
+| bool
+| The current boolean value of this <<sc-boolean-option>>.
+|===
+
+
+=== `selection_value`
+
+[cols="1m,9a"]
+|===
+| any
+| The current selection value for this <<sc-boolean-option>>.
+|===
+
+
+== Methods
+
+=== `+__init__+`
+
+[source, python]
+----
+def __init__(self, key, name, group, default=False, values=None, **kwargs)
+----
+
+Initializes the new <<sc-boolean-option>> instance with the given arguments.
+
+[cols="1h,1m,8a"]
+|===
+| `key`
+| str
+| Key for this option.
+
+| `name`
+| str
+| Display name for this option.
+
+| `group`
+| str
+| Group name for this option.
+
+| `default`
+| bool
+| Optional default value to use when no selection has yet been made by the user.
+
+Defaults to `False`.
+
+| `values`
+| tuple
+| Optional tuple of actual values to use for user selections made by this
+option.  The given tuple *MUST* be a two-tuple where the first value is the
+selection when this option is `True` and the second value is the selection when
+this option is `False`.
+
+Defaults to `(True, False)`.
+|===
+
+
+=== `set_selection`
+
+[source, python]
+----
+def set_selection(self, value)
+----
+
+Sets the selection based on the given boolean `value`.  The selection will be
+set to one of the values provided in the `values` tuple in the constructor
+(or `True`/`False` if not values were set).
+
+==== Arguments
+
+[cols="1h,1m,8a"]
+|===
+| value
+| bool
+| Boolean value indicating the selection to set.
+|===
+
+
+=== `toggle`
+
+[source, python]
+----
+def toggle(self)
+----
+
+Toggles the state of this SCBooleanOption.  This means if the value was `True`
+before calling this method, it will be `False` after calling this method and
+vice versa.
+
+
+=== `randomize`
+
+[source, python]
+----
+def randomize(self)
+----
+
+Selects a "random" option from either `True` or `False` and sets the user
+selection accordingly.

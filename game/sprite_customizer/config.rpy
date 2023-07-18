@@ -117,7 +117,7 @@ define ccf = CustomizedSpriteFactory(
     #     ),
     # ),
 
-    # Accessory Layer
+    # # Accessory Layer
     SCLayer("accessories", "images/ccp/accessories/{accessory}.png", accessory=("Accessory", "Hair", [
         "none",
         "cottoncandy_bow",
@@ -126,6 +126,12 @@ define ccf = CustomizedSpriteFactory(
         "plaid_clips",
     ])),
 
+    # Boolean Accessory Layer
+    # SCLayer(
+    #     "accessories",
+    #     "images/ccp/accessories/{accessory}.png",
+    #     accessory=SCBooleanOption("accessory", "Accessory", "Hair", False, ("cottoncandy_bow", "none"))
+    # ),
 
     # Eye Layer
     SCLayer("eyes", "images/ccp/eyes/{eye_color}_eyes.png", eye_color=("Eyes", "Face", [
