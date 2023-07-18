@@ -2,6 +2,13 @@
 
 == Version 1.x.x
 
+=== v1.2.0
+
+==== Features
+
+* Adds `SCBooleanOption` and supporting screens and images.
+
+
 === v1.1.1
 
 ==== Fixes
