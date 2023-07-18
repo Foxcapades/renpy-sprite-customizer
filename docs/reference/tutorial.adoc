@@ -91,7 +91,7 @@ define player_customizer = CustomizedSprite(
     SCLayer( <2>
         "skin", <3>
         skin_lcb, <4>
-        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <6>
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <5>
         skin_color=("Skin Color", "Body", [ <6>
             "#613021",
             "#874c2c",
@@ -110,7 +110,7 @@ define player_customizer = CustomizedSprite(
 <2> {sc-layer} constructor call.
 <3> Name of the layer.
 <4> Reference to our `skin_lcb` callback, passing the callback to the new layer.
-<6> Skin base option, directly relates to the skin base image files included in
+<5> Skin base option, directly relates to the skin base image files included in
     the tutorial sprite pack ("dark.png", "medium.png", "light.png").
 <6> Skin color option.  A collection of hex codes that will be used to make a
     TintMatrix to apply the skin color to our grayscale base images.
@@ -362,7 +362,7 @@ define player_customizer = CustomizedSprite(
             "Glasses", <2>
             "Face", <3>
             False, <4>
-            ("glasses", "none") <6>
+            ("glasses", "none") <5>
         )
     )
 ----
@@ -372,7 +372,7 @@ be passed in the constructor.
 <3> The group name.
 <4> The default state for the option, `False` here equates to `"none"` in the
 option tuple.
-<6> The option value tuple, the first value is what will be used when the
+<5> The option value tuple, the first value is what will be used when the
 boolean value is `True`, the second value will be used when the boolean value is
 `False`.
 
