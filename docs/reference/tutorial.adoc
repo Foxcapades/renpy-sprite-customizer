@@ -7,7 +7,7 @@
 :sectlinks: 1
 :sectanchors: 1
 :revnumber: any
-:imagesdir: https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial/
+:imagesdir: https://foxcapades.github.io/renpy-sprite-customizer/assets/images/
 
 :docs-url-base: https://foxcapades.github.io/renpy-sprite-customizer
 :custom-sprite: link:{docs-url-base}#custom-sprite[CustomizedSprite]
