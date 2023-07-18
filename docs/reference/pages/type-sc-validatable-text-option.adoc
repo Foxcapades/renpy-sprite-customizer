@@ -46,15 +46,15 @@ validation function.
 ----
 def __init__(
     self,
-    key,
-    name,
-    group,
-    validator,
-    default="",
-    autocommit=False,
-    prefix=None,
-    suffix=None,
-    max_len=None,
+    key: str,
+    name: str,
+    group: str,
+    validator: function,
+    default: str = "",
+    autocommit: bool = False,
+    prefix: str | None = None,
+    suffix: str | None = None,
+    max_len: int | None = None,
     **kwargs
 )
 ----
@@ -129,7 +129,7 @@ value is valid.
 
 [source, python]
 ----
-def set_value(self, value)
+def set_value(self, value: str)
 ----
 
 Sets the `current_value` of this option to the given value.

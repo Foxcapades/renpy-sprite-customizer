@@ -25,9 +25,9 @@ class SCTextOption(SCOption):
         name: str,
         group: str,
         default: str = "",
-        prefix: str|None = None,
-        suffix: str|None = None,
-        max_len: int|None = None,
+        prefix: str | None = None,
+        suffix: str | None = None,
+        max_len: int | None = None,
         **kwargs
     ):
         """

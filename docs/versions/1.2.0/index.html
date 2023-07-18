@@ -4614,7 +4614,17 @@ rendering this option as an input.</p>
 <h5 id="_init_7"><a class="anchor" href="#_init_7"></a><a class="link" href="#_init_7"><code>__init__</code></a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, key, name, group, default="", prefix=None, suffix=None, max_len=None, **kwargs)</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(
+    self,
+    key: str,
+    name: str,
+    group: str,
+    default: str = "",
+    prefix: str | None = None,
+    suffix: str | None = None,
+    max_len: int | None = None,
+    **kwargs
+)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4714,7 +4724,7 @@ when rendering this option.</p>
 <h5 id="_set_value"><a class="anchor" href="#_set_value"></a><a class="link" href="#_set_value"><code>set_value</code></a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def set_value(self, value)</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def set_value(self, value: str)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -4808,15 +4818,15 @@ validation function.</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(
     self,
-    key,
-    name,
-    group,
-    validator,
-    default="",
-    autocommit=False,
-    prefix=None,
-    suffix=None,
-    max_len=None,
+    key: str,
+    name: str,
+    group: str,
+    validator: function,
+    default: str = "",
+    autocommit: bool = False,
+    prefix: str | None = None,
+    suffix: str | None = None,
+    max_len: int | None = None,
     **kwargs
 )</code></pre>
 </div>
@@ -4936,7 +4946,7 @@ value is valid.</p>
 <h5 id="_set_value_2"><a class="anchor" href="#_set_value_2"></a><a class="link" href="#_set_value_2"><code>set_value</code></a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def set_value(self, value)</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def set_value(self, value: str)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -5077,7 +5087,15 @@ be registered to an <a href="#sc-layer"><code>SCLayer</code></a> instance to be 
 <h5 id="_init_9"><a class="anchor" href="#_init_9"></a><a class="link" href="#_init_9"><code>__init__</code></a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(self, key, name, group, values, display_digits=2, **kwargs)</code></pre>
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">def __init__(
+    self,
+    key: str,
+    name: str,
+    group: str,
+    values: list[any] | set[any],
+    display_digits: int = 2,
+    **kwargs
+)</code></pre>
 </div>
 </div>
 <div class="paragraph">
