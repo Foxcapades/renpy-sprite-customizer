@@ -4,6 +4,10 @@
 [cols="2h,4,4"]
 |===
 // | Version | Reference | Tutorial
+| 1.2.0
+| link:{url-base}/versions/1.2.0/[Reference]
+| link:{url-base}/versions/1.2.0/tutorial.html[Tutorial]
+
 | 1.1.0
 | link:{url-base}/versions/1.1.0/[Reference]
 | link:{url-base}/versions/1.1.0/tutorial.html[Tutorial]
