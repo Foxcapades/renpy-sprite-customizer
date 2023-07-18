@@ -2,6 +2,20 @@
 
 == Version 1.x.x
 
+=== v1.1.0
+
+==== Features
+
+Adds two new option types for text inputs:
+
+* `SCTextOption`
+* `SCValidatableTextOption`
+
+==== Changes
+
+Convert `src/` `.rpy` files to `_ren.py` files.
+
+
 === v1.0.2
 
 ==== Fixes
