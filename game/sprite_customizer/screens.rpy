@@ -140,14 +140,15 @@ screen sprite_creator_value_list_option(option):
 
         imagebutton:
             auto "cc_gui_option_arrow_left_%s"
-            xsize 50
+            xcenter 0.5
             ysize 50
             action Function(option.dec_selection)
         text "{:02d}".format(option.selection_index + 1):
+            xcenter 0.5
             line_leading 5
         imagebutton:
             auto "cc_gui_option_arrow_right_%s"
-            xsize 50
+            xcenter 0.5
             ysize 50
             action Function(option.inc_selection)
 
