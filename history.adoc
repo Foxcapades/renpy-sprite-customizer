@@ -6,6 +6,17 @@
 
 ==== Changes
 
+* Internals overhaul
+** Removed `SCOpt` in favor of tuples
+** Stripped down CustomizedSprite API
+** Stripped down SCLayer API
+** Access to option details is now done via the option instances themselves
+
+==== Features
+
+* Option selection randomization functions to allow for a "Randomize" button in
+  the UI if desired.
+
 
 == Version 0.x.x
 
