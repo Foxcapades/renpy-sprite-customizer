@@ -20,7 +20,7 @@
 
 == Prerequisites
 
-* Ren'Py
+* Ren'Py 8+
 * A code editor (link:https://code.visualstudio.com/[VSCode] with the
 link:https://marketplace.visualstudio.com/items?itemName=LuqueDaniel.languague-renpy[Ren'Py Plugin]
 is recommended)
