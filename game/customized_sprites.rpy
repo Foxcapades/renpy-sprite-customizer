@@ -94,9 +94,25 @@ define ccf = CustomizedSpriteFactory(
             "hair_color",
             "Color",
             "Hair",
-            "#3D2314",
+            "#704024",
         )
     ),
+
+    # Hair Layer : Text Input for Color
+    # SCLayer(
+    #     "hair",
+    #     cc_hair,
+    #     hair_style=("Style", "Hair", [ "afro", "bob", "buns" ]),
+    #     hair_color=SCValidatableTextOption(
+    #         "hair_color",
+    #         "Color",
+    #         "Hair",
+    #         sc_validator_hex_color,
+    #         "#ff0000",
+    #         max_len=7,
+    #         autocommit=True
+    #     ),
+    # ),
 
     # Accessory Layer : Value List
     SCLayer("accessories", "images/ccp/accessories/{accessory}.png", accessory=("Accessory", "Hair", [
@@ -106,6 +122,14 @@ define ccf = CustomizedSpriteFactory(
         "plaid_bow",
         "plaid_clips",
     ])),
+
+    # Accessory Layer : Boolean
+    # SCLayer(
+    #     "accessories",
+    #     "images/ccp/accessories/{accessory}.png",
+    #     accessory=SCBooleanOption("accessory", "Accessory", "Hair", False, ("cottoncandy_bow", "none"))
+    # ),
+
 
     # Eye Layer : Value List
     SCLayer("eyes", "images/ccp/eyes/{eye_color}_eyes.png", eye_color=("Eyes", "Face", [

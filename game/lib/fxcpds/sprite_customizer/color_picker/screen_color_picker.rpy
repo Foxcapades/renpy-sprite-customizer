@@ -22,7 +22,7 @@ screen _cs_color_picker(option):
 
                 frame:
 
-                    background "_cs_color_picker_background"
+                    background sc.color_picker_background
 
                     xsize 0.5
                     xpadding 20
@@ -40,15 +40,15 @@ screen _cs_color_picker_tab_bar(tabs):
                 padding (25, 10)
 
                 if _cs_color_picker_tab == val:
-                    background "#2e2c2c"
+                    background sc.color_picker_background
                 else:
-                    background "#1f1f1f"
+                    background sc.color_picker_background_muted
 
                 text val:
                     if _cs_color_picker_tab == val:
-                        color "#dddddd"
+                        color sc.color_picker_text_color
                     else:
-                        color "#bbbbbb"
+                        color sc.color_picker_text_color_muted
 
                 action SetVariable("_cs_color_picker_tab", val)
 
@@ -74,7 +74,7 @@ screen _color_picker_hsl_body(option, bg_picker):
 
                 vbox:
                     text "Hue":
-                        color "#dddddd"
+                        color sc.color_picker_text_color
                         yalign 0.5
                     bar:
                         value bg_picker.hue
@@ -82,7 +82,7 @@ screen _color_picker_hsl_body(option, bg_picker):
                         changed bg_picker.set_hue
                 vbox:
                     text "Saturation":
-                        color "#dddddd"
+                        color sc.color_picker_text_color
                         yalign 0.5
                     bar:
                         value bg_picker.saturation
@@ -90,7 +90,7 @@ screen _color_picker_hsl_body(option, bg_picker):
                         changed bg_picker.set_saturation
                 vbox:
                     text "Brightness":
-                        color "#dddddd"
+                        color sc.color_picker_text_color
                         yalign 0.5
                     bar:
                         value bg_picker.lightness
@@ -120,7 +120,7 @@ screen _color_picker_rgb_body(option, bg_picker):
 
                 vbox:
                     text "Red":
-                        color "#dddddd"
+                        color sc.color_picker_text_color
                         yalign 0.5
                     bar:
                         value bg_picker.red
@@ -128,7 +128,7 @@ screen _color_picker_rgb_body(option, bg_picker):
                         changed bg_picker.set_red
                 vbox:
                     text "Green":
-                        color "#dddddd"
+                        color sc.color_picker_text_color
                         yalign 0.5
                     bar:
                         value bg_picker.green
@@ -136,7 +136,7 @@ screen _color_picker_rgb_body(option, bg_picker):
                         changed bg_picker.set_green
                 vbox:
                     text "Blue":
-                        color "#dddddd"
+                        color sc.color_picker_text_color
                         yalign 0.5
                     bar:
                         value bg_picker.blue
@@ -150,13 +150,15 @@ screen _color_picker_footer(h_value, bg_picker):
         button:
             key_events True
             xsize 172
-            background "#ddd"
+            background sc.input_background_idle_color
+            hover_background sc.input_background_hover_color
 
             input:
                 value h_value
                 prefix '#'
                 length 6
                 copypaste True
+                color sc.input_text_color
 
             action h_value.Toggle()
 

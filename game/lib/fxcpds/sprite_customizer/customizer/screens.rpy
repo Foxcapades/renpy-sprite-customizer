@@ -15,7 +15,7 @@ screen sprite_creator(sprite, customizer):
 
 screen _cs_sprite_preview(sprite):
     frame:
-        background Solid("#9cb9cb")
+        background "cc_sprite_preview_background"
         xsize 0.7
         ysize 1.0
 
@@ -25,7 +25,7 @@ screen _cs_sprite_preview(sprite):
 
 screen _cs_sprite_options(customizer):
     frame:
-        background Solid("#1f1f1f")
+        background Solid(sc.controls_background_color)
         ysize 1.0
         xsize 1.0
 
@@ -57,13 +57,13 @@ screen _sc_option_group(sprite, group, options):
 
         hbox:
             null:
-                width 70
+                width 40
             text group:
-                color "#FFB69D"
+                color sc.control_group_header_color
 
         hbox:
             null:
-                width 100
+                width 70
             vbox:
                 spacing 15
                 for option_key, option in options.items():
@@ -75,7 +75,7 @@ screen _sc_option_group_option(sprite, option_key, option):
         text option.display_name:
             min_width 200
             line_leading 5
-            color "#ccc"
+            color sc.control_label_color
 
         if isinstance(option, SCValueListOption):
             use _sc_value_list_option(option)
@@ -109,6 +109,7 @@ screen _sc_value_list_option(option):
             ysize 50
             action Function(option.dec_selection)
         text "{:02d}".format(option.selection_index + 1):
+            color sc.control_value_color
             xcenter 0.5
             line_leading 5
         imagebutton:
@@ -128,12 +129,13 @@ screen _sc_text_option(option):
         key_events True
         action option_value.Toggle()
 
-        background "#2e2c2c"
-        hover_background "#383535"
+        background sc.input_background_color
+        hover_background sc.input_text_color
 
         input:
             value option_value
             copypaste True
+            color sc.input_text_color
 
             if option.has_prefix:
                 prefix option.prefix
@@ -150,19 +152,20 @@ screen _sc_validatable_text_option(option):
     default option_value = SCTextInput(option)
 
     button:
-        xsize 175
+        xsize 200
 
         key_events True
-        background "#2e2c2c"
-        hover_background "#383535"
+        background sc.input_background_idle_color
+        hover_background sc.input_background_hover_color
         action option_value.Toggle()
 
         input:
             value option_value
             copypaste True
+            color sc.input_text_color
 
             if not option.is_valid:
-                color "#FF0000"
+                color sc.input_invalid_color
 
             if option.has_prefix:
                 prefix option.prefix
@@ -202,7 +205,7 @@ screen _sc_color_option(option):
             ycenter 0.5
             padding (4, 4)
 
-            add AlphaMask(option.preview_image_name, 'lib/fxcpds/sprite_customizer/images/color_button_mask2.png'):
+            add AlphaMask(option.preview_image_name, 'lib/fxcpds/sprite_customizer/images/color_button_mask.png'):
                 xsize 42
                 ysize 42
 
