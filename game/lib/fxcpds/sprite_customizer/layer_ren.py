@@ -261,10 +261,11 @@ class SCLayer:
             A new `SCLayer` instance containing the same values configured
             on this instance minus any user state.
         """
-        options = {}
+        options: dict[str, SCOption] = {}
 
         for key, option in self._options.items():
             options[key] = option._clone()
+            options[key]._post_clone()
 
         return SCLayer(self._name, self._provider, self._transform, **options)
 

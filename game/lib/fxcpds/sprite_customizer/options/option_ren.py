@@ -15,6 +15,7 @@ init -2 python:
 SC_OPTION_TYPE_VALUE_LIST = 0
 SC_OPTION_TYPE_TEXT_INPUT = 1
 SC_OPTION_TYPE_BOOLEAN    = 2
+SC_OPTION_TYPE_COLOR      = 3
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -126,6 +127,9 @@ class SCOption:
         Returns a copy of this SCOption sans state.
         """
         return SCOption(self._key, self._name, self._group, self._type)
+
+    def _post_clone(self):
+        pass
 
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #

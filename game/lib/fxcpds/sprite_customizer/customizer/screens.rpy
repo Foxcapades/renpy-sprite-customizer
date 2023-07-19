@@ -1,47 +1,5 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
-#    Images
-#
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-image cc_gui_option_arrow_right_idle:
-    "sprite_customizer/img/arrow.png"
-    xsize 50
-    ysize 50
-
-image cc_gui_option_arrow_right_hover = Transform("cc_gui_option_arrow_right_idle", matrixcolor=BrightnessMatrix(-0.5))
-
-image cc_gui_option_arrow_left_idle:
-    "sprite_customizer/img/arrow.png"
-    xsize 50
-    ysize 50
-    xzoom -1.0
-
-image cc_gui_option_arrow_left_hover = Transform("cc_gui_option_arrow_left_idle", matrixcolor=BrightnessMatrix(-0.5))
-
-image cc_checkbox_blank_idle:
-    "sprite_customizer/img/checkbox_blank_idle.png"
-    xsize 50
-    ysize 50
-
-image cc_checkbox_blank_hover:
-    "sprite_customizer/img/checkbox_blank_hover.png"
-    xsize 50
-    ysize 50
-
-image cc_checkbox_checked_idle:
-    "sprite_customizer/img/checkbox_checked_idle.png"
-    xsize 50
-    ysize 50
-
-image cc_checkbox_checked_hover:
-    "sprite_customizer/img/checkbox_checked_hover.png"
-    xsize 50
-    ysize 50
-
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-#
 #    Screens
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -51,11 +9,11 @@ screen sprite_creator(sprite, customizer):
     modal True
 
     hbox:
-        use sprite_creator_left(sprite)
-        use sprite_creator_right(customizer)
+        use _cs_sprite_preview(sprite)
+        use _cs_sprite_options(customizer)
 
 
-screen sprite_creator_left(sprite):
+screen _cs_sprite_preview(sprite):
     frame:
         background Solid("#9cb9cb")
         xsize 0.7
@@ -65,7 +23,7 @@ screen sprite_creator_left(sprite):
             xalign 0.5
 
 
-screen sprite_creator_right(customizer):
+screen _cs_sprite_options(customizer):
     frame:
         background Solid("#1f1f1f")
         ysize 1.0
@@ -77,7 +35,7 @@ screen sprite_creator_right(customizer):
             xcenter 0.5
 
             for group, options in customizer.get_options_by_group().items():
-                use sprite_creator_option_group(customizer, group, options)
+                use _sc_option_group(customizer, group, options)
 
             null:
                 height 50
@@ -92,36 +50,43 @@ screen sprite_creator_right(customizer):
                 textbutton "Done":
                     action Return(0)
 
-screen sprite_creator_option_group(sprite, group, options):
+
+screen _sc_option_group(sprite, group, options):
     vbox:
         spacing 20
 
-        text group:
-            color "#FFB69D"
+        hbox:
+            null:
+                width 70
+            text group:
+                color "#FFB69D"
 
         hbox:
             null:
-                width 25
+                width 100
             vbox:
                 spacing 15
                 for option_key, option in options.items():
-                    use sprite_creator_option_group_option(sprite, option_key, option)
+                    use _sc_option_group_option(sprite, option_key, option)
 
 
-screen sprite_creator_option_group_option(sprite, option_key, option):
+screen _sc_option_group_option(sprite, option_key, option):
     hbox:
         text option.display_name:
             min_width 200
             line_leading 5
+            color "#ccc"
 
         if isinstance(option, SCValueListOption):
-            use sprite_creator_value_list_option(option)
+            use _sc_value_list_option(option)
         elif isinstance(option, SCValidatableTextOption):
-            use sprite_creator_validatable_text_option(option)
+            use _sc_validatable_text_option(option)
         elif isinstance(option, SCTextOption):
-            use sprite_creator_text_option(option)
+            use _sc_text_option(option)
         elif isinstance(option, SCBooleanOption):
-            use sprite_creator_boolean_option(option)
+            use _sc_boolean_option(option)
+        elif isinstance(option, SCColorOption):
+            use _sc_color_option(option)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -134,7 +99,7 @@ screen sprite_creator_option_group_option(sprite, option_key, option):
 
 
 # Value List Option Selector
-screen sprite_creator_value_list_option(option):
+screen _sc_value_list_option(option):
     hbox:
         xsize 200
 
@@ -154,7 +119,7 @@ screen sprite_creator_value_list_option(option):
 
 
 # Text Option Input
-screen sprite_creator_text_option(option):
+screen _sc_text_option(option):
     default option_value = SCTextInput(option)
 
     button:
@@ -181,7 +146,7 @@ screen sprite_creator_text_option(option):
 
 
 # Validatable Text Option Input
-screen sprite_creator_validatable_text_option(option):
+screen _sc_validatable_text_option(option):
     default option_value = SCTextInput(option)
 
     button:
@@ -210,7 +175,7 @@ screen sprite_creator_validatable_text_option(option):
 
 
 # Boolean Option Input
-screen sprite_creator_boolean_option(option):
+screen _sc_boolean_option(option):
     hbox:
         xsize 200
         ysize 50
@@ -225,3 +190,20 @@ screen sprite_creator_boolean_option(option):
                 auto "cc_checkbox_blank_%s"
 
             action Function(option.toggle)
+
+screen _sc_color_option(option):
+    hbox:
+        xsize 200
+
+        button:
+            background "cc_color_button_idle"
+            hover_background "cc_color_button_hover"
+            xcenter 0.5
+            ycenter 0.5
+            padding (4, 4)
+
+            add AlphaMask(option.preview_image_name, 'lib/fxcpds/sprite_customizer/images/color_button_mask2.png'):
+                xsize 42
+                ysize 42
+
+            action Show("_cs_color_picker", None, option)

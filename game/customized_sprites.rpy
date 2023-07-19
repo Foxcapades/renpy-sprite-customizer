@@ -48,6 +48,8 @@ init python:
         layer declaration below.  This value is used to create a TintMatrix
         transform to apply color to the selected base hair style.
         """
+        if hair_color == None:
+            raise Exception("oops")
         return Transform("images/ccp/hair/{}.png".format(hair_style), matrixcolor=TintMatrix(hair_color))
 
 
@@ -67,7 +69,8 @@ init python:
 # another in declaration order stepping "closer" to the player with each new
 # layer.
 define ccf = CustomizedSpriteFactory(
-    # Skin Layer
+
+    # Skin Layer : Color List
     SCLayer("skin", cc_skin, skin_color=("Skin", "Body", [
         "#513021",
         "#874c2c",
@@ -78,46 +81,24 @@ define ccf = CustomizedSpriteFactory(
         "#ecc19f"
     ])),
 
-    # Clothes Layer
+    # Clothes Layer : Value List
     SCLayer("clothes", "images/ccp/clothes/{clothes}.png", clothes=("Clothes", "Body", [ "cottoncandy", "plaid" ])),
 
-    # Hair Layer : Value List for Color
+
+    # Hair Layer : Value List + Color Picker
     SCLayer(
         "hair",
         cc_hair,
         hair_style=("Style", "Hair", [ "afro", "bob", "buns" ]),
-        hair_color=("Color", "Hair", [
+        hair_color=SCColorOption(
+            "hair_color",
+            "Color",
+            "Hair",
             "#3D2314",
-            "#100C07",
-            "#DA680F",
-            "#FFCC47",
-            "#9A9E9F",
-            "#FAFAFA",
-            "#801818",
-            "#580271",
-            "#1592CA",
-            "#11694E",
-            "#FF87C5"
-        ]),
+        )
     ),
 
-    # Hair Layer : Text Input for Color
-    # SCLayer(
-    #     "hair",
-    #     cc_hair,
-    #     hair_style=("Style", "Hair", [ "afro", "bob", "buns" ]),
-    #     hair_color=SCValidatableTextOption(
-    #         "hair_color",
-    #         "Color",
-    #         "Hair",
-    #         sc_validator_hex_color,
-    #         "#ff0000",
-    #         max_len=7,
-    #         autocommit=True
-    #     ),
-    # ),
-
-    # # Accessory Layer
+    # Accessory Layer : Value List
     SCLayer("accessories", "images/ccp/accessories/{accessory}.png", accessory=("Accessory", "Hair", [
         "none",
         "cottoncandy_bow",
@@ -126,14 +107,7 @@ define ccf = CustomizedSpriteFactory(
         "plaid_clips",
     ])),
 
-    # Boolean Accessory Layer
-    # SCLayer(
-    #     "accessories",
-    #     "images/ccp/accessories/{accessory}.png",
-    #     accessory=SCBooleanOption("accessory", "Accessory", "Hair", False, ("cottoncandy_bow", "none"))
-    # ),
-
-    # Eye Layer
+    # Eye Layer : Value List
     SCLayer("eyes", "images/ccp/eyes/{eye_color}_eyes.png", eye_color=("Eyes", "Face", [
         "blue",
         "brown",
