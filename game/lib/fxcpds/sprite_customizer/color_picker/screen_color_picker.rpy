@@ -149,7 +149,7 @@ screen _color_picker_footer(h_value, bg_picker):
     hbox:
         button:
             key_events True
-            xsize 172
+            xsize 195
             background sc.input_background_idle_color
             hover_background sc.input_background_hover_color
 
@@ -163,7 +163,7 @@ screen _color_picker_footer(h_value, bg_picker):
             action h_value.Toggle()
 
         null:
-            width 642
+            width 619
 
         textbutton "Done":
             text_style "_color_picker_text_button_style"

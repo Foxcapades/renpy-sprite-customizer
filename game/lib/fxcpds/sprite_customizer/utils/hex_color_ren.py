@@ -41,9 +41,11 @@ def _validate_hex(hex: str):
         raise Exception("invalid hex string '{}': must start with a '#' character".format(hex))
 
     for i in range(1, len(hex)):
-        if not __is_hex_digit(hex[i]):
+        if not _is_hex_digit(hex[i]):
             raise Exception("invalid hex string '{}': character {} ({}) is not a valid hex digit".format(hex, i, hex[i]))
 
+def _is_hex_digit(hex: str) -> bool:
+    return '0' <= hex <= '9' or 'A' <= hex <= 'F' or 'a' <= hex <= 'f'
 
 ################################################################################
 #
@@ -96,6 +98,3 @@ def __hex_to_seg(hex: str) -> int:
         return ord(hex) - 87
     else:
         raise Exception("invalid hex digit '{}'".format(hex))
-
-def __is_hex_digit(hex: str) -> bool:
-    return '0' <= hex <= '9' or 'A' <= hex <= 'F' or 'a' <= hex <= 'f'

@@ -31,3 +31,5 @@ define sc.color_picker_background_muted = "#1f1f1f"
 define sc.color_picker_text_color = "#ddd"
 
 define sc.color_picker_text_color_muted = "#bbb"
+
+define sc.color_picker_text_color_hover = gui.hover_color
