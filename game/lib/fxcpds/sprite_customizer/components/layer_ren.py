@@ -11,6 +11,7 @@ init -1 python:
 from typing import Callable
 
 
+# noinspection PyProtectedMember
 class SCLayer:
     """
     # Sprite Customization Layer
@@ -143,14 +144,14 @@ class SCLayer:
         for key, value in vals.items():
             out = out.replace("{" + key + "}", value)
 
-        return (out, 0.0)
+        return out, 0.0
 
     def _render_function(self, st: float, at: float, **kwargs: any) -> tuple[any, float]:
         kwargs["st"] = st
         kwargs["at"] = at
 
         # Go through user state first to prevent it from overwriting real
-        # option selections.  TODO: Should we allow overriding selections?
+        # option selections.
         for key, value in self._state._user_state.items():
             kwargs[key] = value
 

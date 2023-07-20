@@ -12,6 +12,7 @@ init -1 python:
 from collections import OrderedDict
 
 
+# noinspection PyProtectedMember
 class CustomizedSprite:
     """
     # Customized Sprite
@@ -170,7 +171,7 @@ class CustomizedSprite:
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
     def _require_option(self, option: str):
-        if not option in self._option_to_layer:
+        if option not in self._option_to_layer:
             raise Exception("Unrecognized CustomizedSprite option \"{}\"".format(option))
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -218,7 +219,7 @@ class CustomizedSprite:
         SCOption[]
             List of the options attached to this CustomizedSprite instance.
         """
-        return self._options.values()
+        return [*self._options.values()]
 
     def get_options_by_key(self) -> OrderedDict:
         """
@@ -289,13 +290,13 @@ class CustomizedSprite:
 
         elif isinstance(group_order, list):
             if len(group_order) != len(self._options_by_group):
-                raise Exception(
-                    "group_order parameter must contain all and only the declared option group names for this CustomizedSprite's layers")
+                raise Exception("group_order parameter must contain all and only the declared option group names for "
+                                "this CustomizedSprite's layers")
 
             for group in group_order:
                 out[group] = OrderedDict()
 
-                if not group in self._options_by_group:
+                if group not in self._options_by_group:
                     raise Exception("unrecognized option group name \"{}\"".format(group))
 
                 for option in self._options_by_group[group]:
