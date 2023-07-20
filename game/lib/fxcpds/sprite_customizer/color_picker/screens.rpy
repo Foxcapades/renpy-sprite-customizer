@@ -1,4 +1,4 @@
-screen _cs_color_picker(option):
+screen _sc_color_picker(option):
 
     default hsl_picker = HSLPicker(option)
     default rgb_picker = RGBPicker(option)
@@ -18,7 +18,7 @@ screen _cs_color_picker(option):
             ycenter 0.5
 
             vbox:
-                use _cs_color_picker_tab_bar(tabs)
+                use _sc_color_picker_tab_bar(tabs)
 
                 frame:
 
@@ -33,7 +33,7 @@ screen _cs_color_picker(option):
                     elif _cs_color_picker_tab == "RGB":
                         use _color_picker_rgb_body(option, rgb_picker)
 
-screen _cs_color_picker_tab_bar(tabs):
+screen _sc_color_picker_tab_bar(tabs):
     hbox:
         for val in tabs:
             use _sc_color_picker_tab(val)

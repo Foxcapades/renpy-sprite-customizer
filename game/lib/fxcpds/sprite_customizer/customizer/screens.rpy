@@ -209,4 +209,4 @@ screen _sc_color_option(option):
                 xsize 42
                 ysize 42
 
-            action Show("_cs_color_picker", None, option)
+            action Show("_sc_color_picker", None, option)

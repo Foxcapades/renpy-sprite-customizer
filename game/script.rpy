@@ -35,6 +35,8 @@ label start:
     $ cc_player_sprite.set_state(player_sprite_state)
     $ cc_antagonist_sprite.set_state(antagonist_sprite_state)
 
+    scene classroom
+
     show player at left
     show antagonist relaxed smile at right:
         xzoom -1.0
