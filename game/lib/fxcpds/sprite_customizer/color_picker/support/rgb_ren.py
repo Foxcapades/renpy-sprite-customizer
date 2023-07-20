@@ -85,8 +85,8 @@ class RGBPicker:
         """
         Sets the red channel to the given value.
 
-        If the given value is not between `0` and `255` (inclusive) then this
-        method will raise an exception.
+        If the given value is not an int value between `0` and `255` (inclusive)
+        then this method will raise an exception.
         """
         if not (isinstance(red, int) and 0 <= red <= 255):
             raise Exception("invalid red value")
@@ -97,8 +97,8 @@ class RGBPicker:
         """
         Sets the green channel to the given value.
 
-        If the given value is not between `0` and `255` (inclusive) then this
-        method will raise an exception.
+        If the given value is not an int value between `0` and `255` (inclusive)
+        then this method will raise an exception.
         """
         if not (isinstance(green, int) and 0 <= green <= 255):
             raise Exception("invalid green value")
@@ -109,8 +109,8 @@ class RGBPicker:
         """
         Sets the blue channel to the given value.
 
-        If the given value is not between `0` and `255` (inclusive) then this
-        method will raise an exception.
+        If the given value is not an int value between `0` and `255` (inclusive)
+        then this method will raise an exception.
         """
         if not (isinstance(blue, int) and 0 <= blue <= 255):
             raise Exception("invalid blue value")

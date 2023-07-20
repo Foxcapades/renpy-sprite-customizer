@@ -86,18 +86,36 @@ class HSLPicker:
         renpy.restart_interaction()
 
     def set_hue(self, hue: int):
+        """
+        Sets the hue to the given value.
+
+        If the given value is not an int value between `0` and `359` (inclusive)
+        then this method will raise an exception.
+        """
         if not (isinstance(hue, int) and 0 <= hue < 360):
             raise Exception("invalid hue value")
         self._hsl.set_hue(hue)
         self._update_color()
 
     def set_saturation(self, saturation: int):
+        """
+        Sets the saturation to the given value.
+
+        If the given value is not an int value between `0` and `100` (inclusive)
+        then this method will raise an exception.
+        """
         if not (isinstance(saturation, int) and 0 <= saturation <= 100):
             raise Exception("invalid saturation value")
         self._hsl.set_saturation(saturation / 100)
         self._update_color()
 
     def set_lightness(self, lightness: int):
+        """
+        Sets the lightness to the given value.
+
+        If the given value is not an int value between `0` and `100` (inclusive)
+        then this method will raise an exception.
+        """
         if not (isinstance(lightness, int) and 0 <= lightness <= 100):
             raise Exception("invalid lightness value")
         self._hsl.set_lightness(lightness / 100)
