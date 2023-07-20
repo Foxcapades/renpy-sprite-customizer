@@ -46,6 +46,17 @@ be a hex color string.
 
 === `+__init__+`
 
+[source, python]
+----
+def __init__(
+    self,
+    key: str,
+    name: str,
+    group: str | None,
+    default: str | CSHSL | CSRGB,
+)
+----
+
 Initializes the new SCColorOption with the given arguments.
 
 [cols="1h,1m,8a"]
@@ -59,8 +70,9 @@ Initializes the new SCColorOption with the given arguments.
 | Display name for this option.
 
 | `group`
-| str
-| Group name for this option.
+| str \| None
+| Option group.  If this value is set to `None`, the `name` value will be used
+as the group name.
 
 | `default`
 | str | CSHSL | CSRGB

@@ -71,7 +71,7 @@ init python:
 define ccf = CustomizedSpriteFactory(
 
     # Skin Layer : Color List
-    SCLayer("skin", cc_skin, skin_color=("Skin", "Body", [
+    SCLayer("skin", cc_skin, [SCListOption("skin_color", "Skin", "Body", [
         "#513021",
         "#874c2c",
         "#803716",
@@ -79,7 +79,7 @@ define ccf = CustomizedSpriteFactory(
         "#a96238",
         "#f9bf91",
         "#ecc19f"
-    ])),
+    ])]),
 
     # Clothes Layer : Value List
     SCLayer("clothes", "images/ccp/clothes/{clothes}.png", clothes=("Clothes", "Body", [ "cottoncandy", "plaid" ])),

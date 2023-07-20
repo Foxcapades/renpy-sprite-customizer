@@ -1,5 +1,5 @@
 [#sc-value-list-option]
-= `SCValueListOption`
+= `SCListOption`
 :icons: font
 :source-highlighter: highlight.js
 
@@ -10,7 +10,7 @@ navigated via an index that can be incremented or decremented.
 
 [source, python]
 ----
-SCValueListOption("my_option", "My Option", "My Group", [ "some", "choices" ])
+SCListOption("my_option", "My Option", "My Group", [ "some", "choices" ])
 ----
 
 [IMPORTANT]
@@ -81,7 +81,7 @@ def __init__(
 )
 ----
 
-Initializes the new SCValueListOption instance with the given arguments.
+Initializes the new SCListOption instance with the given arguments.
 
 ==== Arguments
 
@@ -96,8 +96,9 @@ Initializes the new SCValueListOption instance with the given arguments.
 | Display name for this option.
 
 | `group`
-| str
-| Group name for this option.
+| str \| None
+| Option group.  If this value is set to `None`, the `name` value will be used
+as the group name.
 
 | `values`
 | any[]

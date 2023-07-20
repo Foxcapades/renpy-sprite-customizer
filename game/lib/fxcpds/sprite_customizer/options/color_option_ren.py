@@ -34,7 +34,7 @@ class SCColorOption(SCOption):
         self,
         key: str,
         name: str,
-        group: str,
+        group: str | None,
         default: str | CSHSL | CSRGB,
     ):
         """
@@ -48,8 +48,9 @@ class SCColorOption(SCOption):
         name : str
             Display name for this option.
 
-        group : str
-            Group name for this option.
+        group : str | None
+            Option group.  If this value is set to `None`, the `name` value will
+            be used as the group name.
 
         default : str | CSHSL | CSRGB
             Default color value to use when no selection has yet been made by

@@ -77,7 +77,7 @@ screen _sc_option_group_option(sprite, option_key, option):
             line_leading 5
             color sc.control_label_color
 
-        if isinstance(option, SCValueListOption):
+        if isinstance(option, SCListOption):
             use _sc_value_list_option(option)
         elif isinstance(option, SCValidatableTextOption):
             use _sc_validatable_text_option(option)

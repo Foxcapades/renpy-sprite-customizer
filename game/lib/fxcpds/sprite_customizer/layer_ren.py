@@ -1,8 +1,9 @@
 from renpy.store import DynamicDisplayable, Attribute # type: ignore
 
 from options.option_ren import SCOption
-from options.list_option_ren import SCValueListOption
+from options.list_option_ren import SCListOption
 from .state_ren import SCState
+
 
 """renpy
 init -1 python:
@@ -32,9 +33,9 @@ class SCLayer:
     def __init__(
         self,
         name: str,
-        layer_provider: str|function,
+        layer_provider: str | function,
+        options: SCOption | list[SCOption] = None,
         transform: function = None,
-        **options: SCOption
     ):
         """
         Initializes the new `SCLayer` instance with the given arguments.
@@ -51,32 +52,15 @@ class SCLayer:
             backs this layer, or a template string containing `{var_name}`
             variables that will be injected based on the selected options.
 
+        options : list[SCOption]
+            A list of 1 or more SCOption instances for all the options available
+            to this layer.
+
         transform : callable | None
             Optional transform function.  This function takes a Displayable
             as a single argument and returns a Displayable.  Allows
             performing arbitrary transforms to the whole layer regardless of
             option selections.
-
-        **options : kwargs
-            Keyword arguments that define the options available to this
-            layer. Keyword args must be one of the following types:
-
-            * An <<sc-opt>> instance.
-            * An <<sc-option>> instance.
-            * A tuple of 2 values: `(display_name, value_list)`
-            * A tuple of 3 values: `(display_name, group, value_list)`
-
-            ```python
-            option=SCOpt("Option", ["some", "choices"])
-
-            option=SCOpt("Option", group="My Group", values=["some", "choices"])
-
-            option=SCValueListOption("option", "Option", "My Group", ["some", "choices"])
-
-            option=("Option", ["some", "choices"])
-
-            option=("Option", "My Group", ["some", "choices"])
-            ```
         """
 
         if not isinstance(name, str):
@@ -91,20 +75,21 @@ class SCLayer:
         self._options: dict[str, SCOption] = {}
         self._transform: function = transform
 
-        for key, opt in options.items():
-            if isinstance(opt, SCOption):
-                if key != opt.key:
-                    raise Exception("kwargs key and option key do not align! {} != {}".format(key, opt.key))
-                self._options[key] = opt
-            elif isinstance(opt, tuple):
-                if len(opt) == 2:
-                    self._options[key] = SCLayer._2_tuple_to_opt(key, opt)
-                elif len(opt) == 3:
-                    self._options[key] = SCLayer._3_tuple_to_opt(key, opt)
+        if options is None:
+            pass
+        elif isinstance(options, SCOption):
+            self._options[options.key] = options
+        elif isinstance(options, list):
+            for i in range(len(options)):
+                opt = options[i]
+                if isinstance(opt, SCOption):
+                    if opt.key in self._options:
+                        raise Exception(f'More than one option defined with the key "{opt.key}"')
+                    self._options[opt.key] = opt
                 else:
-                    raise Exception("Unexpected {} value tuple for option {}".format(len(opt), key))
-            else:
-                raise Exception("SCLayer option \"{}\" was not a tuple or SCOption instance.".format(key))
+                    raise Exception(f"SCLayer option {i+1} was not an SCOption instance.")
+        else:
+            raise Exception('"options" must be an SCOption or a list of SCOptions')
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
@@ -137,72 +122,6 @@ class SCLayer:
     #   Internal Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-    @staticmethod
-    def _2_tuple_to_opt(key, tup: tuple[str, list[any]]) -> SCValueListOption:
-        """
-        Converts a two-tuple keyword arg from __init__ into an SCOption
-        instance.
-
-        Arguments
-        ---------
-
-        key : str
-            Keyword for the option.
-
-        tup : tuple
-            Tuple containing a display name and a list of option values.
-        """
-        if not isinstance(tup[0], str):
-            raise Exception("invalid 2 tuple passed as option {}, first value must be a string".format(key))
-
-        if isinstance(tup[1], list[any]) or isinstance(tup[1], set):
-            return SCValueListOption(key, tup[0], tup[0], tup[1].copy())
-
-        raise Exception("invalid 2 tuple passed as option {}, second value must be a list or set".format(key))
-
-    @staticmethod
-    def _3_tuple_to_opt(key, tup: tuple[str, str, list[any]]) -> SCValueListOption:
-        """
-        Converts a three-tuple keyword arg from __init__ into an SCOption
-        instance.
-
-        Arguments
-        ---------
-
-        key : str
-            Keyword for the option.
-
-        tup : tuple
-            Tuple containing a display name, a group name, and a list of
-            option values.
-        """
-        if not isinstance(tup[0], str):
-            raise Exception("invalid 3 tuple passed as option {}, first value must be a string".format(key))
-
-        if not isinstance(tup[1], str):
-            raise Exception("invalid 3 tuple passed as option {}, second value must be a string".format(key))
-
-        if isinstance(tup[2], list) or isinstance(tup[2], set):
-            return SCValueListOption(key, tup[0], tup[1], tup[2].copy())
-
-        raise Exception("invalid 3 tuple passed as option {}, third value must be a list or set".format(key))
-
-    def _require_option(self, key: str) -> SCOption:
-        """
-        Requires that the given option keyword is known to this layer, then
-        returns the target option.
-
-        Arguments
-        ---------
-
-        key : str
-            Keyword for the option to require.
-        """
-        if key not in self._options:
-            raise Exception("Unrecognized SCLayer option \"{}\"".format(key))
-
-        return self._options[key]
 
     def _render(self, st: float, at: float, **kwargs: any) -> tuple[any, float]:
         if callable(self._provider):

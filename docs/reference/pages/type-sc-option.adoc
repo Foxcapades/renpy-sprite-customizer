@@ -50,7 +50,7 @@ Base type for Sprite Customizer option types.
 
 [source, python]
 ----
-def __init__(self, key: str, name: str, group: str, option_type: int)
+def __init__(self, key: str, name: str, group: str | None, option_type: int)
 ----
 
 Initializes the new SCOption instance with the given arguments.
@@ -68,8 +68,9 @@ Initializes the new SCOption instance with the given arguments.
 | Option display name.
 
 | `group`
-| str
-| Option group.
+| str \| None
+| Option group.  If this value is set to `None`, the `name` value will be used
+as the group name.
 
 | `option_type`
 | int
