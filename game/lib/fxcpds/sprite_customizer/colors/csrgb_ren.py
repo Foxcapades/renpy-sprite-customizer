@@ -105,5 +105,6 @@ class CSRGB:
         return CSRGBA(self._r, self._g, self._b, alpha)
 
 
+# noinspection PyShadowingBuiltins
 def hex_to_csrgb(hex: str) -> CSRGB:
     return _parse_hex(hex)

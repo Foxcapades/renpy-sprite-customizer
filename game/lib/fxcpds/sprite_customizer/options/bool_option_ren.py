@@ -1,9 +1,10 @@
-import renpy # type: ignore
+import renpy  # type: ignore
 from .option_ren import SCOption, SC_OPTION_TYPE_BOOLEAN
 
 """renpy
 init -1 python:
 """
+
 
 class SCBooleanOption(SCOption):
     """
@@ -72,12 +73,12 @@ class SCBooleanOption(SCOption):
             value is the selection when this option is `False`.  Defaults to
             `(True, False)`.
         """
-        super().__init__(key, name, group, SC_OPTION_TYPE_BOOLEAN, **kwargs)
+        super().__init__(key, name, group, SC_OPTION_TYPE_BOOLEAN)
 
         if not isinstance(default, bool):
             raise Exception('"default" must be a boolean value')
 
-        if values != None:
+        if values is not None:
             if (not isinstance(values, tuple)) or len(values) != 2:
                 raise Exception('"values" must be a two-tuple')
             self._when_true = values[0]

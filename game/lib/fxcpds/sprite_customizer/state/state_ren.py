@@ -2,6 +2,7 @@
 init -1 python:
 """
 
+
 class SCState:
     """
     # Sprite Customizer State
@@ -16,13 +17,13 @@ class SCState:
     my_sprite.set_state(my_sprite_state)
     ```
     """
-    def __init__(self, selections: dict = {}, user_state: dict = {}):
+    def __init__(self, selections: dict | None = None, user_state: dict | None = None):
         """
         Initializes the new, blank SCState instance.
 
         Arguments
         ---------
-        selection : dict
+        selections : dict
             Initial selection state for the SCState instance.
 
         user_state : dict
@@ -33,8 +34,8 @@ class SCState:
         if not isinstance(user_state, dict):
             raise Exception("SCState user_state argument must be a dict value.")
 
-        self._selections = selections.copy()
-        self._user_state = user_state.copy()
+        self._selections = selections.copy() if selections is not None else {}
+        self._user_state = user_state.copy() if user_state is not None else {}
 
     def set_variable(self, key: str, value: any) -> None:
         """

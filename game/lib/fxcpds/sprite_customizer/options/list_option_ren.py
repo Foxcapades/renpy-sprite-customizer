@@ -1,10 +1,11 @@
-import renpy # type: ignore
+import renpy  # type: ignore
 
 from .option_ren import SCOption, SC_OPTION_TYPE_VALUE_LIST
 
 """renpy
 init -1 python:
 """
+
 
 class SCListOption(SCOption):
     """
@@ -26,8 +27,7 @@ class SCListOption(SCOption):
         name: str,
         group: str,
         values: list[any] | set[any],
-        display_digits: int = 2,
-        **kwargs
+        display_digits: int = 2
     ):
         """
         Initializes the new SCListOption instance with the given
@@ -55,7 +55,7 @@ class SCListOption(SCOption):
             `3`, when rendering the first index as a string, the returned
             string would be "001".
         """
-        SCOption.__init__(self, key, name, group, SC_OPTION_TYPE_VALUE_LIST, **kwargs)
+        SCOption.__init__(self, key, name, group, SC_OPTION_TYPE_VALUE_LIST)
 
         if not (isinstance(values, list) or isinstance(values, set)):
             raise Exception("\"values\" argument must be a list or a set")
@@ -71,15 +71,13 @@ class SCListOption(SCOption):
 
         self._display_pattern = "{{0{}d}}".format(display_digits)
 
-        self._values: list[any] = [ value for value in values ]
-
+        self._values: list[any] = [value for value in values]
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     # Properties
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     @property
     def values(self) -> list[any]:
@@ -112,13 +110,11 @@ class SCListOption(SCOption):
         """
         return self._values[self.selection_index]
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   SC-Internal Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def _clone(self):
         """
@@ -140,13 +136,11 @@ class SCListOption(SCOption):
         out._display_pattern = self._display_pattern
         return out
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     # Public Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def inc_selection(self):
         """

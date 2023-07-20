@@ -1,12 +1,11 @@
-import renpy # type: ignore
-from renpy.store import DynamicDisplayable, Solid # type: ignore
+import renpy  # type: ignore
+from renpy.store import DynamicDisplayable, Solid  # type: ignore
 
 from .option_ren import SCOption, SC_OPTION_TYPE_COLOR
 from ..colors.cshsl_ren import CSHSL
 from ..colors.csrgb_ren import CSRGB
 from ..colors.csrgba_ren import CSRGBA
 from ..utils.hex_color_ren import _validate_hex
-
 
 """renpy
 init -1 python:
@@ -75,10 +74,9 @@ class SCColorOption(SCOption):
         elif isinstance(default, CSRGBA):
             self._default = default.to_rgb().hex_string
         elif isinstance(default, CSRGB):
-            tmp = default.hex_string
+            self._default = default.hex_string
         else:
             raise Exception('"default" must be a string, a CSHSL instance, or a CSRGB instance')
-
 
         self._image_name = str(uuid4())
 
@@ -122,8 +120,9 @@ class SCColorOption(SCOption):
     def _post_clone(self):
         renpy.image(self._image_name, DynamicDisplayable(self._color_cb))
 
-    def _color_cb(self, st, at):
-        return (Solid(self.selection_value), 0.0)
+    # noinspection PyUnusedLocal
+    def _color_cb(self, st: float, at: float):
+        return Solid(self.selection_value), 0.0
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #

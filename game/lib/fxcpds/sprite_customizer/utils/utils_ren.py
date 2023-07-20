@@ -2,6 +2,7 @@
 init -1 python:
 """
 
+
 def _sc_validator_hex_color_char(c: str) -> bool:
     """
     Tests whether the given character is a valid hex digit.
@@ -17,6 +18,7 @@ def _sc_validator_hex_color_char(c: str) -> bool:
         Whether the given character was a valid hex digit.
     """
     return '0' <= c <= '9' or 'a' <= c <= 'f' or 'A' <= c <= 'F'
+
 
 def sc_validator_hex_color(text: str) -> bool:
     """
@@ -49,4 +51,3 @@ def sc_validator_hex_color(text: str) -> bool:
             return False
 
     return True
-

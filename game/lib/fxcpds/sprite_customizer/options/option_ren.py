@@ -5,7 +5,6 @@ from ..utils.strings_ren import _require_key_string, _require_non_empty_string
 init -2 python:
 """
 
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 #
 #   Enum Values
@@ -15,8 +14,8 @@ init -2 python:
 
 SC_OPTION_TYPE_VALUE_LIST = 0
 SC_OPTION_TYPE_TEXT_INPUT = 1
-SC_OPTION_TYPE_BOOLEAN    = 2
-SC_OPTION_TYPE_COLOR      = 3
+SC_OPTION_TYPE_BOOLEAN = 2
+SC_OPTION_TYPE_COLOR = 3
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -30,6 +29,7 @@ class SCOption:
     """
     Base type for Sprite Customizer option types.
     """
+
     def __init__(self, key: str, name: str, group: str | None, option_type: int):
         """
         Initializes the new SCOption instance with the given arguments.
@@ -112,7 +112,7 @@ class SCOption:
         self._state = state
 
     def _req_state(self) -> SCState:
-        if self._state == None:
+        if self._state is None:
             raise Exception("CustomizedSprite state is not yet set!  Did you forget to call `set_state`?")
 
         return self._state

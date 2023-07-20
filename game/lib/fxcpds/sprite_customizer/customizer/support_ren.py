@@ -1,11 +1,12 @@
-import renpy # type: ignore
-from renpy import InputValue # type: ignore
+import renpy  # type: ignore
+from renpy import InputValue  # type: ignore
 
-from options.text_option_ren import SCTextOption
+from ..options.text_option_ren import SCTextOption
 
 """renpy
 init -1 python:
 """
+
 
 class SCTextInput(InputValue):
     def __init__(self, option: SCTextOption):

@@ -1,9 +1,8 @@
-import renpy # type: ignore
-from renpy.store import InputValue # type: ignore
+import renpy  # type: ignore
+from renpy.store import InputValue  # type: ignore
 
 from ...utils.hex_color_ren import _parse_hex
 from ...options.color_option_ren import SCColorOption
-
 
 """renpy
 init python:
@@ -29,8 +28,8 @@ class HSLPicker:
             raise Exception('"option" must be an SCColorOption')
 
         self._option = option
-        self._last   = option.selection_value
-        self._hsl    = _parse_hex(self._last).to_hsl()
+        self._last = option.selection_value
+        self._hsl = _parse_hex(self._last).to_hsl()
 
     @property
     def _hsl_hex(self) -> str:

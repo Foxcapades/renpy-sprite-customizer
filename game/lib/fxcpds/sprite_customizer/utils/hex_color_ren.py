@@ -11,9 +11,12 @@ init -1 python:
 #
 ################################################################################
 
+
 def _ubyte_to_hex(value: int) -> str:
     return __seg_to_hex(value >> 4) + __seg_to_hex(value & 15)
 
+
+# noinspection PyShadowingBuiltins
 def _parse_hex(hex: str) -> CSRGB | CSRGBA:
     _validate_hex(hex)
 
@@ -31,6 +34,8 @@ def _parse_hex(hex: str) -> CSRGB | CSRGBA:
     else:
         raise Exception('illegal state')
 
+
+# noinspection PyShadowingBuiltins
 def _validate_hex(hex: str):
     l = len(hex)
 
@@ -42,8 +47,12 @@ def _validate_hex(hex: str):
 
     for i in range(1, len(hex)):
         if not _is_hex_digit(hex[i]):
-            raise Exception("invalid hex string '{}': character {} ({}) is not a valid hex digit".format(hex, i, hex[i]))
+            raise Exception(
+                "invalid hex string '{}': character {} ({}) is not a valid hex digit".format(hex, i, hex[i])
+            )
 
+
+# noinspection PyShadowingBuiltins
 def _is_hex_digit(hex: str) -> bool:
     return '0' <= hex <= '9' or 'A' <= hex <= 'F' or 'a' <= hex <= 'f'
 
@@ -53,12 +62,15 @@ def _is_hex_digit(hex: str) -> bool:
 #
 ################################################################################
 
+
 def __seg_to_hex(value: int) -> str:
     if value < 10:
         return chr(value + 48)
     elif value < 16:
         return chr((value - 10) + 97)
 
+
+# noinspection PyShadowingBuiltins
 def __short_hex_to_rgb(hex: str) -> CSRGB:
     return CSRGB(
         (__hex_to_seg(hex[0]) << 4) | __hex_to_seg(hex[0]),
@@ -66,6 +78,8 @@ def __short_hex_to_rgb(hex: str) -> CSRGB:
         (__hex_to_seg(hex[2]) << 4) | __hex_to_seg(hex[2]),
     )
 
+
+# noinspection PyShadowingBuiltins
 def __short_hex_to_rgba(hex: str) -> CSRGBA:
     return CSRGBA(
         (__hex_to_seg(hex[0]) << 4) | __hex_to_seg(hex[0]),
@@ -74,6 +88,8 @@ def __short_hex_to_rgba(hex: str) -> CSRGBA:
         (__hex_to_seg(hex[3]) << 4) | __hex_to_seg(hex[3]),
     )
 
+
+# noinspection PyShadowingBuiltins
 def __long_hex_to_rgb(hex: str) -> CSRGB:
     return CSRGB(
         (__hex_to_seg(hex[0]) << 4) | __hex_to_seg(hex[1]),
@@ -81,6 +97,8 @@ def __long_hex_to_rgb(hex: str) -> CSRGB:
         (__hex_to_seg(hex[4]) << 4) | __hex_to_seg(hex[5]),
     )
 
+
+# noinspection PyShadowingBuiltins
 def __long_hex_to_rgba(hex: str) -> CSRGBA:
     return CSRGBA(
         (__hex_to_seg(hex[0]) << 4) | __hex_to_seg(hex[1]),
@@ -89,6 +107,8 @@ def __long_hex_to_rgba(hex: str) -> CSRGBA:
         (__hex_to_seg(hex[6]) << 4) | __hex_to_seg(hex[7]),
     )
 
+
+# noinspection PyShadowingBuiltins
 def __hex_to_seg(hex: str) -> int:
     if '0' <= hex <= '9':
         return ord(hex) - 48

@@ -64,6 +64,8 @@ class CSRGBA(CSRGB):
     def set_alpha(self, alpha: int | float):
         self._a = CSRGBA._require_alpha(alpha)
 
+
+# noinspection PyShadowingBuiltins
 def hex_to_csrgba(hex: str) -> CSRGBA:
     l = len(hex)
 

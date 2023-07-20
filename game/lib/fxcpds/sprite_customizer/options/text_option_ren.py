@@ -4,6 +4,9 @@ from .option_ren import SCOption, SC_OPTION_TYPE_TEXT_INPUT
 init -1 python:
 """
 
+from typing import Callable
+
+
 class SCTextOption(SCOption):
     """
     Represents an option that is a string value that may be set by the player.
@@ -62,21 +65,21 @@ class SCTextOption(SCOption):
             **WARNING**: The max length is *NOT* enforced by this type, it must
             be enforced by the input when rendering this option.
         """
-        super().__init__(key, name, group, SC_OPTION_TYPE_TEXT_INPUT, **kwargs)
+        super().__init__(key, name, group, SC_OPTION_TYPE_TEXT_INPUT)
 
         if not isinstance(default, str):
             raise Exception('"default" must be a string')
 
-        if not (prefix == None or isinstance(prefix, str)):
+        if not (prefix is None or isinstance(prefix, str)):
             raise Exception('"prefix" must be a string')
 
-        if not (suffix == None or isinstance(suffix, str)):
+        if not (suffix is None or isinstance(suffix, str)):
             raise Exception('"suffix" must be a string')
 
         if isinstance(max_len, int):
             if max_len < 0:
                 raise Exception('"max_len" must be greater than or equal to zero')
-        elif max_len != None:
+        elif max_len is not None:
             raise Exception('"max_len" must be an int value')
 
         self._default = default
@@ -85,13 +88,11 @@ class SCTextOption(SCOption):
         self._suffix = suffix
         self._max_len = max_len
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   Properties
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     @property
     def default(self) -> str:
@@ -123,7 +124,7 @@ class SCTextOption(SCOption):
         This is primarily used by screen inputs to store the value as it is
         being typed but before it is saved.
         """
-        if self._current == None:
+        if self._current is None:
             self._current = self.selection_value
 
         return self._current
@@ -133,7 +134,7 @@ class SCTextOption(SCOption):
         """
         Whether this option has a prefix value set.
         """
-        return self._prefix != None
+        return self._prefix is not None
 
     @property
     def prefix(self) -> str | None:
@@ -150,7 +151,7 @@ class SCTextOption(SCOption):
         """
         Whether this option has a suffix value set.
         """
-        return self._suffix != None
+        return self._suffix is not None
 
     @property
     def suffix(self) -> str | None:
@@ -167,7 +168,7 @@ class SCTextOption(SCOption):
         """
         Whether this option has a max_len value set.
         """
-        return self._max_len != None
+        return self._max_len is not None
 
     @property
     def max_len(self) -> int | None:
@@ -182,13 +183,11 @@ class SCTextOption(SCOption):
         """
         return self._max_len
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   SC-Internal Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def _clone(self):
         return SCTextOption(
@@ -201,13 +200,11 @@ class SCTextOption(SCOption):
             self._max_len,
         )
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     # Public Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def commit_to_selection(self):
         """
@@ -251,7 +248,7 @@ class SCValidatableTextOption(SCTextOption):
         key: str,
         name: str,
         group: str | None,
-        validator: function,
+        validator: Callable[[str], bool],
         default: str = "",
         autocommit: bool = False,
         prefix: str | None = None,
@@ -260,7 +257,7 @@ class SCValidatableTextOption(SCTextOption):
         **kwargs
     ):
         """
-        Initializes the new SCValidatableTextOptoin instance with the given
+        Initializes the new SCValidatableTextOption instance with the given
         arguments.
 
         Arguments
@@ -315,13 +312,11 @@ class SCValidatableTextOption(SCTextOption):
         self._validator = validator
         self._autocommit = autocommit
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   Properties
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     @property
     def is_valid(self) -> bool:
@@ -336,13 +331,11 @@ class SCValidatableTextOption(SCTextOption):
 
         return out
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   SC-Internal Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def _clone(self):
         return SCValidatableTextOption(
@@ -357,13 +350,11 @@ class SCValidatableTextOption(SCTextOption):
             self._max_len,
         )
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     # Public Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def commit_to_selection(self):
         """
@@ -389,4 +380,3 @@ class SCValidatableTextOption(SCTextOption):
 
         if self._autocommit and self.is_valid:
             super().commit_to_selection()
-

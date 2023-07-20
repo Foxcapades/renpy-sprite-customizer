@@ -4,7 +4,6 @@ import renpy  # type: ignore
 from ...utils.hex_color_ren import _validate_hex, _is_hex_digit
 from ...options.color_option_ren import SCColorOption
 
-
 """renpy
 init python:
 """

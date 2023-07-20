@@ -5,6 +5,7 @@ from .csrgba_ren import CSRGBA
 init python:
 """
 
+
 class CSHSLA(CSHSL):
     def __init__(self, hue, saturation, lightness, alpha):
         super().__init__(hue, saturation, lightness)
