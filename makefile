@@ -13,20 +13,30 @@ clean:
 
 
 .PHONY: release
-release: build-base-project-zip build-slim-zip
+release: build-base-project-zip build-slim-zip build-mid-zip
 
 
 .PHONY: build-base-project-zip
 build-base-project-zip: clean
 	@mkdir -p releases
-	@zip -r "releases/sc-base-project-$(VERSION).zip" game license -x game/saves/**\* -x game/cache/**\*
+	@cp license sc-license
+	@zip -r "releases/sc-base-project-$(VERSION).zip" game sc-license -x game/saves/**\* -x game/cache/**\*
+	@rm sc-license
 
 
 .PHONY: build-slim-zip
 build-slim-zip: clean
 	@mkdir -p releases
 	@cp license sc-license
-	@zip -r "releases/sc-slim-$(VERSION).zip" game/lib/fxcpds/sprite_customizer game/customized_sprites.rpy sc-license
+	@zip -r "releases/sc-slim-$(VERSION).zip" game/lib/fxcpds/sprite_customizer sc-license
+	@rm sc-license
+
+
+.PHONY: build-mid-zip
+build-mid-zip: clean
+	@mkdir -p releases
+	@cp license sc-license
+	@zip -r "releases/sc-mid-$(VERSION).zip" game/lib/fxcpds/sprite_customizer game/images/ccp game/customized_sprites.rpy sc-license
 	@rm sc-license
 
 
