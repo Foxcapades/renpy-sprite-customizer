@@ -1,4 +1,5 @@
-from ..state_ren import SCState
+from ..state.state_ren import SCState
+from ..utils.strings_ren import _require_key_string, _require_non_empty_string
 
 """renpy
 init -2 python:
@@ -15,6 +16,7 @@ init -2 python:
 SC_OPTION_TYPE_VALUE_LIST = 0
 SC_OPTION_TYPE_TEXT_INPUT = 1
 SC_OPTION_TYPE_BOOLEAN    = 2
+SC_OPTION_TYPE_COLOR      = 3
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -28,7 +30,7 @@ class SCOption:
     """
     Base type for Sprite Customizer option types.
     """
-    def __init__(self, key: str, name: str, group: str, option_type: int):
+    def __init__(self, key: str, name: str, group: str | None, option_type: int):
         """
         Initializes the new SCOption instance with the given arguments.
 
@@ -40,37 +42,33 @@ class SCOption:
         name : str
             Option display name.
 
-        group : str
-            Option group.
+        group : str | None
+            Option group.  If this value is set to `None`, the `name` value will
+            be used as the group name.
 
         option_type : int
             Option type indicator.
         """
-        if not isinstance(key, str):
-            raise Exception("\"key\" argument must be a string")
 
-        if not isinstance(name, str):
-            raise Exception("\"name\" argument must be a string")
+        self._key = _require_key_string("key", key)
+        self._name = _require_non_empty_string("name", name)
 
-        if not isinstance(group, str):
-            raise Exception("\"group\" argument must be a string")
+        if group is None:
+            self._group = self._name
+        else:
+            self._group = _require_non_empty_string("group", group)
 
         if not isinstance(option_type, int):
             raise Exception("\"option_type\" argument must be an int")
 
-        self._key = key
-        self._name = name
-        self._group = group
         self._type = option_type
         self._state: SCState | None = None
-
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   Properties
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     @property
     def key(self) -> str:
@@ -104,13 +102,11 @@ class SCOption:
     def selection_value(self) -> any:
         raise Exception("selection_value must be implemented by extending classes!")
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   SC-Internal Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def _set_state(self, state: SCState):
         self._state = state
@@ -127,6 +123,8 @@ class SCOption:
         """
         return SCOption(self._key, self._name, self._group, self._type)
 
+    def _post_clone(self):
+        pass
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #

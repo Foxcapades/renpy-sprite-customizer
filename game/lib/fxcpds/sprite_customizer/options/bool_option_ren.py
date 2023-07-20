@@ -41,7 +41,7 @@ class SCBooleanOption(SCOption):
         self,
         key: str,
         name: str,
-        group: str,
+        group: str | None,
         default: bool = False,
         values: tuple[any, any] | None = None,
         **kwargs
@@ -57,8 +57,9 @@ class SCBooleanOption(SCOption):
         name : str
             Display name for this option.
 
-        group : str
-            Group name for this option.
+        group : str | None
+            Option group.  If this value is set to `None`, the `name` value will
+            be used as the group name.
 
         default : bool, optional
             Optional default value to use when no selection has yet been made by
@@ -87,13 +88,11 @@ class SCBooleanOption(SCOption):
 
         self._default = default
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   Properties
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     @property
     def value(self) -> bool:
@@ -114,13 +113,11 @@ class SCBooleanOption(SCOption):
 
         return self._state.get_selection(self._key)
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   SC-Internal Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def _clone(self):
         return SCBooleanOption(
@@ -134,13 +131,11 @@ class SCBooleanOption(SCOption):
     def _pick_value(self, tf: bool) -> any:
         return self._when_true if tf else self._when_false
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
-    # Public Methods
+    #   Public Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def set_selection(self, value: bool):
         """

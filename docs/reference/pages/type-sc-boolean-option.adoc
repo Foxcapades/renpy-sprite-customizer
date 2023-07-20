@@ -21,6 +21,9 @@ registered to an SCLayer instance to be in any way useful.
 
 == Properties
 
+*Includes* <<sc-option-properties, SCOption Properties>>
+
+
 === `value`
 
 [cols="1m,9a"]
@@ -49,7 +52,7 @@ def __init__(
     self,
     key: str,
     name: str,
-    group: str,
+    group: str | None,
     default: bool = False,
     values: tuple[any, any] | None = None,
     **kwargs
@@ -69,8 +72,9 @@ Initializes the new <<sc-boolean-option>> instance with the given arguments.
 | Display name for this option.
 
 | `group`
-| str
-| Group name for this option.
+| str \| None
+| Option group.  If this value is set to `None`, the `name` value will be used
+as the group name.
 
 | `default`
 | bool

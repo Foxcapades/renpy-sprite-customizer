@@ -23,65 +23,63 @@ image::docs/previews/demo.gif[]
 
 [NOTE]
 --
-The included character customization screen is for demonstration purposes only.
-It is recommended that users of this framework build their own customization
-screens using the API demonstrated by the demo screens.
+The accent, hover, and bar colors displayed in the demo are controlled by the standard `gui.rpy` file.
 --
+
 
 == Project Layout
 
-=== link:game/sprite_customizer[The `sprite_customizer` Directory]
-
-The `game/sprite_customizer` directory is where the source and configuration for
-the Sprite Customizer lives.
-
-This directory contains 2 files and a subdirectory:
-
-* `src/`
-* `config.rpy`
-* `gui.rpy`
-
-==== The `src` Directory
-
-The source directory contains the source files for the classes that back the
-Sprite Customizer.
-
-This is where you would go if you want to hack the behavior of the Sprite
-Customizer.
-
-==== `screens.rpy`
-
-The `screens.rpy` file is where the demo Sprite Customizer screen is defined.
-
-This is where you go if you want to redefine or alter the Sprite Customization
-screen.
-
-
 === link:game/customized_sprites.rpy[`customized_sprites.rpy`]
 
-The `customized_sprites.rpy` file is where the demo sprites are defined.  This
-file is intended to be used to hold your Customized Sprite configuration(s) and
-layer callbacks.
+This is where the sprite customization options are defined.  This is the point
+where your assets meet the library.
 
 
 === link:game/images.rpy[`images.rpy`]
 
-The `images.rpy` file contains the declaration of "normal" Ren'Py images for use
-in the script.
+Demonstration of using "normal" Ren'Py images in conjunction with customized
+sprites.  This file defines some ``layeredimage``s that are based on customized
+sprites and add expressions.
 
-This file contains a demonstration of using the customized character sprites as
-part of link:{renpy-docs}/layeredimage.html[LayeredImage]s.
 
 === link:game/script.rpy[`script.rpy`]
 
-The `script.rpy` file contains a basic example usage of the Sprite Customizer
-and provides a template from which you can model your own usage of the toolset.
+The demo script that makes use of the sprite customizer library.
+
+
+=== The Sprite Customizer Library
+
+The sprite customizer library lives under the
+link:game/lib/fxcpds/sprite_customizer[`game/lib/fxcpds/sprite_customizer`]
+directory.
+
+==== Config File
+
+This file which lives at
+link:game/lib/fxcpds/sprite_customizer/config.rpy[`game/lib/fxcpds/sprite_customizer/config.rpy`]
+is the primary configuration for the sprite customizer.
+
+This is where you go if you want to change the style of the sprite customization
+screens.
+
+==== The Customizer Directory
+
+This directory is where the customizer screens and images are defined.  If you
+intend to create your own character customization screens, this is a good place
+to look to understand how the screens are built.
+
+==== Everything Else
+
+Everything else is library internals and shouldn't need to be touched unless you
+want to hack the behavior of the sprite customizer.
+
 
 == Credits
 
 === Resources Used
 
-* Example Sprite Layers - link:https://butterymilk.itch.io/awfully-sweet[Butter Milk on Itch.io]
+* Example Sprite Layers - https://butterymilk.itch.io/awfully-sweet
+* Classroom Background - https://alte.itch.io/uncle-mugens-school
 
 === Contributors
 

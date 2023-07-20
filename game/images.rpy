@@ -54,3 +54,7 @@ layeredimage antagonist:
 # reflect the changes made to the sprites' mouths and eyebrows.
 image side player = LayeredImageProxy("player", Transform(yoffset=350, xoffset=-50, zoom=0.7))
 image side antagonist = LayeredImageProxy("antagonist", Transform(yoffset=350, xoffset=-50, zoom=0.7))
+
+
+image classroom:
+    "images/backgrounds/class.png"

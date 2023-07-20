@@ -8,7 +8,8 @@ default:
 
 .PHONY: clean
 clean:
-	@find . -name '*.rpyc' | xargs -I'{}' rm {}
+	@echo "Cleaning directory."
+	@find . -name '*.rpyc' -o -name '*.rpyb' -o -name '*.rpymc' | xargs -I'{}' rm '{}'
 
 
 .PHONY: release
@@ -18,13 +19,13 @@ release: build-base-project-zip build-slim-zip
 .PHONY: build-base-project-zip
 build-base-project-zip: clean
 	@mkdir -p releases
-	@zip -r "releases/sc-base-project-$(VERSION).zip" game license -x game/saves/**\*
+	@zip -r "releases/sc-base-project-$(VERSION).zip" game license -x game/saves/**\* -x game/cache/**\*
 
 
 .PHONY: build-slim-zip
 build-slim-zip: clean
 	@mkdir -p releases
-	@zip -r "releases/sc-slim-$(VERSION).zip" game/sprite_customizer game/customized_sprites.rpy license
+	@zip -r "releases/sc-slim-$(VERSION).zip" game/lib/fxcpds/sprite_customizer game/customized_sprites.rpy license
 
 
 .PHONY: docs

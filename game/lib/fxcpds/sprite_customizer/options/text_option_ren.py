@@ -23,7 +23,7 @@ class SCTextOption(SCOption):
         self,
         key: str,
         name: str,
-        group: str,
+        group: str | None,
         default: str = "",
         prefix: str | None = None,
         suffix: str | None = None,
@@ -41,8 +41,9 @@ class SCTextOption(SCOption):
         name : str
             Display name for this option.
 
-        group : str
-            Group name for this option.
+        group : str | None
+            Option group.  If this value is set to `None`, the `name` value will
+            be used as the group name.
 
         default : str, optional
             Default/starting value to use when no value has yet been set.
@@ -249,7 +250,7 @@ class SCValidatableTextOption(SCTextOption):
         self,
         key: str,
         name: str,
-        group: str,
+        group: str | None,
         validator: function,
         default: str = "",
         autocommit: bool = False,
@@ -270,8 +271,9 @@ class SCValidatableTextOption(SCTextOption):
         name : str
             Display name for this option.
 
-        group : str
-            Group name for this option.
+        group : str | None
+            Option group.  If this value is set to `None`, the `name` value will
+            be used as the group name.
 
         validator : callable
             A function that should take a string value as its single argument

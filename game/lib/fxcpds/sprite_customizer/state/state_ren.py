@@ -34,10 +34,6 @@ class SCState:
         if not isinstance(user_state, dict):
             raise Exception("SCState user_state argument must be a dict value.")
 
-        for key, value in selections.items():
-            if not isinstance(value, int) or value < 1:
-                raise Exception("Option selections must be 1 based integers.")
-
         self._selections = selections.copy()
         self._user_state = user_state.copy()
 

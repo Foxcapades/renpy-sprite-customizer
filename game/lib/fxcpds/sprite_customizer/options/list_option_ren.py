@@ -6,13 +6,13 @@ from .option_ren import SCOption, SC_OPTION_TYPE_VALUE_LIST
 init -1 python:
 """
 
-class SCValueListOption(SCOption):
+class SCListOption(SCOption):
     """
     Represents an option group that is a list or set of option choices that
     are navigated via an index that can be incremented or decremented.
 
     ```python
-    SCValueListOption("my_option", "My Option", "My Group", [ "some", "choices" ])
+    SCListOption("my_option", "My Option", "My Group", [ "some", "choices" ])
     ```
 
     **IMPORTANT**: This option type is state dependent and cannot be used on its
@@ -30,7 +30,7 @@ class SCValueListOption(SCOption):
         **kwargs
     ):
         """
-        Initializes the new SCValueListOption instance with the given
+        Initializes the new SCListOption instance with the given
         arguments.
 
         Arguments
@@ -122,16 +122,16 @@ class SCValueListOption(SCOption):
 
     def _clone(self):
         """
-        Returns a copy of this SCValueListOption sans user state.
+        Returns a copy of this SCListOption sans user state.
 
         Returns
         -------
 
-        SCValueListOption
-            A copy of the current SCValueListOption instance without any
+        SCListOption
+            A copy of the current SCListOption instance without any
             user state.
         """
-        out = SCValueListOption(
+        out = SCListOption(
             self._key,
             self._name,
             self._group,

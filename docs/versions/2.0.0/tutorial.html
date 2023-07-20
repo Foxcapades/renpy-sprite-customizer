@@ -1,0 +1,3698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.18">
+<title>Sprite Customizer Tutorial</title>
+<style>
+/*! normalize.css v2.1.2 | MIT License | git.io/normalize */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,700italic,400italic);
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap");
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block
+}
+
+audio,
+canvas,
+video {
+  display: inline-block
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0
+}
+
+[hidden],
+template {
+  display: none
+}
+
+script {
+  display: none !important
+}
+
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%
+}
+
+body {
+  margin: 0
+}
+
+a {
+  background: transparent
+}
+
+a:focus {
+  outline: thin dotted
+}
+
+a:active,
+a:hover {
+  outline: 0
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0
+}
+
+abbr[title] {
+  border-bottom: 1px dotted
+}
+
+b,
+strong {
+  font-weight: bold
+}
+
+dfn {
+  font-style: italic
+}
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0
+}
+
+mark {
+  background: #ff0;
+  color: #000
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em
+}
+
+pre {
+  white-space: pre-wrap
+}
+
+q {
+  quotes: "\201C""\201D""\2018""\2019"
+}
+
+small {
+  font-size: 80%
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline
+}
+
+sup {
+  top: -0.5em
+}
+
+sub {
+  bottom: -0.25em
+}
+
+img {
+  border: 0
+}
+
+svg:not(:root) {
+  overflow: hidden
+}
+
+figure {
+  margin: 0
+}
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em
+}
+
+legend {
+  border: 0;
+  padding: 0
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  margin: 0
+}
+
+button,
+input {
+  line-height: normal
+}
+
+button,
+select {
+  text-transform: none
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: default
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+meta.foundation-mq-small {
+  font-family: "only screen and (min-width: 768px)";
+  width: 768px
+}
+
+meta.foundation-mq-medium {
+  font-family: "only screen and (min-width:1280px)";
+  width: 1280px
+}
+
+meta.foundation-mq-large {
+  font-family: "only screen and (min-width:1440px)";
+  width: 1440px
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box
+}
+
+html,
+body {
+  font-size: 100%
+}
+
+body {
+  background: #fff;
+  color: #222;
+  padding: 0;
+  margin: 0;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  position: relative;
+  cursor: auto
+}
+
+a:hover {
+  cursor: pointer
+}
+
+img,
+object,
+embed {
+  max-width: 100%;
+  height: auto
+}
+
+object,
+embed {
+  height: 100%
+}
+
+img {
+  -ms-interpolation-mode: bicubic
+}
+
+#map_canvas img,
+#map_canvas embed,
+#map_canvas object,
+.map_canvas img,
+.map_canvas embed,
+.map_canvas object {
+  max-width: none !important
+}
+
+.left {
+  float: left !important
+}
+
+.right {
+  float: right !important
+}
+
+.text-left {
+  text-align: left !important
+}
+
+.text-right {
+  text-align: right !important
+}
+
+.text-center {
+  text-align: center !important
+}
+
+.text-justify {
+  text-align: justify !important
+}
+
+.hide {
+  display: none
+}
+
+.antialiased {
+  -webkit-font-smoothing: antialiased
+}
+
+img {
+  display: inline-block;
+  vertical-align: middle
+}
+
+textarea {
+  height: auto;
+  min-height: 50px
+}
+
+select {
+  width: 100%
+}
+
+p.lead {
+  font-size: 1.21875em;
+  line-height: 1.6
+}
+
+.subheader,
+.admonitionblock td.content>.title,
+.audioblock>.title,
+.exampleblock>.title,
+.imageblock>.title,
+.listingblock>.title,
+.literalblock>.title,
+.stemblock>.title,
+.openblock>.title,
+.paragraph>.title,
+.quoteblock>.title,
+table.tableblock>.title,
+.verseblock>.title,
+.videoblock>.title,
+.dlist>.title,
+.olist>.title,
+.ulist>.title,
+.qlist>.title,
+.hdlist>.title {
+  line-height: 1.4;
+  color: #6c818f;
+  font-weight: 300;
+  margin-top: 0.2em;
+  margin-bottom: 0.5em
+}
+
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+#toctitle,
+.sidebarblock>.content>.title,
+h4,
+h5,
+h6,
+pre,
+form,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  direction: ltr
+}
+
+a {
+  color: #2980b9;
+  text-decoration: none;
+  line-height: inherit
+}
+
+a:hover,
+a:focus {
+  color: #3091d1
+}
+
+a img {
+  border: none
+}
+
+p {
+  font-family: inherit;
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 1.25em;
+  text-rendering: optimizeLegibility
+}
+
+p aside {
+  font-size: 0.875em;
+  line-height: 1.35;
+  font-style: italic
+}
+
+h1,
+h2,
+h3,
+#toctitle,
+.sidebarblock>.content>.title,
+h4,
+h5,
+h6 {
+  font-family: "Roboto Slab", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  color: #465158;
+  text-rendering: optimizeLegibility;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  line-height: 1.2125em
+}
+
+h1 small,
+h2 small,
+h3 small,
+#toctitle small,
+.sidebarblock>.content>.title small,
+h4 small,
+h5 small,
+h6 small {
+  font-size: 60%;
+  color: #909ea7;
+  line-height: 0
+}
+
+h1 {
+  font-size: 2.125em
+}
+
+h2 {
+  font-size: 1.6875em
+}
+
+h3,
+#toctitle,
+.sidebarblock>.content>.title {
+  font-size: 1.375em
+}
+
+h4 {
+  font-size: 1.125em
+}
+
+h5 {
+  font-size: 1.125em
+}
+
+h6 {
+  font-size: 1em
+}
+
+hr {
+  border: solid #ddd;
+  border-width: 1px 0 0;
+  clear: both;
+  margin: 1.25em 0 1.1875em;
+  height: 0
+}
+
+em,
+i {
+  font-style: italic;
+  line-height: inherit
+}
+
+strong,
+b {
+  font-weight: bold;
+  line-height: inherit
+}
+
+small {
+  font-size: 60%;
+  line-height: inherit
+}
+
+code {
+  font-family: "Inconsolata", "Consolas", "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+  font-weight: normal;
+  color: #2980b9
+}
+
+ul,
+ol,
+dl {
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 1.25em;
+  list-style-position: outside;
+  font-family: inherit
+}
+
+ul,
+ol {
+  margin-left: 0
+}
+
+ul.no-bullet,
+ol.no-bullet {
+  margin-left: 0
+}
+
+ul li ul,
+ul li ol {
+  margin-left: 1.25em;
+  margin-bottom: 0;
+  font-size: 1em
+}
+
+ul.square li ul,
+ul.circle li ul,
+ul.disc li ul {
+  list-style: inherit
+}
+
+ul.square {
+  list-style-type: square
+}
+
+ul.circle {
+  list-style-type: circle
+}
+
+ul.disc {
+  list-style-type: disc
+}
+
+ul.no-bullet {
+  list-style: none
+}
+
+ol li ul,
+ol li ol {
+  margin-left: 1.25em;
+  margin-bottom: 0
+}
+
+dl dt {
+  margin-bottom: 0.3em;
+  font-weight: bold
+}
+
+dl dd {
+  margin-bottom: 0.75em
+}
+
+abbr,
+acronym {
+  text-transform: uppercase;
+  font-size: 90%;
+  color: #000;
+  border-bottom: 1px dotted #ddd;
+  cursor: help
+}
+
+abbr {
+  text-transform: none
+}
+
+blockquote {
+  margin: 0 0 1.25em;
+  padding: 0.5625em 1.25em 0 1.1875em;
+  border-left: 1px solid #ddd
+}
+
+blockquote cite {
+  display: block;
+  font-size: 0.8125em;
+  color: #748590
+}
+
+blockquote cite:before {
+  content: "\2014 \0020"
+}
+
+blockquote cite a,
+blockquote cite a:visited {
+  color: #748590
+}
+
+blockquote,
+blockquote p {
+  line-height: 1.5;
+  color: #909ea7
+}
+
+.vcard {
+  display: inline-block;
+  margin: 0 0 1.25em 0;
+  border: 1px solid #ddd;
+  padding: 0.625em 0.75em
+}
+
+.vcard li {
+  margin: 0;
+  display: block
+}
+
+.vcard .fn {
+  font-weight: bold;
+  font-size: 0.9375em
+}
+
+.vevent .summary {
+  font-weight: bold
+}
+
+.vevent abbr {
+  cursor: auto;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  padding: 0 0.0625em
+}
+
+@media only screen and (min-width: 768px) {
+
+  h1,
+  h2,
+  h3,
+  #toctitle,
+  .sidebarblock>.content>.title,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.4
+  }
+
+  h1 {
+    font-size: 2.75em
+  }
+
+  h2 {
+    font-size: 2.3125em
+  }
+
+  h3,
+  #toctitle,
+  .sidebarblock>.content>.title {
+    font-size: 1.6875em
+  }
+
+  h4 {
+    font-size: 1.4375em
+  }
+}
+
+table {
+  background: #fff;
+  margin-bottom: 1.25em;
+  border: solid 0 #ddd
+}
+
+table thead,
+table tfoot {
+  background: none;
+  font-weight: bold
+}
+
+table thead tr th,
+table thead tr td,
+table tfoot tr th,
+table tfoot tr td {
+  padding: 1px 8px 1px 5px;
+  font-size: 1em;
+  color: #222;
+  text-align: left
+}
+
+table tr th,
+table tr td {
+  padding: 1px 8px 1px 5px;
+  font-size: 1em;
+  color: #222
+}
+
+table tr.even,
+table tr.alt,
+table tr:nth-of-type(even) {
+  background: none
+}
+
+table thead tr th,
+table tfoot tr th,
+table tbody tr td,
+table tr td,
+table tfoot tr td {
+  display: table-cell;
+  line-height: 1.5
+}
+
+body {
+  tab-size: 4;
+  word-wrap: anywhere;
+  font-family: "Lato", "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased
+}
+
+table {
+  word-wrap: normal
+}
+
+h1,
+h2,
+h3,
+#toctitle,
+.sidebarblock>.content>.title,
+h4,
+h5,
+h6 {
+  line-height: 1.4
+}
+
+object,
+svg {
+  display: inline-block;
+  vertical-align: middle
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto
+}
+
+.stretch {
+  width: 100%
+}
+
+.clearfix:before,
+.clearfix:after,
+.float-group:before,
+.float-group:after {
+  content: " ";
+  display: table
+}
+
+.clearfix:after,
+.float-group:after {
+  clear: both
+}
+
+:not(pre).nobreak {
+  word-wrap: normal
+}
+
+:not(pre).nowrap {
+  white-space: nowrap
+}
+
+:not(pre).pre-wrap {
+  white-space: pre-wrap
+}
+
+:not(pre):not([class^=L])>code {
+  font-size: 0.95em;
+  font-style: normal !important;
+  letter-spacing: 0;
+  padding: 0;
+  line-height: inherit
+}
+
+#toc code {
+  background: none;
+  border: none;
+  color: #f2f2f2;
+}
+
+pre {
+  color: inherit;
+  font-family: "Consolas", "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+  line-height: 1.2
+}
+
+pre code,
+pre pre {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit
+}
+
+pre>code {
+  display: block
+}
+
+pre.nowrap,
+pre.nowrap pre {
+  white-space: pre;
+  word-wrap: normal
+}
+
+em em {
+  font-style: normal
+}
+
+strong strong {
+  font-weight: normal
+}
+
+.keyseq {
+  color: #333
+}
+
+kbd {
+  font-family: "Inconsolata", "Consolas", "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+  display: inline-block;
+  color: #000;
+  font-size: 0.65em;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em #fff inset;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em #fff inset;
+  margin: 0 0.15em;
+  padding: 0.2em 0.5em;
+  vertical-align: middle;
+  position: relative;
+  top: -0.1em;
+  white-space: nowrap
+}
+
+.keyseq kbd:first-child {
+  margin-left: 0
+}
+
+.keyseq kbd:last-child {
+  margin-right: 0
+}
+
+.menuseq,
+.menuref {
+  color: #000
+}
+
+.menuseq b:not(.caret),
+.menuref {
+  font-weight: inherit
+}
+
+.menuseq {
+  word-spacing: -0.02em
+}
+
+.menuseq b.caret {
+  font-size: 1.25em;
+  line-height: 0.8
+}
+
+.menuseq i.caret {
+  font-weight: bold;
+  text-align: center;
+  width: 0.45em
+}
+
+b.button:before,
+b.button:after {
+  position: relative;
+  top: -1px;
+  font-weight: normal
+}
+
+b.button:before {
+  content: "[";
+  padding: 0 3px 0 2px
+}
+
+b.button:after {
+  content: "]";
+  padding: 0 2px 0 3px
+}
+
+#header,
+#content,
+#footnotes,
+#footer {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 62.5em;
+  *zoom: 1;
+  position: relative;
+  padding-left: 0.9375em;
+  padding-right: 0.9375em
+}
+
+#header:before,
+#header:after,
+#content:before,
+#content:after,
+#footnotes:before,
+#footnotes:after,
+#footer:before,
+#footer:after {
+  content: " ";
+  display: table
+}
+
+#header:after,
+#content:after,
+#footnotes:after,
+#footer:after {
+  clear: both
+}
+
+#content {
+  margin-top: 1.25em
+}
+
+#content:before {
+  content: none
+}
+
+#header>h1:first-child {
+  color: #111;
+  margin-top: 2.25rem;
+  margin-bottom: 0
+}
+
+#header>h1:first-child+#toc {
+  margin-top: 8px;
+  border-top: 1px solid #ddd
+}
+
+#header>h1:only-child,
+body.toc2 #header>h1:nth-last-child(2) {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px
+}
+
+#header .details {
+  border-bottom: 1px solid #ddd;
+  line-height: 1.45;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-left: 0.25em;
+  color: #748590;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap
+}
+
+#header .details span:first-child {
+  margin-left: -0.125em
+}
+
+#header .details span.email a {
+  color: #909ea7
+}
+
+#header .details br {
+  display: none
+}
+
+#header .details br+span:before {
+  content: "\00a0\2013\00a0"
+}
+
+#header .details br+span.author:before {
+  content: "\00a0\22c5\00a0";
+  color: #909ea7
+}
+
+#header .details br+span#revremark:before {
+  content: "\00a0|\00a0"
+}
+
+#header #revnumber {
+  text-transform: capitalize
+}
+
+#header #revnumber:after {
+  content: "\00a0"
+}
+
+#content>h1:first-child:not([class]) {
+  color: #111;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+  margin-top: 0;
+  padding-top: 1rem;
+  margin-bottom: 1.25rem
+}
+
+#toc {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5em
+}
+
+#toc>ul {
+  margin-left: 0.125em
+}
+
+#toc ul.sectlevel0>li>a {
+  font-style: italic
+}
+
+#toc ul.sectlevel0 ul.sectlevel1 {
+  margin: 0.5em 0
+}
+
+#toc ul {
+  font-family: "Roboto Slab", sans-serif;
+  list-style-type: none
+}
+
+#toc li {
+  line-height: 1.3334;
+  margin-top: 0.3334em
+}
+
+#toc a {
+  text-decoration: none
+}
+
+#toc a:active {
+  text-decoration: underline
+}
+
+#toctitle {
+  color: #6c818f;
+  font-size: 1.2em
+}
+
+@media only screen and (min-width: 768px) {
+  #toctitle {
+    font-size: 1.375em
+  }
+
+  body.toc2 {
+    padding-left: 15em;
+    padding-right: 0
+  }
+
+  #toc.toc2 {
+    margin-top: 0 !important;
+    background: #f2f2f2;
+    position: fixed;
+    width: 15em;
+    left: 0;
+    top: 0;
+    border-right: 1px solid #ddd;
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
+    z-index: 1000;
+    padding: 1.25em 1em;
+    height: 100%;
+    overflow: auto
+  }
+
+  #toc.toc2 #toctitle {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    font-size: 1.2em
+  }
+
+  #toc.toc2>ul {
+    font-size: 0.9em;
+    margin-bottom: 0
+  }
+
+  #toc.toc2 ul ul {
+    margin-left: 0;
+    padding-left: 1em
+  }
+
+  #toc.toc2 ul.sectlevel0 ul.sectlevel1 {
+    padding-left: 0;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em
+  }
+
+  body.toc2.toc-right {
+    padding-left: 0;
+    padding-right: 15em
+  }
+
+  body.toc2.toc-right #toc.toc2 {
+    border-right-width: 0;
+    border-left: 1px solid #ddd;
+    left: auto;
+    right: 0
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  body.toc2 {
+    padding-left: 20em;
+    padding-right: 0
+  }
+
+  #toc.toc2 {
+    width: 20em
+  }
+
+  #toc.toc2 #toctitle {
+    font-size: 1.375em
+  }
+
+  #toc.toc2>ul {
+    font-size: 0.95em
+  }
+
+  #toc.toc2 ul ul {
+    padding-left: 1.25em
+  }
+
+  body.toc2.toc-right {
+    padding-left: 0;
+    padding-right: 20em
+  }
+}
+
+#content #toc {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d9d9d9;
+  margin-bottom: 1.25em;
+  padding: 1.25em;
+  background: #f2f2f2;
+  -webkit-border-radius: 6px;
+  border-radius: 6px
+}
+
+#content #toc>:first-child {
+  margin-top: 0
+}
+
+#content #toc>:last-child {
+  margin-bottom: 0
+}
+
+#footer {
+  max-width: none;
+  background: #000;
+  padding: 1.25em
+}
+
+#footer-text {
+  color: #fff;
+  line-height: 1.35
+}
+
+#content {
+  margin-bottom: 0.625em
+}
+
+.sect1 {
+  padding-bottom: 0.625em
+}
+
+@media only screen and (min-width: 768px) {
+  #content {
+    margin-bottom: 1.25em
+  }
+
+  .sect1 {
+    padding-bottom: 1.25em
+  }
+}
+
+.sect1:last-child {
+  padding-bottom: 0
+}
+
+.sect1+.sect1 {
+  border-top: 1px solid #ddd
+}
+
+details,
+.audioblock,
+.imageblock,
+.literalblock,
+.listingblock,
+.stemblock,
+.videoblock {
+  margin-bottom: 1.25em
+}
+
+details>summary:first-of-type {
+  cursor: pointer;
+  display: list-item;
+  outline: none;
+  margin-bottom: 0.75em
+}
+
+.admonitionblock td.content>.title,
+.audioblock>.title,
+.exampleblock>.title,
+.imageblock>.title,
+.listingblock>.title,
+.literalblock>.title,
+.stemblock>.title,
+.openblock>.title,
+.paragraph>.title,
+.quoteblock>.title,
+table.tableblock>.title,
+.verseblock>.title,
+.videoblock>.title,
+.dlist>.title,
+.olist>.title,
+.ulist>.title,
+.qlist>.title,
+.hdlist>.title {
+  text-rendering: optimizeLegibility;
+  text-align: left
+}
+
+table.tableblock.fit-content>caption.title {
+  white-space: nowrap;
+  width: 0
+}
+
+.paragraph.lead>p,
+#preamble>.sectionbody>[class="paragraph"]:first-of-type p {
+  font-size: 1.21875em;
+  line-height: 1.6;
+  color: #111
+}
+
+table.tableblock #preamble>.sectionbody>[class="paragraph"]:first-of-type p {
+  font-size: inherit
+}
+
+.admonitionblock>table {
+  border-collapse: separate;
+  border: 0;
+  background: none;
+  width: 100%
+}
+
+.admonitionblock>table td.icon {
+  text-align: center;
+  width: 80px
+}
+
+.admonitionblock>table td.icon img {
+  max-width: none
+}
+
+.admonitionblock>table td.icon .title {
+  font-weight: bold;
+  font-family: "Roboto Slab", sans-serif;
+  text-transform: uppercase
+}
+
+.admonitionblock>table td.content {
+  padding-left: 1.125em;
+  padding-right: 1.25em;
+  border-left: 1px solid #ddd;
+  color: #748590;
+  word-wrap: anywhere
+}
+
+.admonitionblock>table td.content>:last-child>:last-child {
+  margin-bottom: 0
+}
+
+.exampleblock>.content {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #e6e6e6;
+  margin-bottom: 1.25em;
+  padding: 1.25em;
+  background: #fff;
+  -webkit-border-radius: 6px;
+  border-radius: 6px
+}
+
+.exampleblock>.content>:first-child {
+  margin-top: 0
+}
+
+.exampleblock>.content>:last-child {
+  margin-bottom: 0
+}
+
+.sidebarblock {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d4d4d4;
+  margin-bottom: 1.25em;
+  padding: 1.25em;
+  background: #ededed;
+  -webkit-border-radius: 6px;
+  border-radius: 6px
+}
+
+.sidebarblock>:first-child {
+  margin-top: 0
+}
+
+.sidebarblock>:last-child {
+  margin-bottom: 0
+}
+
+.sidebarblock>.content>.title {
+  color: #6c818f;
+  margin-top: 0
+}
+
+.exampleblock>.content>:last-child>:last-child,
+.exampleblock>.content .olist>ol>li:last-child>:last-child,
+.exampleblock>.content .ulist>ul>li:last-child>:last-child,
+.exampleblock>.content .qlist>ol>li:last-child>:last-child,
+.sidebarblock>.content>:last-child>:last-child,
+.sidebarblock>.content .olist>ol>li:last-child>:last-child,
+.sidebarblock>.content .ulist>ul>li:last-child>:last-child,
+.sidebarblock>.content .qlist>ol>li:last-child>:last-child {
+  margin-bottom: 0
+}
+
+.literalblock pre,
+.listingblock>.content>pre {
+  border: 1px solid #ccc;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+  padding: 0.5em;
+  font-size: 0.8125em
+}
+
+@media only screen and (min-width: 768px) {
+
+  .literalblock pre,
+  .listingblock>.content>pre {
+    font-size: 0.90625em
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+
+  .literalblock pre,
+  .listingblock>.content>pre {
+    font-size: 1em
+  }
+}
+
+.literalblock pre,
+.listingblock>.content>pre:not(.highlight),
+.listingblock>.content>pre[class="highlight"],
+.listingblock>.content>pre[class^="highlight "] {
+  background: #eee
+}
+
+.literalblock.output pre {
+  color: #eee;
+  background-color: inherit
+}
+
+.listingblock>.content {
+  position: relative
+}
+
+.listingblock code[data-lang]:before {
+  display: none;
+  content: attr(data-lang);
+  position: absolute;
+  font-size: 0.75em;
+  top: 0.425rem;
+  right: 0.5rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.5
+}
+
+.listingblock:hover code[data-lang]:before {
+  display: block
+}
+
+.listingblock.terminal pre .command:before {
+  content: attr(data-prompt);
+  padding-right: 0.5em;
+  color: inherit;
+  opacity: 0.5
+}
+
+.listingblock.terminal pre .command:not([data-prompt]):before {
+  content: "$"
+}
+
+.listingblock pre.highlightjs {
+  padding: 0
+}
+
+.listingblock pre.highlightjs>code {
+  padding: 0.5em;
+  -webkit-border-radius: 6px;
+  border-radius: 6px
+}
+
+.prettyprint {
+  background: #eee
+}
+
+pre.prettyprint .linenums {
+  line-height: 1.2;
+  margin-left: 2em
+}
+
+pre.prettyprint li {
+  background: none;
+  list-style-type: inherit;
+  padding-left: 0
+}
+
+pre.prettyprint li code[data-lang]:before {
+  opacity: 1
+}
+
+pre.prettyprint li:not(:first-child) code[data-lang]:before {
+  display: none
+}
+
+table.linenotable {
+  border-collapse: separate;
+  border: 0;
+  margin-bottom: 0;
+  background: none
+}
+
+table.linenotable td[class] {
+  color: inherit;
+  vertical-align: top;
+  padding: 0;
+  line-height: inherit;
+  white-space: normal
+}
+
+table.linenotable td.code {
+  padding-left: 0.75em
+}
+
+table.linenotable td.linenos {
+  border-right: 1px solid currentColor;
+  opacity: 0.35;
+  padding-right: 0.5em
+}
+
+pre.pygments .lineno {
+  border-right: 1px solid currentColor;
+  opacity: 0.35;
+  display: inline-block;
+  margin-right: 0.75em
+}
+
+pre.pygments .lineno:before {
+  content: "";
+  margin-right: -0.125em
+}
+
+.quoteblock {
+  margin: 0 1em 1.25em 1.5em;
+  display: table
+}
+
+.quoteblock:not(.excerpt)>.title {
+  margin-left: -1.5em;
+  margin-bottom: 0.75em
+}
+
+.quoteblock blockquote,
+.quoteblock p {
+  color: #909ea7;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  word-spacing: 0.1em;
+  letter-spacing: 0;
+  font-style: italic;
+  text-align: justify
+}
+
+.quoteblock blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0
+}
+
+.quoteblock blockquote:before {
+  content: "\201c";
+  float: left;
+  font-size: 2.75em;
+  font-weight: bold;
+  line-height: 0.6em;
+  margin-left: -0.6em;
+  color: #6c818f;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
+}
+
+.quoteblock blockquote>.paragraph:last-child p {
+  margin-bottom: 0
+}
+
+.quoteblock .attribution {
+  margin-top: 0.75em;
+  margin-right: 0.5ex;
+  text-align: right
+}
+
+.verseblock {
+  margin: 0 1em 1.25em 1em
+}
+
+.verseblock pre {
+  font-family: "Open Sans", "DejaVu Sans", sans;
+  font-size: 1.15rem;
+  color: #909ea7;
+  font-weight: 300;
+  text-rendering: optimizeLegibility
+}
+
+.verseblock pre strong {
+  font-weight: 400
+}
+
+.verseblock .attribution {
+  margin-top: 1.25rem;
+  margin-left: 0.5ex
+}
+
+.quoteblock .attribution,
+.verseblock .attribution {
+  font-size: 0.8125em;
+  line-height: 1.45;
+  font-style: italic
+}
+
+.quoteblock .attribution br,
+.verseblock .attribution br {
+  display: none
+}
+
+.quoteblock .attribution cite,
+.verseblock .attribution cite {
+  display: block;
+  letter-spacing: -0.025em;
+  color: #748590
+}
+
+.quoteblock.abstract blockquote:before,
+.quoteblock.excerpt blockquote:before,
+.quoteblock .quoteblock blockquote:before {
+  display: none
+}
+
+.quoteblock.abstract blockquote,
+.quoteblock.abstract p,
+.quoteblock.excerpt blockquote,
+.quoteblock.excerpt p,
+.quoteblock .quoteblock blockquote,
+.quoteblock .quoteblock p {
+  line-height: 1.6;
+  word-spacing: 0
+}
+
+.quoteblock.abstract {
+  margin: 0 1em 1.25em 1em;
+  display: block
+}
+
+.quoteblock.abstract>.title {
+  margin: 0 0 0.375em 0;
+  font-size: 1.15em;
+  text-align: center
+}
+
+.quoteblock.excerpt>blockquote,
+.quoteblock .quoteblock {
+  padding: 0 0 0.25em 1em;
+  border-left: 0.25em solid #ddd
+}
+
+.quoteblock.excerpt,
+.quoteblock .quoteblock {
+  margin-left: 0
+}
+
+.quoteblock.excerpt blockquote,
+.quoteblock.excerpt p,
+.quoteblock .quoteblock blockquote,
+.quoteblock .quoteblock p {
+  color: inherit;
+  font-size: 1.0625rem
+}
+
+.quoteblock.excerpt .attribution,
+.quoteblock .quoteblock .attribution {
+  color: inherit;
+  text-align: left;
+  margin-right: 0
+}
+
+p.tableblock:last-child {
+  margin-bottom: 0
+}
+
+td.tableblock>.content {
+  margin-bottom: 1.25em;
+  word-wrap: anywhere
+}
+
+td.tableblock>.content>:last-child {
+  margin-bottom: -1.25em
+}
+
+table.tableblock,
+th.tableblock,
+td.tableblock {
+  border: 0 solid #ddd
+}
+
+table.grid-all>*>tr>* {
+  border-width: 0
+}
+
+table.grid-cols>*>tr>* {
+  border-width: 0 0
+}
+
+table.grid-rows>*>tr>* {
+  border-width: 0 0
+}
+
+table.frame-all {
+  border-width: 0
+}
+
+table.frame-ends {
+  border-width: 0 0
+}
+
+table.frame-sides {
+  border-width: 0 0
+}
+
+table.frame-none>colgroup+*>:first-child>*,
+table.frame-sides>colgroup+*>:first-child>* {
+  border-top-width: 0
+}
+
+table.frame-none>:last-child>:last-child>*,
+table.frame-sides>:last-child>:last-child>* {
+  border-bottom-width: 0
+}
+
+table.frame-none>*>tr>:first-child,
+table.frame-ends>*>tr>:first-child {
+  border-left-width: 0
+}
+
+table.frame-none>*>tr>:last-child,
+table.frame-ends>*>tr>:last-child {
+  border-right-width: 0
+}
+
+table.stripes-all tr,
+table.stripes-odd tr:nth-of-type(odd),
+table.stripes-even tr:nth-of-type(even),
+table.stripes-hover tr:hover {
+  background: none
+}
+
+th.halign-left,
+td.halign-left {
+  text-align: left
+}
+
+th.halign-right,
+td.halign-right {
+  text-align: right
+}
+
+th.halign-center,
+td.halign-center {
+  text-align: center
+}
+
+th.valign-top,
+td.valign-top {
+  vertical-align: top
+}
+
+th.valign-bottom,
+td.valign-bottom {
+  vertical-align: bottom
+}
+
+th.valign-middle,
+td.valign-middle {
+  vertical-align: middle
+}
+
+table thead th,
+table tfoot th {
+  font-weight: bold
+}
+
+tbody tr th {
+  display: table-cell;
+  line-height: 1.5;
+  background: none
+}
+
+tbody tr th,
+tbody tr th p,
+tfoot tr th,
+tfoot tr th p {
+  color: #222;
+  font-weight: bold
+}
+
+p.tableblock {
+  font-size: 1em
+}
+
+ol {
+  margin-left: 0.25em
+}
+
+ul li ol {
+  margin-left: 0
+}
+
+dl dd {
+  margin-left: 1.125em
+}
+
+dl dd:last-child,
+dl dd:last-child>:last-child {
+  margin-bottom: 0
+}
+
+ol>li p,
+ul>li p,
+ul dd,
+ol dd,
+.olist .olist,
+.ulist .ulist,
+.ulist .olist,
+.olist .ulist {
+  margin-bottom: 0.625em
+}
+
+ul.checklist,
+ul.none,
+ol.none,
+ul.no-bullet,
+ol.no-bullet,
+ol.unnumbered,
+ul.unstyled,
+ol.unstyled {
+  list-style-type: none
+}
+
+ul.no-bullet,
+ol.no-bullet,
+ol.unnumbered {
+  margin-left: 0.625em
+}
+
+ul.unstyled,
+ol.unstyled {
+  margin-left: 0
+}
+
+ul.checklist {
+  margin-left: 0.625em
+}
+
+ul.checklist li>p:first-child>.fa-square-o:first-child,
+ul.checklist li>p:first-child>.fa-check-square-o:first-child {
+  width: 1.25em;
+  font-size: 0.8em;
+  position: relative;
+  bottom: 0.125em
+}
+
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child {
+  margin-right: 0.25em
+}
+
+ul.inline {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  list-style: none;
+  margin: 0 0 0.625em -1.25em
+}
+
+ul.inline>li {
+  margin-left: 1.25em
+}
+
+.unstyled dl dt {
+  font-weight: normal;
+  font-style: normal
+}
+
+ol.arabic {
+  list-style-type: decimal
+}
+
+ol.decimal {
+  list-style-type: decimal-leading-zero
+}
+
+ol.loweralpha {
+  list-style-type: lower-alpha
+}
+
+ol.upperalpha {
+  list-style-type: upper-alpha
+}
+
+ol.lowerroman {
+  list-style-type: lower-roman
+}
+
+ol.upperroman {
+  list-style-type: upper-roman
+}
+
+ol.lowergreek {
+  list-style-type: lower-greek
+}
+
+.hdlist>table,
+.colist>table {
+  border: 0;
+  background: none
+}
+
+.hdlist>table>tbody>tr,
+.colist>table>tbody>tr {
+  background: none
+}
+
+td.hdlist1,
+td.hdlist2 {
+  vertical-align: top;
+  padding: 0 0.625em
+}
+
+td.hdlist1 {
+  font-weight: bold;
+  padding-bottom: 1.25em
+}
+
+td.hdlist2 {
+  word-wrap: anywhere
+}
+
+.literalblock+.colist,
+.listingblock+.colist {
+  margin-top: -0.5em
+}
+
+.colist td:not([class]):first-child {
+  padding: 0.4em 0.75em 0 0.75em;
+  line-height: 1;
+  vertical-align: top
+}
+
+.colist td:not([class]):first-child img {
+  max-width: none
+}
+
+.colist td:not([class]):last-child {
+  padding: 0.25em 0
+}
+
+.thumb,
+.th {
+  line-height: 0;
+  display: inline-block;
+  border: solid 4px #fff;
+  -webkit-box-shadow: 0 0 0 1px #ddd;
+  box-shadow: 0 0 0 1px #ddd
+}
+
+.imageblock.left {
+  margin: 0.25em 0.625em 1.25em 0
+}
+
+.imageblock.right {
+  margin: 0.25em 0 1.25em 0.625em
+}
+
+.imageblock>.title {
+  margin-bottom: 0
+}
+
+.imageblock.thumb,
+.imageblock.th {
+  border-width: 6px
+}
+
+.imageblock.thumb>.title,
+.imageblock.th>.title {
+  padding: 0 0.125em
+}
+
+.image.left,
+.image.right {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  display: inline-block;
+  line-height: 0
+}
+
+.image.left {
+  margin-right: 0.625em
+}
+
+.image.right {
+  margin-left: 0.625em
+}
+
+a.image {
+  text-decoration: none;
+  display: inline-block
+}
+
+a.image object {
+  pointer-events: none
+}
+
+sup.footnote,
+sup.footnoteref {
+  font-size: 0.875em;
+  position: static;
+  vertical-align: super
+}
+
+sup.footnote a,
+sup.footnoteref a {
+  text-decoration: none
+}
+
+sup.footnote a:active,
+sup.footnoteref a:active {
+  text-decoration: underline
+}
+
+#footnotes {
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  margin-bottom: 0.625em
+}
+
+#footnotes hr {
+  width: 20%;
+  min-width: 6.25em;
+  margin: -0.25em 0 0.75em 0;
+  border-width: 1px 0 0 0
+}
+
+#footnotes .footnote {
+  padding: 0 0.375em 0 0.225em;
+  line-height: 1.3334;
+  font-size: 0.875em;
+  margin-left: 1.2em;
+  margin-bottom: 0.2em
+}
+
+#footnotes .footnote a:first-of-type {
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: -1.05em
+}
+
+#footnotes .footnote:last-of-type {
+  margin-bottom: 0
+}
+
+#content #footnotes {
+  margin-top: -0.625em;
+  margin-bottom: 0;
+  padding: 0.75em 0
+}
+
+.gist .file-data>table {
+  border: 0;
+  background: #fff;
+  width: 100%;
+  margin-bottom: 0
+}
+
+.gist .file-data>table td.line-data {
+  width: 99%
+}
+
+div.unbreakable {
+  page-break-inside: avoid
+}
+
+.big {
+  font-size: larger
+}
+
+.small {
+  font-size: smaller
+}
+
+.underline {
+  text-decoration: underline
+}
+
+.overline {
+  text-decoration: overline
+}
+
+.line-through {
+  text-decoration: line-through
+}
+
+.aqua {
+  color: #00bfbf
+}
+
+.aqua-background {
+  background-color: #00fafa
+}
+
+.black {
+  color: #000
+}
+
+.black-background {
+  background-color: #000
+}
+
+.blue {
+  color: #0000bf
+}
+
+.blue-background {
+  background-color: #0000fa
+}
+
+.fuchsia {
+  color: #bf00bf
+}
+
+.fuchsia-background {
+  background-color: #fa00fa
+}
+
+.gray {
+  color: #606060
+}
+
+.gray-background {
+  background-color: #7d7d7d
+}
+
+.green {
+  color: #006000
+}
+
+.green-background {
+  background-color: #007d00
+}
+
+.lime {
+  color: #00bf00
+}
+
+.lime-background {
+  background-color: #00fa00
+}
+
+.maroon {
+  color: #600000
+}
+
+.maroon-background {
+  background-color: #7d0000
+}
+
+.navy {
+  color: #000060
+}
+
+.navy-background {
+  background-color: #00007d
+}
+
+.olive {
+  color: #606000
+}
+
+.olive-background {
+  background-color: #7d7d00
+}
+
+.purple {
+  color: #600060
+}
+
+.purple-background {
+  background-color: #7d007d
+}
+
+.red {
+  color: #bf0000
+}
+
+.red-background {
+  background-color: #fa0000
+}
+
+.silver {
+  color: #909090
+}
+
+.silver-background {
+  background-color: #bcbcbc
+}
+
+.teal {
+  color: #006060
+}
+
+.teal-background {
+  background-color: #007d7d
+}
+
+.white {
+  color: #bfbfbf
+}
+
+.white-background {
+  background-color: #fafafa
+}
+
+.yellow {
+  color: #bfbf00
+}
+
+.yellow-background {
+  background-color: #fafa00
+}
+
+span.icon>.fa {
+  cursor: default
+}
+
+a span.icon>.fa {
+  cursor: inherit
+}
+
+.admonitionblock td.icon [class^="fa icon-"] {
+  font-size: 2.5em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  cursor: default
+}
+
+.admonitionblock td.icon .icon-note:before {
+  content: "\f05a";
+  color: #1f608b
+}
+
+.admonitionblock td.icon .icon-tip:before {
+  content: "\f0eb";
+  text-shadow: 1px 1px 2px rgba(155, 155, 0, 0.8);
+  color: #111
+}
+
+.admonitionblock td.icon .icon-warning:before {
+  content: "\f071";
+  color: #bf6900
+}
+
+.admonitionblock td.icon .icon-caution:before {
+  content: "\f06d";
+  color: #bf3400
+}
+
+.admonitionblock td.icon .icon-important:before {
+  content: "\f06a";
+  color: #bf0000
+}
+
+.conum[data-value] {
+  display: inline-block;
+  color: #fff !important;
+  background-color: #000;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 0.75em;
+  width: 1.67em;
+  height: 1.67em;
+  line-height: 1.67em;
+  font-family: "Open Sans", "DejaVu Sans", sans-serif;
+  font-style: normal;
+  font-weight: bold
+}
+
+.conum[data-value] * {
+  color: #fff !important
+}
+
+.conum[data-value]+b {
+  display: none
+}
+
+.conum[data-value]:after {
+  content: attr(data-value)
+}
+
+pre .conum[data-value] {
+  position: relative;
+  top: -0.125em
+}
+
+b.conum * {
+  color: inherit !important
+}
+
+.conum:not([data-value]):empty {
+  display: none
+}
+
+h4 {
+  color: #6c818f
+}
+
+.literalblock>.content>pre,
+.listingblock>.content>pre {
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  margin-left: 2em;
+  margin-right: 2em
+}
+
+.admonitionblock {
+  margin-left: 2em;
+  margin-right: 2em
+}
+
+.admonitionblock>table {
+  border: 1px solid #609060;
+  border-top-width: 1.5em;
+  background-color: #e9ffe9;
+  border-collapse: separate;
+  -webkit-border-radius: 0;
+  border-radius: 0
+}
+
+.admonitionblock>table td.icon {
+  padding-top: .5em;
+  padding-bottom: .5em
+}
+
+.admonitionblock>table td.content {
+  padding: .5em 1em;
+  color: #000;
+  font-size: .9em;
+  border-left: none
+}
+
+.sidebarblock {
+  background-color: #e8ecef;
+  border-color: #ccc
+}
+
+.sidebarblock>.content>.title {
+  color: #2980b9
+}
+
+table.tableblock.grid-all {
+  border-collapse: collapse;
+  -webkit-border-radius: 0;
+  border-radius: 0
+}
+
+table.tableblock.grid-all th.tableblock,
+table.tableblock.grid-all td.tableblock {
+  border-bottom: 1px solid #aaa
+}
+
+#footer {
+  background-color: #465158;
+  padding: 2em
+}
+
+#footer-text {
+  color: #eee;
+  font-size: 0.8em;
+  text-align: center
+}
+
+#toc.toc2 {
+  font-family: "Lato", "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  padding: 0;
+  background: #343131
+}
+
+#toc.toc2 #toctitle {
+  padding: 1em 1em;
+  text-align: center;
+  font-family: "Roboto Slab", sans-serif;
+  color: #fff;
+  background: #2980b9
+}
+
+/* #toc.toc2 #toctitle::before {
+  vertical-align: middle;
+  content: "\f02d";
+  content: "\f1b2";
+  padding-right: 0.3em;
+  margin-left: -1em;
+  font-family: 'FontAwesome';
+  font-size: 200%
+} */
+
+#toc.toc2 a {
+  display: block;
+  color: #d9d9d9;
+  padding: 0.25em 1em
+}
+
+#toc.toc2 a:hover,
+#toc.toc2 a:focus {
+  background: #696262
+}
+
+#toc.toc2 ul {
+  font-family: "Lato", "Roboto", "Arial", "Helvetica Neue", sans-serif
+}
+
+#toc.toc2 ul.sectlevel1 a {
+  font-weight: bold;
+  color: #55a5d9
+}
+
+#toc.toc2 ul.sectlevel1 a:hover,
+#toc.toc2 ul.sectlevel1 a:focus {
+  color: #d9d9d9
+}
+
+#toc.toc2 ul.sectlevel2,
+#toc.toc2 ul.sectlevel3,
+#toc.toc2 ul.sectlevel4,
+#toc.toc2 ul.sectlevel5,
+#toc.toc2 ul.sectlevel6 {
+  padding: 0
+}
+
+#toc.toc2 ul.sectlevel2 a,
+#toc.toc2 ul.sectlevel3 a,
+#toc.toc2 ul.sectlevel4 a,
+#toc.toc2 ul.sectlevel5 a,
+#toc.toc2 ul.sectlevel6 a {
+  font-weight: normal;
+  color: #d9d9d9
+}
+
+#toc.toc2 ul.sectlevel2.sectlevel2 a,
+#toc.toc2 ul.sectlevel3.sectlevel2 a,
+#toc.toc2 ul.sectlevel4.sectlevel2 a,
+#toc.toc2 ul.sectlevel5.sectlevel2 a,
+#toc.toc2 ul.sectlevel6.sectlevel2 a {
+  padding-left: 2em
+}
+
+#toc.toc2 ul.sectlevel2.sectlevel3 a,
+#toc.toc2 ul.sectlevel3.sectlevel3 a,
+#toc.toc2 ul.sectlevel4.sectlevel3 a,
+#toc.toc2 ul.sectlevel5.sectlevel3 a,
+#toc.toc2 ul.sectlevel6.sectlevel3 a {
+  padding-left: 3em
+}
+
+#toc.toc2 ul.sectlevel2.sectlevel4 a,
+#toc.toc2 ul.sectlevel3.sectlevel4 a,
+#toc.toc2 ul.sectlevel4.sectlevel4 a,
+#toc.toc2 ul.sectlevel5.sectlevel4 a,
+#toc.toc2 ul.sectlevel6.sectlevel4 a {
+  padding-left: 4em
+}
+
+#toc.toc2 ul.sectlevel2.sectlevel5 a,
+#toc.toc2 ul.sectlevel3.sectlevel5 a,
+#toc.toc2 ul.sectlevel4.sectlevel5 a,
+#toc.toc2 ul.sectlevel5.sectlevel5 a,
+#toc.toc2 ul.sectlevel6.sectlevel5 a {
+  padding-left: 5em
+}
+
+#toc.toc2 ul.sectlevel2.sectlevel6 a,
+#toc.toc2 ul.sectlevel3.sectlevel6 a,
+#toc.toc2 ul.sectlevel4.sectlevel6 a,
+#toc.toc2 ul.sectlevel5.sectlevel6 a,
+#toc.toc2 ul.sectlevel6.sectlevel6 a {
+  padding-left: 6em
+}
+
+:not(pre):not([class^="L"])>code {
+  font-size: 0.95em;
+  font-style: normal !important;
+  letter-spacing: 0;
+  padding: 0px 4px;
+  line-height: inherit;
+  color: #e74c3c
+}
+
+.admonitionblock {
+  margin: 0
+}
+
+.admonitionblock.note>table {
+  background-color: #e7f2fa
+}
+
+.admonitionblock.note>table td.icon {
+  background-color: #3e97d7;
+  width: 100%;
+  text-align: left;
+  padding-left: 2em
+}
+
+.admonitionblock.note>table td.icon i.icon-note::before {
+  color: white
+}
+
+.admonitionblock.note>table td.icon i.icon-note::after {
+  color: white;
+  content: "Note";
+  padding-left: 1em;
+  font-family: "Lato", "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-size: 0.9em;
+  font-weight: bold
+}
+
+.admonitionblock.tip>table {
+  background-color: #e9ffe9
+}
+
+.admonitionblock.tip>table td.icon {
+  background-color: #00b600;
+  width: 100%;
+  text-align: left;
+  padding-left: 2em
+}
+
+.admonitionblock.tip>table td.icon i.icon-tip::before {
+  color: white
+}
+
+.admonitionblock.tip>table td.icon i.icon-tip::after {
+  color: white;
+  content: "Tip";
+  padding-left: 1em;
+  font-family: "Lato", "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-size: 0.9em;
+  font-weight: bold
+}
+
+.admonitionblock.caution>table {
+  background-color: #ffe3ca
+}
+
+.admonitionblock.caution>table td.icon {
+  background-color: #fd7700;
+  width: 100%;
+  text-align: left;
+  padding-left: 2em
+}
+
+.admonitionblock.caution>table td.icon i.icon-caution::before {
+  color: white
+}
+
+.admonitionblock.caution>table td.icon i.icon-caution::after {
+  color: white;
+  content: "Caution";
+  padding-left: 1em;
+  font-family: "Lato", "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-size: 0.9em;
+  font-weight: bold
+}
+
+.admonitionblock.important>table {
+  background-color: #ffd6ca
+}
+
+.admonitionblock.important>table td.icon {
+  background-color: #fd3900;
+  width: 100%;
+  text-align: left;
+  padding-left: 2em
+}
+
+.admonitionblock.important>table td.icon i.icon-important::before {
+  color: white
+}
+
+.admonitionblock.important>table td.icon i.icon-important::after {
+  color: white;
+  content: "Important";
+  padding-left: 1em;
+  font-family: "Lato", "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-size: 0.9em;
+  font-weight: bold
+}
+
+.admonitionblock.warning>table {
+  background-color: #ffedcc
+}
+
+.admonitionblock.warning>table td.icon {
+  background-color: orange;
+  width: 100%;
+  text-align: left;
+  padding-left: 2em
+}
+
+.admonitionblock.warning>table td.icon i.icon-warning::before {
+  color: white
+}
+
+.admonitionblock.warning>table td.icon i.icon-warning::after {
+  color: white;
+  content: "Warning";
+  padding-left: 1em;
+  font-family: "Lato", "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-size: 0.9em;
+  font-weight: bold
+}
+
+.admonitionblock>table {
+  border: none
+}
+
+.admonitionblock>table td {
+  display: inline-block;
+  width: 100%;
+  font-size: 8px
+}
+
+.tableblock code {
+  border: none
+}
+
+.literalblock>.content>pre,
+.listingblock>.content>pre {
+  margin: 0
+}
+
+.literalblock pre,
+.listingblock>.content>pre {
+  background: #f8f8f8
+}
+
+@media only screen and (min-width: 768px) {
+  #toc.toc2 {
+    padding: 0;
+    background: #343131
+  }
+
+  #toc.toc2 #toctitle::before {
+    margin-left: -0.5em
+  }
+}
+
+.ulist:not(.checklist) ul,
+.ulist:not(.checklist) ol {
+  margin-left: 1.5em
+}
+
+.ulist:not(.checklist) ul li>p,
+.ulist:not(.checklist) ol li>p {
+  padding-left: 0.5em
+}
+
+.ulist:not(.checklist) ul>li::marker,
+.ulist:not(.checklist) ol>li::marker {
+  content: "\f111";
+  font-family: "FontAwesome";
+  font-size: 0.7em;
+  color: #2980b9
+}
+
+.olist ol {
+  margin-left: 2em
+}
+
+i.conum[data-value] {
+  background-color: #2980b9
+}
+
+#content h1:hover>a.anchor,
+#content h1>a.anchor:hover,
+h2:hover>a.anchor,
+h2>a.anchor:hover,
+h3:hover>a.anchor,
+#toctitle:hover>a.anchor,
+.sidebarblock>.content>.title:hover>a.anchor,
+h3>a.anchor:hover,
+#toctitle>a.anchor:hover,
+.sidebarblock>.content>.title>a.anchor:hover,
+h4:hover>a.anchor,
+h4>a.anchor:hover,
+h5:hover>a.anchor,
+h5>a.anchor:hover,
+h6:hover>a.anchor,
+h6>a.anchor:hover {
+  visibility: visible
+}
+
+#content h1>a.link,
+h2>a.link,
+h3>a.link,
+#toctitle>a.link,
+.sidebarblock>.content>.title>a.link,
+h4>a.link,
+h5>a.link,
+h6>a.link {
+  color: #465158;
+  text-decoration: none
+}
+
+#content h1>a.link:hover,
+h2>a.link:hover,
+h3>a.link:hover,
+#toctitle>a.link:hover,
+.sidebarblock>.content>.title>a.link:hover,
+h4>a.link:hover,
+h5>a.link:hover,
+h6>a.link:hover {
+  color: #3b444a
+}
+
+#content h1>a.link:hover:after,
+h2>a.link:hover:after,
+h3>a.link:hover:after,
+#toctitle>a.link:hover:after,
+.sidebarblock>.content>.title>a.link:hover:after,
+h4>a.link:hover:after,
+h5>a.link:hover:after,
+h6>a.link:hover:after {
+  content: "\f0c1";
+  font-family: 'FontAwesome';
+  font-size: 0.65em;
+  display: inline-block;
+  color: #3091d1;
+  margin-left: 0.5em
+}
+
+h3 code, h4 code, h5 code {
+  border: none !important;
+  background: none !important;
+  color: #465158 !important;
+  font-weight: bold;
+}
+
+h5 code {
+  font-size: 1.1em !important;
+}
+
+a > code {
+  background: none !important;
+  border: none !important;
+  color: #2980b9 !important;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<h1>Sprite Customizer Tutorial</h1>
+<div class="details">
+<span id="revnumber">version 2.0.0</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_prerequisites">Prerequisites</a></li>
+<li><a href="#_walkthrough">Walkthrough</a>
+<ul class="sectlevel2">
+<li><a href="#_1_project_preparation">1. Project Preparation</a></li>
+<li><a href="#_2_the_first_steps">2. The First Steps</a>
+<ul class="sectlevel3">
+<li><a href="#_2_1_prep">2.1 Prep</a></li>
+<li><a href="#_2_2_adding_our_first_layer">2.2 Adding Our First Layer!</a></li>
+</ul>
+</li>
+<li><a href="#_3_showing_our_image">3. Showing Our Image</a></li>
+<li><a href="#_4_adding_more_layers">4. Adding More Layers</a>
+<ul class="sectlevel3">
+<li><a href="#_4_1_clothes">4.1 Clothes</a></li>
+<li><a href="#_4_2_hair">4.2 Hair</a></li>
+<li><a href="#_4_3_eyes">4.3 Eyes</a></li>
+<li><a href="#_4_4_glasses">4.4 Glasses</a></li>
+<li><a href="#_4_6_bow">4.6 Bow</a></li>
+</ul>
+</li>
+<li><a href="#_6_the_character_customization_screen">6. The Character Customization Screen</a></li>
+<li><a href="#char-expressions">6. Character Expressions</a></li>
+</ul>
+</li>
+<li><a href="#_completed_source">Completed Source</a></li>
+<li><a href="#_credits">Credits</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>This document is a work in progress!</strong></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a><a class="link" href="#_prerequisites">Prerequisites</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Ren&#8217;Py 8+</p>
+</li>
+<li>
+<p>A code editor (<a href="https://code.visualstudio.com/">VSCode</a> with the
+<a href="https://marketplace.visualstudio.com/items?itemName=LuqueDaniel.languague-renpy">Ren&#8217;Py Plugin</a>
+is recommended)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_walkthrough"><a class="anchor" href="#_walkthrough"></a><a class="link" href="#_walkthrough">Walkthrough</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_project_preparation"><a class="anchor" href="#_1_project_preparation"></a><a class="link" href="#_1_project_preparation">1. Project Preparation</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new project directory under your Ren&#8217;Py workspace directory titled
+"CharacterCreatorTutorial" (or whatever you would like to call it).</p>
+</li>
+<li>
+<p>Download the <a href="https://github.com/Foxcapades/renpy-sprite-customizer/releases/latest">latest release</a> of the
+Sprite Customizer (specifically the 'base-project' zip file). and unzip it
+into your new project directory.</p>
+</li>
+<li>
+<p>In the new project directory, delete the <code>game/images/ccp</code> directory and its
+contents.</p>
+</li>
+<li>
+<p>Create a new directory under <code>game/images</code> called "sugar".</p>
+</li>
+<li>
+<p>Download <a href="https://github.com/Foxcapades/renpy-sprite-customizer/raw/main/docs/assets/sugar-life.zip">the tutorial asset pack</a> and unzip it into the <code>game/images/sugar</code> directory.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Your <code>game/images/sugar</code> directory should now contain multiple subdirectories
+named "accessories", "brows", "clothes", etc&#8230;&#8203;</p>
+</li>
+<li>
+<p>Explore the directories to familiarize yourself with the assets we will be
+using in this tutorial.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_the_first_steps"><a class="anchor" href="#_2_the_first_steps"></a><a class="link" href="#_2_the_first_steps">2. The First Steps</a></h3>
+<div class="sect3">
+<h4 id="_2_1_prep"><a class="anchor" href="#_2_1_prep"></a><a class="link" href="#_2_1_prep">2.1 Prep</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open up your tutorial project directory in your code editor.</p>
+</li>
+<li>
+<p>Open the <code>game/sprite_customizer/config.rpy</code> file.</p>
+</li>
+<li>
+<p>Delete all the file&#8217;s contents, leaving it empty.</p>
+</li>
+<li>
+<p>Add a new <code>define</code> statement for our <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a>, it&#8217;s best to go ahead
+and make the declaration multi-line as we are going to be adding a lot to it.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+)</code></pre>
+</div>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Give it a name that we can use in our <code>show</code> statements.  We are going to
+name it <code>player_base</code> for reasons we will explore <a href="#char-expressions">later</a>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+  "player_base",
+)</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_2_2_adding_our_first_layer"><a class="anchor" href="#_2_2_adding_our_first_layer"></a><a class="link" href="#_2_2_adding_our_first_layer">2.2 Adding Our First Layer!</a></h4>
+<div class="paragraph">
+<p>Now we are going to add our first layer to the <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a>.  Layers are
+declared by creating new <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> instances and passing in a set of values
+that tell it what options it has and how to render them.</p>
+</div>
+<div class="paragraph">
+<p>Since layers are stacked on top of each other, the first layer is generally
+going to be the base or skin layer.  In our case we have multiple customization
+options for the skin layer, so this will be one of the more complex examples.</p>
+</div>
+<div class="paragraph">
+<p>The full snippet is as follows, but we will break down what it means below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
+    def skin_lcb(skin_base, skin_color, **kwargs): <i class="conum" data-value="1"></i><b>(1)</b>
+        return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+
+define player_customizer = CustomizedSprite(
+    "player_base",
+    SCLayer( <i class="conum" data-value="2"></i><b>(2)</b>
+        "skin", <i class="conum" data-value="3"></i><b>(3)</b>
+        skin_lcb, <i class="conum" data-value="4"></i><b>(4)</b>
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]), <i class="conum" data-value="5"></i><b>(5)</b>
+        skin_color=("Skin Color", "Body", [ <i class="conum" data-value="6"></i><b>(6)</b>
+            "#613021",
+            "#874c2c",
+            "#803716",
+            "#b66837",
+            "#a96238",
+            "#f9bf91",
+            "#ecc19f",
+            "#9e9a73",
+        ])
+    )
+)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><a href="#skin-lcb">The <code>skin_lcb</code> Callback</a> is used to generate the <a href="https://www.renpy.org/doc/html/displayables.html#displayables">Displayable</a> that will be used as
+the base layer for our customized sprite.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> constructor call.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Name of the layer.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Reference to our <code>skin_lcb</code> callback, passing the callback to the new layer.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Skin base option, directly relates to the skin base image files included in
+the tutorial sprite pack ("dark.png", "medium.png", "light.png").</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>Skin color option.  A collection of hex codes that will be used to make a
+TintMatrix to apply the skin color to our grayscale base images.</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="skin-lcb"><a class="anchor" href="#skin-lcb"></a><a class="link" href="#skin-lcb">The <code>skin_lcb</code> Callback</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">def skin_lcb(skin_base, skin_color, **kwargs):
+    return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>skin_lcb</code> function is a <a href="https://foxcapades.github.io/renpy-sprite-customizer#_layer_callbacks">Layer Callback</a> that is used to build the
+<a href="https://www.renpy.org/doc/html/displayables.html#displayables">Displayable</a> that will be used as the base layer for our
+<a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> instance.</p>
+</div>
+<div class="paragraph">
+<p>This function takes our two option values ("skin_base" and "skin_color") and
+uses them to provide a path to the target file and apply a TintMatrix to that
+target file.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The names of a callback&#8217;s arguments must be the same as the names of the options
+on the relevant layer.  Since, in this case, our layer has two options named
+<code>skin_base</code> and <code>skin_color</code>, those two options will be passed to the callback
+under arguments with those names.  The ordering of the arguments does not
+matter.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We pass this function to the created <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> instance to tell the layer how
+to render that part of the customized sprite.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="first-sc-layer"><a class="anchor" href="#first-sc-layer"></a><a class="link" href="#first-sc-layer">Our First SCLayer</a></h5>
+<div class="paragraph">
+<p>Our first <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> instance is constructed with the following arguments:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The layer name</p>
+</li>
+<li>
+<p>A callback that will be used to generate our layer image</p>
+</li>
+<li>
+<p>An option group named <code>skin_base</code></p>
+</li>
+<li>
+<p>An option group named <code>skin_color</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The layer name should be unique across all the layers in a single
+<a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> instance.</p>
+</div>
+<div class="paragraph">
+<p>The callback is described above in <a href="#skin-lcb">The <code>skin_lcb</code> Callback</a>.</p>
+</div>
+<div class="paragraph">
+<p>The first option group, <code>skin_base</code>, is a list of the distinct portion of the
+paths to the target image files.  In our case, the paths are all the same except
+for the file name (minus the extension) which is one of "dark", "medium", or
+"light".</p>
+</div>
+<div class="paragraph">
+<p>The second option group, <code>skin_color</code>, is a list of hex color codes that will be
+used to apply a <a href="https://www.renpy.org/doc/html/matrixcolor.html#TintMatrix">TintMatrix</a> to the selected grayscale base image.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_showing_our_image"><a class="anchor" href="#_3_showing_our_image"></a><a class="link" href="#_3_showing_our_image">3. Showing Our Image</a></h3>
+<div class="paragraph">
+<p>Now we have a base sprite (even if it&#8217;s just a skin layer), lets show it so we
+can watch our progress in-game via script reloads.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open <code>game/script.rpy</code> and delete all its contents.</p>
+</li>
+<li>
+<p>Create a new <a href="#sc-state">[sc-state]</a> object to hold our custom sprite option selections.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add an <a href="https://www.renpy.org/doc/html/label.html#special-labels"><code>after_load</code></a>
+label and a python line to load our
+<a href="https://foxcapades.github.io/renpy-sprite-customizer/#_sprite_state">state</a>
+into the sprite customizer on game load time (without this the option
+selections will not show when loading a game).</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label after_load:
+    $ player_customizer.set_state(customizer_state)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add our <code>start</code> label and another python line to load our
+<a href="https://foxcapades.github.io/renpy-sprite-customizer/#_sprite_state">state</a>
+into the sprite customizer.  This is done so that the player&#8217;s choices will be
+stored as part of the game save files.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label start:
+    $ player_customizer.set_state(customizer_state)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Show our customized sprite.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label start:
+    $ player_customizer.set_state(customizer_state)
+    show player_base <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>"player_base" is the name we gave our <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> instance in
+<code>config.rpy</code></td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Add a <code>pause</code> so the game doesn&#8217;t end immediately.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">label start:
+    $ player_customizer.set_state(customizer_state)
+    show player_base
+    pause 1000000</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now we can reload our game as we add layers and see our changes live!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial-01.png" alt="tutorial 01">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_adding_more_layers"><a class="anchor" href="#_4_adding_more_layers"></a><a class="link" href="#_4_adding_more_layers">4. Adding More Layers</a></h3>
+<div class="paragraph">
+<p>Now that we can see what we are doing, let&#8217;s go back to <code>config.rpy</code> and add
+more layers.</p>
+</div>
+<div class="sect3">
+<h4 id="_4_1_clothes"><a class="anchor" href="#_4_1_clothes"></a><a class="link" href="#_4_1_clothes">4.1 Clothes</a></h4>
+<div class="paragraph">
+<p>Next we will add the clothes layer, this layer is a simple image swap layer so
+the definition of it will be more simple than the skin layer.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> declaration, add a new argument that is another
+<a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> constructor:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+    "player_base",
+    SCLayer(
+        ...
+    ),
+    SCLayer(
+        "clothes",
+        "images/sugar/clothes/{clothes}.png", <i class="conum" data-value="1"></i><b>(1)</b>
+        clothes=("Clothes", "Body", [ "tshirt", "tie", "bow" ])
+    ),
+)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>For this layer, since we will just be swapping images out without any
+transforms, we can pass a template path instead of a callback.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Go ahead and reload the game now and you should see the <code>tshirt</code> layer
+rendering on top of the base image.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial-02.png" alt="tutorial 02">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_2_hair"><a class="anchor" href="#_4_2_hair"></a><a class="link" href="#_4_2_hair">4.2 Hair</a></h4>
+<div class="paragraph">
+<p>Now we will stack the hair layer onto our sprite.  This layer is another one
+with multiple images as well as color options, so we will be declaring another
+callback.</p>
+</div>
+<div class="paragraph">
+<p>Under our existing <code>skin_lcb</code> callback in the <code>init python</code> block we will add
+a new function named <code>hair_lcb</code> which does the same thing the <code>skin_lcb</code>
+function does but with a different image path.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
+    def skin_lcb(skin_base, skin_color, **kwargs):
+        return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+
+    def hair_lcb(hair_style, hair_color, **kwargs):
+        return Transform(f"images/sugar/hair/hair{hair_style}.png", matrixcolor=TintMatrix(hair_color))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Lets look at this callback quickly.  As it takes the arguments <code>hair_style</code> and
+<code>hair_color</code> which means our new layer must have those options attached to it.</p>
+</div>
+<div class="paragraph">
+<p>Now that that&#8217;s out of the way, lets add our hair layer.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "hair",
+        hair_lcb,
+        hair_style=("Style", "Hair", [ 1, 2, 3 ]), <i class="conum" data-value="1"></i><b>(1)</b>
+        hair_color=("Color", "Hair", [ <i class="conum" data-value="2"></i><b>(2)</b>
+            "#3D2314",
+            "#100C07",
+            "#DA680F",
+            "#FFCC47",
+            "#9A9E9F",
+            "#FAFAFA",
+            "#801818",
+            "#680271",
+            "#1692CA",
+            "#11694E",
+            "#FF87C6"
+        ])
+    ),
+)</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The first option just has the values <code>1</code>, <code>2</code>, and <code>3</code> as that is the only
+part of the image name that differs between hair style images.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The second option is a selection of hex codes for hair color options we will
+allow.</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial-03.png" alt="tutorial 03">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_3_eyes"><a class="anchor" href="#_4_3_eyes"></a><a class="link" href="#_4_3_eyes">4.3 Eyes</a></h4>
+<div class="paragraph">
+<p>The eyes layer is another simple layer without a transform, so we can construct
+our <a href="https://foxcapades.github.io/renpy-sprite-customizer/#sc-layer">SCLayer</a> instance an image path rather than a callback.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "eyes",
+        "images/sugar/eyes/{eye_color}.png",
+        eye_color=("Eyes", "Face", [ "blue", "green", "grey", "yellow" ])
+    ),
+)</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial-04.png" alt="tutorial 04">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_4_glasses"><a class="anchor" href="#_4_4_glasses"></a><a class="link" href="#_4_4_glasses">4.4 Glasses</a></h4>
+<div class="paragraph">
+<p>Our sprite pack comes with one glasses sprite that we will want to toggle on and
+off.  For this use case, it doesn&#8217;t make much sense to provide a list of options
+since there are only two, "glasses.png" and "none.png".  To implement this
+yes/no choice we can use a new option type <code>SCBooleanOption</code> which is purpose
+built for this kind of situation.</p>
+</div>
+<div class="paragraph">
+<p>This is also a good point to talk about <em>removing</em> options.  Right now, there is
+now way to do this via the Sprite Customizer other than by using a blank PNG
+file.  This is what we will be doing for the glasses and other accessories.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "eyes",
+        "images/sugar/accessories/{face_accessory}.png",
+        face_accessory=SCBooleanOption(
+            "face_accessory", <i class="conum" data-value="1"></i><b>(1)</b>
+            "Glasses", <i class="conum" data-value="2"></i><b>(2)</b>
+            "Face", <i class="conum" data-value="3"></i><b>(3)</b>
+            False, <i class="conum" data-value="4"></i><b>(4)</b>
+            ("glasses", "none") <i class="conum" data-value="5"></i><b>(5)</b>
+        )
+    )</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>For <code>SCOption</code> types like <code>SCBooleanOption</code>, the keyword for the option must
+be passed in the constructor.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The display name for the option.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The group name.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The default state for the option, <code>False</code> here equates to <code>"none"</code> in the
+option tuple.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The option value tuple, the first value is what will be used when the
+boolean value is <code>True</code>, the second value will be used when the boolean value is
+<code>False</code>.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_4_6_bow"><a class="anchor" href="#_4_6_bow"></a><a class="link" href="#_4_6_bow">4.6 Bow</a></h4>
+<div class="paragraph">
+<p>In addition to glasses, our sprite pack comes with another accessory; a bow.
+We will want to be able to both toggle the bow on and off, but also for this
+example, we want to apply colors to the bow.</p>
+</div>
+<div class="paragraph">
+<p>Here we will be constructing another layer callback which will take a value from
+a standard option as well as an <code>SCBooleanOption</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
+    ...
+    def hair_accessory_lcb(hair_accessory, hair_accessory_color, **kwargs):
+        return Transform(f"images/sugar/accessories/{hair_accessory}.png", matrixcolor=TintMatrix(hair_accessory_color))
+
+define player_customizer = CustomizedSprite(
+    "player_base",
+    ...
+    SCLayer(
+        "hair_accessory",
+        hair_accessory_lcb,
+        hair_accessory=SCBooleanOption(
+            "hair_accessory",
+            "Bow",
+            "Hair",
+            False,
+            ("bow", "none")
+        ),
+        hair_accessory_color=("Bow Color", "Hair", [
+            "#849FF7",
+            "#A683F7",
+            "#FFEB79",
+            "#FFD679"
+        ])
+    ),
+)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_6_the_character_customization_screen"><a class="anchor" href="#_6_the_character_customization_screen"></a><a class="link" href="#_6_the_character_customization_screen">6. The Character Customization Screen</a></h3>
+<div class="paragraph">
+<p>Now we have added all our base options (the remaining options will be used in
+a <code>layeredimage</code> for mood), lets show the included character customization
+screen and play with what we&#8217;ve made so far.</p>
+</div>
+<div class="paragraph">
+<p>To do this, go back to the <code>script.rpy</code> file and add call the customization
+screen.</p>
+</div>
+<div class="listingblock">
+<div class="title"><code>script.rpy</code></div>
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
+
+label start:
+    $ player_customizer.set_state(customizer_state)
+    show player_base
+    pause 1000000
+
+    $ quick_menu = False <i class="conum" data-value="1"></i><b>(1)</b>
+    call screen sprite_creator("player_base", player_customizer) <i class="conum" data-value="2"></i><b>(2)</b>
+    $ quick_menu = True <i class="conum" data-value="3"></i><b>(3)</b>
+
+    pause 1000000</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Hide the quick menu as it looks out of place with the <code>sprite_creator</code>
+screen open.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Call the <code>sprite_creator</code> screen passing in the name of our player image
+as well as a reference to the <a href="https://foxcapades.github.io/renpy-sprite-customizer#custom-sprite">CustomizedSprite</a> instance itself.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Reshow the quick menu when we leave the character customization screen.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Play around with what you&#8217;ve made!</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://foxcapades.github.io/renpy-sprite-customizer/assets/images/tutorial-06.gif" alt="tutorial 06">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="char-expressions"><a class="anchor" href="#char-expressions"></a><a class="link" href="#char-expressions">6. Character Expressions</a></h3>
+<div class="paragraph">
+<p>Now that we have a base for character, we can make the
+<a href="https://www.renpy.org/doc/html/layeredimage.html">Layered Images</a> necesesary
+to have character expressions.  We won&#8217;t go into too much detail here as this is
+a standard Ren&#8217;Py feature.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open up the <code>game/images.rpy</code> file and delete all of its contents.</p>
+</li>
+<li>
+<p>Create a new <code>layeredimage</code> named "player".</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add an <code>always</code> attribute to show our customized sprite, <code>player_base</code>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
+    always:
+        "player_base"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add a new group named "eyebrows" for our eyebrow expression sprites, "angry"
+"neutral", "questioning", "raised", and "sad" and add those sprite paths.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
+    always:
+        "player_base"
+
+    group eyebrows:
+        attribute angry_brows:
+            "images/sugar/brows/angry.png"
+        attribute neutral_brows default:
+            "images/sugar/brows/neutral.png"
+        attribute questioning_brows:
+            "images/sugar/brows/questioning.png"
+        attribute raised_brows:
+            "images/sugar/brows/raised.png"
+        attribute sad_brows:
+            "images/sugar/brows/sad.png"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add another group named "mouth" for our mouth expression sprites, "frown",
+"happy", "smile", and "surprised".</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
+    ...
+    group mouth:
+        attribute frown:
+            "images/sugar/mouth/frown.png"
+        attribute happy:
+            "images/sugar/mouth/happy.png"
+        attribute smile default:
+            "images/sugar/mouth/smile.png"
+        attribute surprised:
+            "images/sugar/mouth/surprised.png"</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now we have constructed a layered image with expressions that we can use as our
+character sprite.  To do this we need to go back to <code>script.rpy</code> and edit the
+references to <code>player_base</code> to say "player" instead.  This will use our new
+layered image rather than the raw custom sprite it&#8217;s based on.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
+
+label start:
+    $ player_customizer.set_state(customizer_state)
+    show player
+    pause 1000000
+
+    $ quick_menu = False
+    call screen sprite_creator("player", player_customizer)
+    $ quick_menu = True
+
+    pause 1000000</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we can change our player character sprites expression by using our
+`layeredimage&#8217;s attributes like so:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">    show player raised_brows surprised
+    # or
+    show player angry_brows frown
+    # etc...</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_completed_source"><a class="anchor" href="#_completed_source"></a><a class="link" href="#_completed_source">Completed Source</a></h2>
+<div class="sectionbody">
+<details>
+<summary class="title"><code>game/sprite_customizer/config.rpy</code></summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">init python:
+    def skin_lcb(skin_base, skin_color, **kwargs):
+        return Transform(f"images/sugar/skin/{skin_base}.png", matrixcolor=TintMatrix(skin_color))
+
+    def hair_lcb(hair_style, hair_color, **kwargs):
+        return Transform(f"images/sugar/hair/hair{hair_style}.png", matrixcolor=TintMatrix(hair_color))
+
+    def hair_accessory_lcb(hair_accessory, hair_accessory_color, **kwargs):
+        return Transform(f"images/sugar/accessories/{hair_accessory}.png", matrixcolor=TintMatrix(hair_accessory_color))
+
+define player_customizer = CustomizedSprite(
+    "player_base",
+    SCLayer(
+        "skin",
+        skin_lcb,
+        skin_base=("Skin Base", "Body", [ "dark", "medium", "light" ]),
+        skin_color=("Skin Color", "Body", [
+            "#613021",
+            "#874c2c",
+            "#803716",
+            "#b66837",
+            "#a96238",
+            "#f9bf91",
+            "#ecc19f",
+            "#9e9a73",
+        ])
+    ),
+    SCLayer(
+        "clothes",
+        "images/sugar/clothes/{clothes}.png",
+        clothes=("Clothes", "Body", [ "tshirt", "tie", "bow" ])
+    ),
+    SCLayer(
+        "hair",
+        hair_lcb,
+        hair_style=("Style", "Hair", [ 1, 2, 3 ]),
+        hair_color=("Color", "Hair", [
+            "#3D2314",
+            "#100C07",
+            "#DA680F",
+            "#FFCC47",
+            "#9A9E9F",
+            "#FAFAFA",
+            "#801818",
+            "#680271",
+            "#1692CA",
+            "#11694E",
+            "#FF87C6"
+        ])
+    ),
+    SCLayer(
+        "eyes",
+        "images/sugar/eyes/{eye_color}.png",
+        eye_color=("Eyes", "Face", [ "blue", "green", "grey", "yellow" ])
+    ),
+    SCLayer(
+        "eyes",
+        "images/sugar/accessories/{face_accessory}.png",
+        face_accessory=("Glasses", "Face", [ "glasses", "none" ])
+    ),
+    SCLayer(
+        "hair_accessory",
+        hair_accessory_lcb,
+        hair_accessory=("Bow", "Hair", [ "bow", "none" ]),
+        hair_accessory_color=("Bow Color", "Hair", [
+            "#849FF7",
+            "#A683F7",
+            "#FFEB79",
+            "#FFD679"
+        ])
+    ),
+)</code></pre>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title"><code>game/images.rpy</code></summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">layeredimage player:
+    always:
+        "player_base"
+
+    group eyebrows:
+        attribute angry_brows:
+            "images/sugar/brows/angry.png"
+        attribute neutral_brows default:
+            "images/sugar/brows/neutral.png"
+        attribute questioning_brows:
+            "images/sugar/brows/questioning.png"
+        attribute raised_brows:
+            "images/sugar/brows/raised.png"
+        attribute sad_brows:
+            "images/sugar/brows/sad.png"
+
+    group mouth:
+        attribute frown:
+            "images/sugar/mouth/frown.png"
+        attribute happy:
+            "images/sugar/mouth/happy.png"
+        attribute smile default:
+            "images/sugar/mouth/smile.png"
+        attribute surprised:
+            "images/sugar/mouth/surprised.png"</code></pre>
+</div>
+</div>
+</div>
+</details>
+<details>
+<summary class="title"><code>game/script.rpy</code></summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-python hljs" data-lang="python">default customizer_state = SCState()
+
+label start:
+    $ player_customizer.set_state(customizer_state)
+
+    show player
+    pause 1000000
+
+    $ quick_menu = False
+    call screen sprite_creator("player", player_customizer)
+    $ quick_menu = True
+
+    pause 1000000</code></pre>
+</div>
+</div>
+</div>
+</details>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_credits"><a class="anchor" href="#_credits"></a><a class="link" href="#_credits">Credits</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Sprite Pack: <a href="https://butterymilk.itch.io/sugary-life">Sugary Life by Buttery Milk</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 2.0.0<br>
+Last updated 2023-07-18 15:25:41 -0400
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
+<script>
+if (!hljs.initHighlighting.called) {
+  hljs.initHighlighting.called = true
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
+}
+</script>
+</body>
+</html>

@@ -142,7 +142,7 @@ def __init__(
     self,
     key: str,
     name: str,
-    group: str,
+    group: str | None,
     default: str = "",
     prefix: str | None = None,
     suffix: str | None = None,
@@ -166,8 +166,9 @@ Initializes the new <<sc-text-option>> instance with the given arguments.
 | Display name for this option.
 
 | `group`
-| str
-| Group name for this option.
+| str \| None
+| Option group.  If this value is set to `None`, the `name` value will be used
+as the group name.
 
 | `default`
 | str

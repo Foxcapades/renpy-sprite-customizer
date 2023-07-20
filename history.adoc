@@ -1,5 +1,40 @@
 = Version History
 
+== Version 2.x.x
+
+=== v2.0.0
+
+==== Features
+
+* Color option and picker
+* Sprite customization screen may now be customized via the
+`lib/fxcpds/sprite_customizer/customizer/config.rpy`.
+
+
+==== Changes
+
+* Major restructuring of the project layout.  SpriteCustomizer code now lives in
+the `lib/fxcpds/sprite_customizer` directory.
+* Options can no longer be constructed via tuples, direct constructor calls are
+now required.
+* Options are no longer passed to layers via keyword args, they are now passed
+as a list of options.
+
+
+==== Misc
+
+What the heck does `fxcpds` mean?::
+That is an abbreviation of Foxcapades, the creator's username
+
+Why put things in this weird directory?::
+Because Foxcapades intends to make multiple Ren'Py libraries, it was decided
+that, to keep things clean and avoid conflicts, the libraries would be placed
+under a directory that would not conflict with anything else.
++
+For example, if there were a new library named "Foo Bar", it would live under
+the `lib/fxcpds/foo_bar` directory.
+
+
 == Version 1.x.x
 
 === v1.2.1
