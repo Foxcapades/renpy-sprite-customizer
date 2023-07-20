@@ -81,7 +81,8 @@ and provides a template from which you can model your own usage of the toolset.
 
 === Resources Used
 
-* Example Sprite Layers - link:https://butterymilk.itch.io/awfully-sweet[Butter Milk on Itch.io]
+* Example Sprite Layers - https://butterymilk.itch.io/awfully-sweet
+* Classroom Background - https://alte.itch.io/uncle-mugens-school
 
 === Contributors
 
