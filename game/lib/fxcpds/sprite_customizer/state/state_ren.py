@@ -22,7 +22,6 @@ class SCState:
 
         Arguments
         ---------
-
         selection : dict
             Initial selection state for the SCState instance.
 
@@ -37,7 +36,7 @@ class SCState:
         self._selections = selections.copy()
         self._user_state = user_state.copy()
 
-    def set_variable(self, key: str, value: any):
+    def set_variable(self, key: str, value: any) -> None:
         """
         Store arbitrary user variable that will be passed to all layer
         callbacks.
@@ -60,7 +59,6 @@ class SCState:
 
         Arguments
         ---------
-
         key : str
             Key for the user state item.
 
@@ -75,13 +73,11 @@ class SCState:
 
         Arguments
         ---------
-
         key : str
             Key for the user state item.
 
         Returns
         -------
-
         any
             User state value.
         """
@@ -93,19 +89,17 @@ class SCState:
 
         Arguments
         ---------
-
         key : str
             Key of the selection to look up.
 
         Returns
         -------
-
         any
             Target selection value (or `None` if no such value is set).
         """
         return self._selections[key]
 
-    def set_selection(self, key: str, value: any):
+    def set_selection(self, key: str, value: any) -> None:
         """
         Sets the target selection value.
 
