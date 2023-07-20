@@ -23,8 +23,8 @@ define an = Character("Antagonist", image="antagonist", color="#a174b0")
 label after_load:
     # !!IMPORTANT!!
     # Recall the saved state for all our custom sprites.
-    $ cc_player_sprite.set_state(player_sprite_state)
-    $ cc_antagonist_sprite.set_state(antagonist_sprite_state)
+    $ sc_player_sprite.set_state(player_sprite_state)
+    $ sc_antagonist_sprite.set_state(antagonist_sprite_state)
     return
 
 
@@ -32,8 +32,8 @@ label start:
 
     # !!IMPORTANT!!
     # Set the state for all our custom sprites.
-    $ cc_player_sprite.set_state(player_sprite_state)
-    $ cc_antagonist_sprite.set_state(antagonist_sprite_state)
+    $ sc_player_sprite.set_state(player_sprite_state)
+    $ sc_antagonist_sprite.set_state(antagonist_sprite_state)
 
     scene classroom
 
@@ -44,7 +44,7 @@ label start:
     pc "Customize my sprite!"
 
     $ quick_menu = False
-    call screen sprite_creator("player", cc_player_sprite)
+    call screen sprite_creator("player", sc_player_sprite)
     $ quick_menu = True
 
     show player relaxed smile
@@ -53,7 +53,7 @@ label start:
     an "Now customize {i}my{/i} sprite!"
 
     $ quick_menu = False
-    call screen sprite_creator("antagonist", cc_antagonist_sprite)
+    call screen sprite_creator("antagonist", sc_antagonist_sprite)
     $ quick_menu = True
 
     show antagonist angry_brows grin

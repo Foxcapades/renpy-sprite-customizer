@@ -6,7 +6,7 @@
 
 # Background color that will show behind the sprite preview side of the screen.
 # If you wish to display an image as the background of that pane, changes may be
-# made to the `cc_sprite_preview_background` image in the images.rpy file.
+# made to the `sc_sprite_preview_background` image in the images.rpy file.
 define sc.sprite_background_color = "#9cb9cb"
 
 ##

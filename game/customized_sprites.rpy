@@ -18,11 +18,11 @@
 # These callbacks must return a displayable.
 init python:
 
-    def cc_skin(skin_color, **kwargs):
+    def sc_skin(skin_color, **kwargs):
         """
         CustomizedSprite Example: Skin Callback
 
-        The `cc_skin` callback takes the `skin_color` argument and uses it to
+        The `sc_skin` callback takes the `skin_color` argument and uses it to
         generate a displayable for the chosen skin color option.
 
         The `skin_color` argument value will be one of the hex code values
@@ -32,11 +32,11 @@ init python:
         """
         return Transform("images/ccp/base/base.png", matrixcolor=TintMatrix(skin_color))
 
-    def cc_hair(hair_style, hair_color, **kwargs):
+    def sc_hair(hair_style, hair_color, **kwargs):
         """
         CustomizedSprite Example: Hair Callback
 
-        The `cc_hair` callback takes the `hair_style` and `hair_color` arguments
+        The `sc_hair` callback takes the `hair_style` and `hair_color` arguments
         and uses them to generate a displayable for the chosen hair options.
 
         The `hair_style` argument value will be one of the hair style options
@@ -52,11 +52,11 @@ init python:
             raise Exception("oops")
         return Transform("images/ccp/hair/{}.png".format(hair_style), matrixcolor=TintMatrix(hair_color))
 
-    def cc_accessory(has_accessory, accessory, **kwargs):
+    def sc_accessory(has_accessory, accessory, **kwargs):
         """
         CustomizedSprite Example: Accessory Callback
 
-        The `cc_accessory` callback takes the `has_accessory` and `accessory`
+        The `sc_accessory` callback takes the `has_accessory` and `accessory`
         arguments and uses them to generate a displayable for the accesory
         options.
 
@@ -90,7 +90,7 @@ init python:
 define ccf = CustomizedSpriteFactory(
 
     # Skin Layer : List Option
-    SCLayer("skin", cc_skin, SCListOption("skin_color", "Skin", "Body", [
+    SCLayer("skin", sc_skin, SCListOption("skin_color", "Skin", "Body", [
         "#513021",
         "#874c2c",
         "#803716",
@@ -108,7 +108,7 @@ define ccf = CustomizedSpriteFactory(
     ),
 
     # Hair Layer : List Option + Color Option
-    SCLayer("hair", cc_hair, [
+    SCLayer("hair", sc_hair, [
         SCListOption("hair_style", "Style", "Hair", [ "afro", "bob", "buns" ]),
         SCColorOption("hair_color", "Color", "Hair", "#704024")
     ]),
@@ -116,7 +116,7 @@ define ccf = CustomizedSpriteFactory(
     # Hair Layer : List Option + Text Input for Color
     # SCLayer(
     #     "hair",
-    #     cc_hair,
+    #     sc_hair,
     #     [
     #         SCListOption("hair_style", "Style", "Hair", [ "afro", "bob", "buns" ]),
     #         SCValidatableTextOption(
@@ -134,7 +134,7 @@ define ccf = CustomizedSpriteFactory(
     # Accessory Layer : Boolean Option + Value List
     SCLayer(
         "accessories",
-        cc_accessory,
+        sc_accessory,
         [
             SCBooleanOption("has_accessory", "Show", "Accessory"),
             SCListOption("accessory", "Type", "Accessory", [
@@ -174,5 +174,5 @@ define ccf = CustomizedSpriteFactory(
 # the image that will be created.  Meaning if you pass in the string
 # "player_base" you can now reference that image like normal by doing things
 # such as `show player_base`.
-define cc_player_sprite = ccf.new_sprite("player_base")
-define cc_antagonist_sprite = ccf.new_sprite("antagonist_base")
+define sc_player_sprite = ccf.new_sprite("player_base")
+define sc_antagonist_sprite = ccf.new_sprite("antagonist_base")

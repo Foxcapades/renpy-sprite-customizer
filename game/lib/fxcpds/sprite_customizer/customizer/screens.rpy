@@ -15,7 +15,7 @@ screen sprite_creator(sprite, customizer):
 
 screen _cs_sprite_preview(sprite):
     frame:
-        background "cc_sprite_preview_background"
+        background "sc_sprite_preview_background"
         xsize 0.7
         ysize 1.0
 
@@ -104,7 +104,7 @@ screen _sc_value_list_option(option):
         xsize 200
 
         imagebutton:
-            auto "cc_gui_option_arrow_left_%s"
+            auto "sc_gui_option_arrow_left_%s"
             xcenter 0.5
             ysize 50
             action Function(option.dec_selection)
@@ -113,7 +113,7 @@ screen _sc_value_list_option(option):
             xcenter 0.5
             line_leading 5
         imagebutton:
-            auto "cc_gui_option_arrow_right_%s"
+            auto "sc_gui_option_arrow_right_%s"
             xcenter 0.5
             ysize 50
             action Function(option.inc_selection)
@@ -188,9 +188,9 @@ screen _sc_boolean_option(option):
             ycenter 0.5
 
             if option.value:
-                auto "cc_checkbox_checked_%s"
+                auto "sc_checkbox_checked_%s"
             else:
-                auto "cc_checkbox_blank_%s"
+                auto "sc_checkbox_blank_%s"
 
             action Function(option.toggle)
 
@@ -199,8 +199,8 @@ screen _sc_color_option(option):
         xsize 200
 
         button:
-            background "cc_color_button_idle"
-            hover_background "cc_color_button_hover"
+            background "sc_color_button_idle"
+            hover_background "sc_color_button_hover"
             xcenter 0.5
             ycenter 0.5
             padding (4, 4)
