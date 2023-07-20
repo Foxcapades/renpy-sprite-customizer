@@ -88,7 +88,7 @@ class RGBPicker:
         If the given value is not between `0` and `255` (inclusive) then this
         method will raise an exception.
         """
-        if not (0 <= red <= 255 and isinstance(red, int)):
+        if not (isinstance(red, int) and 0 <= red <= 255):
             raise Exception("invalid red value")
         self._rgb.set_red(red)
         self._update_color()
@@ -100,7 +100,7 @@ class RGBPicker:
         If the given value is not between `0` and `255` (inclusive) then this
         method will raise an exception.
         """
-        if not (0 <= green <= 255 and isinstance(green, int)):
+        if not (isinstance(green, int) and 0 <= green <= 255):
             raise Exception("invalid green value")
         self._rgb.set_green(green)
         self._update_color()
@@ -112,7 +112,7 @@ class RGBPicker:
         If the given value is not between `0` and `255` (inclusive) then this
         method will raise an exception.
         """
-        if not (0 <= blue <= 255 and isinstance(blue, int)):
+        if not (isinstance(blue, int) and 0 <= blue <= 255):
             raise Exception("invalid blue value")
         self._rgb.set_blue(blue)
         self._update_color()
