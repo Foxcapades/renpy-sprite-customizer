@@ -1,4 +1,4 @@
-from ..state_ren import SCState
+from ..state.state_ren import SCState
 from ..utils.strings_ren import _require_key_string, _require_non_empty_string
 
 """renpy

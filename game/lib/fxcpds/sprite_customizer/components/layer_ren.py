@@ -2,7 +2,7 @@ from renpy.store import DynamicDisplayable, Attribute # type: ignore
 
 from options.option_ren import SCOption
 from options.list_option_ren import SCListOption
-from .state_ren import SCState
+from ..state.state_ren import SCState
 
 
 """renpy
