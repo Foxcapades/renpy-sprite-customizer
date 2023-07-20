@@ -6,11 +6,19 @@
 default player_sprite_state = SCState()
 
 # For the antagonist, set some different defaults than the player.
-default antagonist_sprite_state = SCState()
+default antagonist_sprite_state = SCState({
+    "skin_color": 3,
+    "clothes": 1,
+    "hair_style": 2,
+    "hair_color": "#526f48",
+    "accessories": 3,
+    "eye_color": 2
+})
 
 # Define our characters like normal.
 define pc = Character("Player", image="player")
-define an = Character("Antagonist", image="antagonist")
+define an = Character("Antagonist", image="antagonist", color="#a174b0")
+
 
 label after_load:
     # !!IMPORTANT!!
@@ -18,6 +26,7 @@ label after_load:
     $ cc_player_sprite.set_state(player_sprite_state)
     $ cc_antagonist_sprite.set_state(antagonist_sprite_state)
     return
+
 
 label start:
 
