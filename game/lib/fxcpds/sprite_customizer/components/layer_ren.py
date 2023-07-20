@@ -1,13 +1,14 @@
-from renpy.store import DynamicDisplayable, Attribute # type: ignore
+from renpy.store import DynamicDisplayable, Attribute, Displayable  # type: ignore
 
-from options.option_ren import SCOption
-from options.list_option_ren import SCListOption
+from ..options.option_ren import SCOption
 from ..state.state_ren import SCState
 
 
 """renpy
 init -1 python:
 """
+
+from typing import Callable
 
 
 class SCLayer:
@@ -33,9 +34,9 @@ class SCLayer:
     def __init__(
         self,
         name: str,
-        layer_provider: str | function,
+        layer_provider: str | Callable[..., Displayable],
         options: SCOption | list[SCOption] = None,
-        transform: function = None,
+        transform: Callable[[Displayable], Displayable] = None,
     ):
         """
         Initializes the new `SCLayer` instance with the given arguments.
@@ -47,7 +48,7 @@ class SCLayer:
             Internal name of the layer.  This value should be all lowercase
             and should only contain letters, numbers, and underscores.
 
-        layer_provider : callable | str
+        layer_provider : function | str
             Either a Layer Callback used to create the displayable that
             backs this layer, or a template string containing `{var_name}`
             variables that will be injected based on the selected options.
@@ -56,7 +57,7 @@ class SCLayer:
             A list of 1 or more SCOption instances for all the options available
             to this layer.
 
-        transform : callable | None
+        transform : function | None
             Optional transform function.  This function takes a Displayable
             as a single argument and returns a Displayable.  Allows
             performing arbitrary transforms to the whole layer regardless of
@@ -70,10 +71,10 @@ class SCLayer:
             raise Exception("SCLayer layer_provider must be callable or a string.")
 
         self._name: str = name
-        self._provider: str|function = layer_provider
+        self._provider: str | Callable[..., Displayable] = layer_provider
         self._state: SCState | None = None
         self._options: dict[str, SCOption] = {}
-        self._transform: function = transform
+        self._transform: Callable[[Displayable], Displayable] = transform
 
         if options is None:
             pass
@@ -109,7 +110,7 @@ class SCLayer:
         """
         List of options attached to this layer.
         """
-        return self._options.values()
+        return [*self._options.values()]
 
     @property
     def options_by_key(self) -> dict[str, SCOption]:
@@ -200,7 +201,7 @@ class SCLayer:
         DynamicDisplayable
             The DynamicDisplayable that represents this `SCLayer` instance.
         """
-        if self._transform == None:
+        if self._transform is None:
             return DynamicDisplayable(self._render)
 
         return self._transform(DynamicDisplayable(self._render))

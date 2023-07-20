@@ -1,8 +1,9 @@
-from renpy.store import LayeredImage # type: ignore
-import renpy.exports as renpy # type: ignore
+from renpy.store import LayeredImage  # type: ignore
+import renpy.exports as renpy  # type: ignore
 
 from .layer_ren import SCLayer
-from .state_ren import SCState
+from ..state.state_ren import SCState
+from ..options.option_ren import SCOption
 
 """renpy
 init -1 python:
@@ -66,6 +67,7 @@ class CustomizedSprite:
     and options then it is best to create a `CustomizedSpriteFactory`
     instance then use that to create the `CustomizedSprite` instances.
     """
+
     def __init__(self, image_name: str, *layers: SCLayer, **kwargs: any):
         """
         Initializes a new `CustomizedSprite` instance with the given
@@ -86,7 +88,7 @@ class CustomizedSprite:
         transform (callable): An optional transform function that will be
         applied to the created image.
         """
-        self._layers: list[SCLayer] = [ *layers ]
+        self._layers: list[SCLayer] = [*layers]
         self._options = OrderedDict()
         self._option_to_layer = OrderedDict()
         self._options_by_group = OrderedDict()
@@ -109,7 +111,7 @@ class CustomizedSprite:
                 if option.group in self._options_by_group:
                     self._options_by_group[option.group].append(option)
                 else:
-                    self._options_by_group[option.group] = [ option ]
+                    self._options_by_group[option.group] = [option]
 
         if "transform" in kwargs:
             if not callable(kwargs["transform"]):
@@ -120,12 +122,12 @@ class CustomizedSprite:
             transform = None
 
         # Build the layered image
-        attrs = [ layers[0]._build_image() ]
+        attrs = [layers[0]._build_image()]
 
         for i in range(1, len(layers)):
             attrs.append(layers[i]._build_attribute())
 
-        if transform == None:
+        if transform is None:
             renpy.image(image_name, LayeredImage(attrs))
         else:
             from uuid import uuid4
@@ -133,20 +135,18 @@ class CustomizedSprite:
             renpy.image(tmp_name, LayeredImage(attrs))
             renpy.image(image_name, transform(tmp_name))
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   Properties
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-
     @property
     def layers(self) -> list[SCLayer]:
         """
         The list of layers attached to this CustomizedSprite instance.
         """
-        return [ *self._layers ]
+        return [*self._layers]
 
     @property
     def option_keys(self) -> list[str]:
@@ -154,7 +154,7 @@ class CustomizedSprite:
         A list of the keys for all the options attached to this
         CustomizedSprite instance.
         """
-        return self._option_to_layer.keys()
+        return [*self._option_to_layer.keys()]
 
     @property
     def option_count(self) -> int:
@@ -163,25 +163,21 @@ class CustomizedSprite:
         """
         return len(self._option_to_layer.keys())
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   Internal Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-
     def _require_option(self, option: str):
         if not option in self._option_to_layer:
             raise Exception("Unrecognized CustomizedSprite option \"{}\"".format(option))
-
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   Public Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def set_state(self, state: SCState):
         """
@@ -211,7 +207,7 @@ class CustomizedSprite:
         for layer in self._layers:
             layer._set_state(state)
 
-    def get_options(self) -> list:
+    def get_options(self) -> list[SCOption]:
         """
         Gets a list of the options attached to this CustomizedSprite
         instance.
@@ -237,7 +233,7 @@ class CustomizedSprite:
         """
         return self._options.copy()
 
-    def get_options_by_group(self, group_order: list|None = None) -> OrderedDict:
+    def get_options_by_group(self, group_order: list | None = None) -> OrderedDict:
         """
         Returns an index of options and display names grouped by layer group
         name.  This index may optionally be ordered by providing a list of
@@ -285,7 +281,7 @@ class CustomizedSprite:
         """
         out = OrderedDict()
 
-        if group_order == None:
+        if group_order is None:
             for group, options in self._options_by_group.items():
                 out[group] = OrderedDict()
                 for option in options:
@@ -293,7 +289,8 @@ class CustomizedSprite:
 
         elif isinstance(group_order, list):
             if len(group_order) != len(self._options_by_group):
-                raise Exception("group_order parameter must contain all and only the declared option group names for this CustomizedSprite's layers")
+                raise Exception(
+                    "group_order parameter must contain all and only the declared option group names for this CustomizedSprite's layers")
 
             for group in group_order:
                 out[group] = OrderedDict()
@@ -317,6 +314,7 @@ class CustomizedSprite:
         for option in self._options.values():
             option.randomize()
 
+
 class CustomizedSpriteFactory:
     """
     # Customized Sprite Factory
@@ -324,6 +322,7 @@ class CustomizedSpriteFactory:
     A factory that can be used to generate multiple `CustomizedSprite`
     instances with the same set of base options.
     """
+
     def __init__(self, *layers: SCLayer, **kwargs: any):
         """
         Initializes a new `CustomizedSpriteFactory` instance with the given
@@ -364,4 +363,4 @@ class CustomizedSpriteFactory:
             if not key in kwargs:
                 kwargs[key] = self._kwargs[key]
 
-        return CustomizedSprite(image_name, *[ layer._clone() for layer in self._layers ], **kwargs)
+        return CustomizedSprite(image_name, *[layer._clone() for layer in self._layers], **kwargs)
