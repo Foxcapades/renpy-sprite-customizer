@@ -8,7 +8,8 @@ default:
 
 .PHONY: clean
 clean:
-	@find . -name '*.rpyc' | xargs -I'{}' rm {}
+	@echo "Cleaning directory."
+	@find . -name '*.rpyc' -o -name '*.rpyb' -o -name '*.rpymc' | xargs -I'{}' rm '{}'
 
 
 .PHONY: release
