@@ -106,7 +106,6 @@ class SCState:
 
         Arguments
         ---------
-
         key : str
             Key of the selection to set.
 
@@ -122,13 +121,11 @@ class SCState:
 
         Arguments
         ---------
-
         key : str
             Key of the selection value to test for.
 
         Returns
         -------
-
         boolean
             Whether the state contains the target selection value.
         """
@@ -141,13 +138,11 @@ class SCState:
 
         Arguments
         ---------
-
         key : str
             Key of the user variable to test for.
 
         Returns
         -------
-
         boolean
             Whether the state contains the target user variable.
         """
