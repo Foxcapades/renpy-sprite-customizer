@@ -36,21 +36,42 @@ screen _cs_color_picker(option):
 screen _cs_color_picker_tab_bar(tabs):
     hbox:
         for val in tabs:
-            button:
-                padding (25, 10)
+            use _sc_color_picker_tab(val)
 
+
+screen _sc_color_picker_tab(val):
+    button:
+        padding (0, 0)
+
+        if _cs_color_picker_tab == val:
+            background sc.color_picker_background
+        else:
+            background sc.color_picker_background_muted
+
+        vbox:
+            if _cs_color_picker_tab == val:
+                add "_cs_color_picker_tab_header_active":
+                    ysize 5
+                    xsize 125
+            else:
+                add "_cs_color_picker_tab_header_muted":
+                    ysize 5
+                    xsize 125
+
+            null:
+                height 15
+
+            text val:
+                xcenter 0.5
                 if _cs_color_picker_tab == val:
-                    background sc.color_picker_background
+                    color sc.color_picker_text_color
                 else:
-                    background sc.color_picker_background_muted
+                    color sc.color_picker_text_color_muted
 
-                text val:
-                    if _cs_color_picker_tab == val:
-                        color sc.color_picker_text_color
-                    else:
-                        color sc.color_picker_text_color_muted
+            null:
+                height 20
 
-                action SetVariable("_cs_color_picker_tab", val)
+        action SetVariable("_cs_color_picker_tab", val)
 
 
 

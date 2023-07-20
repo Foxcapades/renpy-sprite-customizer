@@ -55,6 +55,14 @@ define sc.input_invalid_color = "#ff0000"
 
 
 ##
+# Modals
+##
+
+# Color for the solid that covers the screen when a modal is visible
+define sc.modal_coverall_color = "#00000088"
+
+
+##
 # Color Picker Configuration
 ##
 

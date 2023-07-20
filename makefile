@@ -1,6 +1,9 @@
 VERSION := $(shell grep 'define config.version' game/options.rpy | sed 's/.\+"\(.\+\)"/\1/')
 FEATURE := $(shell grep 'define config.version' game/options.rpy | sed 's/.\+"\(.\+\)"/\1/;s/\([0-9]\+\.[0-9]\+\).\+/\1.0/')
 
+SLIM_ZIP_NAME := "releases/sc-slim-$(VERSION).zip"
+FULL_ZIP_NAME := "releases/sc-project-$(VERSION).zip"
+
 .PHONY: default
 default:
 	@echo "What are you doing?"
@@ -13,30 +16,24 @@ clean:
 
 
 .PHONY: release
-release: build-base-project-zip build-slim-zip build-mid-zip
+release: build-base-project-zip build-slim-zip
 
 
 .PHONY: build-base-project-zip
 build-base-project-zip: clean
 	@mkdir -p releases
+	@rm -f "$(FULL_ZIP_NAME)"
 	@cp license sc-license
-	@zip -r "releases/sc-base-project-$(VERSION).zip" game sc-license -x game/saves/**\* -x game/cache/**\*
+	@zip -r "$(FULL_ZIP_NAME)" game sc-license -x game/saves/**\* -x game/cache/**\*
 	@rm sc-license
 
 
 .PHONY: build-slim-zip
 build-slim-zip: clean
 	@mkdir -p releases
+	@rm -f "$(SLIM_ZIP_NAME)"
 	@cp license sc-license
-	@zip -r "releases/sc-slim-$(VERSION).zip" game/lib/fxcpds/sprite_customizer sc-license
-	@rm sc-license
-
-
-.PHONY: build-mid-zip
-build-mid-zip: clean
-	@mkdir -p releases
-	@cp license sc-license
-	@zip -r "releases/sc-mid-$(VERSION).zip" game/lib/fxcpds/sprite_customizer game/images/ccp game/customized_sprites.rpy sc-license
+	@zip -r "$(SLIM_ZIP_NAME)" game/lib/fxcpds/sprite_customizer sc-license
 	@rm sc-license
 
 

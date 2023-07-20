@@ -8,5 +8,7 @@ init -1 python:
 
 default _cs_color_picker_tab = "HSL"
 
-image _cs_color_picker_coverall = Solid("#00000088")
-image _cs_color_picker_background = Solid("#2e2c2c")
+image _cs_color_picker_coverall = Solid(sc.modal_coverall_color)
+image _cs_color_picker_background = Solid(sc.color_picker_background)
+image _cs_color_picker_tab_header_active = Solid(sc.control_accent_color)
+image _cs_color_picker_tab_header_muted = Transform("_cs_color_picker_tab_header_active", matrixcolor=BrightnessMatrix(-0.2))
