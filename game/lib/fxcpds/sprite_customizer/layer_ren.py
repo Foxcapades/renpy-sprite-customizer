@@ -180,13 +180,14 @@ class SCLayer:
             A new `SCLayer` instance containing the same values configured
             on this instance minus any user state.
         """
-        options: dict[str, SCOption] = {}
+        options: list[SCOption] = []
 
-        for key, option in self._options.items():
-            options[key] = option._clone()
-            options[key]._post_clone()
+        for option in self._options.values():
+            tmp = option._clone()
+            tmp._post_clone()
+            options.append(tmp)
 
-        return SCLayer(self._name, self._provider, self._transform, **options)
+        return SCLayer(self._name, self._provider, options, self._transform)
 
     def _build_image(self):
         """

@@ -52,6 +52,25 @@ init python:
             raise Exception("oops")
         return Transform("images/ccp/hair/{}.png".format(hair_style), matrixcolor=TintMatrix(hair_color))
 
+    def cc_accessory(has_accessory, accessory, **kwargs):
+        """
+        CustomizedSprite Example: Accessory Callback
+
+        The `cc_accessory` callback takes the `has_accessory` and `accessory`
+        arguments and uses them to generate a displayable for the accesory
+        options.
+
+        The `has_accessory` argument value will be a boolean flag indicating
+        whether an accessory should be shown.
+
+        The `accessory` argument value will be the name of the accessory image
+        to show if `has_accessory` is true.
+        """
+        if has_accessory:
+            return f"images/ccp/accessories/{accessory}.png"
+        else:
+            return Null()
+
 
 # Customized Sprite Factory Declaration.
 #
@@ -70,8 +89,8 @@ init python:
 # layer.
 define ccf = CustomizedSpriteFactory(
 
-    # Skin Layer : Color List
-    SCLayer("skin", cc_skin, [SCListOption("skin_color", "Skin", "Body", [
+    # Skin Layer : List Option
+    SCLayer("skin", cc_skin, SCListOption("skin_color", "Skin", "Body", [
         "#513021",
         "#874c2c",
         "#803716",
@@ -79,49 +98,53 @@ define ccf = CustomizedSpriteFactory(
         "#a96238",
         "#f9bf91",
         "#ecc19f"
-    ])]),
+    ])),
 
-    # Clothes Layer : Value List
-    SCLayer("clothes", "images/ccp/clothes/{clothes}.png", clothes=("Clothes", "Body", [ "cottoncandy", "plaid" ])),
-
-
-    # Hair Layer : Value List + Color Picker
+    # Clothes Layer : List Option
     SCLayer(
-        "hair",
-        cc_hair,
-        hair_style=("Style", "Hair", [ "afro", "bob", "buns" ]),
-        hair_color=SCColorOption(
-            "hair_color",
-            "Color",
-            "Hair",
-            "#704024",
-        )
+        "clothes",
+        "images/ccp/clothes/{clothes}.png",
+        SCListOption("clothes", "Clothes", "Body", [ "cottoncandy", "plaid" ])
     ),
 
-    # Hair Layer : Text Input for Color
+    # Hair Layer : List Option + Color Option
+    SCLayer("hair", cc_hair, [
+        SCListOption("hair_style", "Style", "Hair", [ "afro", "bob", "buns" ]),
+        SCColorOption("hair_color", "Color", "Hair", "#704024")
+    ]),
+
+    # Hair Layer : List Option + Text Input for Color
     # SCLayer(
     #     "hair",
     #     cc_hair,
-    #     hair_style=("Style", "Hair", [ "afro", "bob", "buns" ]),
-    #     hair_color=SCValidatableTextOption(
-    #         "hair_color",
-    #         "Color",
-    #         "Hair",
-    #         sc_validator_hex_color,
-    #         "#ff0000",
-    #         max_len=7,
-    #         autocommit=True
-    #     ),
+    #     [
+    #         SCListOption("hair_style", "Style", "Hair", [ "afro", "bob", "buns" ]),
+    #         SCValidatableTextOption(
+    #             "hair_color",
+    #             "Color",
+    #             "Hair",
+    #             sc_validator_hex_color,
+    #             "#ff0000",
+    #             max_len=7,
+    #             autocommit=True
+    #         ),
+    #     ]
     # ),
 
-    # Accessory Layer : Value List
-    SCLayer("accessories", "images/ccp/accessories/{accessory}.png", accessory=("Accessory", "Hair", [
-        "none",
-        "cottoncandy_bow",
-        "cottoncandy_clips",
-        "plaid_bow",
-        "plaid_clips",
-    ])),
+    # Accessory Layer : Boolean Option + Value List
+    SCLayer(
+        "accessories",
+        cc_accessory,
+        [
+            SCBooleanOption("has_accessory", "Show", "Accessory"),
+            SCListOption("accessory", "Type", "Accessory", [
+                "cottoncandy_bow",
+                "cottoncandy_clips",
+                "plaid_bow",
+                "plaid_clips",
+            ])
+        ]
+    ),
 
     # Accessory Layer : Boolean
     # SCLayer(
@@ -132,12 +155,16 @@ define ccf = CustomizedSpriteFactory(
 
 
     # Eye Layer : Value List
-    SCLayer("eyes", "images/ccp/eyes/{eye_color}_eyes.png", eye_color=("Eyes", "Face", [
-        "blue",
-        "brown",
-        "green",
-        "grey"
-    ])),
+    SCLayer(
+        "eyes",
+        "images/ccp/eyes/{eye_color}_eyes.png",
+        SCListOption("eye_color", "Eyes", "Face", [
+            "blue",
+            "brown",
+            "green",
+            "grey"
+        ])
+    ),
 )
 
 # Create defines for the sprite controller classes which are used by screens to
