@@ -18,7 +18,7 @@ release: build-base-project-zip build-slim-zip
 .PHONY: build-base-project-zip
 build-base-project-zip: clean
 	@mkdir -p releases
-	@zip -r "releases/sc-base-project-$(VERSION).zip" game license -x game/saves/**\*
+	@zip -r "releases/sc-base-project-$(VERSION).zip" game license -x game/saves/**\* -x game/cache/**\*
 
 
 .PHONY: build-slim-zip
