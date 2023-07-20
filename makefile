@@ -24,7 +24,7 @@ build-base-project-zip: clean
 .PHONY: build-slim-zip
 build-slim-zip: clean
 	@mkdir -p releases
-	@zip -r "releases/sc-slim-$(VERSION).zip" game/sprite_customizer game/customized_sprites.rpy license
+	@zip -r "releases/sc-slim-$(VERSION).zip" game/lib/fxcpds/sprite_customizer game/customized_sprites.rpy license
 
 
 .PHONY: docs
