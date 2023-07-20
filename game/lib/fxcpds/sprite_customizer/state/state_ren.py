@@ -29,9 +29,9 @@ class SCState:
         user_state : dict
             Initial user variable state for the SCState instance.
         """
-        if not isinstance(selections, dict):
+        if not (isinstance(selections, dict) or selections is None):
             raise Exception("SCState selections argument must be a dict value.")
-        if not isinstance(user_state, dict):
+        if not (isinstance(user_state, dict) or user_state is None):
             raise Exception("SCState user_state argument must be a dict value.")
 
         self._selections = selections.copy() if selections is not None else {}
