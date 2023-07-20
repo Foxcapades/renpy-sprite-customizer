@@ -69,7 +69,7 @@ screen _sc_color_picker_tab(val):
                     color sc.color_picker_text_color_muted
 
             null:
-                height 20
+                height 15
 
         action SetVariable("_cs_color_picker_tab", val)
 
