@@ -87,13 +87,11 @@ class SCBooleanOption(SCOption):
 
         self._default = default
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   Properties
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     @property
     def value(self) -> bool:
@@ -114,13 +112,11 @@ class SCBooleanOption(SCOption):
 
         return self._state.get_selection(self._key)
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
     #   SC-Internal Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def _clone(self):
         return SCBooleanOption(
@@ -134,13 +130,11 @@ class SCBooleanOption(SCOption):
     def _pick_value(self, tf: bool) -> any:
         return self._when_true if tf else self._when_false
 
-
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
-    # Public Methods
+    #   Public Methods
     #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
 
     def set_selection(self, value: bool):
         """

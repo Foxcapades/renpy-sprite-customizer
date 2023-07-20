@@ -21,6 +21,9 @@ registered to an SCLayer instance to be in any way useful.
 
 == Properties
 
+*Includes* <<sc-option-properties, SCOption Properties>>
+
+
 === `value`
 
 [cols="1m,9a"]
