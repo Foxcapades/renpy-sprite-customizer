@@ -188,4 +188,4 @@ screen _color_picker_footer(h_value, bg_picker):
 
         textbutton "Done":
             text_style "_color_picker_text_button_style"
-            action Hide("_cs_color_picker")
+            action Hide("_sc_color_picker")
