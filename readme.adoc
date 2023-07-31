@@ -80,6 +80,7 @@ want to hack the behavior of the sprite customizer.
 
 * Example Sprite Layers - https://butterymilk.itch.io/awfully-sweet
 * Classroom Background - https://alte.itch.io/uncle-mugens-school
+* Cover Image Background - link:https://www.freepik.com/free-vector/hand-drawn-floral-wallpaper_15680937.htm#query=floral%20background&position=2&from_view=keyword&track=ais[pikisuperstar on Freepik]
 
 === Contributors
 
