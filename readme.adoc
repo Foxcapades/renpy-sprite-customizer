@@ -17,7 +17,7 @@ and screens to set up character or sprite customization in their own games.
 Presently this framework is only compatible with Ren'Py 8+ and Python 3.
 --
 
-video::https://raw.githubusercontent.com/Foxcapades/renpy-sprite-customizer/main/.assets/demo.webm[]
+video::https://raw.githubusercontent.com/Foxcapades/renpy-sprite-customizer/main/.assets/demo.webm[width=800]
 
 
 == Project Layout
