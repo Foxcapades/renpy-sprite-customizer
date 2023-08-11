@@ -183,6 +183,8 @@ init python:
     build.classify('**/.**', None)
     build.classify('**/#**', None)
     build.classify('**/thumbs.db', None)
+    build.classify('docs/**')
+    build.classify('build/**')
 
     ## To archive files, classify them as 'archive'.
 

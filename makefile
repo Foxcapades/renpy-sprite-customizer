@@ -1,8 +1,8 @@
 VERSION := $(shell grep 'define config.version' game/options.rpy | sed 's/.\+"\(.\+\)"/\1/')
 FEATURE := $(shell grep 'define config.version' game/options.rpy | sed 's/.\+"\(.\+\)"/\1/;s/\([0-9]\+\.[0-9]\+\).\+/\1.0/')
 
-SLIM_ZIP_NAME := "releases/sc-slim-$(VERSION).zip"
-FULL_ZIP_NAME := "releases/sc-project-$(VERSION).zip"
+SLIM_ZIP_NAME := "build/sc-slim-$(VERSION).zip"
+FULL_ZIP_NAME := "build/sc-project-$(VERSION).zip"
 
 .PHONY: default
 default:
@@ -21,7 +21,7 @@ release: build-base-project-zip build-slim-zip
 
 .PHONY: build-base-project-zip
 build-base-project-zip: clean
-	@mkdir -p releases
+	@mkdir -p build
 	@rm -f "$(FULL_ZIP_NAME)"
 	@cp license sc-license
 	@zip -r "$(FULL_ZIP_NAME)" game sc-license -x game/saves/**\* -x game/cache/**\*
@@ -30,7 +30,7 @@ build-base-project-zip: clean
 
 .PHONY: build-slim-zip
 build-slim-zip: clean
-	@mkdir -p releases
+	@mkdir -p build
 	@rm -f "$(SLIM_ZIP_NAME)"
 	@cp license sc-license
 	@zip -r "$(SLIM_ZIP_NAME)" game/lib/fxcpds/sprite_customizer sc-license
