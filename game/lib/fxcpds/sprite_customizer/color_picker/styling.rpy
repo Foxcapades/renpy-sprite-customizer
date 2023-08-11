@@ -1,16 +1,16 @@
-define gui.color_picker.bg_muted = '#111111'
-define gui.color_picker.bg_normal = '#222222'
+# define gui.color_picker.bg_muted = sc.color_picker_background_muted
+# define gui.color_picker.bg_normal = sc.color_picker_background
 
 define gui.color_picker.text_color_muted = gui.interface_text_color + '7F'
 define gui.color_picker.text_color_normal = gui.interface_text_color
 
-define gui.color_picker.text_input_background = '#ffffff'
+define gui.color_picker.text_input_background = '#efefef'
 define gui.color_picker.text_input_text_color = gui.accent_color
 
 define gui.color_picker.tab_marker_muted = gui.hover_muted_color
 define gui.color_picker.tab_marker_normal = gui.accent_color
 
-define gui.color_picker.coverall_color = '#ffffff7f'
+# define gui.color_picker.coverall_color = sc.modal_coverall_color
 
 
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
@@ -26,13 +26,13 @@ style _fox_color_picker_body:
 
 style _fox_color_picker_picker_body:
     padding (10, 10, 5, 10)
-    background gui.color_picker.bg_normal
+    background sc.color_picker_background
 
 style _fox_color_picker_slider_body:
     padding (5, 10, 10, 10)
     xsize 410
     ysize 420
-    background gui.color_picker.bg_normal
+    background sc.color_picker_background
 
 
 ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
@@ -47,11 +47,11 @@ style _fox_color_picker_tab:
 
 style _fox_color_picker_tab_idle:
     is _fox_color_picker_tab
-    background gui.color_picker.bg_muted
+    background sc.color_picker_background_muted
 
 style _fox_color_picker_tab_selected:
     is _fox_color_picker_tab
-    background gui.color_picker.bg_normal
+    background sc.color_picker_background
 
 style _fox_color_picker_tab_text:
     size 32

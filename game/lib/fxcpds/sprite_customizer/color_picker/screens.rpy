@@ -11,7 +11,7 @@ screen _fox_color_picker(option, initial_color = FoxHSV(0, 1.0, 1.0)):
     default picker = ColorPicker(400, 400, option, initial_color if isinstance(initial_color, FoxColor) else hex_to_fox_rgb(initial_color))
 
     frame:
-        background gui.color_picker.coverall_color
+        background sc.modal_coverall_color
         xfill True
         yfill True
 
