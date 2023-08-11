@@ -141,7 +141,7 @@ class SCColorOption(SCOption):
         Selects a "random" color option and sets the user selection to that
         value.
         """
-        self._req_state().set_selection(FoxRGB(
+        self._req_state().set_selection(self._key, FoxRGB(
             renpy.random.randint(0, 255),
             renpy.random.randint(0, 255),
             renpy.random.randint(0, 255),
