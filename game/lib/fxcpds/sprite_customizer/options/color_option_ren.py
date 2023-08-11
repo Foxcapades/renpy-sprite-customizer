@@ -2,10 +2,7 @@ import renpy  # type: ignore
 from renpy.store import DynamicDisplayable, Solid  # type: ignore
 
 from .option_ren import SCOption, SC_OPTION_TYPE_COLOR
-from ..colors.cshsl_ren import CSHSL
-from ..colors.csrgb_ren import CSRGB
-from ..colors.csrgba_ren import CSRGBA
-from ..utils.hex_color_ren import _validate_hex
+from ..color_picker.fox_color_ren import FoxColor, hex_to_fox_rgb, FoxRGB
 
 """renpy
 init -1 python:
@@ -34,7 +31,7 @@ class SCColorOption(SCOption):
         key: str,
         name: str,
         group: str | None,
-        default: str | CSHSL | CSRGB,
+        default: str | FoxColor,
     ):
         """
         Initializes the new SCColorOption with the given arguments.
@@ -51,7 +48,7 @@ class SCColorOption(SCOption):
             Option group.  If this value is set to `None`, the `name` value will
             be used as the group name.
 
-        default : str | CSHSL | CSRGB
+        default : str | FoxColor
             Default color value to use when no selection has yet been made by
             the user.
         """
@@ -59,24 +56,13 @@ class SCColorOption(SCOption):
         super().__init__(key, name, group, SC_OPTION_TYPE_COLOR)
 
         if isinstance(default, str):
-            _validate_hex(default)
-
-            # If we have a hex string with alpha, trim out the alpha channel.
-            if len(default) == 9:
-                self._default = default[0:7]
-            elif len(default) == 5:
-                self._default = default[0:4]
-            else:
-                self._default = default
-
-        elif isinstance(default, CSHSL):
-            self._default = default.to_rgb().hex_string
-        elif isinstance(default, CSRGBA):
-            self._default = default.to_rgb().hex_string
-        elif isinstance(default, CSRGB):
-            self._default = default.hex_string
+            tmp = hex_to_fox_rgb(default)
+            tmp.set_alpha(1.0)
+            self._default = tmp.hex
+        elif isinstance(default, FoxColor):
+            self._default = default.hex
         else:
-            raise Exception('"default" must be a string, a CSHSL instance, or a CSRGB instance')
+            raise Exception('"default" must be a string or a FoxColor instance.')
 
         self._image_name = str(uuid4())
 
@@ -146,16 +132,17 @@ class SCColorOption(SCOption):
         if not isinstance(value, str):
             raise Exception('"value" must be a hex string')
 
-        _validate_hex(value)
-        self._req_state().set_selection(self._key, value)
+        tmp = hex_to_fox_rgb(value)
+        tmp.set_alpha(1.0)
+        self._req_state().set_selection(self._key, tmp.hex)
 
     def randomize(self):
         """
         Selects a "random" color option and sets the user selection to that
         value.
         """
-        self.set_selection(CSRGB(
+        self._req_state().set_selection(FoxRGB(
             renpy.random.randint(0, 255),
             renpy.random.randint(0, 255),
             renpy.random.randint(0, 255),
-        ).hex_string)
+        ).hex)

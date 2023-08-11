@@ -1,191 +1,276 @@
-screen _sc_color_picker(option):
+transform _color_picker_slider:
+    shader "fxcpds.slider"
 
-    default hsl_picker = HSLPicker(option)
-    default rgb_picker = RGBPicker(option)
-    default tabs = [ "HSL", "RGB" ]
+
+transform _color_picker_square(tr):
+    shader "fxcpds.color_block"
+    u_top_right_rgb _color_picker_normalize_rgb(tr.rgb)
+
+
+screen _fox_color_picker(option, initial_color = FoxHSV(0, 1.0, 1.0)):
+    default picker = ColorPicker(400, 400, option, initial_color if isinstance(initial_color, FoxColor) else hex_to_fox_rgb(initial_color))
 
     frame:
-        modal True
-
-        background "_cs_color_picker_coverall"
-
+        background gui.color_picker.coverall_color
         xfill True
         yfill True
 
-        frame:
-            background None
-            xcenter 0.5
-            ycenter 0.5
+        use _fox_color_picker_body(picker)
 
+
+screen _fox_color_picker_body(picker):
+    default slider_tab = StringContainer("RGB")
+
+    frame:
+        style '_fox_color_picker_body'
+
+        hbox:
             vbox:
-                use _sc_color_picker_tab_bar(tabs)
+                use _fox_color_picker_picker_tabs()
+                use _fox_color_picker_picker_body(picker)
+            vbox:
+                use _fox_color_picker_slider_tabs(slider_tab)
+                use _fox_color_picker_slider_body(picker, slider_tab)
 
-                frame:
 
-                    background sc.color_picker_background
-
-                    xsize 0.5
-                    xpadding 20
-                    ypadding 20
-
-                    if _cs_color_picker_tab == "HSL":
-                        use _color_picker_hsl_body(option, hsl_picker)
-                    elif _cs_color_picker_tab == "RGB":
-                        use _color_picker_rgb_body(option, rgb_picker)
-
-screen _sc_color_picker_tab_bar(tabs):
+screen _fox_color_picker_picker_tabs:
     hbox:
-        for val in tabs:
-            use _sc_color_picker_tab(val)
+        vbox:
+            button:
+                style '_fox_color_picker_tab_marker_selected'
+
+                text "Picker":
+                    style '_fox_color_picker_tab_text'
+            button:
+                style '_fox_color_picker_tab_selected'
+                text "Picker":
+                    style '_fox_color_picker_tab_text_selected'
 
 
-screen _sc_color_picker_tab(val):
-    button:
-        padding (0, 0)
+screen _fox_color_picker_picker_body(picker):
+    frame:
+        style '_fox_color_picker_picker_body'
 
-        if _cs_color_picker_tab == val:
-            background sc.color_picker_background
-        else:
-            background sc.color_picker_background_muted
+        hbox:
+            spacing 5
+            add picker
+            vbar:
+                value picker.rotation
+                xysize (25, 400)
+                range 359
+                base_bar At(Transform('#fff', xysize=(25, 400)), _color_picker_slider())
+                thumb Transform("lib/fxcpds/sprite_customizer/color_picker/slider.png")
+                thumb_offset 4
+                changed picker.set_rotation
+
+
+screen _fox_color_picker_slider_tabs(selected_tab):
+    hbox:
+        use _fox_color_picker_slider_tab("RGB", selected_tab)
+        use _fox_color_picker_slider_tab("HSL", selected_tab)
+        use _fox_color_picker_slider_tab("HSV", selected_tab)
+
+
+screen _fox_color_picker_slider_tab(name, selected_tab):
+    vbox:
+        button:
+            if selected_tab.value == name:
+                style '_fox_color_picker_tab_marker_selected'
+            else:
+                style '_fox_color_picker_tab_marker_idle'
+
+            text name:
+                style '_fox_color_picker_tab_text'
+
+        button:
+            if selected_tab.value == name:
+                style '_fox_color_picker_tab_selected'
+            else:
+                style '_fox_color_picker_tab_idle'
+
+            text name:
+                if selected_tab.value == name:
+                    style '_fox_color_picker_tab_text_selected'
+                else:
+                    style '_fox_color_picker_tab_text_idle'
+
+            action Function(selected_tab.set_value, name)
+
+
+screen _fox_color_picker_slider_body(picker, selected_tab):
+    frame:
+        style '_fox_color_picker_slider_body'
 
         vbox:
-            if _cs_color_picker_tab == val:
-                add "_cs_color_picker_tab_header_active":
-                    ysize 5
-                    xsize 125
-            else:
-                add "_cs_color_picker_tab_header_muted":
-                    ysize 5
-                    xsize 125
+            spacing 10
+            yfill True
+
+            use _fox_color_picker_slider_header(picker)
+
+            if selected_tab.value == 'RGB':
+                use _fox_color_picker_rgb_slider_pane(picker)
+            elif selected_tab.value == 'HSL':
+                use _fox_color_picker_hsl_slider_pane(picker)
+            elif selected_tab.value == 'HSV':
+                use _fox_color_picker_hsv_slider_pane(picker)
 
             null:
-                height 15
+                height 10
 
-            text val:
-                xcenter 0.5
-                if _cs_color_picker_tab == val:
-                    color sc.color_picker_text_color
-                else:
-                    color sc.color_picker_text_color_muted
-
-            null:
-                height 15
-
-        action SetVariable("_cs_color_picker_tab", val)
+            use _fox_color_picker_slider_footer(picker)
 
 
+screen _fox_color_picker_slider_header(picker):
+    default hex_input = HexInputValue(picker)
 
-screen _color_picker_hsl_body(option, bg_picker):
-    default hex_value = HexInputValue(option)
-
-    vbox:
-        spacing 20
-
-        hbox:
-            spacing 20
-
-            imagebutton:
-                idle option.preview_image_name
-                xsize 270
-                ysize 270
-                yalign 1.0
-
-            vbox:
-                spacing 20
-
-                vbox:
-                    text "Hue":
-                        color sc.color_picker_text_color
-                        yalign 0.5
-                    bar:
-                        value bg_picker.hue
-                        range 359
-                        changed bg_picker.set_hue
-                vbox:
-                    text "Saturation":
-                        color sc.color_picker_text_color
-                        yalign 0.5
-                    bar:
-                        value bg_picker.saturation
-                        range 100
-                        changed bg_picker.set_saturation
-                vbox:
-                    text "Brightness":
-                        color sc.color_picker_text_color
-                        yalign 0.5
-                    bar:
-                        value bg_picker.lightness
-                        range 100
-                        changed bg_picker.set_lightness
-
-        use _color_picker_footer(hex_value, bg_picker)
-
-
-screen _color_picker_rgb_body(option, bg_picker):
-    default h_value = HexInputValue(option)
-
-    vbox:
-        spacing 20
-
-        hbox:
-            spacing 20
-
-            imagebutton:
-                idle option.preview_image_name
-                xsize 270
-                ysize 270
-                yalign 1.0
-
-            vbox:
-                spacing 20
-
-                vbox:
-                    text "Red":
-                        color sc.color_picker_text_color
-                        yalign 0.5
-                    bar:
-                        value bg_picker.red
-                        range 255
-                        changed bg_picker.set_red
-                vbox:
-                    text "Green":
-                        color sc.color_picker_text_color
-                        yalign 0.5
-                    bar:
-                        value bg_picker.green
-                        range 255
-                        changed bg_picker.set_green
-                vbox:
-                    text "Blue":
-                        color sc.color_picker_text_color
-                        yalign 0.5
-                    bar:
-                        value bg_picker.blue
-                        range 255
-                        changed bg_picker.set_blue
-
-        use _color_picker_footer(h_value, bg_picker)
-
-screen _color_picker_footer(h_value, bg_picker):
     hbox:
+        spacing 5
+
+        text "Hex"
+
+        null:
+            width 25
+
         button:
+            style '_fox_color_picker_hex_input_button'
+
             key_events True
-            xsize 195
-            background sc.input_background_idle_color
-            hover_background sc.input_background_hover_color
 
             input:
-                value h_value
+                style '_fox_color_picker_hex_input_input'
+                value hex_input
                 prefix '#'
                 length 6
                 copypaste True
-                color sc.input_text_color
 
-            action h_value.Toggle()
+            action hex_input.Toggle()
 
-        null:
-            width 619
+
+screen _fox_color_picker_rgb_slider_pane(picker):
+    vbox:
+        spacing 10
+        vbox:
+            hbox:
+                xfill True
+                text "Red"
+                text str(picker.rgb.red):
+                    xalign 1.0
+            bar:
+                ysize 25
+                range 255
+                value picker.rgb.red
+                changed _color_picker_rgb_bar_setter(picker, 'r')
+        vbox:
+            hbox:
+                xfill True
+                text "Green"
+                text str(picker.rgb.green):
+                    xalign 1.0
+            bar:
+                ysize 25
+                range 255
+                value picker.rgb.green
+                changed _color_picker_rgb_bar_setter(picker, 'g')
+        vbox:
+            hbox:
+                xfill True
+                text "Blue"
+                text str(picker.rgb.blue):
+                    xalign 1.0
+            bar:
+                ysize 25
+                range 255
+                value picker.rgb.blue
+                changed _color_picker_rgb_bar_setter(picker, 'b')
+
+
+screen _fox_color_picker_hsl_slider_pane(picker):
+    vbox:
+        spacing 10
+        vbox:
+            hbox:
+                xfill True
+                text "Hue"
+                text str(picker.hsl.hue):
+                    xalign 1.0
+            bar:
+                ysize 25
+                range 359
+                value picker.hsl.hue
+                changed _color_picker_hsl_bar_setter(picker, 'h')
+        vbox:
+            hbox:
+                xfill True
+                text "Saturation"
+                text str(round(picker.hsl.saturation * 100)):
+                    xalign 1.0
+            bar:
+                ysize 25
+                range 1.0
+                value picker.hsl.saturation
+                changed _color_picker_hsl_bar_setter(picker, 's')
+        vbox:
+            hbox:
+                xfill True
+                text "Lightness"
+                text str(round(picker.hsl.lightness * 100)):
+                    xalign 1.0
+            bar:
+                ysize 25
+                range 1.0
+                value picker.hsl.lightness
+                changed _color_picker_hsl_bar_setter(picker, 'l')
+
+
+screen _fox_color_picker_hsv_slider_pane(picker):
+    vbox:
+        spacing 10
+        vbox:
+            hbox:
+                xfill True
+                text "Hue"
+                text str(picker.hsv.hue):
+                    xalign 1.0
+            bar:
+                ysize 25
+                range 359
+                value picker.hsv.hue
+                changed _color_picker_hsv_bar_setter(picker, 'h')
+        vbox:
+            hbox:
+                xfill True
+                text "Saturation"
+                text str(round(picker.hsv.saturation * 100)):
+                    xalign 1.0
+            bar:
+                ysize 25
+                range 1.0
+                value picker.hsv.saturation
+                changed _color_picker_hsv_bar_setter(picker, 's')
+        vbox:
+            hbox:
+                xfill True
+                text "Value"
+                text str(round(picker.hsv.value * 100)):
+                    xalign 1.0
+            bar:
+                ysize 25
+                range 1.0
+                value picker.hsv.value
+                changed _color_picker_hsv_bar_setter(picker, 'v')
+
+
+screen _fox_color_picker_slider_footer(picker):
+    default preview = DynamicDisplayable(_color_picker_preview_cb, picker=picker)
+
+    hbox:
+        xfill True
+
+        add preview:
+            xsize 100
+            ysize 100
 
         textbutton "Done":
-            text_style "_color_picker_text_button_style"
-            action Hide("_sc_color_picker")
+            yalign 1.2
+            xalign 1.0
+            action Hide()
