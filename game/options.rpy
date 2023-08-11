@@ -23,7 +23,7 @@ define gui.show_name = True
 
 ## The version of the game.
 
-define config.version = "2.0.0"
+define config.version = "3.0.0"
 
 
 ## Text that is placed on the game's about screen. Place the text between the
@@ -183,8 +183,8 @@ init python:
     build.classify('**/.**', None)
     build.classify('**/#**', None)
     build.classify('**/thumbs.db', None)
-    build.classify('docs/**')
-    build.classify('build/**')
+    build.classify('docs/**', None)
+    build.classify('build/**', None)
 
     ## To archive files, classify them as 'archive'.
 
