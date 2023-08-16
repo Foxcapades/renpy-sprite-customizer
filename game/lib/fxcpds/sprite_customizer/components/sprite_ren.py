@@ -39,11 +39,11 @@ class CustomizedSprite:
     Then pass that newly created state to the `CustomizedSprite` instance
     via the `set_state` method.
 
-    ------------------------------------------------------------------------
-    | IMPORTANT! | This MUST be done in both the `start` and `after_load`  |
-    |            | labels to ensure the state is properly loaded from the  |
-    |            | save.                                                   |
-    ------------------------------------------------------------------------
+    +-----------+----------------------------------------------------------+
+    | IMPORTANT | This MUST be done in both the `start` and `after_load`   |
+    |           | labels to ensure the state is properly loaded from the   |
+    |           | save.                                                    |
+    +-----------+----------------------------------------------------------+
 
     ```renpy
     label after_load:
