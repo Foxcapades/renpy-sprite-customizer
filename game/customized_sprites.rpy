@@ -113,24 +113,6 @@ define ccf = CustomizedSpriteFactory(
         SCColorOption("hair_color", "Color", "Hair", "#704024")
     ]),
 
-    # Hair Layer : List Option + Text Input for Color
-    # SCLayer(
-    #     "hair",
-    #     sc_hair,
-    #     [
-    #         SCListOption("hair_style", "Style", "Hair", [ "afro", "bob", "buns" ]),
-    #         SCValidatableTextOption(
-    #             "hair_color",
-    #             "Color",
-    #             "Hair",
-    #             sc_validator_hex_color,
-    #             "#ff0000",
-    #             max_len=7,
-    #             autocommit=True
-    #         ),
-    #     ]
-    # ),
-
     # Accessory Layer : Boolean Option + Value List
     SCLayer(
         "accessories",
@@ -145,14 +127,6 @@ define ccf = CustomizedSpriteFactory(
             ])
         ]
     ),
-
-    # Accessory Layer : Boolean
-    # SCLayer(
-    #     "accessories",
-    #     "images/ccp/accessories/{accessory}.png",
-    #     accessory=SCBooleanOption("accessory", "Accessory", "Hair", False, ("cottoncandy_bow", "none"))
-    # ),
-
 
     # Eye Layer : Value List
     SCLayer(
