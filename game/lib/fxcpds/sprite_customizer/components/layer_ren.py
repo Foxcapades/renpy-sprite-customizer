@@ -22,14 +22,6 @@ class SCLayer:
     construction time via named layer option keyword args.  The user's
     selections of those options are then passed to the given
     `layer_provider` to construct the underlying Displayable for the layer.
-
-    ```python
-    SCLayer("name", callback, option=("Option", [ "some", "choices" ]))
-
-    # OR
-
-    SCLayer("name", "my_image_{option}", option=("Option", [ "some", "choices" ]))
-    ```
     """
 
     def __init__(

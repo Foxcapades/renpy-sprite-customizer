@@ -160,9 +160,23 @@ class CustomizedSprite:
     @property
     def option_count(self) -> int:
         """
-        Returns the total number of registered options.
+        The total number of registered options.
         """
         return len(self._option_to_layer.keys())
+
+    @property
+    def option_groups(self) -> list[str]:
+        """
+        Registered option group names.
+        """
+        return [*self._options_by_group.keys()]
+
+    @property
+    def option_group_count(self) -> int:
+        """
+        Total number of registered option groups.
+        """
+        return len(self._options_by_group.keys())
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
     #
