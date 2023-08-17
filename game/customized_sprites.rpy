@@ -1,6 +1,6 @@
 # Here we will define all the callbacks that will be used to render changes to
-# our custom character sprites.  There will be one callback per layer to provide
-# the customization for that layer.
+# our custom character sprites.  Layers may use these callbacks to provide the
+# customization.
 #
 # Each callback will be passed to a layer as a constructor argument, and should
 # take the option keys defined on that layer as function arguments.
@@ -26,9 +26,9 @@ init python:
         generate a displayable for the chosen skin color option.
 
         The `skin_color` argument value will be one of the hex code values
-        defined in the `skin_color=SCOpt(...` declaration below and is used with
-        a TintMatrix to Transform the colorless base image into a base image
-        with the selected color overlayed.
+        defined in the `skin_color=SCListOption(...` declaration below and is
+        used with a TintMatrix to Transform the colorless base image into a base
+        image with the selected color overlayed.
         """
         return Transform("images/ccp/base/base.png", matrixcolor=TintMatrix(skin_color))
 
@@ -74,19 +74,8 @@ init python:
 
 # Customized Sprite Factory Declaration.
 #
-# This demonstrates the creation of a customized character sprite.  The creation
-# of this sprite takes 2+ parameters.
-#
-# The first parameter is the name of the customized character sprite to be used
-# wherever a displayable may normally be referenced.  (`show` statements, `add`
-# statements, Transforms, etc...).
-#
-# The following parameter is the base image layer for the sprite.  A base layer
-# is required to construct a CustomizedSprite instance.
-#
-# All following parameters are additional layers that are placed on top of one
-# another in declaration order stepping "closer" to the player with each new
-# layer.
+# The CustomizedSpriteFactory may be used to generate one or more custom sprite
+# instances.
 define ccf = CustomizedSpriteFactory(
 
     # Skin Layer : List Option
